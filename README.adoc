@@ -11,7 +11,7 @@ https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[G
 
 [quote, The Old Kroy Times]
 ____________________________________________________________________
-The latest and greatest project management tool. You simply have to try it.
+The latest and greatest project management tool. You have to try it.
 ____________________________________________________________________
 
 {sp} +
