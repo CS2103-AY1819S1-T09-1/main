@@ -1,12 +1,23 @@
-[[cs2103-project-v1.0-w5-cowbae-user-guide]]
-CS2103 Project v1.0 (W5) Cowbae User Guide
-------------------------------------------
+= Cow - User Guide
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:toclevels: 3
+:sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/CS2103-AY1819S1-T9-1/main
 
-[TOC]
+By: `Team T9-1`      Since: `Aug 2018`      Licence: `MIT`
 
-[[introduction]]
-1. Introduction
----------------
+== Introduction
 
 Cowbay is an application for those who prefer to use a desktop app for
 managing tasks and contacts. It is optimized for those who prefer to
@@ -15,9 +26,7 @@ of a Graphical User Interface (GUI). If you can type fast, Cowbay can
 get your contact and task management done faster than traditional GUI
 apps.
 
-[[quick-start]]
-2. Quick Start
---------------
+== Quick Start
 
 1.  Ensure you have JRE 9 or later installed.
 2.  Download the `.jar`.
@@ -25,11 +34,9 @@ apps.
 4.  Type in a command and press `Enter` to execute it. For a start, type
 `help` and press `Enter` to see the help text.
 
-[[features]]
-3. Features
------------
+== Features
 
-_Command Format_
+**Command Format**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user
 e.g. in `add n/NAME`, `NAME` is a parameter which can be used as
@@ -42,192 +49,137 @@ times e.g. `[t/TAG]...` can be used as
 * Parameters can be in any order e.g. if the command specifies
 `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-[[viewing-help-help]]
-3.1. Viewing help: `help`
-~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Viewing help: `help`
 
 Format: `help`
 
-[[contacts]]
-3.2 Contacts
-~~~~~~~~~~~~
+=== Contacts
 
-[[view-all-contacts-contacts-list]]
-3.2.1 View all contacts: `contacts list`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== View all contacts: `contacts list`
 
 Format: `contacts view`
 
-[[add-contact-contacts-add]]
-3.2.2 Add contact: `contacts add`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Add contact: `contacts add`
 
 Format: `contacts add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 
-[[edit-contact-contacts-edit]]
-3.2.3 Edit contact: `contacts edit`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Edit contact: `contacts edit`
 
 Format:
 `contacts edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
-[[find-contact-contacts-find]]
-3.2.4 Find contact: `contacts find`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Find contact: `contacts find`
 
 Format: `contacts find KEYWORD [MORE_KEYWORDS]`
 
-[[delete-contact-contacts-delete]]
-3.2.5 Delete contact: `contacts delete`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Delete contact: `contacts delete`
 
 Format: `contacts delete INDEX`
 
-[[assign-tasks-to-contact-contacts-assign]]
-3.2.6 Assign tasks to contact: `contacts assign`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Assign tasks to contact: `contacts assign`
 
 Format: `contacts assign CONTACT_INDEX... TASK_INDEX..`
 
-[[unassign-tasks-from-contact-contacts-unassign]]
-3.2.7 Unassign tasks from contact: `contacts unassign`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Unassign tasks from contact: `contacts unassign`
 
 Format: `contacts unassign CONTACT_INDEX... (TASK_INDEX...|*)`
 
 If `*` is provided as the argument for TASK_INDEX, unassign all tasks
 from the contacts specified.
 
-[[show-tasks-assigned-to-contact]]
-3.2.8 Show tasks assigned to contact:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Show tasks assigned to contact:
 
 Format: `contacts assigned CONTACT_ID`
 
 This will display all tasks assigned to the contact in the tasks pane.
 
-[[tasks]]
-3.3 Tasks
-~~~~~~~~~
+=== Tasks
 
 Format for entering dates is YYYYMMDD. Format for entering times is HHMM
 in 24-hour time. (All commands from AB4 but prepend `tasks`)
 
-[[view-all-tasks-tasks-list]]
-3.3.1 View all tasks: `tasks list`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== View all tasks: `tasks list`
 
 Format: `tasks list`
 
-[[add-task-tasks-add]]
-3.3.2 Add task: `tasks add`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Add task: `tasks add`
 
 Format:
 `tasks add n/TASK_NAME sd/START_DATE st/START_TIME ed/END_DATE ed/END_TIME [t/TAG]…`
 
-[[edit-task-tasks-edit]]
-3.3.3 Edit task: `tasks edit`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Edit task: `tasks edit`
 
 Format:
 `tasks edit n/TASK_NAME sd/START_DATE st/START_TIME ed/END_DATE ed/END_TIME [t/TAG]…`
 
-[[search-for-task-tasks-find]]
-3.3.4 Search for task: `tasks find`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Search for task: `tasks find`
 
 Finds tasks whose names contain any of the given keywords. + Format:
 `tasks find KEYWORD [MORE_KEYWORDS]`
-
-'''''
-
+****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match
 `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Tasks matching at least one keyword will be returned (i.e. `OR`
-search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang` ****
-
-[[delete-task-tasks-delete]]
-3.3.5 Delete task: `tasks delete`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+==== Delete task: `tasks delete`
 
 Format: `tasks delete INDEX...`
 
 Delete all tasks corresponding to the indices provided.
 
-[[assign-person-to-task-tasks-assign]]
-3.3.6 Assign person to task: `tasks assign`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Assign person to task: `tasks assign`
 
 Format: `tasks assign TASK_INDEX... CONTACT_INDEX...`
 
-[[unassign-person-from-tasks-tasks-unassign]]
-3.3.7 Unassign person from tasks: `tasks unassign`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Unassign person from tasks: `tasks unassign`
 
 Format: `tasks unassign TASK_INDEX... (CONTACT_INDEX...|*)`
 
 If `*` is provided as the argument for CONTACT_INDEX, all contacts will
 be unassigned.
 
-[[show-full-details-of-a-task-tasks-assigned]]
-3.3.8 Show full details of a task: `tasks assigned`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Show full details of a task: `tasks assigned`
 
 Format: `tasks assigned TASK_ID`
 
 This will display the contacts assigned to the task in the contacts
 pane.
 
-[[display]]
-3.3.9 Display
-^^^^^^^^^^^^^
+==== Display
 
-[[calendar]]
-3.4 Calendar
-~~~~~~~~~~~~
+=== Calendar
 
-[[view-calendar-calendars-show]]
-3.4.1 View calendar: `calendars show`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== View calendar: `calendars show`
 
 Format: `calendars show INDEX`
 
-[[list-shared-calendars-calendars-list]]
-3.4.2 List shared calendars: `calendars list`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== List shared calendars: `calendars list`
 
-Format: `calendars list` ### 3.4.3 Share calendar: `calendars share`
+Format: `calendars list`
+
+==== Share calendar: `calendars share`
+
 Format: `calendars share CONTACT_INDEX`
 
-[[global]]
-3.5 Global
-~~~~~~~~~~
+=== Global
 
-[[undo-previous-command-undo]]
-3.5.1 Undo previous command `undo`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Undo previous command `undo`
 
 Format: `undo`
 
-[[redo-previously-undone-command-redo]]
-3.5.2 Redo previously undone command `redo`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Redo previously undone command `redo`
 
 Format: `redo`
 
-[[exiting-the-program-exit]]
-3.5.3 Exiting the program: `exit`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Exiting the program: `exit`
 
 Format: `exit`
 
-[[saving-data]]
-3.5.4 Saving data
-^^^^^^^^^^^^^^^^^
+==== Saving data
 
 Data is saved in the hard disk automatically after any command that
 changes the data. There is no need to save manually.
