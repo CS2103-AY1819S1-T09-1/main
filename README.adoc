@@ -10,19 +10,22 @@ https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[G
 ////
 
 [quote, The Old Kroy Times]
-____
+____________________________________________________________________
 The latest and greatest project management tool. You simply have to try it.
-____
+____________________________________________________________________
 
+{sp} +
 [quote, 24-7Mac]
-____
+____________________________________________________________________
 The clean minimal UI fits perfectly with the image I want to project as a stylish Mac user.
-____
-
+____________________________________________________________________
+{sp} +
 [quote, Winter Singapore]
-____
+____________________________________________________________________
 A simply outstanding piece of software. Unbelievable that this was built by a team of students.
-____
+____________________________________________________________________
+{sp} +
+
 
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
