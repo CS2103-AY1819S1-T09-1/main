@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredTasks = new FilteredList<>(versionedAddressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -83,6 +86,19 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return versionedAddressBook.hasTask(task);
+    }
+
+    @Override
+    public void addTask(Task task) {
+        versionedAddressBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -99,7 +115,22 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+    //=========== Filtered Task List Accessors =============================================================
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return FXCollections.unmodifiableObservableList(filteredTasks);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -144,7 +175,8 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredTasks.equals(other.filteredTasks);
     }
 
 }
