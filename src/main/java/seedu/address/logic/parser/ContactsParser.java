@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.contacts.AddCommand;
+import seedu.address.logic.commands.contacts.AssignCommand;
 import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.logic.commands.contacts.DeleteCommand;
 import seedu.address.logic.commands.contacts.EditCommand;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.contacts.FindCommand;
 import seedu.address.logic.commands.contacts.ListCommand;
 import seedu.address.logic.commands.contacts.SelectCommand;
 import seedu.address.logic.parser.contacts.AddCommandParser;
+import seedu.address.logic.parser.contacts.AssignCommandParser;
 import seedu.address.logic.parser.contacts.DeleteCommandParser;
 import seedu.address.logic.parser.contacts.EditCommandParser;
 import seedu.address.logic.parser.contacts.FindCommandParser;
@@ -71,6 +73,9 @@ public class ContactsParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case AssignCommand.COMMAND_WORD:
+            return new AssignCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
