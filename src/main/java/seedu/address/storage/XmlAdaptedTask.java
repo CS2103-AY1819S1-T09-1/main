@@ -1,12 +1,21 @@
 package seedu.address.storage;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.*;
-import seedu.address.model.tag.Tag;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
-import java.util.*;
-import java.util.stream.Collectors;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.DateTime;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
+
 
 /**
  * JAXB-friendly version of the Task.
@@ -29,7 +38,8 @@ public class XmlAdaptedTask {
      * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedTask() {}
+    public XmlAdaptedTask() {
+    }
 
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
@@ -77,7 +87,8 @@ public class XmlAdaptedTask {
         final Name modelName = new Name(name);
 
         if (startDateTime == null || endDateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateTime.class.getSimpleName()));
         }
 
         final DateTime modelStartDateTime = new DateTime(startDateTime);
