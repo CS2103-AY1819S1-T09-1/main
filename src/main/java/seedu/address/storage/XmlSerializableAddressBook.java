@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.task.Task;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,9 +20,13 @@ import seedu.address.model.person.Person;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_TASK = "Persons list contains duplicate task(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
+
+    @XmlElement
+    private List<XmlAdaptedTask> tasks;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -29,6 +34,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -37,6 +43,7 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +60,13 @@ public class XmlSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        for (XmlAdaptedTask t : tasks) {
+            Task task = t.toModelType();
+            if (addressBook.hasTask(task)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+            }
+            addressBook.addTask(task);
         }
         return addressBook;
     }
