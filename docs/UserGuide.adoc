@@ -19,10 +19,10 @@ By: `Team T09-1`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-Cowbay is an application for those who prefer to use a desktop app for
+Cow is an application for those who prefer to use a desktop app for
 managing tasks and contacts. It is optimized for those who prefer to
 work with a Command Line Interface (CLI) while still having the benefits
-of a Graphical User Interface (GUI). If you can type fast, Cowbay can
+of a Graphical User Interface (GUI). If you can type fast, Cow can
 get your contact and task management done faster than traditional GUI
 apps.
 
