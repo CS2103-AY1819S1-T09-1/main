@@ -66,6 +66,12 @@ public interface Model {
      */
     void addTask(Task task);
 
+    /**
+     * Deletes the given task.
+     * The task must exist in the address book.
+     */
+    void deleteTask(Task target);
+
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
