@@ -61,7 +61,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(Task source) {
         name = source.getName().toString();
         startDateTime = source.getStartDateTime().getCalendar();
-        endDateTime = source.getStartDateTime().getCalendar();
+        endDateTime = source.getEndDateTime().getCalendar();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
