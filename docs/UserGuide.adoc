@@ -105,12 +105,12 @@ Format: `tasks list`
 ==== Add task: `tasks add`
 
 Format:
-`tasks add n/TASK_NAME sd/START_DATE st/START_TIME ed/END_DATE ed/END_TIME [t/TAG]…`
+`tasks add n/TASK_NAME sd/START_DATE st/START_TIME ed/END_DATE et/END_TIME [t/TAG]…`
 
 ==== Edit task: `tasks edit`
 
 Format:
-`tasks edit n/TASK_NAME sd/START_DATE st/START_TIME ed/END_DATE ed/END_TIME [t/TAG]…`
+`tasks edit n/TASK_NAME sd/START_DATE st/START_TIME ed/END_DATE et/END_TIME [t/TAG]…`
 
 ==== Search for task: `tasks find`
 
