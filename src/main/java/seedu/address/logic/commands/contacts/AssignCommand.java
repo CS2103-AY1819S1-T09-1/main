@@ -21,14 +21,16 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 /**
- * Assigns a contact to a task. Both contact and task are identified by the index number used in the displayed person and task list respectively.
+ * Assigns a contact to a task. Both contact and task are identified by the index number used in the displayed person
+ * and task list respectively.
  */
 public class AssignCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Assigns a contact to a task. Both contact and task are identified by the index number used in the displayed person and task list respectively.\n"
+            + ": Assigns a contact to a task. Both contact and task are identified by the index number used in the "
+            + "displayed person and task list respectively.\n"
             + "Parameters: "
             + PREFIX_CONTACT_ID + "CONTACT_INDEX "
             + PREFIX_TASK_ID + "TASK_INDEX\n"
