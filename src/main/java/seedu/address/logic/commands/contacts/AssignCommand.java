@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_CONTACT_ID;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_TASK_ID;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
@@ -57,6 +59,19 @@ public class AssignCommand extends Command {
         if (targetTaskIndex.getZeroBased() >= filteredTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+
+        Person personToEdit = filteredPersonList.get(targetContactIndex.getZeroBased());
+        Task taskToAssign = filteredTaskList.get(targetTaskIndex.getZeroBased());
+
+        Set<Task> updatedTasks = new HashSet<>(personToEdit.getTasks());
+        updatedTasks.add(taskToAssign);
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), updatedTasks);
+
+        model.updatePerson(personToEdit, editedPerson);
+        // TODO: Check if updateFilteredPersonList call is necessary
+        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetContactIndex));
         return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_SUCCESS,
