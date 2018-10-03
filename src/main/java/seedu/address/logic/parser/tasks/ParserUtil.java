@@ -59,8 +59,11 @@ public class ParserUtil {
         requireAllNonNull(date, time);
         String trimmedDate = date.trim();
         String trimmedTime = time.trim();
-        if (!DateTime.isValidDateTime(trimmedDate, trimmedTime)) {
-            throw new ParseException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        if (!DateTime.isValidDateTimeFormat(trimmedDate, trimmedTime)) {
+            throw new ParseException(DateTime.MESSAGE_DATETIME_FORMAT_CONSTRAINTS);
+        }
+        if (!DateTime.isValidDateTimeValues(trimmedDate, trimmedTime)) {
+            throw new ParseException(DateTime.MESSAGE_DATETIME_VALUE_CONSTRAINTS);
         }
         return new DateTime(date, time);
     }

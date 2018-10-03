@@ -10,12 +10,15 @@ import java.util.stream.IntStream;
 
 /**
  * Represents a Task's start or end datetime in the address book.
- * Guarantees: is valid as declared in {@link #isValidDateTime(String, String)}
+ * Guarantees: is valid as declared in {@link #isValidDateTimeFormat(String, String)}
+ * and {@link #isValidDateTimeValues(String, String)}.
  */
 public class DateTime implements Comparable<DateTime> {
 
-    public static final String MESSAGE_DATETIME_CONSTRAINTS =
+    public static final String MESSAGE_DATETIME_FORMAT_CONSTRAINTS =
             "The date string must be 8 digits long and the time string must be 4 digits long.";
+    public static final String MESSAGE_DATETIME_VALUE_CONSTRAINTS =
+            "The date must exist and the time must be from 0000-2359 inclusive.";
 
     /*
      * Date string must be 8 digits long.
@@ -37,7 +40,8 @@ public class DateTime implements Comparable<DateTime> {
      */
     public DateTime(String date, String time) {
         requireAllNonNull(date, time);
-        checkArgument(isValidDateTime(date, time), MESSAGE_DATETIME_CONSTRAINTS);
+        checkArgument(isValidDateTimeFormat(date, time), MESSAGE_DATETIME_FORMAT_CONSTRAINTS);
+        checkArgument(isValidDateTimeValues(date, time), MESSAGE_DATETIME_VALUE_CONSTRAINTS);
         this.calendar = createCalendar(date, time);
     }
 
@@ -57,13 +61,16 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
+     * Returns true if the given strings are of the correct format.
+     */
+    public static boolean isValidDateTimeFormat(String date, String time) {
+        return date.matches(DATE_VALIDATION_REGEX) && time.matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
      * Returns true if the given strings are a valid date and time.
      */
-    public static boolean isValidDateTime(String date, String time) {
-        if (!date.matches(DATE_VALIDATION_REGEX)
-            || !time.matches(TIME_VALIDATION_REGEX)) {
-            return false;
-        }
+    public static boolean isValidDateTimeValues(String date, String time) {
         int[] dateArray = splitDate(date);
         int[] timeArray = splitTime(time);
         int year = dateArray[0];
