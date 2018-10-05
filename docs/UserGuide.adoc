@@ -159,11 +159,11 @@ Format for entering dates is YYYYMMDD.
 
 ==== View calendar for tasks due within given year and month: `calendars show`
 
-Format: `calendars show YEAR MONTH`
+Format: `calendars show y/YEAR m/MONTH`
 
 ==== List tasks for a specific day: `calendars list`
 
-Format: `calendars list END_DATE`
+Format: `calendars list ed/END_DATE`
 
 ==== Share calendar: `calendars share`
 
