@@ -153,13 +153,17 @@ pane.
 
 === Calendar
 
-==== View calendar: `calendars show`
+Format for entering year is YYYY.
+Format for entering month is MM.
+Format for entering dates is YYYYMMDD.
 
-Format: `calendars show INDEX`
+==== View calendar for tasks due within given year and month: `calendars show`
 
-==== List shared calendars: `calendars list`
+Format: `calendars show y/YEAR m/MONTH`
 
-Format: `calendars list`
+==== List tasks for a specific day: `calendars list`
+
+Format: `calendars list ed/END_DATE`
 
 ==== Share calendar: `calendars share`
 
