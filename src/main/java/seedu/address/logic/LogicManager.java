@@ -1,7 +1,9 @@
 package seedu.address.logic;
 
+import java.util.Calendar;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -13,8 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import javafx.beans.value.ObservableValue;
-import java.util.Calendar;
 
 /**
  * The main LogicManager of the app.

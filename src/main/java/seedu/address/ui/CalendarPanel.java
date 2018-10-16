@@ -1,13 +1,18 @@
 package seedu.address.ui;
 
+import java.util.Calendar;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -24,12 +29,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.task.Task;
-import javafx.beans.value.ObservableValue;
-import java.util.Calendar;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ListCell;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.ListChangeListener;
 
 /**
  * Panel for displaying the calendar.
@@ -41,7 +40,7 @@ public class CalendarPanel extends UiPart<Region> {
     private static final int ROW_HEIGHT = 80;
     private static final int COL_WIDTH = 105;
     private static final String[] HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-            "Friday", "Saturday" };
+        "Friday", "Saturday" };
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
     private final ObservableList<Task> taskList;
@@ -69,6 +68,10 @@ public class CalendarPanel extends UiPart<Region> {
         writeHeaders();
     }
 
+    /**
+     * Fills in the contents of each grid non-header cell by calling buildCell on
+     * it..
+     */
     private void fillContents() {
         for (int i = 1; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
@@ -77,6 +80,9 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Builds the content for an individual cell based on its index.
+     */
     private void buildCell(int row, int col) {
         int firstDayOfMonth = calendar.getValue().get(Calendar.DAY_OF_WEEK);
         Node node = getCellNode(row, col);

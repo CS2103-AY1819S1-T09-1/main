@@ -1,12 +1,12 @@
 package seedu.address.model;
 
+import java.util.Calendar;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import javafx.beans.value.ObservableValue;
-import java.util.Calendar;
 
 /**
  * The API of the Model component.
