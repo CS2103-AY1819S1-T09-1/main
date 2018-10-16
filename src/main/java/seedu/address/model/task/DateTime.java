@@ -75,6 +75,10 @@ public class DateTime implements Comparable<DateTime> {
         return hour + ":" + minute;
     }
 
+    public String getDateTime() {
+        return this.getDate() + ", " + this.getTime();
+    }
+
     /**
      * Returns true if the given strings are of the correct format.
      */

@@ -47,8 +47,8 @@ public class TaskDetailsPane extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Task task = event.getNewSelection();
         name.setText(task.getName().toString());
-        startDateTime.setText(task.getStartDateTime().getDate() + ", " + task.getStartDateTime().getTime());
-        endDateTime.setText(task.getEndDateTime().getDate() + ", " + task.getEndDateTime().getTime());
+        startDateTime.setText(task.getStartDateTime().getDateTime());
+        endDateTime.setText(task.getEndDateTime().getDateTime());
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
     }

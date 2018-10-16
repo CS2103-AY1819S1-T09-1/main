@@ -41,7 +41,7 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
-        endDateTime.setText(task.getEndDateTime().getDate() + ", " + task.getEndDateTime().getTime());
+        endDateTime.setText(task.getEndDateTime().getDateTime());
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
