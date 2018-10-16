@@ -67,8 +67,8 @@ public class AssignCommand extends Command {
 
         Set<Task> updatedTasks = new HashSet<>(personToEdit.getTasks());
         updatedTasks.add(taskToAssign);
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), updatedTasks);
+        Person editedPerson = new Person(personToEdit.getId(), personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), updatedTasks);
 
         model.updatePerson(personToEdit, editedPerson);
         // TODO: Check if updateFilteredPersonList call is necessary
