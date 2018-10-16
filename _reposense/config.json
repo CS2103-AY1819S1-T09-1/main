@@ -1,0 +1,25 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "tuesmiddt",
+      "authorNames": ["tuesmiddt"]
+    },
+    {
+      "githubId": "indocomsoft",
+      "authorNames": ["indocomsoft", "Julius Putra Tanu Setiaji"]
+    },
+    {
+      "githubId": "taneliang",
+      "authorNames": ["taneliang", "E-Liang Tan"]
+    },
+    {
+      "githubId": "zxjtan",
+      "authorNames": ["zxjtan", "Jolene Tan"]
+    },
+    {
+      "githubId": "jaypeeteedee",
+      "authorNames": ["jaypeeteedee", "John Phua"]
+    }
+  ]
+}
