@@ -1,6 +1,5 @@
 package systemtests.contacts;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -47,7 +46,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
 import systemtests.AppSystemTest;
 
 public class EditCommandSystemTest extends ContactsSystemTest {
