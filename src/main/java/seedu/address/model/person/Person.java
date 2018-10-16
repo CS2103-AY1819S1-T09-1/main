@@ -127,8 +127,6 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" ID: ")
-                .append(getId())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
