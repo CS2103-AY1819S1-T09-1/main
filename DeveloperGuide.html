@@ -26,9 +26,10 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
+<li><a href="#calendar-show-feature">3.2. Calendar show feature</a></li>
+<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.4. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -643,20 +644,135 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
+<h3 id="calendar-show-feature"><a class="link" href="#calendar-show-feature">3.2. Calendar show feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The calendar show feature is facilitated by the <code>ModelManager</code>. It extends <code>ModelManager</code> with a calendar panel that allows the user to more easily view the tasks.</p>
+</div>
+<div class="paragraph">
+<p>It exposes the following operations via the <code>Model</code> interface:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#updateCalendarMonth()</code>&#8201;&#8212;&#8201;Saves the given calendar that encapsulates the month to be displayed in the calendar panel.</p>
+</li>
+<li>
+<p><code>Model#getCalendarMonth()</code>&#8201;&#8212;&#8201;Returns an <code>ObservableValue&lt;Calendar&gt;</code> for the calendar panel to identify which weekday the month begins with.</p>
+</li>
+<li>
+<p><code>Model#updateCalendarTaskList()</code>&#8201;&#8212;&#8201;Updates the model with a predicate to filter the tasks that should be displayed in the calendar.</p>
+</li>
+<li>
+<p><code>Model#getCalendarTaskList()</code>&#8201;&#8212;&#8201;Returns an <code>ObservableList&lt;Task&gt;</code> for the calendar panel to display.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the calendar show mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application. The <code>MainWindow</code> class calls <code>Model#getCalendarMonth()</code> and <code>Model#getCalendarTaskList()</code> when creating the calendar panel. This initialises the calendar panel with an <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code> to allow it to perform UI updates when necessary.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The calendar panel constructs a <code>GridPane</code> and initialises the cells with empty containers.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The calendar panel registers listeners to both the <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code> with a task that would empty grid cells and repopulate them with <code>ListView</code> elements that display the tasks starting on the corresponding dates.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. The user creates any number of tasks with start date in January 2018. The tasks will be stored appropriately.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. The user executes <code>calendars show y/2018 m/1</code>. The <code>calendars show</code> command calls <code>Model#updateCalendarMonth()</code> and <code>Model#updateCalendarTaskList()</code>, listeners in the calendar panel to be notified of the changes.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-where-to-filter-tasks-by-month-for-displaying-in-the-calendar"><a class="link" href="#aspect-where-to-filter-tasks-by-month-for-displaying-in-the-calendar">Aspect: Where to filter tasks by month for displaying in the calendar.</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Done in the model</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Application logic does not reside in the view layer.</p>
+</li>
+<li>
+<p>Cons: Repeated filtering at multiple steps. Tasks are duplicated in two data lists.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Calendar object representing current month and full task list passed to calendar pane, all filter operations done in the calendar pane.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less data duplication.</p>
+</li>
+<li>
+<p>Cons: Poorer separation of concerns, less modularity.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-construction-of-grid-cell-list-view"><a class="link" href="#aspect-construction-of-grid-cell-list-view">Aspect: Construction of grid cell list view.</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Delete and regenerate <code>ListView</code> elements each time the moth is changed</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Ease of implementation, especially since <code>GridPane</code> does not support random access.</p>
+</li>
+<li>
+<p>Cons: Poorer performance, although this is likely insignificant since number of elements to be created/deleted is small.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create and store <code>ListView</code> containers and reuse them.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Better performance, since deleting and recreating them incurs some computational cost.</p>
+</li>
+<li>
+<p>Cons: Requires creating an auxillary data structure to store the elements to get around deficiencies in the <code>GridPane</code> API.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -687,7 +803,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1967,4 +2083,4 @@ their best</p>
 </blockquote>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 14:53:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 09:01:00 UTC</div></div></div></body></html>
