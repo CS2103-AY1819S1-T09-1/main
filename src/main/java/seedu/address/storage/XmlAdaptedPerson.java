@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * JAXB-friendly version of the Person.
@@ -40,7 +40,7 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
     @XmlElement
-    private List<XmlAdaptedTask> tasked = new ArrayList<>();
+    private List<XmlAdaptedTaskId> tasked = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -52,7 +52,7 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String id, String name, String phone, String email, String address,
-                            List<XmlAdaptedTag> tagged, List<XmlAdaptedTask> tasked) {
+                            List<XmlAdaptedTag> tagged, List<XmlAdaptedTaskId> tasked) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -80,8 +80,8 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        tasked = source.getTasks().stream()
-                 .map(XmlAdaptedTask::new)
+        tasked = source.getTaskIds().stream()
+                 .map(XmlAdaptedTaskId::new)
                  .collect(Collectors.toList());
     }
 
@@ -100,9 +100,9 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<Task> personTasks = new ArrayList<>();
-        for (XmlAdaptedTask task : tasked) {
-            personTasks.add(task.toModelType());
+        final List<TaskId> personTaskIds = new ArrayList<>();
+        for (XmlAdaptedTaskId taskId : tasked) {
+            personTaskIds.add(taskId.toModelType());
         }
 
         if (id == null) {
@@ -144,7 +144,7 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<Task> modelTasks = new HashSet<>(personTasks);
+        final Set<TaskId> modelTasks = new HashSet<>(personTaskIds);
         return new Person(modelId, modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTasks);
     }
 

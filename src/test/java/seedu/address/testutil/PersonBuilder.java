@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -29,7 +29,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Set<Task> tasks;
+    private Set<TaskId> taskIds;
 
     public PersonBuilder() {
         id = null;
@@ -38,7 +38,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        tasks = new HashSet<>();
+        taskIds = new HashSet<>();
     }
 
     /**
@@ -51,7 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        tasks = new HashSet<>(personToCopy.getTasks());
+        taskIds = new HashSet<>(personToCopy.getTaskIds());
     }
 
     /**
@@ -95,7 +95,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(id, name, phone, email, address, tags, tasks);
+        return new Person(id, name, phone, email, address, tags, taskIds);
     }
 
 }
