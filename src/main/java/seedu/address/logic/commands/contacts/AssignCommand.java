@@ -18,6 +18,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonId;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskId;
 
@@ -71,9 +72,13 @@ public class AssignCommand extends Command {
         Person editedPerson = new Person(personToEdit.getId(), personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), updatedTaskIds);
 
+        Set<PersonId> updatedPersonIds = new HashSet<>(taskToAssign.getPersonIds());
+        updatedPersonIds.add(personToEdit.getId());
+        Task editedTask = new Task(taskToAssign.getId(), taskToAssign.getName(), taskToAssign.getStartDateTime(),
+                taskToAssign.getEndDateTime(), taskToAssign.getTags(), updatedPersonIds);
+
         model.updatePerson(personToEdit, editedPerson);
-        // TODO: Check if updateFilteredPersonList call is necessary
-        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateTask(taskToAssign, editedTask);
         model.commitAddressBook();
 
         EventsCenter.getInstance().post(new JumpToPersonListRequestEvent(targetContactIndex));
