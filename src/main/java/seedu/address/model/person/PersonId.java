@@ -1,30 +1,30 @@
-package seedu.address.model.task;
+package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.UUID;
 
 /**
- * Represents a Task's ID in the address book.
+ * Represents a Person's ID in the address book.
  * Guarantees: immutable
  */
-public class TaskId {
+public class PersonId {
 
     public final String id;
 
     /**
-     * Constructs a {@code TaskId} with a random ID.
+     * Constructs a {@code PersonId} with a random ID.
      */
-    public TaskId() {
+    public PersonId() {
         this.id = UUID.randomUUID().toString();
     }
 
     /**
-     * Constructs a {@code TaskId}.
+     * Constructs a {@code PersonId}.
      *
      * @param id A valid id
      */
-    public TaskId(String id) {
+    public PersonId(String id) {
         requireNonNull(id);
         this.id = id;
     }
@@ -37,8 +37,8 @@ public class TaskId {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TaskId // instanceof handles nulls
-                && id.equals(((TaskId) other).id)); // state check
+                || (other instanceof PersonId // instanceof handles nulls
+                && id.equals(((PersonId) other).id)); // state check
     }
 
     @Override
