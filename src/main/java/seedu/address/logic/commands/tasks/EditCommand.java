@@ -1,21 +1,5 @@
 package seedu.address.logic.commands.tasks;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.DateTime;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
-
-import java.util.*;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_TIME;
@@ -24,6 +8,28 @@ import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.DateTime;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
+
+/**
+ * Edits the details of an existing task in the address book.
+ */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
@@ -82,6 +88,9 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
+    /**
+     * Creates and returns a {code Task} with the details of {@code taskToEdit}
+     */
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
@@ -134,25 +143,41 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
         }
 
-        public boolean isAnyFieldEdited() { return CollectionUtil.isAnyNonNull(name, startDateTime, endDateTime, tags); }
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(name, startDateTime, endDateTime, tags);
+        }
 
-        public void setName(Name name) { this.name = name; }
+        public void setName(Name name) {
+            this.name = name;
+        }
 
-        public Optional<Name> getName() { return Optional.ofNullable(name); }
+        public Optional<Name> getName() {
+            return Optional.ofNullable(name);
+        }
 
-        public void setStartDateTime(DateTime startDateTime) { this.startDateTime = startDateTime; }
+        public void setStartDateTime(DateTime startDateTime) {
+            this.startDateTime = startDateTime;
+        }
 
-        public Optional<DateTime> getStartDateTime() { return Optional.ofNullable(startDateTime); }
+        public Optional<DateTime> getStartDateTime() {
+            return Optional.ofNullable(startDateTime);
+        }
 
-        public void setEndDateTime(DateTime endDateTime) { this.endDateTime = endDateTime; }
+        public void setEndDateTime(DateTime endDateTime) {
+            this.endDateTime = endDateTime;
+        }
 
-        public Optional<DateTime>  getEndDateTime() { return Optional.ofNullable(endDateTime); }
+        public Optional<DateTime> getEndDateTime() {
+            return Optional.ofNullable(endDateTime);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) { this.tags = (tags != null) ? new HashSet<>(tags) : null; }
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}

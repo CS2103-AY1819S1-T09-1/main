@@ -2,6 +2,19 @@ package seedu.address.logic.parser.tasks;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_DATE;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.tasks.EditCommand;
 import seedu.address.logic.commands.tasks.EditCommand.EditTaskDescriptor;
@@ -14,19 +27,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Task;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
-
+/**
+ * Parses input arguments and creates a new EditCommand object
+ */
 public class EditCommandParser implements Parser<EditCommand> {
 
     /**
@@ -37,7 +40,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultiMap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_START_DATE, PREFIX_START_TIME, PREFIX_END_DATE, PREFIX_END_TIME, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_START_DATE, PREFIX_START_TIME, PREFIX_END_DATE,
+                        PREFIX_END_TIME, PREFIX_TAG);
 
         Index index;
 
@@ -51,9 +55,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultiMap.getValue(PREFIX_NAME).isPresent()) {
             editTaskDescriptor.setName(ParserUtil.parseName(argMultiMap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultiMap.getValue(PREFIX_START_DATE).isPresent() && argMultiMap.getValue(PREFIX_START_TIME).isPresent() && argMultiMap.getValue(PREFIX_END_DATE).isPresent() && argMultiMap.getValue(PREFIX_END_TIME).isPresent()) {
-            DateTime startDateTime = ParserUtil.parseDateTime(argMultiMap.getValue(PREFIX_START_DATE).get(), argMultiMap.getValue(PREFIX_START_TIME).get());
-            DateTime endDateTime = ParserUtil.parseDateTime(argMultiMap.getValue(PREFIX_END_DATE).get(), argMultiMap.getValue(PREFIX_END_TIME).get());
+        if (argMultiMap.getValue(PREFIX_START_DATE).isPresent()
+                && argMultiMap.getValue(PREFIX_START_TIME).isPresent()
+                && argMultiMap.getValue(PREFIX_END_DATE).isPresent()
+                && argMultiMap.getValue(PREFIX_END_TIME).isPresent()) {
+            DateTime startDateTime = ParserUtil.parseDateTime(argMultiMap.getValue(PREFIX_START_DATE).get(),
+                    argMultiMap.getValue(PREFIX_START_TIME).get());
+            DateTime endDateTime = ParserUtil.parseDateTime(argMultiMap.getValue(PREFIX_END_DATE).get(),
+                    argMultiMap.getValue(PREFIX_END_TIME).get());
             if (startDateTime.compareTo(endDateTime) > 0) {
                 throw new ParseException(Task.MESSAGE_START_AFTER_END);
             }
