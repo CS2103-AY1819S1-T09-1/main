@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.JumpToPersonListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -75,7 +75,7 @@ public class AssignCommand extends Command {
         // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetContactIndex));
+        EventsCenter.getInstance().post(new JumpToPersonListRequestEvent(targetContactIndex));
         return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_SUCCESS,
                 targetContactIndex.getOneBased(), targetTaskIndex.getOneBased()));
 
