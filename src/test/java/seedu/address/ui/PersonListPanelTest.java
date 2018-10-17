@@ -28,7 +28,8 @@ public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
             FXCollections.observableList(getTypicalPersons());
 
-    private static final JumpToPersonListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToPersonListRequestEvent(INDEX_SECOND_PERSON);
+    private static final JumpToPersonListRequestEvent JUMP_TO_SECOND_EVENT =
+            new JumpToPersonListRequestEvent(INDEX_SECOND_PERSON);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
