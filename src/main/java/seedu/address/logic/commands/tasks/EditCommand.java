@@ -26,6 +26,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * Edits the details of an existing task in the address book.
@@ -94,12 +95,13 @@ public class EditCommand extends Command {
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
+        TaskId id = taskToEdit.getId(); // ID is not editable
         Name updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
         DateTime updatedStartDateTime = editTaskDescriptor.getStartDateTime().orElse(taskToEdit.getStartDateTime());
         DateTime updatedEndDateTime = editTaskDescriptor.getEndDateTime().orElse(taskToEdit.getEndDateTime());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedName, updatedStartDateTime, updatedEndDateTime, updatedTags);
+        return new Task(id, updatedName, updatedStartDateTime, updatedEndDateTime, updatedTags);
     }
 
     @Override
