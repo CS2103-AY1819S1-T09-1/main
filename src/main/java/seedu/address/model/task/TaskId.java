@@ -2,7 +2,6 @@ package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**

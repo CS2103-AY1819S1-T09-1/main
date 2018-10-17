@@ -8,7 +8,7 @@ import java.util.UUID;
  * Represents a Person's ID in the address book.
  * Guarantees: immutable
  */
-public class PersonId  {
+public class PersonId {
 
     public final String id;
 
