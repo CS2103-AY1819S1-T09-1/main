@@ -18,7 +18,7 @@ import seedu.address.model.task.Task;
 public class Person {
 
     // Identity fields
-    private final String id;
+    private final PersonId id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -31,12 +31,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(String id, Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Task> tasks) {
+    public Person(PersonId id, Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Task> tasks) {
         requireAllNonNull(name, phone, email, address, tags, tasks);
         if (id != null) {
             this.id = id;
         } else {
-            this.id = UUID.randomUUID().toString();
+            this.id = new PersonId(UUID.randomUUID().toString());
         }
         this.name = name;
         this.phone = phone;
@@ -46,7 +46,7 @@ public class Person {
         this.tasks.addAll(tasks);
     }
 
-    public String getId() {
+    public PersonId getId() {
         return id;
     }
 
