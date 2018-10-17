@@ -20,7 +20,8 @@
 <li><a href="#design">2. Design</a>
 <ul class="sectlevel2">
 <li><a href="#Design-Architecture">2.1. Architecture</a></li>
-<li><a href="#Design-Commons">2.2. Common classes</a></li>
+<li><a href="#Design-Logic">2.2. Logic component</a></li>
+<li><a href="#Design-Commons">2.3. Common classes</a></li>
 </ul>
 </li>
 <li><a href="#implementation">3. Implementation</a>
@@ -32,6 +33,7 @@
 <li><a href="#logging">3.5. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
 <li><a href="#editing-and-deleting-tasks">3.7. Editing and Deleting Tasks</a></li>
+<li><a href="#assigning-tasks-and-contacts">3.8. Assigning tasks and contacts</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -430,7 +432,48 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.2. Common classes</a></h3>
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.2. Logic component</a></h3>
+<div id="fig-LogicClassDiagram" class="imageblock">
+<div class="content">
+<img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+</div>
+<div class="title">Figure 5. Structure of the Logic Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> :
+<a href="https://github.com/CS2103-AY1819S1-T09-1/main/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Logic</code> uses the <code>AppParser</code> class to parse the user command.</p>
+</li>
+<li>
+<p><code>AppParser</code> then sends the command to the appropriate module parser.</p>
+</li>
+<li>
+<p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The command execution can affect the <code>Model</code> (e.g. adding a person) and/or raise events.</p>
+</li>
+<li>
+<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("contacts delete 1")</code> API call.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
+</div>
+<div class="title">Figure 6. Interactions Inside the Logic Component for the <code>contacts delete 1</code> Command</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.3. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
 </div>
@@ -923,6 +966,30 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p><span class="image"><img src="images/EditCommand.jpg" alt="EditCommand"></span></p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="assigning-tasks-and-contacts"><a class="link" href="#assigning-tasks-and-contacts">3.8. Assigning tasks and contacts</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.8.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>Tasks and contacts can be assigned to each other using the commands <code>tasks assign</code> and <code>contacts assign</code>. This many-to-many relationship is stored simply as a list of task IDs and person IDs in the Person and Task classes respectively.</p>
+</div>
+<div class="paragraph">
+<p>The commands are parsed by <code>AssignCommand</code> in both <code>TasksParser</code> and <code>ContactsParser</code>. If both the specified task and contact are found, the task and person IDs will be added to <code>Person.taskIds</code> and <code>Task.personIds</code> respectively, and the edited objects will be saved to disk. As happens when the edit commands are run, <code>indicateAddressBookChanged()</code> is called to update the UI. The data flow is similar to the one for <code>EditCommand</code> in the previous section.</p>
+</div>
+<div class="paragraph">
+<p>An alternative implementation that was considered was to model the many-to-many relationship using an <code>Assignment</code> class, which will act like a join table in relational databases. This would have slightly decoupled the <code>Person</code> and <code>Task</code> classes. However, we chose not to implement it this way as a <code>Person</code> will always be assigned to a <code>Task</code>, and also because implementing such a relationship with manually managed IDs is extremely complex without a relational database to abstract away the complexity.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-enhancements-2"><a class="link" href="#future-enhancements-2">3.8.2. Future Enhancements</a></h4>
+<div class="paragraph">
+<p>Both implementations of <code>AssignCommand</code> are almost identical, and should be refactored.</p>
+</div>
+<div class="paragraph">
+<p>Currently, assignments cannot be removed. The commands that will perform this task, <code>tasks unassign</code> and <code>contacts unassign</code>, are both slated to be implemented in v1.3.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -984,7 +1051,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 5. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 7. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2198,4 +2265,4 @@ their best</p>
 </blockquote>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 15:44:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 16:02:10 UTC</div></div></div></body></html>
