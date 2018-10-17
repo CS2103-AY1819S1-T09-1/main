@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * Represents a Person in the address book.
@@ -25,13 +25,14 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Task> tasks = new HashSet<>();
+    private final Set<TaskId> taskIds = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(PersonId id, Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Task> tasks) {
-        requireAllNonNull(name, phone, email, address, tags, tasks);
+    public Person(PersonId id, Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Set<TaskId> taskIds) {
+        requireAllNonNull(name, phone, email, address, tags, taskIds);
         if (id != null) {
             this.id = id;
         } else {
@@ -42,7 +43,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.tasks.addAll(tasks);
+        this.taskIds.addAll(taskIds);
     }
 
     public PersonId getId() {
@@ -77,8 +78,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Task> getTasks() {
-        return Collections.unmodifiableSet(tasks);
+    public Set<TaskId> getTaskIds() {
+        return Collections.unmodifiableSet(taskIds);
     }
 
     /**
@@ -134,8 +135,8 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Tasks: ");
-        getTasks().forEach(builder::append);
+        builder.append(" TasksIds: ");
+        getTaskIds().forEach(builder::append);
         return builder.toString();
     }
 
