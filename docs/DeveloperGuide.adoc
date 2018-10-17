@@ -171,6 +171,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+////
 
 [[Design-Logic]]
 === Logic component
@@ -182,16 +183,17 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `AppParser` class to parse the user command.
+.  `AppParser` then sends the command to the appropriate module parser.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("contacts delete 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
+.Interactions Inside the Logic Component for the `contacts delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
-
+////
 [[Design-Model]]
 === Model component
 
