@@ -107,6 +107,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        versionedAddressBook.updateTask(target, editedTask);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public void deleteTask(Task target) {
         versionedAddressBook.deleteTask(target);
     }
