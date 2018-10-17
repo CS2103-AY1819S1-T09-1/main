@@ -1,7 +1,9 @@
 package seedu.address.logic;
 
+import java.util.Calendar;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -54,6 +56,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Task> getCalendarTaskList() {
         return model.getCalendarTaskList();
+    }
+
+    @Override
+    public ObservableValue<Calendar> getCalendarMonth() {
+        return model.getCalendarMonth();
     }
 
     @Override

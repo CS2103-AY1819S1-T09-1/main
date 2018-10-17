@@ -2,6 +2,7 @@
 <addressbook>
 
     <persons>
+        <id>36ED93EB-FEE2-4299-8407-EB13F394CFE7</id>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
         <email>alice@example.com</email>
@@ -11,6 +12,7 @@
 
     <!-- Person with same identity as Alice Pauline -->
     <persons>
+        <id>36ED93EB-FEE2-4299-8407-EB13F394CFE7</id>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
         <email>pauline@example.com</email>

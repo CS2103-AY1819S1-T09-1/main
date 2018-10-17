@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -17,6 +18,7 @@ import seedu.address.model.task.Task;
 public class Person {
 
     // Identity fields
+    private final String id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -29,14 +31,23 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Task> tasks) {
+    public Person(String id, Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Task> tasks) {
         requireAllNonNull(name, phone, email, address, tags, tasks);
+        if (id != null) {
+            this.id = id;
+        } else {
+            this.id = UUID.randomUUID().toString();
+        }
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.tasks.addAll(tasks);
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Name getName() {
@@ -72,7 +83,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * Returns true if both persons have the same ID.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -81,8 +92,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+                && otherPerson.getId().equals(getId());
     }
 
     /**
@@ -110,7 +120,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(id, name, phone, email, address, tags);
     }
 
     @Override
