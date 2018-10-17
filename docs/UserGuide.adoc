@@ -78,11 +78,11 @@ Format: `contacts delete INDEX`
 
 ==== Assign tasks to contact: `contacts assign`
 
-Format: `contacts assign CONTACT_INDEX... TASK_INDEX..`
+Format: `contacts assign c/CONTACT_INDEX k/TASK_INDEX`
 
 ==== Unassign tasks from contact: `contacts unassign`
 
-Format: `contacts unassign CONTACT_INDEX... (TASK_INDEX...|*)`
+Format: `contacts unassign c/CONTACT_INDEX... (k/TASK_INDEX...|*)`
 
 If `*` is provided as the argument for TASK_INDEX, unassign all tasks
 from the contacts specified.
@@ -133,11 +133,11 @@ Delete all tasks corresponding to the indices provided.
 
 ==== Assign person to task: `tasks assign`
 
-Format: `tasks assign k/TASK_INDEX... c/CONTACT_INDEX...`
+Format: `tasks assign k/TASK_INDEX c/CONTACT_INDEX`
 
 ==== Unassign person from tasks: `tasks unassign`
 
-Format: `tasks unassign k/TASK_INDEX... (c/CONTACT_INDEX...|*)`
+Format: `tasks unassign k/TASK_INDEX (c/CONTACT_INDEX...|*)`
 
 If `*` is provided as the argument for CONTACT_INDEX, all contacts will
 be unassigned.

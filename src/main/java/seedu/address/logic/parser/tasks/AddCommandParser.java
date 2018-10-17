@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -17,6 +18,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.PersonId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
@@ -52,8 +54,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(Task.MESSAGE_START_AFTER_END);
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<PersonId> personIds = new HashSet<>();
 
-        Task task = new Task(null, name, startDateTime, endDateTime, tagList);
+        Task task = new Task(null, name, startDateTime, endDateTime, tagList, personIds);
 
         return new AddCommand(task);
     }

@@ -9,12 +9,14 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.tasks.AddCommand;
+import seedu.address.logic.commands.tasks.AssignCommand;
 import seedu.address.logic.commands.tasks.DeleteCommand;
 import seedu.address.logic.commands.tasks.EditCommand;
 import seedu.address.logic.commands.tasks.FindCommand;
 import seedu.address.logic.commands.tasks.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tasks.AddCommandParser;
+import seedu.address.logic.parser.tasks.AssignCommandParser;
 import seedu.address.logic.parser.tasks.DeleteCommandParser;
 import seedu.address.logic.parser.tasks.EditCommandParser;
 import seedu.address.logic.parser.tasks.FindCommandParser;
@@ -62,6 +64,9 @@ public class TasksParser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case AssignCommand.COMMAND_WORD:
+            return new AssignCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

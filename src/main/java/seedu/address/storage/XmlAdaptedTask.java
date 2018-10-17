@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.PersonId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
@@ -36,6 +37,8 @@ public class XmlAdaptedTask {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElement
+    private List<XmlAdaptedPersonId> assigned = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -48,13 +51,16 @@ public class XmlAdaptedTask {
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
     public XmlAdaptedTask(String id, String name, DateTime startDateTime, DateTime endDateTime,
-                          List<XmlAdaptedTag> tagged) {
+                          List<XmlAdaptedTag> tagged, List<XmlAdaptedPersonId> assigned) {
         this.id = id;
         this.name = name;
         this.startDateTime = startDateTime.getCalendar();
         this.endDateTime = endDateTime.getCalendar();
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+        if (assigned != null) {
+            this.assigned = new ArrayList<>(assigned);
         }
     }
 
@@ -71,6 +77,9 @@ public class XmlAdaptedTask {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        assigned = source.getPersonIds().stream()
+                  .map(XmlAdaptedPersonId::new)
+                  .collect(Collectors.toList());
     }
 
     /**
@@ -82,6 +91,11 @@ public class XmlAdaptedTask {
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
+        }
+
+        final List<PersonId> taskPersonIds = new ArrayList<>();
+        for (XmlAdaptedPersonId personId : assigned) {
+            taskPersonIds.add(personId.toModelType());
         }
 
         if (id == null) {
@@ -106,7 +120,8 @@ public class XmlAdaptedTask {
         final DateTime modelEndDateTime = new DateTime(endDateTime);
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        return new Task(modelId, modelName, modelStartDateTime, modelEndDateTime, modelTags);
+        final Set<PersonId> modelPersonIds = new HashSet<>(taskPersonIds);
+        return new Task(modelId, modelName, modelStartDateTime, modelEndDateTime, modelTags, modelPersonIds);
     }
 
     @Override
@@ -124,6 +139,7 @@ public class XmlAdaptedTask {
                 && Objects.equals(name, otherPerson.name)
                 && Objects.equals(startDateTime, otherPerson.startDateTime)
                 && Objects.equals(endDateTime, otherPerson.endDateTime)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+                && assigned.equals(otherPerson.assigned);
     }
 }
