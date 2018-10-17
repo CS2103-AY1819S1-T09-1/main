@@ -26,9 +26,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonId;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -98,14 +99,15 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
+        PersonId id = personToEdit.getId(); // ID is not editable
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Task> updatedTasks = personToEdit.getTasks();
+        Set<TaskId> updatedTaskIds = personToEdit.getTaskIds();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTasks);
+        return new Person(id, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTaskIds);
     }
 
     @Override

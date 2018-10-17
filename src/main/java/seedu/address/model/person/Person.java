@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * Represents a Person in the address book.
@@ -17,6 +17,7 @@ import seedu.address.model.task.Task;
 public class Person {
 
     // Identity fields
+    private final PersonId id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -24,19 +25,29 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Task> tasks = new HashSet<>();
+    private final Set<TaskId> taskIds = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Task> tasks) {
-        requireAllNonNull(name, phone, email, address, tags, tasks);
+    public Person(PersonId id, Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Set<TaskId> taskIds) {
+        requireAllNonNull(name, phone, email, address, tags, taskIds);
+        if (id != null) {
+            this.id = id;
+        } else {
+            this.id = new PersonId();
+        }
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.tasks.addAll(tasks);
+        this.taskIds.addAll(taskIds);
+    }
+
+    public PersonId getId() {
+        return id;
     }
 
     public Name getName() {
@@ -67,12 +78,12 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Task> getTasks() {
-        return Collections.unmodifiableSet(tasks);
+    public Set<TaskId> getTaskIds() {
+        return Collections.unmodifiableSet(taskIds);
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * Returns true if both persons have the same ID.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -81,8 +92,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+                && otherPerson.getId().equals(getId());
     }
 
     /**
@@ -110,7 +120,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(id, name, phone, email, address, tags);
     }
 
     @Override
@@ -125,8 +135,8 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Tasks: ");
-        getTasks().forEach(builder::append);
+        builder.append(" TasksIds: ");
+        getTaskIds().forEach(builder::append);
         return builder.toString();
     }
 

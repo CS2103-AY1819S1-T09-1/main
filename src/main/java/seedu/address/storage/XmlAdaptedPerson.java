@@ -14,9 +14,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonId;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * JAXB-friendly version of the Person.
@@ -25,6 +26,8 @@ public class XmlAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
+    @XmlElement(required = true)
+    private String id;
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
@@ -37,7 +40,7 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
     @XmlElement
-    private List<XmlAdaptedTask> tasked = new ArrayList<>();
+    private List<XmlAdaptedTaskId> tasked = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -48,8 +51,9 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address,
-                            List<XmlAdaptedTag> tagged, List<XmlAdaptedTask> tasked) {
+    public XmlAdaptedPerson(String id, String name, String phone, String email, String address,
+                            List<XmlAdaptedTag> tagged, List<XmlAdaptedTaskId> tasked) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -68,6 +72,7 @@ public class XmlAdaptedPerson {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedPerson(Person source) {
+        id = source.getId().id;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -75,9 +80,13 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        tasked = source.getTasks().stream()
-                 .map(XmlAdaptedTask::new)
+        tasked = source.getTaskIds().stream()
+                 .map(XmlAdaptedTaskId::new)
                  .collect(Collectors.toList());
+    }
+
+    public String getId() {
+        return id;
     }
 
     /**
@@ -91,10 +100,16 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<Task> personTasks = new ArrayList<>();
-        for (XmlAdaptedTask task : tasked) {
-            personTasks.add(task.toModelType());
+        final List<TaskId> personTaskIds = new ArrayList<>();
+        for (XmlAdaptedTaskId taskId : tasked) {
+            personTaskIds.add(taskId.toModelType());
         }
+
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PersonId.class.getSimpleName()));
+        }
+        final PersonId modelId = new PersonId(id);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -129,8 +144,8 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<Task> modelTasks = new HashSet<>(personTasks);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTasks);
+        final Set<TaskId> modelTasks = new HashSet<>(personTaskIds);
+        return new Person(modelId, modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTasks);
     }
 
     @Override
@@ -144,7 +159,8 @@ public class XmlAdaptedPerson {
         }
 
         XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
-        return Objects.equals(name, otherPerson.name)
+        return Objects.equals(id, otherPerson.id)
+                && Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)

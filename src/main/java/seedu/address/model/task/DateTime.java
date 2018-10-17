@@ -120,7 +120,7 @@ public class DateTime implements Comparable<DateTime> {
             maxDay = 28;
         }
 
-        return day < maxDay;
+        return day <= maxDay;
     }
 
     private static boolean isLeapYear(int year) {
@@ -169,7 +169,8 @@ public class DateTime implements Comparable<DateTime> {
         int[] dateArray = splitDate(date);
         int[] timeArray = splitTime(time);
         int year = dateArray[0];
-        int month = dateArray[1];
+        // GregorianCalendar month is 0-indexed
+        int month = dateArray[1] - 1;
         int day = dateArray[2];
         int hour = timeArray[0];
         int minute = timeArray[1];

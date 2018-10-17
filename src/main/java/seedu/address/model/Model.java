@@ -1,7 +1,9 @@
 package seedu.address.model;
 
+import java.util.Calendar;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
@@ -67,6 +69,14 @@ public interface Model {
     void addTask(Task task);
 
     /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book. The task identity of
+     * {@code editedTask} must not be the same as another existing task in the
+     * address book.
+     */
+    void updateTask(Task target, Task editedTask);
+
+    /**
      * Deletes the given task.
      * The task must exist in the address book.
      */
@@ -85,7 +95,7 @@ public interface Model {
 
     /**
      * Returns an unmodifiable view of the filtered task list containing tasks to be
-     * rendered in the calendar
+     * rendered in the calendar.
      */
     ObservableList<Task> getCalendarTaskList();
 
@@ -96,6 +106,19 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateCalendarTaskList(Predicate<Task> predicate);
+
+    /**
+     * Updates the Calendar's active month for drawing of grid.
+     *
+     * @throws NullPointerException if {@code calendar} is null.
+     */
+    void updateCalendarMonth(Calendar calendar);
+
+    /**
+     * Gets Calendar's active month.
+     */
+    public ObservableValue<Calendar> getCalendarMonth();
+
 
     /**
      * Returns true if the model has previous address book states to restore.

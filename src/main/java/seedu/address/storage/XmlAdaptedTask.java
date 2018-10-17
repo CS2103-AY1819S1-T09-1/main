@@ -15,6 +15,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 
 /**
@@ -24,6 +25,8 @@ public class XmlAdaptedTask {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tasks's %s field is missing!";
 
+    @XmlElement(required = true)
+    private String id;
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
@@ -44,7 +47,9 @@ public class XmlAdaptedTask {
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
-    public XmlAdaptedTask(String name, DateTime startDateTime, DateTime endDateTime, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedTask(String id, String name, DateTime startDateTime, DateTime endDateTime,
+                          List<XmlAdaptedTag> tagged) {
+        this.id = id;
         this.name = name;
         this.startDateTime = startDateTime.getCalendar();
         this.endDateTime = endDateTime.getCalendar();
@@ -59,6 +64,7 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedTask(Task source) {
+        id = source.getId().toString();
         name = source.getName().toString();
         startDateTime = source.getStartDateTime().getCalendar();
         endDateTime = source.getEndDateTime().getCalendar();
@@ -78,6 +84,11 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
 
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskId.class.getSimpleName()));
+        }
+        final TaskId modelId = new TaskId(id);
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -95,7 +106,7 @@ public class XmlAdaptedTask {
         final DateTime modelEndDateTime = new DateTime(endDateTime);
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        return new Task(modelName, modelStartDateTime, modelEndDateTime, modelTags);
+        return new Task(modelId, modelName, modelStartDateTime, modelEndDateTime, modelTags);
     }
 
     @Override
@@ -109,7 +120,8 @@ public class XmlAdaptedTask {
         }
 
         XmlAdaptedTask otherPerson = (XmlAdaptedTask) other;
-        return Objects.equals(name, otherPerson.name)
+        return Objects.equals(id, otherPerson.id)
+                && Objects.equals(name, otherPerson.name)
                 && Objects.equals(startDateTime, otherPerson.startDateTime)
                 && Objects.equals(endDateTime, otherPerson.endDateTime)
                 && tagged.equals(otherPerson.tagged);
