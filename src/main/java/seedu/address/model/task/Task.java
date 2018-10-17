@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.PersonId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,12 +24,14 @@ public class Task {
     private final DateTime startDateTime;
     private final DateTime endDateTime;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<PersonId> personIds = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskId id, Name name, DateTime startDateTime, DateTime endDateTime, Set<Tag> tags) {
-        requireAllNonNull(name, startDateTime, endDateTime, tags);
+    public Task(TaskId id, Name name, DateTime startDateTime, DateTime endDateTime,
+                Set<Tag> tags, Set<PersonId> personIds) {
+        requireAllNonNull(name, startDateTime, endDateTime, tags, personIds);
         if (id != null) {
             this.id = id;
         } else {
@@ -38,6 +41,7 @@ public class Task {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.tags.addAll(tags);
+        this.personIds.addAll(personIds);
     }
 
     public TaskId getId() {
@@ -62,6 +66,14 @@ public class Task {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable person ID set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<PersonId> getPersonIds() {
+        return Collections.unmodifiableSet(personIds);
     }
 
     /**
@@ -120,6 +132,8 @@ public class Task {
                 .append(getEndDateTime().getTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" PersonIds: ");
+        getPersonIds().forEach(builder::append);
         return builder.toString();
     }
 

@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.contacts;
+package seedu.address.logic.parser.tasks;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_CONTACT_ID;
@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_TASK_ID;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.contacts.AssignCommand;
+import seedu.address.logic.commands.tasks.AssignCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -46,4 +46,3 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
-
