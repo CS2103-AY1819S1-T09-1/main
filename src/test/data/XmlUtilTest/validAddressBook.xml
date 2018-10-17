@@ -1,54 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
     <persons>
+        <id>7642CA06-A8D2-4B19-A816-CC918264624F</id>
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
     </persons>
     <persons>
+        <id>AAE49A85-9F95-411F-966F-C0D4BFFF2DD6</id>
         <name>Ruth Mueller</name>
         <phone isPrivate="false">87249245</phone>
         <email isPrivate="false">ruth@example.com</email>
         <address isPrivate="false">81th street</address>
     </persons>
     <persons>
+        <id>0B196F0C-2558-412A-A244-A1FBDE5C9573</id>
         <name>Heinz Kurz</name>
         <phone isPrivate="false">95352563</phone>
         <email isPrivate="false">heinz@example.com</email>
         <address isPrivate="false">wall street</address>
     </persons>
     <persons>
+        <id>5C7B36F4-A965-4536-9E76-7C37BE2D8C07</id>
         <name>Cornelia Meier</name>
         <phone isPrivate="false">87652533</phone>
         <email isPrivate="false">cornelia@example.com</email>
         <address isPrivate="false">10th street</address>
     </persons>
     <persons>
+        <id>72F13EBA-71E6-41C2-B1F1-79A5D49BFEA9</id>
         <name>Werner Meyer</name>
         <phone isPrivate="false">9482224</phone>
         <email isPrivate="false">werner@example.com</email>
         <address isPrivate="false">michegan ave</address>
     </persons>
     <persons>
+        <id>3EC6F866-5546-45ED-BD5F-D781D9564B98</id>
         <name>Lydia Kunz</name>
         <phone isPrivate="false">9482427</phone>
         <email isPrivate="false">lydia@example.com</email>
         <address isPrivate="false">little tokyo</address>
     </persons>
     <persons>
+        <id>58C8424F-9B2A-4E4E-8404-05DBD8C7E76D</id>
         <name>Anna Best</name>
         <phone isPrivate="false">9482442</phone>
         <email isPrivate="false">anna@example.com</email>
         <address isPrivate="false">4th street</address>
     </persons>
     <persons>
+        <id>BDAA6651-FF1B-4D6B-BC3C-AE8B93049ACD</id>
         <name>Stefan Meier</name>
         <phone isPrivate="false">8482424</phone>
         <email isPrivate="false">stefan@example.com</email>
         <address isPrivate="false">little india</address>
     </persons>
     <persons>
+        <id>9D381BB6-65E0-4C4B-B32E-DFBE530DDA50</id>
         <name>Martin Mueller</name>
         <phone isPrivate="false">8482131</phone>
         <email isPrivate="false">hans@example.com</email>
