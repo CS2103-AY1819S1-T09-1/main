@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -36,7 +35,7 @@ public class Person {
         if (id != null) {
             this.id = id;
         } else {
-            this.id = new PersonId(UUID.randomUUID().toString());
+            this.id = new PersonId();
         }
         this.name = name;
         this.phone = phone;

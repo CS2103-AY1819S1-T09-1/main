@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.UUID;
+
 /**
  * Represents a Person's ID in the address book.
  * Guarantees: immutable
@@ -9,6 +11,13 @@ import static java.util.Objects.requireNonNull;
 public class PersonId  {
 
     public final String id;
+
+    /**
+     * Constructs a {@code PersonId} with a random ID.
+     */
+    public PersonId() {
+        this.id = UUID.randomUUID().toString();
+    }
 
     /**
      * Constructs a {@code PersonId}.

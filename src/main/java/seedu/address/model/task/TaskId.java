@@ -2,6 +2,9 @@ package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+import java.util.UUID;
+
 /**
  * Represents a Task's ID in the address book.
  * Guarantees: immutable
@@ -9,6 +12,13 @@ import static java.util.Objects.requireNonNull;
 public class TaskId {
 
     public final String id;
+
+    /**
+     * Constructs a {@code TaskId} with a random ID.
+     */
+    public TaskId() {
+        this.id = UUID.randomUUID().toString();
+    }
 
     /**
      * Constructs a {@code TaskId}.
