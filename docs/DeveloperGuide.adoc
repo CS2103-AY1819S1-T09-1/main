@@ -388,6 +388,18 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+=== Editing and Deleting Tasks
+
+The code for editing and deleting tasks is actually pretty similar to how it is implemented for persons. This is a combination of adding support for two additional commands: `tasks edit` and `tasks delete` inside `TasksParser`, defining `EditCommand` and `DeleteCommand` themselves, and finally, adding `void updateTask(Task target, Task editedTask);` and `void deleteTask(Task target);` in the `Model` interface, and implementing them in the `ModelManager` class.
+
+After any task is updated/deleted, `indicateAddressBookChanged()` is called to fire off the event such that the UI is updated.
+
+To explain more clearly, you can see below a diagram of what happens when the user asked the program to edit a task:
+
+image:EditCommandParser.jpg[]
+
+image:EditCommand.jpg[]
+
 == Documentation
 
 We use asciidoc for writing documentation.
