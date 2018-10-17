@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.model.tag.Tag;
 
@@ -18,6 +19,7 @@ public class Task {
     public static final String MESSAGE_START_AFTER_END =
             "Start date and time cannot be later than end date and time.";
 
+    private final TaskId id;
     private final Name name;
     private final DateTime startDateTime;
     private final DateTime endDateTime;
@@ -26,12 +28,21 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, DateTime startDateTime, DateTime endDateTime, Set<Tag> tags) {
+    public Task(TaskId id, Name name, DateTime startDateTime, DateTime endDateTime, Set<Tag> tags) {
         requireAllNonNull(name, startDateTime, endDateTime, tags);
+        if (id != null) {
+            this.id = id;
+        } else {
+            this.id = new TaskId(UUID.randomUUID().toString());
+        }
         this.name = name;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.tags.addAll(tags);
+    }
+
+    public TaskId getId() {
+        return id;
     }
 
     public Name getName() {
@@ -64,9 +75,7 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(getName())
-                && otherTask.getStartDateTime().equals(getStartDateTime())
-                && otherTask.getEndDateTime().equals(getEndDateTime());
+                && otherTask.getId().equals(getId());
     }
 
     /**
@@ -100,6 +109,8 @@ public class Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" ID: ")
+                .append(getId())
                 .append(" Start date: ")
                 .append(getStartDateTime().getDate())
                 .append(" Start time: ")

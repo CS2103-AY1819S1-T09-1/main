@@ -53,7 +53,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Task task = new Task(name, startDateTime, endDateTime, tagList);
+        Task task = new Task(null, name, startDateTime, endDateTime, tagList);
 
         return new AddCommand(task);
     }
