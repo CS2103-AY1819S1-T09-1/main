@@ -47,7 +47,8 @@ public class XmlAdaptedTask {
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
-    public XmlAdaptedTask(String id, String name, DateTime startDateTime, DateTime endDateTime, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedTask(String id, String name, DateTime startDateTime, DateTime endDateTime,
+                          List<XmlAdaptedTag> tagged) {
         this.id = id;
         this.name = name;
         this.startDateTime = startDateTime.getCalendar();
