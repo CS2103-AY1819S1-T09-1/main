@@ -458,6 +458,21 @@ image:EditCommandParser.jpg[]
 
 image:EditCommand.jpg[]
 
+=== Assigning tasks and contacts
+==== Current implementation
+
+Tasks and contacts can be assigned to each other using the commands `tasks assign` and `contacts assign`. This many-to-many relationship is stored simply as a list of task IDs and person IDs in the Person and Task classes respectively.
+
+The commands are parsed by `AssignCommand` in both `TasksParser` and `ContactsParser`. If both the specified task and contact are found, the task and person IDs will be added to `Person.taskIds` and `Task.personIds` respectively, and the edited objects will be saved to disk. As happens when the edit commands are run, `indicateAddressBookChanged()` is called to update the UI. The data flow is similar to the one for `EditCommand` in the previous section.
+
+An alternative implementation that was considered was to model the many-to-many relationship using an `Assignment` class, which will act like a join table in relational databases. This would have slightly decoupled the `Person` and `Task` classes. However, we chose not to implement it this way as a `Person` will always be assigned to a `Task`, and also because implementing such a relationship with manually managed IDs is extremely complex without a relational database to abstract away the complexity.
+
+==== Future Enhancements
+
+Both implementations of `AssignCommand` are almost identical, and should be refactored.
+
+Currently, assignments cannot be removed. The commands that will perform this task, `tasks unassign` and `contacts unassign`, are both slated to be implemented in v1.3.
+
 == Documentation
 
 We use asciidoc for writing documentation.
