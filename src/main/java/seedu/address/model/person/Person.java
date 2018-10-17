@@ -75,7 +75,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable task ID set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<TaskId> getTaskIds() {
@@ -135,7 +135,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" TasksIds: ");
+        builder.append(" TaskIds: ");
         getTaskIds().forEach(builder::append);
         return builder.toString();
     }

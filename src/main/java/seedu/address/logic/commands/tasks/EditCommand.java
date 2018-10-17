@@ -22,6 +22,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.PersonId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
@@ -100,8 +101,9 @@ public class EditCommand extends Command {
         DateTime updatedStartDateTime = editTaskDescriptor.getStartDateTime().orElse(taskToEdit.getStartDateTime());
         DateTime updatedEndDateTime = editTaskDescriptor.getEndDateTime().orElse(taskToEdit.getEndDateTime());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
+        Set<PersonId> updatedPersons = taskToEdit.getPersonIds();
 
-        return new Task(id, updatedName, updatedStartDateTime, updatedEndDateTime, updatedTags);
+        return new Task(id, updatedName, updatedStartDateTime, updatedEndDateTime, updatedTags, updatedPersons);
     }
 
     @Override

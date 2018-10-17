@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.contacts;
+package seedu.address.logic.commands.tasks;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_CONTACT_ID;
@@ -23,7 +23,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskId;
 
 /**
- * Assigns a contact to a task. Both contact and task are identified by the index number used in the displayed person
+ * Assigns a task to a contact. Both contact and task are identified by the index number used in the displayed person
  * and task list respectively.
  */
 public class AssignCommand extends Command {
@@ -31,7 +31,7 @@ public class AssignCommand extends Command {
     public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Assigns a contact to a task. Both contact and task are identified by the index number used in the "
+            + ": Assigns a task to a contact. Both contact and task are identified by the index number used in the "
             + "displayed person and task list respectively.\n"
             + "Parameters: "
             + PREFIX_CONTACT_ID + "CONTACT_INDEX "
@@ -40,7 +40,7 @@ public class AssignCommand extends Command {
             + PREFIX_CONTACT_ID + "2 "
             + PREFIX_TASK_ID + "4";
 
-    public static final String MESSAGE_ASSIGN_PERSON_SUCCESS = "Assigned Person %1$s to Task %2$s";
+    public static final String MESSAGE_ASSIGN_TASK_SUCCESS = "Assigned Task %1$s to Person %2$s";
 
     private final Index targetContactIndex;
     private final Index targetTaskIndex;
@@ -82,8 +82,8 @@ public class AssignCommand extends Command {
         model.commitAddressBook();
 
         EventsCenter.getInstance().post(new JumpToPersonListRequestEvent(targetContactIndex));
-        return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_SUCCESS,
-                targetContactIndex.getOneBased(), targetTaskIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_ASSIGN_TASK_SUCCESS,
+                targetTaskIndex.getOneBased(), targetContactIndex.getOneBased()));
 
     }
 
