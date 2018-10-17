@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * Assigns a contact to a task. Both contact and task are identified by the index number used in the displayed person
@@ -65,10 +66,10 @@ public class AssignCommand extends Command {
         Person personToEdit = filteredPersonList.get(targetContactIndex.getZeroBased());
         Task taskToAssign = filteredTaskList.get(targetTaskIndex.getZeroBased());
 
-        Set<Task> updatedTasks = new HashSet<>(personToEdit.getTasks());
-        updatedTasks.add(taskToAssign);
+        Set<TaskId> updatedTaskIds = new HashSet<>(personToEdit.getTaskIds());
+        updatedTaskIds.add(taskToAssign.getId());
         Person editedPerson = new Person(personToEdit.getId(), personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), updatedTasks);
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), updatedTaskIds);
 
         model.updatePerson(personToEdit, editedPerson);
         // TODO: Check if updateFilteredPersonList call is necessary
