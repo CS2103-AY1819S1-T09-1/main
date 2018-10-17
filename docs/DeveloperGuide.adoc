@@ -235,6 +235,64 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::listfindtasks[]
+=== Listing and finding of tasks
+==== Current Implementation
+
+Listing and finding of tasks is facilitated by `ModelManager` and displayed through `TaskListPanel`.
+
+`ModelManager` implements the following relevant methods:
+
+* `ModelManager#updateFilteredTaskList(Predicate<Task> predicate)` --
+Updates the the internal `filteredTasks` list with the predicate given. Exposed through the `Model` interface.
+* `ModelManager#getFilteredTaskList()` -- Returns an unmodifiable view of the internal `filteredTasks` list that
+updates with any changes to the baselist.
+Exposed through the `Logic` and `Model` interfaces.
+
+[NOTE]
+`ModelManager#filteredTasks` is a JavaFX FilteredList around the unmodifiable list of tasks provided by `VersionedAddressBook#getTaskList())`. +
+
+
+`TaskListPanel` is constructed with the JavaFX ObservableList returned by
+`ModelManager#getFilteredTaskList()` when the application is started and displays it.
+
+To find specific tasks, the appropriate predicate is passed into `ModelManager#updateFilteredTaskList()`, which updates
+the `filteredTasks` list, propagating the change up to the `TaskListPanel` display.
+
+Currently, there are 2 use cases where `ModelManager#updateFilteredTaskList()` is called, examples are given below.
+
+image::TaskListFindModelSequenceDiagram.png[width="800"]
+
+Case 1: On application startup or after running `tasks list` command
+
+`ModelManager#updateFilteredTaskList()` is called with
+`Model#PREDICATE_SHOW_ALL_TASKS` which returns _true_ for all tasks
+
+image::TaskListLogicSequenceDiagram.png[width="800"]
+
+Case 2: After running `tasks find [KEYWORDS]` command
+
+`ModelManager#updateFilteredTaskList()` is called with
+`NameContainsKeywordsPredicate` formed with the keywords provided,
+which returns true only for tasks with keywords in the name.
+
+image::TaskFindLogicSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+The use of `ObservableList` and `FilteredList` from JavaFX saves us the trouble of handling task list updates.
+Under this design, addition, updates and deletion of tasks will only need to interface with `VersionedAddressBook`,
+and the lists for display will be updated through JavaFX.
+
+If we were use Java Lists instead, events will need to be raised to update lists stored for display.
+
+==== Future Enhancements
+
+Currently, users can only search for tasks by name. Additional predicates can be added and exposed via commands to allow
+users to search by assigned people or dates.
+
+// end::listfindtasks[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
