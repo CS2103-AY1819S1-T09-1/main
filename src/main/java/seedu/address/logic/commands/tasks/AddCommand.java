@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "Math Assignment "
             + PREFIX_START_DATE + "20180101 "
             + PREFIX_START_TIME + "0000 "
-            + PREFIX_END_DATE + "20183112 "
+            + PREFIX_END_DATE + "20181231 "
             + PREFIX_END_TIME + "2359 "
             + PREFIX_TAG + "school "
             + PREFIX_TAG + "urgent";
