@@ -3,9 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Calendar;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -25,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
     private final FilteredList<Task> calendarTasks;
+    private final ReadOnlyObjectWrapper<Calendar> calendar;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredTasks = new FilteredList<>(versionedAddressBook.getTaskList());
         calendarTasks = new FilteredList<>(versionedAddressBook.getTaskList());
+        this.calendar = new ReadOnlyObjectWrapper<>(Calendar.getInstance());
     }
 
     public ModelManager() {
@@ -106,7 +111,8 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.deleteTask(target);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors
+    // =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the
@@ -156,6 +162,17 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateCalendarTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         calendarTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateCalendarMonth(Calendar calendar) {
+        requireNonNull(calendar);
+        this.calendar.set(calendar);
+    }
+
+    @Override
+    public ObservableValue<Calendar> getCalendarMonth() {
+        return this.calendar;
     }
 
     // =========== Undo/Redo
