@@ -26,6 +26,8 @@ public class XmlAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     @XmlElement(required = true)
+    private String id;
+    @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
     private String phone;
@@ -48,8 +50,9 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address,
+    public XmlAdaptedPerson(String id, String name, String phone, String email, String address,
                             List<XmlAdaptedTag> tagged, List<XmlAdaptedTask> tasked) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -68,6 +71,7 @@ public class XmlAdaptedPerson {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedPerson(Person source) {
+        id = source.getId();
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -78,6 +82,10 @@ public class XmlAdaptedPerson {
         tasked = source.getTasks().stream()
                  .map(XmlAdaptedTask::new)
                  .collect(Collectors.toList());
+    }
+
+    public String getId() {
+        return id;
     }
 
     /**
@@ -95,6 +103,11 @@ public class XmlAdaptedPerson {
         for (XmlAdaptedTask task : tasked) {
             personTasks.add(task.toModelType());
         }
+
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "ID"));
+        }
+        final String modelId = id;
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -130,7 +143,7 @@ public class XmlAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Task> modelTasks = new HashSet<>(personTasks);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTasks);
+        return new Person(modelId, modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTasks);
     }
 
     @Override
@@ -144,7 +157,8 @@ public class XmlAdaptedPerson {
         }
 
         XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
-        return Objects.equals(name, otherPerson.name)
+        return Objects.equals(id, otherPerson.id)
+                && Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)

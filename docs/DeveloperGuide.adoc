@@ -315,6 +315,52 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::calendarshow[]
+=== Calendar show feature
+==== Current Implementation
+
+The calendar show feature is facilitated by the `ModelManager`. It extends `ModelManager` with a calendar panel that allows the user to more easily view the tasks.
+
+It exposes the following operations via the `Model` interface:
+
+* `Model#updateCalendarMonth()` -- Saves the given calendar that encapsulates the month to be displayed in the calendar panel.
+* `Model#getCalendarMonth()` -- Returns an `ObservableValue<Calendar>` for the calendar panel to identify which weekday the month begins with.
+* `Model#updateCalendarTaskList()` -- Updates the model with a predicate to filter the tasks that should be displayed in the calendar.
+* `Model#getCalendarTaskList()` -- Returns an `ObservableList<Task>` for the calendar panel to display.
+
+Given below is an example usage scenario and how the calendar show mechanism behaves at each step.
+
+Step 1. The user launches the application. The `MainWindow` class calls `Model#getCalendarMonth()` and `Model#getCalendarTaskList()` when creating the calendar panel. This initialises the calendar panel with an `ObservableList<Task>` and `ObservableValue<Calendar>` to allow it to perform UI updates when necessary.
+
+Step 2. The calendar panel constructs a `GridPane` and initialises the cells with empty containers.
+
+Step 3. The calendar panel registers listeners to both the `ObservableList<Task>` and `ObservableValue<Calendar>` with a task that would empty grid cells and repopulate them with `ListView` elements that display the tasks starting on the corresponding dates.
+
+Step 4. The user creates any number of tasks with start date in January 2018. The tasks will be stored appropriately.
+
+Step 5. The user executes `calendars show y/2018 m/1`. The `calendars show` command calls `Model#updateCalendarMonth()` and `Model#updateCalendarTaskList()`, listeners in the calendar panel to be notified of the changes.
+
+==== Design Considerations
+
+===== Aspect: Where to filter tasks by month for displaying in the calendar.
+
+* **Alternative 1 (current choice):** Done in the model
+** Pros: Application logic does not reside in the view layer.
+** Cons: Repeated filtering at multiple steps. Tasks are duplicated in two data lists.
+* **Alternative 2:** Calendar object representing current month and full task list passed to calendar pane, all filter operations done in the calendar pane.
+** Pros: Less data duplication.
+** Cons: Poorer separation of concerns, less modularity.
+
+===== Aspect: Construction of grid cell list view.
+
+* **Alternative 1 (current choice):** Delete and regenerate `ListView` elements each time the moth is changed
+** Pros: Ease of implementation, especially since `GridPane` does not support random access.
+** Cons: Poorer performance, although this is likely insignificant since number of elements to be created/deleted is small.
+* **Alternative 2:** Create and store `ListView` containers and reuse them.
+** Pros: Better performance, since deleting and recreating them incurs some computational cost.
+** Cons: Requires creating an auxillary data structure to store the elements to get around deficiencies in the `GridPane` API.
+// end::calendarshow[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

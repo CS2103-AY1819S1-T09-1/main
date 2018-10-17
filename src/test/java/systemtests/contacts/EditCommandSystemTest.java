@@ -1,6 +1,5 @@
 package systemtests.contacts;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -47,7 +46,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
 import systemtests.AppSystemTest;
 
 public class EditCommandSystemTest extends ContactsSystemTest {
@@ -193,35 +191,6 @@ public class EditCommandSystemTest extends ContactsSystemTest {
         assertCommandFailure(MODULE_WORD + " "
                         + EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_TAG_DESC,
                 Tag.MESSAGE_TAG_CONSTRAINTS);
-
-        /* Case: edit a person with new values same as another person's values -> rejected */
-        executeCommand(PersonUtil.getAddCommand(BOB));
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
-        index = INDEX_FIRST_PERSON;
-        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
-        command = MODULE_WORD + " " + EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
-
-        /* Case: edit a person with new values same as another person's values but with different tags -> rejected */
-        command = MODULE_WORD + " " + EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
-
-        /* Case: edit a person with new values same as another person's values but with different address -> rejected */
-        command = MODULE_WORD + " " + EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
-
-        /* Case: edit a person with new values same as another person's values but with different phone -> rejected */
-        command = MODULE_WORD + " " + EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB
-                + PHONE_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
-
-        /* Case: edit a person with new values same as another person's values but with different email -> rejected */
-        command = MODULE_WORD + " " + EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     /**

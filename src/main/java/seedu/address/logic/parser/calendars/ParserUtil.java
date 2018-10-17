@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.calendars;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -19,12 +20,12 @@ public class ParserUtil {
      * @throws ParseException if the specified year is invalid (not a non-negative
      *                        integer).
      */
-    public static int parseYear(String yearString) throws ParseException {
+    public static Index parseYear(String yearString) throws ParseException {
         String trimmedYearString = yearString.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedYearString)) {
             throw new ParseException(MESSAGE_INVALID_YEAR);
         }
-        return Integer.parseInt(trimmedYearString);
+        return Index.fromOneBased(Integer.parseInt(trimmedYearString));
     }
 
     /**
@@ -33,7 +34,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the specified month is invalid (<1 or > 12).
      */
-    public static int parseMonth(String monthString) throws ParseException {
+    public static Index parseMonth(String monthString) throws ParseException {
         String trimmedMonthString = monthString.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedMonthString)) {
             throw new ParseException(MESSAGE_INVALID_MONTH);
@@ -45,6 +46,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_MONTH);
         }
 
-        return month;
+        return Index.fromOneBased(month);
     }
 }
