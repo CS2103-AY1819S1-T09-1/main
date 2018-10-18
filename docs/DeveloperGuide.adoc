@@ -193,7 +193,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 .Interactions Inside the Logic Component for the `contacts delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
-////
+
 [[Design-Model]]
 === Model component
 
@@ -206,14 +206,10 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
-
+////
 [[Design-Storage]]
 === Storage component
 
@@ -236,6 +232,15 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+
+// tag::tasks[]
+=== Tasks class
+image::TaskComponentClassDiagram.png[width="800"]
+
+The `Task` class consists of list of `Tag` objects and a `Name` object, corresponding to the same classes in the `Person` namespace. It also has two `DateTime` objects, one for the start date and time and the other for the end date and time of the task.
+
+The `DateTime` class encapsulates a Java `Calendar` object to store a date and time. It also includes methods to parse and validate date/time inputs from the user, and methods to return the date or time as a `String`.
+// end::tasks[]
 
 // tag::listfindtasks[]
 === Listing and finding of tasks
