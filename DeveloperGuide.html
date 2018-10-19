@@ -20,19 +20,22 @@
 <li><a href="#design">2. Design</a>
 <ul class="sectlevel2">
 <li><a href="#Design-Architecture">2.1. Architecture</a></li>
-<li><a href="#Design-Commons">2.2. Common classes</a></li>
+<li><a href="#Design-Logic">2.2. Logic component</a></li>
+<li><a href="#Design-Model">2.3. Model component</a></li>
+<li><a href="#Design-Commons">2.4. Common classes</a></li>
 </ul>
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#listing-and-finding-of-tasks">3.1. Listing and finding of tasks</a></li>
-<li><a href="#undo-redo-feature">3.2. Undo/Redo feature</a></li>
-<li><a href="#calendar-show-feature">3.3. Calendar show feature</a></li>
-<li><a href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
-<li><a href="#editing-and-deleting-tasks">3.7. Editing and Deleting Tasks</a></li>
-<li><a href="#assigning-tasks-and-contacts">3.8. Assigning tasks and contacts</a></li>
+<li><a href="#tasks-class">3.1. Tasks class</a></li>
+<li><a href="#listing-and-finding-of-tasks">3.2. Listing and finding of tasks</a></li>
+<li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
+<li><a href="#calendar-show-feature">3.4. Calendar show feature</a></li>
+<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
+<li><a href="#editing-and-deleting-tasks">3.8. Editing and Deleting Tasks</a></li>
+<li><a href="#assigning-tasks-and-contacts">3.9. Assigning tasks and contacts</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -431,7 +434,79 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.2. Common classes</a></h3>
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.2. Logic component</a></h3>
+<div id="fig-LogicClassDiagram" class="imageblock">
+<div class="content">
+<img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+</div>
+<div class="title">Figure 5. Structure of the Logic Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> :
+<a href="https://github.com/CS2103-AY1819S1-T09-1/main/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Logic</code> uses the <code>AppParser</code> class to parse the user command.</p>
+</li>
+<li>
+<p><code>AppParser</code> then sends the command to the appropriate module parser.</p>
+</li>
+<li>
+<p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The command execution can affect the <code>Model</code> (e.g. adding a person) and/or raise events.</p>
+</li>
+<li>
+<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("contacts delete 1")</code> API call.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
+</div>
+<div class="title">Figure 6. Interactions Inside the Logic Component for the <code>contacts delete 1</code> Command</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Model"><a class="link" href="#Design-Model">2.3. Model component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+</div>
+<div class="title">Figure 7. Structure of the Model Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="https://github.com/CS2103-AY1819S1-T09-1/main/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Model</code>,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+</li>
+<li>
+<p>stores the Address Book data.</p>
+</li>
+<li>
+<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> and <code>ObservableList&lt;Task&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li>
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.4. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
 </div>
@@ -445,9 +520,23 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="listing-and-finding-of-tasks"><a class="link" href="#listing-and-finding-of-tasks">3.1. Listing and finding of tasks</a></h3>
+<h3 id="tasks-class"><a class="link" href="#tasks-class">3.1. Tasks class</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/TaskComponentClassDiagram.png" alt="TaskComponentClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Task</code> class consists of list of <code>Tag</code> objects and a <code>Name</code> object, corresponding to the same classes in the <code>Person</code> namespace. It also has two <code>DateTime</code> objects, one for the start date and time and the other for the end date and time of the task.</p>
+</div>
+<div class="paragraph">
+<p>The <code>DateTime</code> class encapsulates a Java <code>Calendar</code> object to store a date and time. It also includes methods to parse and validate date/time inputs from the user, and methods to return the date or time as a <code>String</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-and-finding-of-tasks"><a class="link" href="#listing-and-finding-of-tasks">3.2. Listing and finding of tasks</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Listing and finding of tasks is facilitated by <code>ModelManager</code> and displayed through <code>TaskListPanel</code>.</p>
 </div>
@@ -521,7 +610,7 @@ which returns true only for tasks with keywords in the name.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>The use of <code>ObservableList</code> and <code>FilteredList</code> from JavaFX saves us the trouble of handling task list updates.
 Under this design, addition, updates and deletion of tasks will only need to interface with <code>VersionedAddressBook</code>,
@@ -532,7 +621,7 @@ and the lists for display will be updated through JavaFX.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancements"><a class="link" href="#future-enhancements">3.1.3. Future Enhancements</a></h4>
+<h4 id="future-enhancements"><a class="link" href="#future-enhancements">3.2.3. Future Enhancements</a></h4>
 <div class="paragraph">
 <p>Currently, users can only search for tasks by name. Additional predicates can be added and exposed via commands to allow
 users to search by assigned people or dates.</p>
@@ -540,9 +629,9 @@ users to search by assigned people or dates.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.2. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.3. Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
 It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
@@ -672,7 +761,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -742,9 +831,9 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-show-feature"><a class="link" href="#calendar-show-feature">3.3. Calendar show feature</a></h3>
+<h3 id="calendar-show-feature"><a class="link" href="#calendar-show-feature">3.4. Calendar show feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The calendar show feature is facilitated by the <code>ModelManager</code>. It extends <code>ModelManager</code> with a calendar panel that allows the user to more easily view the tasks.</p>
 </div>
@@ -787,7 +876,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-where-to-filter-tasks-by-month-for-displaying-in-the-calendar"><a class="link" href="#aspect-where-to-filter-tasks-by-month-for-displaying-in-the-calendar">Aspect: Where to filter tasks by month for displaying in the calendar.</a></h5>
 <div class="ulist">
@@ -857,20 +946,20 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -901,13 +990,13 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-and-deleting-tasks"><a class="link" href="#editing-and-deleting-tasks">3.7. Editing and Deleting Tasks</a></h3>
+<h3 id="editing-and-deleting-tasks"><a class="link" href="#editing-and-deleting-tasks">3.8. Editing and Deleting Tasks</a></h3>
 <div class="paragraph">
 <p>The code for editing and deleting tasks is actually pretty similar to how it is implemented for persons. This is a combination of adding support for two additional commands: <code>tasks edit</code> and <code>tasks delete</code> inside <code>TasksParser</code>, defining <code>EditCommand</code> and <code>DeleteCommand</code> themselves, and finally, adding <code>void updateTask(Task target, Task editedTask);</code> and <code>void deleteTask(Task target);</code> in the <code>Model</code> interface, and implementing them in the <code>ModelManager</code> class.</p>
 </div>
@@ -925,9 +1014,9 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="assigning-tasks-and-contacts"><a class="link" href="#assigning-tasks-and-contacts">3.8. Assigning tasks and contacts</a></h3>
+<h3 id="assigning-tasks-and-contacts"><a class="link" href="#assigning-tasks-and-contacts">3.9. Assigning tasks and contacts</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.8.1. Current implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.9.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>Tasks and contacts can be assigned to each other using the commands <code>tasks assign</code> and <code>contacts assign</code>. This many-to-many relationship is stored simply as a list of task IDs and person IDs in the Person and Task classes respectively.</p>
 </div>
@@ -939,7 +1028,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancements-2"><a class="link" href="#future-enhancements-2">3.8.2. Future Enhancements</a></h4>
+<h4 id="future-enhancements-2"><a class="link" href="#future-enhancements-2">3.9.2. Future Enhancements</a></h4>
 <div class="paragraph">
 <p>Both implementations of <code>AssignCommand</code> are almost identical, and should be refactored.</p>
 </div>
@@ -1009,7 +1098,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 5. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 8. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2223,4 +2312,4 @@ their best</p>
 </blockquote>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 16:02:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-19 03:51:38 UTC</div></div></div></body></html>
