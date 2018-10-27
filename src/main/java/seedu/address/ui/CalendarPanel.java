@@ -20,29 +20,43 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
 import javafx.util.Pair;
+import java.text.DateFormatSymbols;
+
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.task.Task;
+import seedu.address.commons.events.ui.CalendarPanelClickEvent;
+import seedu.address.ui.util.NoSelectionModel;
 
 /**
  * Panel for displaying the calendar.
  */
 public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
+
+    private static final String CALENDAR_PANEL_LIST_VIEW_CLASS = "calendar-panel-list-view";
     private static final int COLS = 7; // 7 Days in a week
     private static final int ROWS = 7; // 6 Rows + header
     private static final int HEADER_ROW = 0;
-    private static final int ROW_HEIGHT = 80;
-    private static final int COL_WIDTH = 105;
+    private static final int ROW_HEIGHT = 100;
+    private static final int COL_WIDTH = 130;
     private static final String[] COL_HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Saturday" };
+
+    private static final Font COL_HEADER_FONT = new Font("Segoe UI", 14);
+    private static final Font CELL_HEADER_FONT = new Font("Segoe UI", 12);
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
     private final ObservableList<Task> taskList;
@@ -50,7 +64,10 @@ public class CalendarPanel extends UiPart<Region> {
     private final Node[][] gridCells;
 
     @FXML
-    private GridPane taskGridPane;
+    private Text calendarHeader;
+
+    @FXML
+    private GridPane calendarGridPane;
 
     public CalendarPanel(ObservableList<Task> taskList, ObservableValue<Calendar> calendar) {
         super(FXML);
@@ -58,12 +75,10 @@ public class CalendarPanel extends UiPart<Region> {
         this.calendar = calendar;
         this.gridCells = new Node[ROWS][COLS];
         buildGridPane();
+        this.handleUpdateCalendar(calendar.getValue());
         this.calendar.addListener((cal, oldCal, newCal) -> {
-            this.fillContents(newCal);
+            this.handleUpdateCalendar(newCal);
         });
-        this.taskList.addListener(
-                (ListChangeListener.Change<? extends Task> change) -> this.fillContents(calendar.getValue()));
-        this.fillContents(calendar.getValue());
         registerAsAnEventHandler(this);
     }
 
@@ -75,13 +90,15 @@ public class CalendarPanel extends UiPart<Region> {
         writeBox();
         setGridCells();
         writeHeaders();
+        writeMonthHeader(calendar.getValue());
     }
 
     /**
      * Fills in the contents of each grid non-header cell by calling buildCell on
      * it..
      */
-    private void fillContents(Calendar calendar) {
+    private void handleUpdateCalendar(Calendar calendar) {
+        writeMonthHeader(calendar);
         for (int i = 1; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 buildCell(i, j, calendar);
@@ -89,19 +106,27 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
+    private void writeMonthHeader(Calendar calendar) {
+        calendarHeader.setText(new DateFormatSymbols().getMonths()[calendar.get(Calendar.MONTH)]);
+    }
+
     private Pair<Calendar, Integer> getCellCalendarAndDate(int row, int col, Calendar curMonth) {
         Calendar filterCalendar;
         int displayDate;
 
+        // Set to first day of month so that we can find out the weekday it falls on
+        curMonth.set(Calendar.DAY_OF_MONTH, 1);
+
         int firstDayOfMonth = curMonth.get(Calendar.DAY_OF_WEEK);
         int dateInCurMonth = (row - 1) * 7 + col - firstDayOfMonth + 2;
-        // This grid belongs to previous month
         if (dateInCurMonth < 1) {
+            // This grid belongs to previous month
             Calendar prevMonth = (Calendar) curMonth.clone();
             prevMonth.add(Calendar.MONTH, -1);
             filterCalendar = prevMonth;
             displayDate = dateInCurMonth + prevMonth.getActualMaximum(Calendar.DAY_OF_MONTH);
         } else if (dateInCurMonth > curMonth.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+            // This grid belongs to the next month
             Calendar nextMonth = (Calendar) curMonth.clone();
             nextMonth.add(Calendar.MONTH, 11);
             filterCalendar = nextMonth;
@@ -127,15 +152,26 @@ public class CalendarPanel extends UiPart<Region> {
 
         ListView<Task> gridTaskListView = new ListView<>();
         FilteredList<Task> gridTaskList = this.taskList
-                .filtered((Task t) -> isBelongToCurCell(t, filterCalendar, displayDate));
+                .filtered((Task t) -> isTaskBelongToCurCell(t, filterCalendar, displayDate));
 
         gridTaskListView.setItems(gridTaskList);
-        gridTaskListView.setCellFactory(listView -> new TaskListViewCell());
-        box.getChildren().add(new Text(Integer.toString(displayDate)));
+        gridTaskListView.getStyleClass().add(CALENDAR_PANEL_LIST_VIEW_CLASS);
+        gridTaskListView.setSelectionModel(new NoSelectionModel<Task>());
+        gridTaskListView.setCellFactory(listView -> new CalendarTaskListCell());
+
+        Text cellHeader = new Text(Integer.toString(displayDate));
+
+        if (curMonth.equals(filterCalendar)) {
+            cellHeader.setFill(Color.WHITE);
+        } else {
+            cellHeader.setFill(Color.LIGHTGRAY);
+        }
+        cellHeader.setFont(CELL_HEADER_FONT);
+        box.getChildren().add(cellHeader);
         box.getChildren().add(gridTaskListView);
     }
 
-    private boolean isBelongToCurCell(Task task, Calendar filterCalendar, int date) {
+    private boolean isTaskBelongToCurCell(Task task, Calendar filterCalendar, int date) {
         Calendar taskCalendar = task.getEndDateTime().getCalendar();
         return taskCalendar.get(Calendar.YEAR) == filterCalendar.get(Calendar.YEAR)
                 && taskCalendar.get(Calendar.MONTH) == filterCalendar.get(Calendar.MONTH)
@@ -146,17 +182,24 @@ public class CalendarPanel extends UiPart<Region> {
      * Writes day headers to calendar grid.
      */
     private void writeHeaders() {
+        BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#515658"), CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(backgroundFill);
+
         for (int i = 0; i < COLS; i++) {
             Node node = gridCells[HEADER_ROW][i];
             VBox box = (VBox) node;
             Text header = new Text(COL_HEADERS[i]);
+            header.setFill(Color.WHITE);
+            header.setFont(COL_HEADER_FONT);
             box.setAlignment(Pos.CENTER);
+            box.setBackground(background);
+
             box.getChildren().add(header);
         }
     }
 
     private void setGridCells() {
-        for (Node node : taskGridPane.getChildren()) {
+        for (Node node : calendarGridPane.getChildren()) {
             int gridRow = GridPane.getRowIndex(node);
             int gridCol = GridPane.getColumnIndex(node);
 
@@ -168,18 +211,16 @@ public class CalendarPanel extends UiPart<Region> {
      * Write grid boxes.
      */
     private void writeBox() {
-        BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"), CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(backgroundFill);
-
-        Border border = new Border(new BorderStroke(Paint.valueOf("#F0F0F0"), BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY, BorderStroke.MEDIUM));
+        Border border = new Border(new BorderStroke(Paint.valueOf("#4d4d4d"), BorderStrokeStyle.SOLID,
+                CornerRadii.EMPTY, BorderStroke.THIN));
 
         for (int i = 0; i < COLS; i++) {
             for (int j = 0; j < ROWS; j++) {
                 VBox box = new VBox();
-                box.setBackground(background);
                 box.setBorder(border);
-                taskGridPane.add(box, i, j);
+                box.setAlignment(Pos.TOP_RIGHT);
+                box.setPadding(new Insets(2,2,2,2));
+                calendarGridPane.add(box, i, j);
             }
         }
     }
@@ -191,7 +232,7 @@ public class CalendarPanel extends UiPart<Region> {
         for (int i = 0; i < COLS; i++) {
             ColumnConstraints column = new ColumnConstraints(COL_WIDTH);
             column.setHgrow(Priority.ALWAYS);
-            taskGridPane.getColumnConstraints().add(column);
+            calendarGridPane.getColumnConstraints().add(column);
         }
 
         for (int i = 0; i < ROWS; i++) {
@@ -201,7 +242,7 @@ public class CalendarPanel extends UiPart<Region> {
             } else {
                 row = new RowConstraints(ROW_HEIGHT);
             }
-            taskGridPane.getRowConstraints().add(row);
+            calendarGridPane.getRowConstraints().add(row);
         }
     }
 
@@ -210,16 +251,23 @@ public class CalendarPanel extends UiPart<Region> {
      * TODO: Write new cell for calendar Custom {@code ListCell} that displays the
      * graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class TaskListViewCell extends ListCell<Task> {
+    class CalendarTaskListCell extends ListCell<Task> {
         @Override
         protected void updateItem(Task task, boolean empty) {
             super.updateItem(task, empty);
+
+            setOnMouseClicked((event) -> {
+                if (task != null) {
+                    logger.fine("Clicked on task in calendar panel : '" + task + "'");
+                    raise(new CalendarPanelClickEvent(task));
+                }
+            });
 
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new CalendarTaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }
