@@ -892,6 +892,28 @@ Use case ends
 +
 Use case resumes at step 2
 
+=== Batch delete tasks
+
+**MSS**
+
+1. User requests to list tasks
+2. Cow shows a list of tasks
+3. User requests to delete a number or all tasks in the list
+4. Cow deletes the specified tasks
++
+Use case ends
+
+**Extensions**
+
+[none]
+* 2a. The list is empty.
++
+use case ends
+* 3a. Any of the given indices is invalid.
+[nonc]
+** 3a1. Cow shows an error message.
+Use case resumes at step 2
+
 === Assign people to tasks
 
 **MSS**
