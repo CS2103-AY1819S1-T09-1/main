@@ -127,9 +127,15 @@ search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 ==== Delete task: `tasks delete`
 
-Format: `tasks delete INDEX...`
+Format: `tasks delete INDEX1 [INDEX2] [INDEX3] ...`
 
 Delete all tasks corresponding to the indices provided.
+
+==== Delete all tasks: `tasks delete all`
+
+Format: `tasks delete all`
+
+Delete all tasks that are shown in the list.
 
 ==== Assign person to task: `tasks assign`
 
