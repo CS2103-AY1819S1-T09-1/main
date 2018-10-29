@@ -46,7 +46,6 @@ public class ParserUtil {
         String[] trimmedIndices = oneBasedIndices.trim().split(" ");
         List<Index> result = new ArrayList<>();
 
-        // I have to do this because Java streams does not have any way to propagate errors!!! AAAGHHHH!!!
         for (String trimmedIndex : trimmedIndices) {
             result.add(parseIndex(trimmedIndex));
         }
