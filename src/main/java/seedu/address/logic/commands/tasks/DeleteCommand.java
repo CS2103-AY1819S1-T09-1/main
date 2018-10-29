@@ -2,7 +2,9 @@ package seedu.address.logic.commands.tasks;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
@@ -21,37 +23,64 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the index number used in the displayed task list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes all tasks or the task(s) identified by the index number\n"
+            + "used in the displayed task list.\n"
+            + "Parameters: all or INDEX1 [INDEX2 INDEX3 INDEX4 ...] (must be a positive integer)\n"
+            + "Example 1: " + COMMAND_WORD + " 1\n"
+            + "Example 1: " + COMMAND_WORD + " 2 5 4\n"
+            + "Example 1: " + COMMAND_WORD + " all";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task(s):\n%1$s";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndices;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * @param targetIndices null to delete all, else give a list of indices to delete.
+     */
+    public DeleteCommand(List<Index> targetIndices) {
+        this.targetIndices = targetIndices;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        List<Task> tasksToDelete = getTasksToDelete(model.getFilteredTaskList());
 
-        if (targetIndex.getZeroBased() >= ((ObservableList) lastShownList).size()) {
+        tasksToDelete.stream().forEach(taskToDelete -> model.deleteTask(taskToDelete));
+        model.commitAddressBook();
+
+        String deletedTasksString =
+                tasksToDelete
+                        .stream()
+                        .map(taskToDelete -> tasksToDelete.toString())
+                        .collect(Collectors.joining("\n"));
+
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTasksString));
+    }
+
+    private List<Task> getTasksToDelete(List<Task> lastShownList) throws CommandException {
+        // Delete all
+        if (targetIndices == null) {
+            return new ArrayList<>(lastShownList);
+        }
+
+        // Check that all indices are valid
+        if (targetIndices
+                .stream()
+                .anyMatch(targetIndex -> targetIndex.getZeroBased() >= ((ObservableList) lastShownList).size())) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteTask(taskToDelete);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        return targetIndices
+                .stream()
+                .map(targetIndex -> lastShownList.get(targetIndex.getZeroBased()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand) // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex); // state check
+                && targetIndices.equals(((DeleteCommand) other).targetIndices); // state check
     }
 }
