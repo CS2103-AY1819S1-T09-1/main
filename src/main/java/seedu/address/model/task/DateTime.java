@@ -67,6 +67,23 @@ public class DateTime implements Comparable<DateTime> {
         return day + " " + month + " " + year;
     }
 
+    public String getInputDate() {
+        String day = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
+        String month = Integer.toString(calendar.get(Calendar.MONTH));
+        String year = Integer.toString(calendar.get(Calendar.YEAR));
+        day = (day.length() < 2 ? "0" : "") + day;
+        month = (month.length() < 2 ? "0" : "") + month;
+        return year + month + day;
+    }
+
+    public String getInputTime() {
+        String hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
+        String minute = Integer.toString(calendar.get(Calendar.MINUTE));
+        hour = (hour.length() < 2 ? "0" : "") + hour;
+        minute = (minute.length() < 2 ? "0" : "") + minute;
+        return hour + minute;
+    }
+
     public String getTime() {
         String hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
         String minute = Integer.toString(calendar.get(Calendar.MINUTE));
