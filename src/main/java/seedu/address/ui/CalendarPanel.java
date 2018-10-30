@@ -107,7 +107,8 @@ public class CalendarPanel extends UiPart<Region> {
      * object
      */
     private void writeMonthHeader(Calendar calendar) {
-        calendarHeader.setText(new DateFormatSymbols().getMonths()[calendar.get(Calendar.MONTH)]);
+        calendarHeader.setText(new DateFormatSymbols().getMonths()[calendar.get(Calendar.MONTH)] + " "
+                + Integer.toString(calendar.get(Calendar.YEAR)));
     }
 
     /**
