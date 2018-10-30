@@ -2,12 +2,9 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
-import seedu.address.commons.core.LogsCenter;
-import java.util.logging.Logger;
 
 /**
  * An UI component that displays information of a {@code Task}.
@@ -26,7 +23,6 @@ public class CalendarTaskCard extends UiPart<Region> {
      */
 
     public final Task task;
-    private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
     @FXML
     private HBox cardPane;
