@@ -39,13 +39,17 @@ public class CalendarsParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+        try {
+            switch (commandWord) {
 
-        case ShowCommand.COMMAND_WORD:
-            return new ShowCommandParser().parse(arguments);
+            case ShowCommand.COMMAND_WORD:
+                return new ShowCommandParser().parse(arguments);
 
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+        } catch (ParseException e) {
+            throw new ParseException(e.getMessage(MODULE_WORD));
         }
     }
 

@@ -36,7 +36,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
+            + ": Edits the details of the task identified "
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -46,7 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_END_DATE + "END DATE] "
             + "[" + PREFIX_END_TIME + "END TIME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + getCommandFormat(COMMAND_WORD) + " 1 "
             + PREFIX_NAME + "Implement Edit Tasks";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
