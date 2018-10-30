@@ -75,11 +75,11 @@ public class SelectCommandSystemTest extends ContactsSystemTest {
 
         /* Case: invalid index (0) -> rejected */
         assertCommandFailure(MODULE_WORD + " " + SelectCommand.COMMAND_WORD + " " + 0,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), MODULE_WORD));
 
         /* Case: invalid index (-1) -> rejected */
         assertCommandFailure(MODULE_WORD + " " + SelectCommand.COMMAND_WORD + " " + -1,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), MODULE_WORD));
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredPersonList().size() + 1;
@@ -88,11 +88,11 @@ public class SelectCommandSystemTest extends ContactsSystemTest {
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(MODULE_WORD + " " + SelectCommand.COMMAND_WORD + " abc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), MODULE_WORD));
 
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(MODULE_WORD + " " + SelectCommand.COMMAND_WORD + " 1 abc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), MODULE_WORD));
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure(MODULE_WORD + " " + "SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);

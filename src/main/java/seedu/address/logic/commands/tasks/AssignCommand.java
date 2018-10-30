@@ -30,13 +30,13 @@ public class AssignCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
             + ": Assigns a task to a contact. Both contact and task are identified by the index number used in the "
             + "displayed person and task list respectively.\n"
             + "Parameters: "
             + PREFIX_CONTACT_ID + "CONTACT_INDEX "
             + PREFIX_TASK_ID + "TASK_INDEX\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + getCommandFormat(COMMAND_WORD) + " "
             + PREFIX_CONTACT_ID + "2 "
             + PREFIX_TASK_ID + "4";
 

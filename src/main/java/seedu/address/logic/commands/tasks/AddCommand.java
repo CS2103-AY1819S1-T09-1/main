@@ -22,15 +22,15 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
+            + ": Adds a task. Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_START_DATE + "START DATE "
             + PREFIX_START_TIME + "START TIME "
             + PREFIX_END_DATE + "END DATE "
             + PREFIX_END_TIME + "END TIME "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + getCommandFormat(COMMAND_WORD) + " "
             + PREFIX_NAME + "Math Assignment "
             + PREFIX_START_DATE + "20180101 "
             + PREFIX_START_TIME + "0000 "

@@ -21,7 +21,8 @@ public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_SUCCESS = "Showed calendar";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " <year> <month>: Shows the calendar view. "
+    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
+            + " <year> <month>: Shows the calendar view. "
             + "Parameters: " + PREFIX_YEAR + "YEAR " + PREFIX_MONTH + "MONTH";
 
     private final TaskInYearMonthPredicate filter;
