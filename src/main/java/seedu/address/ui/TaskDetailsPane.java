@@ -11,6 +11,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.TaskPanelDeselectionEvent;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.model.task.Task;
 
@@ -52,5 +53,15 @@ public class TaskDetailsPane extends UiPart<Region> {
         // Clear existing list of tags before populating with new tags
         tags.getChildren().clear();
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    @Subscribe
+    private void handleTaskPanelDeselectionEvent(TaskPanelDeselectionEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        // Clear details pane
+        name.setText("");
+        startDateTime.setText("");
+        endDateTime.setText("");
+        tags.getChildren().clear();
     }
 }
