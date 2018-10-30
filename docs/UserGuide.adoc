@@ -163,7 +163,7 @@ Format for entering year is YYYY.
 Format for entering month is MM.
 Format for entering dates is YYYYMMDD.
 
-==== View calendar for tasks due within given year and month: `calendars show`
+==== View calendar for tasks due within given year and month: `calendar show`
 
 Format: `calendars show y/YEAR m/MONTH`
 
