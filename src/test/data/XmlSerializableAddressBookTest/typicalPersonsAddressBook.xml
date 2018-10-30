@@ -2,6 +2,7 @@
 <!-- AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook() -->
 <addressbook>
     <persons>
+        <id>275710EF-C550-4826-8A55-0F599FB1F707</id>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
         <email>alice@example.com</email>
@@ -9,6 +10,7 @@
         <tagged>friends</tagged>
     </persons>
     <persons>
+        <id>9A70E4F8-268A-47AE-8193-4A654E97A777</id>
         <name>Benson Meier</name>
         <phone>98765432</phone>
         <email>johnd@example.com</email>
@@ -17,12 +19,14 @@
         <tagged>friends</tagged>
     </persons>
     <persons>
+        <id>68F7D6BB-ED1D-4CE1-9852-A153252DF0DB</id>
         <name>Carl Kurz</name>
         <phone>95352563</phone>
         <email>heinz@example.com</email>
         <address>wall street</address>
     </persons>
     <persons>
+        <id>448548BB-A97E-4922-9AAA-7C9D60A78869</id>
         <name>Daniel Meier</name>
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
@@ -30,18 +34,21 @@
         <tagged>friends</tagged>
     </persons>
     <persons>
+        <id>B84C3C42-D17F-4D5A-8ED1-CEA9EBC7A248</id>
         <name>Elle Meyer</name>
         <phone>9482224</phone>
         <email>werner@example.com</email>
         <address>michegan ave</address>
     </persons>
     <persons>
+        <id>49739A8D-C9CF-4859-BA7B-785D39FFFC34</id>
         <name>Fiona Kunz</name>
         <phone>9482427</phone>
         <email>lydia@example.com</email>
         <address>little tokyo</address>
     </persons>
     <persons>
+        <id>323472DB-5FD0-4C05-B346-ACD481445A46</id>
         <name>George Best</name>
         <phone>9482442</phone>
         <email>anna@example.com</email>

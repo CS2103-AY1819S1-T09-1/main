@@ -15,7 +15,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new SelectCommand object
+ * Parses input arguments and creates a new AssignCommand object
  */
 public class AssignCommandParser implements Parser<AssignCommand> {
 

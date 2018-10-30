@@ -15,7 +15,7 @@ import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.model.task.Task;
 
 /**
- * The Browser Panel of the App.
+ * The Task Detail Panel of the App.
  */
 public class TaskDetailsPane extends UiPart<Region> {
 
@@ -47,9 +47,10 @@ public class TaskDetailsPane extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Task task = event.getNewSelection();
         name.setText(task.getName().toString());
-        startDateTime.setText(task.getStartDateTime().getDateTime());
-        endDateTime.setText(task.getEndDateTime().getDateTime());
+        startDateTime.setText(task.getStartDateTime().getDate() + ", " + task.getStartDateTime().getTime());
+        endDateTime.setText(task.getEndDateTime().getDate() + ", " + task.getEndDateTime().getTime());
+        // Clear existing list of tags before populating with new tags
+        tags.getChildren().clear();
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
     }
 }

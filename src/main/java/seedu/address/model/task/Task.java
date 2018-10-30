@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.PersonId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,20 +19,33 @@ public class Task {
     public static final String MESSAGE_START_AFTER_END =
             "Start date and time cannot be later than end date and time.";
 
+    private final TaskId id;
     private final Name name;
     private final DateTime startDateTime;
     private final DateTime endDateTime;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<PersonId> personIds = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, DateTime startDateTime, DateTime endDateTime, Set<Tag> tags) {
-        requireAllNonNull(name, startDateTime, endDateTime, tags);
+    public Task(TaskId id, Name name, DateTime startDateTime, DateTime endDateTime,
+                Set<Tag> tags, Set<PersonId> personIds) {
+        requireAllNonNull(name, startDateTime, endDateTime, tags, personIds);
+        if (id != null) {
+            this.id = id;
+        } else {
+            this.id = new TaskId();
+        }
         this.name = name;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.tags.addAll(tags);
+        this.personIds.addAll(personIds);
+    }
+
+    public TaskId getId() {
+        return id;
     }
 
     public Name getName() {
@@ -55,6 +69,14 @@ public class Task {
     }
 
     /**
+     * Returns an immutable person ID set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<PersonId> getPersonIds() {
+        return Collections.unmodifiableSet(personIds);
+    }
+
+    /**
      * Returns true if both tasks of the same name have the same start datetime and end datetime.
      * This defines a weaker notion of equality between two tasks.
      */
@@ -64,9 +86,7 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(getName())
-                && otherTask.getStartDateTime().equals(getStartDateTime())
-                && otherTask.getEndDateTime().equals(getEndDateTime());
+                && otherTask.getId().equals(getId());
     }
 
     /**
@@ -100,6 +120,8 @@ public class Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" ID: ")
+                .append(getId())
                 .append(" Start date: ")
                 .append(getStartDateTime().getDate())
                 .append(" Start time: ")
@@ -110,6 +132,8 @@ public class Task {
                 .append(getEndDateTime().getTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" PersonIds: ");
+        getPersonIds().forEach(builder::append);
         return builder.toString();
     }
 
