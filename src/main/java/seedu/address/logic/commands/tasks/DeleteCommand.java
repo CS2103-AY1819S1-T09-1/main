@@ -22,13 +22,13 @@ import seedu.address.model.task.Task;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
             + ": Deletes all tasks or the task(s) identified by the index number\n"
             + "used in the displayed task list.\n"
             + "Parameters: all or INDEX1 [INDEX2 INDEX3 INDEX4 ...] (must be a positive integer)\n"
-            + "Example 1: " + COMMAND_WORD + " 1\n"
-            + "Example 1: " + COMMAND_WORD + " 2 5 4\n"
-            + "Example 1: " + COMMAND_WORD + " all";
+            + "Example 1: " + getCommandFormat(COMMAND_WORD) + " 1\n"
+            + "Example 1: " + getCommandFormat(COMMAND_WORD) + " 2 5 4\n"
+            + "Example 1: " + getCommandFormat(COMMAND_WORD) + " all";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task(s):\n%1$s";
 
