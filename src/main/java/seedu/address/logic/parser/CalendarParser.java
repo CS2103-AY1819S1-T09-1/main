@@ -15,9 +15,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class CalendarsParser {
+public class CalendarParser {
 
-    public static final String MODULE_WORD = "calendars";
+    public static final String MODULE_WORD = "calendar";
 
     /**
      * Used for initial separation of command word and args.

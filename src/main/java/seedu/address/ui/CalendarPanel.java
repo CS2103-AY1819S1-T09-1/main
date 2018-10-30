@@ -47,7 +47,7 @@ public class CalendarPanel extends UiPart<Region> {
     private static final int ROW_HEIGHT = 100;
     private static final int COL_WIDTH = 130;
     private static final String[] COL_HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-            "Friday", "Saturday" };
+        "Friday", "Saturday" };
 
     private static final Font COL_HEADER_FONT = new Font("Segoe UI", 14);
     private static final Font CELL_HEADER_FONT = new Font("Segoe UI", 12);

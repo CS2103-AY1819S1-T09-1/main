@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.calendars;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CalendarParser.MODULE_WORD;
 import static seedu.address.logic.parser.calendars.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.calendars.CliSyntax.PREFIX_YEAR;
 
@@ -20,8 +21,9 @@ public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_SUCCESS = "Showed calendar";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " <year> <month>: Shows the calendar view. "
-            + "Parameters: " + PREFIX_YEAR + "YEAR " + PREFIX_MONTH + "MONTH";
+    public static final String MESSAGE_USAGE = MODULE_WORD + " " + COMMAND_WORD
+            + " <year> <month>: Shows the calendar view. " + "Parameters: " + PREFIX_YEAR + "YEAR " + PREFIX_MONTH
+            + "MONTH";
 
     private final Index year;
     private final Index month;
