@@ -25,7 +25,7 @@ public class DateTime implements Comparable<DateTime> {
     public static final String MESSAGE_DATETIME_FORMAT_CONSTRAINTS =
             "The date string must be 8 digits long and the time string must be 4 digits long.";
     public static final String MESSAGE_DATETIME_VALUE_CONSTRAINTS =
-            "The date must exist and the time must be from 0000-2359 inclusive.";
+            "The date must be a valid calendar date and the time must be from 0000-2359 inclusive.";
 
     /*
      * Date string must be 8 digits long.
