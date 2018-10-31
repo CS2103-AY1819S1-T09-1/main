@@ -213,5 +213,9 @@ public class EditCommand extends Command {
                     && getEndDateTime().equals(e.getEndDateTime())
                     && getTags().equals(e.getTags());
         }
+
+        public boolean isValidDateTimeRange() {
+            return startDateTime.compareTo(endDateTime) <= 0;
+        }
     }
 }
