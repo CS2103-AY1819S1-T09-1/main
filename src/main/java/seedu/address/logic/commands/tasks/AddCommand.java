@@ -22,22 +22,12 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
-            + ": Adds a task. Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_START_DATE + "START DATE "
-            + PREFIX_START_TIME + "START TIME "
-            + PREFIX_END_DATE + "END DATE "
-            + PREFIX_END_TIME + "END TIME "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + getCommandFormat(COMMAND_WORD) + " "
-            + PREFIX_NAME + "Math Assignment "
-            + PREFIX_START_DATE + "20180101 "
-            + PREFIX_START_TIME + "0000 "
-            + PREFIX_END_DATE + "20181231 "
-            + PREFIX_END_TIME + "2359 "
-            + PREFIX_TAG + "school "
-            + PREFIX_TAG + "urgent";
+    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD) + ": Adds a task.\n" + "Parameters: "
+            + PREFIX_NAME + "NAME " + PREFIX_START_DATE + "START DATE " + PREFIX_START_TIME + "START TIME "
+            + PREFIX_END_DATE + "END DATE " + PREFIX_END_TIME + "END TIME " + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + getCommandFormat(COMMAND_WORD) + " " + PREFIX_NAME + "Math Assignment " + PREFIX_START_DATE
+            + "20180101 " + PREFIX_START_TIME + "0000 " + PREFIX_END_DATE + "20181231 " + PREFIX_END_TIME + "2359 "
+            + PREFIX_TAG + "school " + PREFIX_TAG + "urgent";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists";
@@ -69,6 +59,6 @@ public class AddCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                        && toAdd.equals(((AddCommand) other).toAdd));
     }
 }
