@@ -30,7 +30,8 @@ public class UnassignCommandParser implements Parser<UnassignCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CONTACT_ID, PREFIX_TASK_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignCommand.MESSAGE_USAGE), true);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignCommand.MESSAGE_USAGE),
+                    true);
         }
 
         Index contactIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT_ID).get());

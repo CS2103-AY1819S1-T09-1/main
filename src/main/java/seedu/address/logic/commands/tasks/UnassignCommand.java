@@ -23,8 +23,8 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskId;
 
 /**
- * Unassigns a task from a contact. Both contact and task are identified by the index number used in the displayed person
- * and task list respectively.
+ * Unassigns a task from a contact. Both contact and task are identified by the index number used in the displayed
+ * person and task list respectively.
  */
 public class UnassignCommand extends Command {
 
