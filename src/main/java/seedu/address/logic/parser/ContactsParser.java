@@ -16,12 +16,14 @@ import seedu.address.logic.commands.contacts.EditCommand;
 import seedu.address.logic.commands.contacts.FindCommand;
 import seedu.address.logic.commands.contacts.ListCommand;
 import seedu.address.logic.commands.contacts.SelectCommand;
+import seedu.address.logic.commands.contacts.UnassignCommand;
 import seedu.address.logic.parser.contacts.AddCommandParser;
 import seedu.address.logic.parser.contacts.AssignCommandParser;
 import seedu.address.logic.parser.contacts.DeleteCommandParser;
 import seedu.address.logic.parser.contacts.EditCommandParser;
 import seedu.address.logic.parser.contacts.FindCommandParser;
 import seedu.address.logic.parser.contacts.SelectCommandParser;
+import seedu.address.logic.parser.contacts.UnassignCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -77,6 +79,9 @@ public class ContactsParser {
 
             case AssignCommand.COMMAND_WORD:
                 return new AssignCommandParser().parse(arguments);
+
+            case UnassignCommand.COMMAND_WORD:
+                return new UnassignCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
