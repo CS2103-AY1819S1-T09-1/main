@@ -60,6 +60,7 @@ public class EditTaskDescriptorBuilder {
         descriptor.setEndDateTime(endDateTime);
         return this;
     }
+
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditTaskDescriptor}
      * that we are building.
