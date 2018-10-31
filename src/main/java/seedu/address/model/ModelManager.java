@@ -27,7 +27,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
-    private final FilteredList<Task> calendarTasks;
     private final ReadOnlyObjectWrapper<Calendar> calendar;
 
     /**
@@ -42,8 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredTasks = new FilteredList<>(versionedAddressBook.getTaskList());
-        calendarTasks = new FilteredList<>(versionedAddressBook.getTaskList());
-        this.calendar = new ReadOnlyObjectWrapper<>(Calendar.getInstance());
+        calendar = new ReadOnlyObjectWrapper<>(Calendar.getInstance());
     }
 
     public ModelManager() {
@@ -163,18 +161,7 @@ public class ModelManager extends ComponentManager implements Model {
      * internal list of {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Task> getCalendarTaskList() {
-        return FXCollections.unmodifiableObservableList(calendarTasks);
-    }
-
-    @Override
-    public void updateCalendarTaskList(Predicate<Task> predicate) {
-        requireNonNull(predicate);
-        calendarTasks.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateCalendarMonth(Calendar calendar) {
+    public void setCalendarMonth(Calendar calendar) {
         requireNonNull(calendar);
         this.calendar.set(calendar);
     }

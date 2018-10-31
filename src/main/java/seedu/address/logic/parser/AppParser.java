@@ -47,8 +47,8 @@ public class AppParser {
         case TasksParser.MODULE_WORD:
             return new TasksParser().parseCommand(arguments);
 
-        case CalendarsParser.MODULE_WORD:
-            return new CalendarsParser().parseCommand(arguments);
+        case CalendarParser.MODULE_WORD:
+            return new CalendarParser().parseCommand(arguments);
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
