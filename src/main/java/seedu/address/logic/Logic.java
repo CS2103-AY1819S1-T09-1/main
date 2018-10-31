@@ -31,12 +31,6 @@ public interface Logic {
     ObservableList<Task> getFilteredTaskList();
 
     /**
-     * Returns an unmodifiable view of the filtered list of tasks for calendar
-     * display
-     */
-    ObservableList<Task> getCalendarTaskList();
-
-    /**
      * Gets Calendar's active month.
      */
     ObservableValue<Calendar> getCalendarMonth();

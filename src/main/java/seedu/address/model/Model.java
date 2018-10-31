@@ -77,8 +77,7 @@ public interface Model {
     void updateTask(Task target, Task editedTask);
 
     /**
-     * Deletes the given task.
-     * The task must exist in the address book.
+     * Deletes the given task. The task must exist in the address book.
      */
     void deleteTask(Task target);
 
@@ -94,31 +93,16 @@ public interface Model {
     void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
-     * Returns an unmodifiable view of the filtered task list containing tasks to be
-     * rendered in the calendar.
-     */
-    ObservableList<Task> getCalendarTaskList();
-
-    /**
-     * Updates the filter of the calendar task list to filter by the given
-     * {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateCalendarTaskList(Predicate<Task> predicate);
-
-    /**
      * Updates the Calendar's active month for drawing of grid.
      *
      * @throws NullPointerException if {@code calendar} is null.
      */
-    void updateCalendarMonth(Calendar calendar);
+    void setCalendarMonth(Calendar calendar);
 
     /**
      * Gets Calendar's active month.
      */
     public ObservableValue<Calendar> getCalendarMonth();
-
 
     /**
      * Returns true if the model has previous address book states to restore.

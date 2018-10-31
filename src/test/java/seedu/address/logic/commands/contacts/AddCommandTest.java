@@ -163,24 +163,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Task> getCalendarTaskList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableValue<Calendar> getCalendarMonth() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateCalendarMonth(Calendar calendar) {
+        public void setCalendarMonth(Calendar calendar) {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateCalendarTaskList(Predicate<Task> predicate) {
-            throw new AssertionError("This method should not be called.");
-
         }
 
         @Override

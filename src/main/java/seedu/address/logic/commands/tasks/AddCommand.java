@@ -22,8 +22,8 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
-            + ": Adds a task. Parameters: "
+    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD) + ": Adds a task.\n"
+            + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_START_DATE + "START DATE "
             + PREFIX_START_TIME + "START TIME "
@@ -69,6 +69,6 @@ public class AddCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                        && toAdd.equals(((AddCommand) other).toAdd));
     }
 }
