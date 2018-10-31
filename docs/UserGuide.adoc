@@ -105,7 +105,9 @@ Format: `tasks list`
 ==== Add task: `tasks add`
 
 Format:
-`tasks add n/TASK_NAME sd/START_DATE st/START_TIME ed/END_DATE et/END_TIME [t/TAG]…`
+`tasks add n/TASK_NAME [sd/START_DATE] [st/START_TIME] ed/END_DATE et/END_TIME [t/TAG]…`
+
+If start date or time is not entered, the missing field(s) will default to the current date/time.
 
 ==== Edit task: `tasks edit`
 
