@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.calendars;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CalendarParser.MODULE_WORD;
 import static seedu.address.logic.parser.calendars.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.calendars.CliSyntax.PREFIX_YEAR;
 
