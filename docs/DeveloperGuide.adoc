@@ -242,6 +242,19 @@ The `Task` class consists of list of `Tag` objects and a `Name` object, correspo
 The `DateTime` class encapsulates a Java `Calendar` object to store a date and time. It also includes methods to parse and validate date/time inputs from the user, and methods to return the date or time as a `String`.
 // end::tasks[]
 
+// tag::addtasks[]
+=== Addition of tasks
+Adding a task is fairly straightforward. The user command is given to the parser, which validates the input and creates the task and the objects it is associated with. One aspect with a more involved implementation is the accomodation of optional start date and time fields in the user input, which is illustrated here.
+
+image::AddTaskSequenceDiagram.png[width="800"]
+
+1. The `AddCommandParser` receives the input string and calls `ArgumentTokenizer.tokenize()` to create an `ArgumentMultiMap`.
+2. It then creates a Date object for the current moment in time and uses the `INPUT_DATE_FORMAT` and `INPUT_TIME_FORMAT` `DateFormat` s in `DateTime` to parse the Date object into date and time strings in the correct format.
+3. It then retrieves the start date and start time strings from `argMultiMap`, which returns `Optional<String>` for each of them.
+4. `orElse()` is then called on each `Optional<String>` to obtain the string encapsulated by the `Optional`, or the string for the current date/time if the `Optional` is empty.
+5. Finally, `ParserUtil.parseDateTime()` is called with the resultant date and time strings.
+// end::addtasks[]
+
 // tag::listfindtasks[]
 === Listing and finding of tasks
 ==== Current Implementation
