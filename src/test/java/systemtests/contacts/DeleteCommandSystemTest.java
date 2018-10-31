@@ -92,11 +92,11 @@ public class DeleteCommandSystemTest extends ContactsSystemTest {
 
         /* Case: invalid index (0) -> rejected */
         command = MODULE_WORD + " " + DeleteCommand.COMMAND_WORD + " 0";
-        assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_DELETE_COMMAND_FORMAT, MODULE_WORD));
 
         /* Case: invalid index (-1) -> rejected */
         command = MODULE_WORD + " " + DeleteCommand.COMMAND_WORD + " -1";
-        assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_DELETE_COMMAND_FORMAT, MODULE_WORD));
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
@@ -106,11 +106,11 @@ public class DeleteCommandSystemTest extends ContactsSystemTest {
 
         /* Case: invalid arguments (alphabets) -> rejected */
         command = MODULE_WORD + " " + DeleteCommand.COMMAND_WORD + " abc";
-        assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_DELETE_COMMAND_FORMAT, MODULE_WORD));
 
         /* Case: invalid arguments (extra argument) -> rejected */
         command = MODULE_WORD + " " + DeleteCommand.COMMAND_WORD + " 1 abc";
-        assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_DELETE_COMMAND_FORMAT, MODULE_WORD));
 
         /* Case: mixed case command word -> rejected */
         command = MODULE_WORD + " " + "DelETE 1";

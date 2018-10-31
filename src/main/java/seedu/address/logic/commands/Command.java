@@ -8,6 +8,14 @@ import seedu.address.model.Model;
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
+    /**
+     * Returns a format String to insert the module name.
+     *
+     * @param command the command word
+     */
+    public static String getCommandFormat(String command) {
+        return "%1$s " + command;
+    }
 
     /**
      * Executes the command and returns the result message.

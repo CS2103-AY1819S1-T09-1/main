@@ -30,7 +30,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CONTACT_ID, PREFIX_TASK_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), true);
         }
 
         Index contactIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT_ID).get());
