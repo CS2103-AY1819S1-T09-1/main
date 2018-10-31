@@ -75,6 +75,18 @@ public class DateTime implements Comparable<DateTime> {
         return OUTPUT_TIME_FORMAT.format(calendar.getTime());
     }
 
+    public String getInputDate() {
+        return INPUT_DATE_FORMAT.format(calendar.getTime());
+    }
+
+    public String getInputTime() {
+        return INPUT_TIME_FORMAT.format(calendar.getTime());
+    }
+
+    public String getDateTime() {
+        return this.getDate() + ", " + this.getTime();
+    }
+
     /**
      * Returns true if the given strings are of the correct format.
      */
