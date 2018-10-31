@@ -56,20 +56,24 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultiMap.getValue(PREFIX_NAME).isPresent()) {
             editTaskDescriptor.setName(ParserUtil.parseName(argMultiMap.getValue(PREFIX_NAME).get()));
         }
+
+
         if (argMultiMap.getValue(PREFIX_START_DATE).isPresent()
-                && argMultiMap.getValue(PREFIX_START_TIME).isPresent()
-                && argMultiMap.getValue(PREFIX_END_DATE).isPresent()
-                && argMultiMap.getValue(PREFIX_END_TIME).isPresent()) {
+                && argMultiMap.getValue(PREFIX_START_TIME).isPresent()) {
             DateTime startDateTime = ParserUtil.parseDateTime(argMultiMap.getValue(PREFIX_START_DATE).get(),
                     argMultiMap.getValue(PREFIX_START_TIME).get());
+            editTaskDescriptor.setStartDateTime(startDateTime);
+        }
+        if (argMultiMap.getValue(PREFIX_END_DATE).isPresent()
+                && argMultiMap.getValue(PREFIX_END_TIME).isPresent()) {
             DateTime endDateTime = ParserUtil.parseDateTime(argMultiMap.getValue(PREFIX_END_DATE).get(),
                     argMultiMap.getValue(PREFIX_END_TIME).get());
-            if (startDateTime.compareTo(endDateTime) > 0) {
-                throw new ParseException(Task.MESSAGE_START_AFTER_END);
-            }
-            editTaskDescriptor.setStartDateTime(startDateTime);
             editTaskDescriptor.setEndDateTime(endDateTime);
         }
+        if (!editTaskDescriptor.isValidDateTimeRange()) {
+            throw new ParseException(Task.MESSAGE_START_AFTER_END);
+        }
+
         parseTagsForEdit(argMultiMap.getAllValues(PREFIX_TAG)).ifPresent(editTaskDescriptor::setTags);
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {
