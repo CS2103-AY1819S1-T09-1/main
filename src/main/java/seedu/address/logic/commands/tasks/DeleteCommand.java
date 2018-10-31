@@ -27,8 +27,8 @@ public class DeleteCommand extends Command {
             + "used in the displayed task list.\n"
             + "Parameters: all or INDEX1 [INDEX2 INDEX3 INDEX4 ...] (must be a positive integer)\n"
             + "Example 1: " + getCommandFormat(COMMAND_WORD) + " 1\n"
-            + "Example 1: " + getCommandFormat(COMMAND_WORD) + " 2 5 4\n"
-            + "Example 1: " + getCommandFormat(COMMAND_WORD) + " all";
+            + "Example 2: " + getCommandFormat(COMMAND_WORD) + " 2 5 4\n"
+            + "Example 3: " + getCommandFormat(COMMAND_WORD) + " all";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task(s):\n%1$s";
 
