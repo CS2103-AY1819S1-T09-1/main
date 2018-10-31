@@ -28,14 +28,15 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#tasks-class">3.1. Tasks class</a></li>
-<li><a href="#listing-and-finding-of-tasks">3.2. Listing and finding of tasks</a></li>
-<li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
-<li><a href="#calendar-show-feature">3.4. Calendar show feature</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
-<li><a href="#editing-and-deleting-tasks">3.8. Editing and Deleting Tasks</a></li>
-<li><a href="#assigning-tasks-and-contacts">3.9. Assigning tasks and contacts</a></li>
+<li><a href="#addition-of-tasks">3.2. Addition of tasks</a></li>
+<li><a href="#listing-and-finding-of-tasks">3.3. Listing and finding of tasks</a></li>
+<li><a href="#undo-redo-feature">3.4. Undo/Redo feature</a></li>
+<li><a href="#calendar-show-feature">3.5. Calendar show feature</a></li>
+<li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.7. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
+<li><a href="#editing-and-deleting-tasks">3.9. Editing and Deleting Tasks</a></li>
+<li><a href="#assigning-tasks-and-contacts">3.10. Assigning tasks and contacts</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -535,9 +536,39 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-and-finding-of-tasks"><a class="link" href="#listing-and-finding-of-tasks">3.2. Listing and finding of tasks</a></h3>
+<h3 id="addition-of-tasks"><a class="link" href="#addition-of-tasks">3.2. Addition of tasks</a></h3>
+<div class="paragraph">
+<p>Adding a task is fairly straightforward. The user command is given to the parser, which validates the input and creates the task and the objects it is associated with. One aspect with a more involved implementation is the accomodation of optional start date and time fields in the user input, which is illustrated here.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddTaskSequenceDiagram.png" alt="AddTaskSequenceDiagram" width="800">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>AddCommandParser</code> receives the input string and calls <code>ArgumentTokenizer.tokenize()</code> to create an <code>ArgumentMultiMap</code>.</p>
+</li>
+<li>
+<p>It then creates a Date object for the current moment in time and uses the <code>INPUT_DATE_FORMAT</code> and <code>INPUT_TIME_FORMAT</code> <code>DateFormat</code> s in <code>DateTime</code> to parse the Date object into date and time strings in the correct format.</p>
+</li>
+<li>
+<p>It then retrieves the start date and start time strings from <code>argMultiMap</code>, which returns <code>Optional&lt;String&gt;</code> for each of them.</p>
+</li>
+<li>
+<p><code>orElse()</code> is then called on each <code>Optional&lt;String&gt;</code> to obtain the string encapsulated by the <code>Optional</code>, or the string for the current date/time if the <code>Optional</code> is empty.</p>
+</li>
+<li>
+<p>Finally, <code>ParserUtil.parseDateTime()</code> is called with the resultant date and time strings.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-and-finding-of-tasks"><a class="link" href="#listing-and-finding-of-tasks">3.3. Listing and finding of tasks</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Listing and finding of tasks is facilitated by <code>ModelManager</code> and displayed through <code>TaskListPanel</code>.</p>
 </div>
@@ -611,7 +642,7 @@ which returns true only for tasks with keywords in the name.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.3.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>The use of <code>ObservableList</code> and <code>FilteredList</code> from JavaFX saves us the trouble of handling task list updates.
 Under this design, addition, updates and deletion of tasks will only need to interface with <code>VersionedAddressBook</code>,
@@ -622,7 +653,7 @@ and the lists for display will be updated through JavaFX.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancements"><a class="link" href="#future-enhancements">3.2.3. Future Enhancements</a></h4>
+<h4 id="future-enhancements"><a class="link" href="#future-enhancements">3.3.3. Future Enhancements</a></h4>
 <div class="paragraph">
 <p>Currently, users can only search for tasks by name. Additional predicates can be added and exposed via commands to allow
 users to search by assigned people or dates.</p>
@@ -630,9 +661,9 @@ users to search by assigned people or dates.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.3. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.4. Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
 It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
@@ -762,7 +793,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -832,9 +863,9 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-show-feature"><a class="link" href="#calendar-show-feature">3.4. Calendar show feature</a></h3>
+<h3 id="calendar-show-feature"><a class="link" href="#calendar-show-feature">3.5. Calendar show feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The calendar show feature is facilitated by the <code>ModelManager</code>. It extends <code>ModelManager</code> with a calendar panel that allows the user to more easily view the tasks.</p>
 </div>
@@ -877,7 +908,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-where-to-filter-tasks-by-month-for-displaying-in-the-calendar"><a class="link" href="#aspect-where-to-filter-tasks-by-month-for-displaying-in-the-calendar">Aspect: Where to filter tasks by month for displaying in the calendar.</a></h5>
 <div class="ulist">
@@ -947,20 +978,20 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -991,13 +1022,13 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-and-deleting-tasks"><a class="link" href="#editing-and-deleting-tasks">3.8. Editing and Deleting Tasks</a></h3>
+<h3 id="editing-and-deleting-tasks"><a class="link" href="#editing-and-deleting-tasks">3.9. Editing and Deleting Tasks</a></h3>
 <div class="paragraph">
 <p>The code for editing and deleting tasks is actually pretty similar to how it is implemented for persons. This is a combination of adding support for two additional commands: <code>tasks edit</code> and <code>tasks delete</code> inside <code>TasksParser</code>, defining <code>EditCommand</code> and <code>DeleteCommand</code> themselves, and finally, adding <code>void updateTask(Task target, Task editedTask);</code> and <code>void deleteTask(Task target);</code> in the <code>Model</code> interface, and implementing them in the <code>ModelManager</code> class.</p>
 </div>
@@ -1015,9 +1046,9 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="assigning-tasks-and-contacts"><a class="link" href="#assigning-tasks-and-contacts">3.9. Assigning tasks and contacts</a></h3>
+<h3 id="assigning-tasks-and-contacts"><a class="link" href="#assigning-tasks-and-contacts">3.10. Assigning tasks and contacts</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.9.1. Current implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>Tasks and contacts can be assigned to each other using the commands <code>tasks assign</code> and <code>contacts assign</code>. This many-to-many relationship is stored simply as a list of task IDs and person IDs in the Person and Task classes respectively.</p>
 </div>
@@ -1029,7 +1060,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancements-2"><a class="link" href="#future-enhancements-2">3.9.2. Future Enhancements</a></h4>
+<h4 id="future-enhancements-2"><a class="link" href="#future-enhancements-2">3.10.2. Future Enhancements</a></h4>
 <div class="paragraph">
 <p>Both implementations of <code>AssignCommand</code> are almost identical, and should be refactored.</p>
 </div>
@@ -2362,4 +2393,4 @@ their best</p>
 </blockquote>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 13:47:09 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 13:57:57 UTC</div></div></div></body></html>
