@@ -3,9 +3,10 @@ package seedu.address.model.task;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.stream.IntStream;
 
 /**
@@ -14,6 +15,12 @@ import java.util.stream.IntStream;
  * and {@link #isValidDateTimeValues(String, String)}.
  */
 public class DateTime implements Comparable<DateTime> {
+
+    public static final DateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
+    public static final DateFormat INPUT_TIME_FORMAT = new SimpleDateFormat("HHmm");
+    public static final DateFormat INPUT_DATE_TIME_FORMAT = new SimpleDateFormat("yyyyMMddHHmm");
+    public static final DateFormat OUTPUT_DATE_FORMAT = new SimpleDateFormat("dd MMM yyyy");
+    public static final DateFormat OUTPUT_TIME_FORMAT = new SimpleDateFormat("HH:mm");
 
     public static final String MESSAGE_DATETIME_FORMAT_CONSTRAINTS =
             "The date string must be 8 digits long and the time string must be 4 digits long.";
@@ -61,18 +68,11 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     public String getDate() {
-        String day = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
-        String month = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, new Locale("en", "SG"));
-        String year = Integer.toString(calendar.get(Calendar.YEAR));
-        return day + " " + month + " " + year;
+        return OUTPUT_DATE_FORMAT.format(calendar.getTime());
     }
 
     public String getTime() {
-        String hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
-        String minute = Integer.toString(calendar.get(Calendar.MINUTE));
-        hour = (hour.length() < 2 ? "0" : "") + hour;
-        minute = (minute.length() < 2 ? "0" : "") + minute;
-        return hour + ":" + minute;
+        return OUTPUT_TIME_FORMAT.format(calendar.getTime());
     }
 
     /**
@@ -166,15 +166,9 @@ public class DateTime implements Comparable<DateTime> {
      * @return a {@code Calendar} with the given date and time.
      */
     private static Calendar createCalendar(String date, String time) {
-        int[] dateArray = splitDate(date);
-        int[] timeArray = splitTime(time);
-        int year = dateArray[0];
-        // GregorianCalendar month is 0-indexed
-        int month = dateArray[1] - 1;
-        int day = dateArray[2];
-        int hour = timeArray[0];
-        int minute = timeArray[1];
-        return new GregorianCalendar(year, month, day, hour, minute);
+        Calendar result = Calendar.getInstance();
+        result.setTime(INPUT_DATE_TIME_FORMAT.parse(date + time, new ParsePosition(0)));
+        return result;
     }
 
     @Override
