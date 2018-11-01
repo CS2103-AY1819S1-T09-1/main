@@ -10,6 +10,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.tasks.AddCommand;
 import seedu.address.logic.commands.tasks.AssignCommand;
+import seedu.address.logic.commands.tasks.AssignedCommand;
 import seedu.address.logic.commands.tasks.DeleteCommand;
 import seedu.address.logic.commands.tasks.EditCommand;
 import seedu.address.logic.commands.tasks.FindCommand;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.tasks.UnassignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tasks.AddCommandParser;
 import seedu.address.logic.parser.tasks.AssignCommandParser;
+import seedu.address.logic.parser.tasks.AssignedCommandParser;
 import seedu.address.logic.parser.tasks.DeleteCommandParser;
 import seedu.address.logic.parser.tasks.EditCommandParser;
 import seedu.address.logic.parser.tasks.FindCommandParser;
@@ -53,29 +55,32 @@ public class TasksParser {
         try {
             switch (commandWord) {
 
-            case AddCommand.COMMAND_WORD:
-                return new AddCommandParser().parse(arguments);
+                case AddCommand.COMMAND_WORD:
+                    return new AddCommandParser().parse(arguments);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(arguments);
+                case EditCommand.COMMAND_WORD:
+                    return new EditCommandParser().parse(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(arguments);
+                case AssignedCommand.COMMAND_WORD:
+                    return new AssignedCommandParser().parse(arguments);
+                    
+                case DeleteCommand.COMMAND_WORD:
+                    return new DeleteCommandParser().parse(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+                case ListCommand.COMMAND_WORD:
+                    return new ListCommand();
 
-            case FindCommand.COMMAND_WORD:
-                return new FindCommandParser().parse(arguments);
+                case FindCommand.COMMAND_WORD:
+                    return new FindCommandParser().parse(arguments);
 
-            case AssignCommand.COMMAND_WORD:
-                return new AssignCommandParser().parse(arguments);
+                case AssignCommand.COMMAND_WORD:
+                    return new AssignCommandParser().parse(arguments);
 
-            case UnassignCommand.COMMAND_WORD:
-                return new UnassignCommandParser().parse(arguments);
+                case UnassignCommand.COMMAND_WORD:
+                    return new UnassignCommandParser().parse(arguments);
 
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } catch (ParseException e) {
             throw new ParseException(e.getMessage(MODULE_WORD));
