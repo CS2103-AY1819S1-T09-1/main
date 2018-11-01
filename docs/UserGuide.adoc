@@ -165,9 +165,11 @@ Format for entering year is YYYY.
 Format for entering month is MM.
 Format for entering dates is YYYYMMDD.
 
+// tag::calendarshow[]
 ==== View calendar for tasks due within given year and month: `calendar show`
 
-Format: `calendars show y/YEAR m/MONTH`
+Format: `calendar show y/YEAR m/MONTH`
+// end::calendarshow[]
 
 ==== List tasks for a specific day: `calendars list`
 

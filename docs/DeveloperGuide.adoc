@@ -429,14 +429,14 @@ Step 5. The user executes `calendars show y/2018 m/1`. The `calendars show` comm
 ** Pros: Less data duplication.
 ** Cons: Poorer separation of concerns, less modularity.
 
-===== Aspect: Construction of grid cell list view.
+===== Aspect: Construction of grid cell.
 
-* **Alternative 1 (current choice):** Delete and regenerate `ListView` elements each time the moth is changed
-** Pros: Ease of implementation, especially since `GridPane` does not support random access.
-** Cons: Poorer performance, although this is likely insignificant since number of elements to be created/deleted is small.
+* **Alternative 1 (current choice):** Delete and regenerate cell contents each time the month is changed
+** Pros: Ease of implementation.
+** Cons: Poorer performance, although this is insignificant since number of elements to be created/deleted is small and fixed.
 * **Alternative 2:** Create and store `ListView` containers and reuse them.
 ** Pros: Better performance, since deleting and recreating them incurs some computational cost.
-** Cons: Requires creating an auxillary data structure to store the elements to get around deficiencies in the `GridPane` API.
+** Cons: There were some difficulties around creating a separate `UiPart` component that could be added as a child of a `VBox` element.
 // end::calendarshow[]
 
 // tag::dataencryption[]
