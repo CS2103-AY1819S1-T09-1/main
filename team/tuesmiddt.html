@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Chen Shaowei - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Cow</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-T09-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Chen Shaowei - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-cow"><a class="link" href="#project-cow">PROJECT: Cow</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cow is a task management app with an emphasis on Command Line Interface ("CLI") interaction. It is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 10k LoC.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to visualise tasks in a calendar</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to view all tasks due in a specified month through the <code>calendar show</code> command.</p>
+</li>
+<li>
+<p>Justification: This feature achieves a significant improvement in the task management workflow by allowing easier and more intuitive deadline management.</p>
+</li>
+<li>
+<p>Highlights: This enhancement involves significant changes to the GUI. It requires a good understanding of the tools available via JavaFX. In addition, the implementation was challenging as it involved changes at multiple levels in the app.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: TBC</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Port User Guide and Developer Guide sections from Markdown meeting minutes: <a href="https://github.com">#2</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="calendar"><a class="link" href="#calendar">Calendar</a></h3>
+<div class="paragraph">
+<p>Format for entering year is YYYY.
+Format for entering month is MM.
+Format for entering dates is YYYYMMDD.</p>
+</div>
+<div class="paragraph">
+<p>Each cell in the calendar is populated with tasks that end on that day. Clicking on any task would cause its details to be displayed in the task details pane. Task filters applied via the <code>tasks find</code> command would also apply to the tasks displayed in the calendar.</p>
+</div>
+<div class="paragraph">
+<p>If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.</p>
+</div>
+<div class="sect3">
+<h4 id="view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code"><a class="link" href="#view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code">View calendar for tasks due within given year and month: <code>calendar show</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>calendar show y/YEAR m/MONTH</code></p>
+</div>
+<div class="paragraph">
+<p>This will populate the calendar panel with tasks from the specified month. Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="calendar-show-feature"><a class="link" href="#calendar-show-feature">Calendar show feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The calendar show feature is facilitated by the <code>ModelManager</code>. It extends <code>ModelManager</code> with a calendar panel that allows the user to more easily view the tasks.</p>
+</div>
+<div class="paragraph">
+<p>It exposes the following operations via the <code>Model</code> interface:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#updateCalendarMonth()</code>&#8201;&#8212;&#8201;Saves the given calendar that encapsulates the month to be displayed in the calendar panel.</p>
+</li>
+<li>
+<p><code>Model#getCalendarMonth()</code>&#8201;&#8212;&#8201;Returns an <code>ObservableValue&lt;Calendar&gt;</code> for the calendar panel to identify which weekday the month begins with.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the calendar show mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application. The <code>MainWindow</code> class calls <code>Model#getCalendarMonth()</code> and <code>Model#getFilteredTaskList()</code> when creating the calendar panel. This initialises the calendar panel with an <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code> to allow it to perform UI updates when necessary.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The calendar panel constructs a <code>GridPane</code> and initialises the cells with empty containers.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The calendar panel registers listeners to the <code>ObservableValue&lt;Calendar&gt;</code> with a task that would empty grid cells and repopulate them with <code>ListView</code> elements that display the tasks starting on the corresponding dates.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. The user creates any number of tasks with start date in January 2018. The tasks will be stored appropriately.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. The user executes <code>calendars show y/2018 m/1</code>. The <code>calendars show</code> command calls <code>Model#updateCalendarMonth()</code>, listeners in the calendar panel to be notified of the changes.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-where-to-filter-tasks-by-month-for-displaying-in-the-calendar"><a class="link" href="#aspect-where-to-filter-tasks-by-month-for-displaying-in-the-calendar">Aspect: Where to filter tasks by month for displaying in the calendar.</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Calendar object representing current month and full task list passed to calendar pane, all filter operations done in the calendar pane.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Less data duplication.</p>
+</li>
+<li>
+<p>Allows effect of task filtering via the CLI to also be visible in the calendar view.</p>
+</li>
+<li>
+<p>Allows display of tasks in adjacent months.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Slightly less efficient since each cell needs to filter the entire task list.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 1:</strong> Done in the model</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Application logic does not reside in the view layer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Repeated filtering at multiple steps.</p>
+</li>
+<li>
+<p>Task data is duplicated in multiple places.</p>
+</li>
+<li>
+<p>Difficult to display events from adjacent months.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-construction-of-grid-cell"><a class="link" href="#aspect-construction-of-grid-cell">Aspect: Construction of grid cell.</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Delete and regenerate cell contents each time the month is changed</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ease of implementation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Poorer performance, although this is insignificant since number of elements to be created/deleted is small and fixed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create and store <code>ListView</code> containers and reuse them.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Better performance, since deleting and recreating them incurs some computational cost.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>There were some difficulties around creating a separate <code>UiPart</code> component that could be added as a child of a <code>VBox</code> element.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:41:43 UTC</div></div></div></body></html>

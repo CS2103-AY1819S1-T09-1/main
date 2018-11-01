@@ -43,8 +43,8 @@
 <li><a href="#calendar">3.4. Calendar</a>
 <ul class="sectlevel3">
 <li><a href="#view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code">3.4.1. View calendar for tasks due within given year and month: <code>calendar show</code></a></li>
-<li><a href="#list-tasks-for-a-specific-day-code-calendars-list-code">3.4.2. List tasks for a specific day: <code>calendars list</code></a></li>
-<li><a href="#share-calendar-code-calendars-share-code">3.4.3. Share calendar: <code>calendars share</code></a></li>
+<li><a href="#list-tasks-for-a-specific-day-code-calendars-list-code-code-coming-in-v2-0-code">3.4.2. List tasks for a specific day: <code>calendars list</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#share-calendar-code-calendars-share-code-code-coming-in-v2-0-code">3.4.3. Share calendar: <code>calendars share</code> <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#global">3.5. Global</a>
@@ -302,20 +302,29 @@ pane.</p>
 Format for entering month is MM.
 Format for entering dates is YYYYMMDD.</p>
 </div>
+<div class="paragraph">
+<p>Each cell in the calendar is populated with tasks that end on that day. Clicking on any task would cause its details to be displayed in the task details pane. Task filters applied via the <code>tasks find</code> command would also apply to the tasks displayed in the calendar.</p>
+</div>
+<div class="paragraph">
+<p>If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.</p>
+</div>
 <div class="sect3">
 <h4 id="view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code"><a class="link" href="#view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code">3.4.1. View calendar for tasks due within given year and month: <code>calendar show</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>calendars show y/YEAR m/MONTH</code></p>
+<p>Format: <code>calendar show y/YEAR m/MONTH</code></p>
+</div>
+<div class="paragraph">
+<p>This will populate the calendar panel with tasks from the specified month. Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-tasks-for-a-specific-day-code-calendars-list-code"><a class="link" href="#list-tasks-for-a-specific-day-code-calendars-list-code">3.4.2. List tasks for a specific day: <code>calendars list</code></a></h4>
+<h4 id="list-tasks-for-a-specific-day-code-calendars-list-code-code-coming-in-v2-0-code"><a class="link" href="#list-tasks-for-a-specific-day-code-calendars-list-code-code-coming-in-v2-0-code">3.4.2. List tasks for a specific day: <code>calendars list</code> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>calendars list ed/END_DATE</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="share-calendar-code-calendars-share-code"><a class="link" href="#share-calendar-code-calendars-share-code">3.4.3. Share calendar: <code>calendars share</code></a></h4>
+<h4 id="share-calendar-code-calendars-share-code-code-coming-in-v2-0-code"><a class="link" href="#share-calendar-code-calendars-share-code-code-coming-in-v2-0-code">3.4.3. Share calendar: <code>calendars share</code> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>calendars share CONTACT_INDEX</code></p>
 </div>
@@ -350,4 +359,4 @@ changes the data. There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 15:52:19 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:41:43 UTC</div></div></div></body></html>

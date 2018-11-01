@@ -880,31 +880,25 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <li>
 <p><code>Model#getCalendarMonth()</code>&#8201;&#8212;&#8201;Returns an <code>ObservableValue&lt;Calendar&gt;</code> for the calendar panel to identify which weekday the month begins with.</p>
 </li>
-<li>
-<p><code>Model#updateCalendarTaskList()</code>&#8201;&#8212;&#8201;Updates the model with a predicate to filter the tasks that should be displayed in the calendar.</p>
-</li>
-<li>
-<p><code>Model#getCalendarTaskList()</code>&#8201;&#8212;&#8201;Returns an <code>ObservableList&lt;Task&gt;</code> for the calendar panel to display.</p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the calendar show mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application. The <code>MainWindow</code> class calls <code>Model#getCalendarMonth()</code> and <code>Model#getCalendarTaskList()</code> when creating the calendar panel. This initialises the calendar panel with an <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code> to allow it to perform UI updates when necessary.</p>
+<p>Step 1. The user launches the application. The <code>MainWindow</code> class calls <code>Model#getCalendarMonth()</code> and <code>Model#getFilteredTaskList()</code> when creating the calendar panel. This initialises the calendar panel with an <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code> to allow it to perform UI updates when necessary.</p>
 </div>
 <div class="paragraph">
 <p>Step 2. The calendar panel constructs a <code>GridPane</code> and initialises the cells with empty containers.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The calendar panel registers listeners to both the <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code> with a task that would empty grid cells and repopulate them with <code>ListView</code> elements that display the tasks starting on the corresponding dates.</p>
+<p>Step 3. The calendar panel registers listeners to the <code>ObservableValue&lt;Calendar&gt;</code> with a task that would empty grid cells and repopulate them with <code>ListView</code> elements that display the tasks starting on the corresponding dates.</p>
 </div>
 <div class="paragraph">
 <p>Step 4. The user creates any number of tasks with start date in January 2018. The tasks will be stored appropriately.</p>
 </div>
 <div class="paragraph">
-<p>Step 5. The user executes <code>calendars show y/2018 m/1</code>. The <code>calendars show</code> command calls <code>Model#updateCalendarMonth()</code> and <code>Model#updateCalendarTaskList()</code>, listeners in the calendar panel to be notified of the changes.</p>
+<p>Step 5. The user executes <code>calendars show y/2018 m/1</code>. The <code>calendars show</code> command calls <code>Model#updateCalendarMonth()</code>, listeners in the calendar panel to be notified of the changes.</p>
 </div>
 </div>
 <div class="sect3">
@@ -914,27 +908,67 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Done in the model</p>
+<p><strong>Alternative 1 (current choice):</strong> Calendar object representing current month and full task list passed to calendar pane, all filter operations done in the calendar pane.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Application logic does not reside in the view layer.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Less data duplication.</p>
 </li>
 <li>
-<p>Cons: Repeated filtering at multiple steps. Tasks are duplicated in two data lists.</p>
+<p>Allows effect of task filtering via the CLI to also be visible in the calendar view.</p>
+</li>
+<li>
+<p>Allows display of tasks in adjacent months.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Calendar object representing current month and full task list passed to calendar pane, all filter operations done in the calendar pane.</p>
+<p>Cons:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Less data duplication.</p>
+<p>Slightly less efficient since each cell needs to filter the entire task list.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: Poorer separation of concerns, less modularity.</p>
+<p><strong>Alternative 1:</strong> Done in the model</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Application logic does not reside in the view layer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Repeated filtering at multiple steps.</p>
+</li>
+<li>
+<p>Task data is duplicated in multiple places.</p>
+</li>
+<li>
+<p>Difficult to display events from adjacent months.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -943,18 +977,32 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-construction-of-grid-cell-list-view"><a class="link" href="#aspect-construction-of-grid-cell-list-view">Aspect: Construction of grid cell list view.</a></h5>
+<h5 id="aspect-construction-of-grid-cell"><a class="link" href="#aspect-construction-of-grid-cell">Aspect: Construction of grid cell.</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Delete and regenerate <code>ListView</code> elements each time the moth is changed</p>
+<p><strong>Alternative 1 (current choice):</strong> Delete and regenerate cell contents each time the month is changed</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Ease of implementation, especially since <code>GridPane</code> does not support random access.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ease of implementation.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: Poorer performance, although this is likely insignificant since number of elements to be created/deleted is small.</p>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Poorer performance, although this is insignificant since number of elements to be created/deleted is small and fixed.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -964,10 +1012,24 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Better performance, since deleting and recreating them incurs some computational cost.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Better performance, since deleting and recreating them incurs some computational cost.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: Requires creating an auxillary data structure to store the elements to get around deficiencies in the <code>GridPane</code> API.</p>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>There were some difficulties around creating a separate <code>UiPart</code> component that could be added as a child of a <code>VBox</code> element.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2393,4 +2455,4 @@ their best</p>
 </blockquote>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 15:52:19 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:41:43 UTC</div></div></div></body></html>
