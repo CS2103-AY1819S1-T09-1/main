@@ -72,12 +72,6 @@ Format:
 
 Format: `contacts find KEYWORD [MORE_KEYWORDS]`
 
-==== Select a contact: `contacts select`
-
-Format: `contacts select INDEX`
-
-Selects the contact identified by the index number used in the displayed contact list.
-
 ==== Delete contact: `contacts delete`
 
 Format: `contacts delete INDEX`
