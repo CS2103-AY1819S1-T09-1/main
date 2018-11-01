@@ -75,7 +75,7 @@ public class TasksParser {
 
             case UnassignCommand.COMMAND_WORD:
                 return new UnassignCommandParser().parse(arguments);
-                
+
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
 
