@@ -171,11 +171,11 @@ Format for entering dates is YYYYMMDD.
 Format: `calendar show y/YEAR m/MONTH`
 // end::calendarshow[]
 
-==== List tasks for a specific day: `calendars list`
+==== List tasks for a specific day: `calendars list` `[coming in v2.0]`
 
 Format: `calendars list ed/END_DATE`
 
-==== Share calendar: `calendars share`
+==== Share calendar: `calendars share` `[coming in v2.0]`
 
 Format: `calendars share CONTACT_INDEX`
 
