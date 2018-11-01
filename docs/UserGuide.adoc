@@ -159,16 +159,25 @@ pane.
 
 ==== Display
 
+// tag::calendar[]
+
 === Calendar
 
 Format for entering year is YYYY.
 Format for entering month is MM.
 Format for entering dates is YYYYMMDD.
 
+Each cell in the calendar is populated with tasks that end on that day. Clicking on any task would cause its details to be displayed in the task details pane. Task filters applied via the `tasks find` command would also apply to the tasks displayed in the calendar.
+
+If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.
+// end::calendar[]
+
 // tag::calendarshow[]
 ==== View calendar for tasks due within given year and month: `calendar show`
 
 Format: `calendar show y/YEAR m/MONTH`
+
+This will populate the calendar panel with tasks from the specified month. Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.
 // end::calendarshow[]
 
 ==== List tasks for a specific day: `calendars list` `[coming in v2.0]`
