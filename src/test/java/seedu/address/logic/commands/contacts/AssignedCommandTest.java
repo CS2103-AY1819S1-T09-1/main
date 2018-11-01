@@ -24,9 +24,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AssignedCommand}.
  */
-public class SelectCommandTest {
+public class AssignedCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
@@ -72,14 +72,14 @@ public class SelectCommandTest {
 
     @Test
     public void equals() {
-        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_PERSON);
-        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_PERSON);
+        AssignedCommand selectFirstCommand = new AssignedCommand(INDEX_FIRST_PERSON);
+        AssignedCommand selectSecondCommand = new AssignedCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(selectFirstCommand.equals(selectFirstCommand));
 
         // same values -> returns true
-        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST_PERSON);
+        AssignedCommand selectFirstCommandCopy = new AssignedCommand(INDEX_FIRST_PERSON);
         assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
 
         // different types -> returns false
@@ -93,15 +93,15 @@ public class SelectCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index},
+     * Executes a {@code AssignedCommand} with the given {@code index},
      * and checks that {@code JumpToPersonListRequestEvent}
      * is raised with the correct index.
      */
     private void assertExecutionSuccess(Index index) {
-        SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        AssignedCommand assignedCommand = new AssignedCommand(index);
+        String expectedMessage = String.format(AssignedCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
 
-        assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(assignedCommand, model, commandHistory, expectedMessage, expectedModel);
 
         JumpToPersonListRequestEvent lastEvent = (JumpToPersonListRequestEvent) eventsCollectorRule.eventsCollector
                 .getMostRecent();
@@ -109,12 +109,12 @@ public class SelectCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * Executes a {@code AssignedCommand} with the given {@code index}, and checks that a {@code CommandException}
      * is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
-        SelectCommand selectCommand = new SelectCommand(index);
-        assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
+        AssignedCommand assignedCommand = new AssignedCommand(index);
+        assertCommandFailure(assignedCommand, model, commandHistory, expectedMessage);
         assertTrue(eventsCollectorRule.eventsCollector.isEmpty());
     }
 }
