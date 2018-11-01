@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -39,15 +40,19 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_START_DATE,
                         PREFIX_START_TIME, PREFIX_END_DATE, PREFIX_END_TIME, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_START_DATE,
-                        PREFIX_START_TIME, PREFIX_END_DATE, PREFIX_END_TIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_END_DATE, PREFIX_END_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), true);
         }
 
+        Date currentDate = new Date();
+        String nowDateString = DateTime.INPUT_DATE_FORMAT.format(currentDate);
+        String nowTimeString = DateTime.INPUT_TIME_FORMAT.format(currentDate);
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        DateTime startDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_START_DATE).get(),
-                argMultimap.getValue(PREFIX_START_TIME).get());
+        DateTime startDateTime = ParserUtil.parseDateTime(
+                argMultimap.getValue(PREFIX_START_DATE).orElse(nowDateString),
+                argMultimap.getValue(PREFIX_START_TIME).orElse(nowTimeString));
         DateTime endDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_END_DATE).get(),
                 argMultimap.getValue(PREFIX_END_TIME).get());
         if (startDateTime.compareTo(endDateTime) > 0) {

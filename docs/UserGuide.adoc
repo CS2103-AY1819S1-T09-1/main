@@ -76,16 +76,15 @@ Format: `contacts find KEYWORD [MORE_KEYWORDS]`
 
 Format: `contacts delete INDEX`
 
+// tag::assigntasktocontact[]
 ==== Assign tasks to contact: `contacts assign`
 
 Format: `contacts assign c/CONTACT_INDEX k/TASK_INDEX`
 
 ==== Unassign tasks from contact: `contacts unassign`
 
-Format: `contacts unassign c/CONTACT_INDEX... (k/TASK_INDEX...|*)`
-
-If `*` is provided as the argument for TASK_INDEX, unassign all tasks
-from the contacts specified.
+Format: `contacts unassign c/CONTACT_INDEX k/TASK_INDEX`
+// end::assigntasktocontact[]
 
 ==== Show tasks assigned to contact:
 
@@ -105,7 +104,9 @@ Format: `tasks list`
 ==== Add task: `tasks add`
 
 Format:
-`tasks add n/TASK_NAME sd/START_DATE st/START_TIME ed/END_DATE et/END_TIME [t/TAG]…`
+`tasks add n/TASK_NAME [sd/START_DATE] [st/START_TIME] ed/END_DATE et/END_TIME [t/TAG]…`
+
+If start date or time is not entered, the missing field(s) will default to the current date/time.
 
 ==== Edit task: `tasks edit`
 
@@ -114,16 +115,16 @@ Format:
 
 ==== Search for task: `tasks find`
 
-Finds tasks whose names contain any of the given keywords. + Format:
-`tasks find KEYWORD [MORE_KEYWORDS]`
+Find tasks that based on name, start date, end date and/or tags +
+Format:
+`tasks find [n/KEYWORD]... [sd/START_DATE] [ed/END_DATE] [t/TAG]…`
+
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match
-`Bo Hans`
-* Only the name is searched.
+* Searching by keyword is case insensitive. e.g `hans` will match `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Tasks matching at least one keyword will be returned (i.e. `OR`
-search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Providing multiple keywords or tags will return tasks that match any of the keywords or tags.
+* Searching based on different criteria will return tasks that match all criteria e.g. Searching on start date and end date
+will return tasks that match both
 ****
 ==== Delete task: `tasks delete`
 
@@ -139,16 +140,15 @@ Format: `tasks delete all`
 Delete all tasks that are shown in the list.
 // end::tasksdeleteall[]
 
+// tag::assigncontacttotask[]
 ==== Assign person to task: `tasks assign`
 
 Format: `tasks assign k/TASK_INDEX c/CONTACT_INDEX`
 
 ==== Unassign person from tasks: `tasks unassign`
 
-Format: `tasks unassign k/TASK_INDEX (c/CONTACT_INDEX...|*)`
-
-If `*` is provided as the argument for CONTACT_INDEX, all contacts will
-be unassigned.
+Format: `tasks unassign k/TASK_INDEX c/CONTACT_INDEX`
+// end::assigncontacttotask[]
 
 ==== Show full details of a task: `tasks assigned`
 
@@ -159,21 +159,32 @@ pane.
 
 ==== Display
 
+// tag::calendar[]
+
 === Calendar
 
 Format for entering year is YYYY.
 Format for entering month is MM.
 Format for entering dates is YYYYMMDD.
 
+Each cell in the calendar is populated with tasks that end on that day. Clicking on any task would cause its details to be displayed in the task details pane. Task filters applied via the `tasks find` command would also apply to the tasks displayed in the calendar.
+
+If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.
+// end::calendar[]
+
+// tag::calendarshow[]
 ==== View calendar for tasks due within given year and month: `calendar show`
 
-Format: `calendars show y/YEAR m/MONTH`
+Format: `calendar show y/YEAR m/MONTH`
 
-==== List tasks for a specific day: `calendars list`
+This will populate the calendar panel with tasks from the specified month. Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.
+// end::calendarshow[]
+
+==== List tasks for a specific day: `calendars list` `[coming in v2.0]`
 
 Format: `calendars list ed/END_DATE`
 
-==== Share calendar: `calendars share`
+==== Share calendar: `calendars share` `[coming in v2.0]`
 
 Format: `calendars share CONTACT_INDEX`
 
