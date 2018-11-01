@@ -13,8 +13,8 @@ import org.junit.Test;
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.contacts.DeleteCommand;
 import seedu.address.logic.commands.contacts.AssignedCommand;
+import seedu.address.logic.commands.contacts.DeleteCommand;
 import seedu.address.ui.StatusBarFooter;
 
 /**

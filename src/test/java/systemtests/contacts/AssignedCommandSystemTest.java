@@ -75,11 +75,13 @@ public class AssignedCommandSystemTest extends ContactsSystemTest {
 
         /* Case: invalid index (0) -> rejected */
         assertCommandFailure(MODULE_WORD + " " + AssignedCommand.COMMAND_WORD + " " + 0,
-                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignedCommand.MESSAGE_USAGE), MODULE_WORD));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AssignedCommand.MESSAGE_USAGE), MODULE_WORD));
 
         /* Case: invalid index (-1) -> rejected */
         assertCommandFailure(MODULE_WORD + " " + AssignedCommand.COMMAND_WORD + " " + -1,
-                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignedCommand.MESSAGE_USAGE), MODULE_WORD));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AssignedCommand.MESSAGE_USAGE), MODULE_WORD));
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredPersonList().size() + 1;
@@ -88,18 +90,21 @@ public class AssignedCommandSystemTest extends ContactsSystemTest {
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(MODULE_WORD + " " + AssignedCommand.COMMAND_WORD + " abc",
-                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignedCommand.MESSAGE_USAGE), MODULE_WORD));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AssignedCommand.MESSAGE_USAGE), MODULE_WORD));
 
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(MODULE_WORD + " " + AssignedCommand.COMMAND_WORD + " 1 abc",
-                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignedCommand.MESSAGE_USAGE), MODULE_WORD));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AssignedCommand.MESSAGE_USAGE), MODULE_WORD));
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure(MODULE_WORD + " " + "SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: select from empty address book -> rejected */
         deleteAllPersons();
-        assertCommandFailure(MODULE_WORD + " " + AssignedCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(MODULE_WORD + " "
+                        + AssignedCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -114,6 +119,7 @@ public class AssignedCommandSystemTest extends ContactsSystemTest {
      * 6. Status bar remains unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     *
      * @see AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      * @see AppSystemTest#assertSelectedCardChanged(Index)
      */
@@ -145,6 +151,7 @@ public class AssignedCommandSystemTest extends ContactsSystemTest {
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     *
      * @see AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {

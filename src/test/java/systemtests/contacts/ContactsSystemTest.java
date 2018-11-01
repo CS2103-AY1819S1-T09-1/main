@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.ContactsParser.MODULE_WORD;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.contacts.AssignedCommand;
 import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.logic.commands.contacts.FindCommand;
 import seedu.address.logic.commands.contacts.ListCommand;
-import seedu.address.logic.commands.contacts.AssignedCommand;
 import systemtests.AppSystemTest;
 
 /**
