@@ -19,10 +19,10 @@ import seedu.address.logic.commands.contacts.ListCommand;
 import seedu.address.logic.commands.contacts.UnassignCommand;
 import seedu.address.logic.parser.contacts.AddCommandParser;
 import seedu.address.logic.parser.contacts.AssignCommandParser;
+import seedu.address.logic.parser.contacts.AssignedCommandParser;
 import seedu.address.logic.parser.contacts.DeleteCommandParser;
 import seedu.address.logic.parser.contacts.EditCommandParser;
 import seedu.address.logic.parser.contacts.FindCommandParser;
-import seedu.address.logic.parser.contacts.AssignedCommandParser;
 import seedu.address.logic.parser.contacts.UnassignCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
