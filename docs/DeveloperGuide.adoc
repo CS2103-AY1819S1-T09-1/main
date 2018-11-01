@@ -488,6 +488,7 @@ image:EditCommandParser.jpg[]
 
 image:EditCommand.jpg[]
 
+// tag::assigning-tasks-and-contacts[]
 === Assigning tasks and contacts
 ==== Current implementation
 
@@ -502,6 +503,7 @@ An alternative implementation that was considered was to model the many-to-many 
 Both implementations of `AssignCommand` are almost identical, and should be refactored.
 
 Currently, assignments cannot be removed. The commands that will perform this task, `tasks unassign` and `contacts unassign`, are both slated to be implemented in v1.3.
+// end::assigning-tasks-and-contacts[]
 
 == Documentation
 

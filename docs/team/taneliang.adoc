@@ -1,0 +1,61 @@
+= Tan E-Liang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Cow
+
+---
+
+== Overview
+
+Cow is a desktop group project task manager aimed at students. Some features include individual task management, and project groupmate management and task assignment. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to assign and unassign tasks to groupmates*.
+** What it does: allows the user to assign a task to a contact and vice versa, and unassign them from each other.
+** Justification: This is a key feature for students who manage group projects, as they need to keep track of everyone's tasks and ensure that their projects will be completed on time.
+** Highlights: This enhancement required the implementation of a many-to-many relationship without a relational database. This was challenging as it required changes to some core components of the app, and thus resulted in many code changes throughout the codebase.
+
+* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+
+* *Code contributed*: [https://github.com/CS2103-AY1819S1-T09-1/main/tree/master/src/main[Functional code]] [https://github.com/CS2103-AY1819S1-T09-1/main/tree/master/src/test[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` and `v1.2` (2 releases) on GitHub
+*** Created milestones on GitHub
+*** Created PR review duty roster
+** Documentation:
+*** Participated in the renaming effort of the app: https://github.com/CS2103-AY1819S1-T09-1/main/pull/8[#8]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T09-1/main/pull/35[#35], https://github.com/CS2103-AY1819S1-T09-1/main/pull/67[#67], https://github.com/CS2103-AY1819S1-T09-1/main/pull/85[#85]
+*** Contributed to forum discussions (example: https://github.com/nus-cs2103-AY1819S1/forum/issues/9[1])
+** Tools:
+*** Set up the team repository.
+*** Set up Travis CI integration.
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=assigntasktocontact]
+
+include::../UserGuide.adoc[tag=assigncontacttotask]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=assigning-tasks-and-contacts]
+
+== PROJECT: ShowFace
+
+During the same semester that I worked on Cow, I was also developing https://showface.io[ShowFace.io], a React web app that allows groups to find the best time to meet. In this project, I was the lead developer, delivering features nearly every day.

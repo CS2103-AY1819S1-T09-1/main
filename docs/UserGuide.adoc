@@ -76,16 +76,15 @@ Format: `contacts find KEYWORD [MORE_KEYWORDS]`
 
 Format: `contacts delete INDEX`
 
+// tag::assigntasktocontact[]
 ==== Assign tasks to contact: `contacts assign`
 
 Format: `contacts assign c/CONTACT_INDEX k/TASK_INDEX`
 
 ==== Unassign tasks from contact: `contacts unassign`
 
-Format: `contacts unassign c/CONTACT_INDEX... (k/TASK_INDEX...|*)`
-
-If `*` is provided as the argument for TASK_INDEX, unassign all tasks
-from the contacts specified.
+Format: `contacts unassign c/CONTACT_INDEX k/TASK_INDEX`
+// end::assigntasktocontact[]
 
 ==== Show tasks assigned to contact:
 
@@ -139,16 +138,15 @@ Format: `tasks delete all`
 
 Delete all tasks that are shown in the list.
 
+// tag::assigncontacttotask[]
 ==== Assign person to task: `tasks assign`
 
 Format: `tasks assign k/TASK_INDEX c/CONTACT_INDEX`
 
 ==== Unassign person from tasks: `tasks unassign`
 
-Format: `tasks unassign k/TASK_INDEX (c/CONTACT_INDEX...|*)`
-
-If `*` is provided as the argument for CONTACT_INDEX, all contacts will
-be unassigned.
+Format: `tasks unassign k/TASK_INDEX c/CONTACT_INDEX`
+// end::assigncontacttotask[]
 
 ==== Show full details of a task: `tasks assigned`
 
