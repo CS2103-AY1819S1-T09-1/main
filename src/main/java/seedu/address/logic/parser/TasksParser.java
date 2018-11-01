@@ -55,32 +55,32 @@ public class TasksParser {
         try {
             switch (commandWord) {
 
-                case AddCommand.COMMAND_WORD:
-                    return new AddCommandParser().parse(arguments);
+            case AddCommand.COMMAND_WORD:
+                return new AddCommandParser().parse(arguments);
 
-                case EditCommand.COMMAND_WORD:
-                    return new EditCommandParser().parse(arguments);
+            case EditCommand.COMMAND_WORD:
+                return new EditCommandParser().parse(arguments);
 
-                case AssignedCommand.COMMAND_WORD:
-                    return new AssignedCommandParser().parse(arguments);
-                    
-                case DeleteCommand.COMMAND_WORD:
-                    return new DeleteCommandParser().parse(arguments);
+            case AssignedCommand.COMMAND_WORD:
+                return new AssignedCommandParser().parse(arguments);
 
-                case ListCommand.COMMAND_WORD:
-                    return new ListCommand();
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-                case FindCommand.COMMAND_WORD:
-                    return new FindCommandParser().parse(arguments);
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-                case AssignCommand.COMMAND_WORD:
-                    return new AssignCommandParser().parse(arguments);
+            case FindCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
 
-                case UnassignCommand.COMMAND_WORD:
-                    return new UnassignCommandParser().parse(arguments);
+            case AssignCommand.COMMAND_WORD:
+                return new AssignCommandParser().parse(arguments);
 
-                default:
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            case UnassignCommand.COMMAND_WORD:
+                return new UnassignCommandParser().parse(arguments);
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } catch (ParseException e) {
             throw new ParseException(e.getMessage(MODULE_WORD));
