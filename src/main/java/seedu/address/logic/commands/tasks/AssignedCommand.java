@@ -13,7 +13,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.IsAssignedToPersonPredicate;
+import seedu.address.model.task.IsAssignedToTaskPredicate;
 import seedu.address.model.task.Task;
 
 /**
@@ -49,7 +49,7 @@ public class AssignedCommand extends Command {
         }
         // Retrieve the desired task and update filter
         Task desiredTask = filteredTaskList.get(targetIndex.getZeroBased());
-        model.updateFilteredPersonList(new IsAssignedToPersonPredicate(desiredTask));
+        model.updateFilteredPersonList(new IsAssignedToTaskPredicate(desiredTask));
 
         // Update UI (purely cosmetic for now)
         EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex));
