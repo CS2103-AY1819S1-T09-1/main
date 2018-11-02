@@ -1,0 +1,45 @@
+= Chen Shaowei - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Cow
+
+---
+
+== Overview
+
+Cow is a task management app with an emphasis on Command Line Interface ("CLI") interaction. It is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 10k LoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to visualise tasks in a calendar*
+** What it does: allows the user to view all tasks due in a specified month through the `calendar show` command.
+** Justification: This feature achieves a significant improvement in the task management workflow by allowing easier and more intuitive deadline management.
+** Highlights: This enhancement involves significant changes to the GUI. It requires a good understanding of the tools available via JavaFX. In addition, the implementation was challenging as it involved changes at multiple levels in the app.
+
+* *Code contributed*: TBC
+
+* *Other contributions*:
+
+** Documentation:
+*** Port User Guide and Developer Guide sections from Markdown meeting minutes: https://github.com[#2]
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=calendar]
+
+include::../UserGuide.adoc[tag=calendarshow]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=calendarshow]

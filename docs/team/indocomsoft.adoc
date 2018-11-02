@@ -1,0 +1,57 @@
+= Julius Putra Tanu Setiaji - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Cow
+
+---
+
+== Overview
+
+Cow is a task management app with an emphasis on Command Line Interface ("CLI") interaction. It is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 10k LoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to edit, delete and batch delete tasks*
+** What it does: allows the user to change tasks as well as delete more than one tasks at a time
+** Justification: This feature improves the product significantly because sometimes user may add duplicate tasks or add tasks with wrong details. Moreover, sometimes a user may need to delete more than one tasks at a time. Instead of doing it one-by-one which is time consuming, they can do it in one command instead.
+** Highlights: This enhancement was built such that the syntax is the same as the ones for contacts. Moreover, the batch delete tasks syntax is also built on top of the original single delete command. Efforts were taken to ensure that code duplication remains minimum between delete and batch delete.
+
+* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+
+* *Code contributed*: TBC
+
+* *Other contributions*:
+
+** Enhancements to existing features:
+*** Added module name in usage messages: https://github.com/CS2103-AY1819S1-T09-1/main/pull/87[#87]
+*** Allow editing task's either start or end datetime: https://github.com/CS2103-AY1819S1-T09-1/main/pull/94[#94]
+** Documentation:
+*** Updated the User Guide to include new features: https://github.com/CS2103-AY1819S1-T09-1/main/pull/84[#84]
+*** Updated the Developer Guide to include the use case of the new features implemented: https://github.com/CS2103-AY1819S1-T09-1/main/pull/84[#84]
+*** Added diagram to explain how the new features included were implemented: https://github.com/CS2103-AY1819S1-T09-1/main/pull/62[#62]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T09-1/main/pull/89[#89], https://github.com/CS2103-AY1819S1-T09-1/main/pull/51[#51]
+** Tools:
+*** Integrated a new GitHub plugin (coveralls) to the project to track test coverage (https://github.com/CS2103-AY1819S1-T09-1/main/pull/50[#50])
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=tasksdeleteall]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=editdeletetasks]
+include::../DeveloperGuide.adoc[tag=batchdeletetasks]
