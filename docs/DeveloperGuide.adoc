@@ -476,6 +476,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+// tag::editdeletetasks[]
 === Editing and Deleting Tasks
 
 The code for editing and deleting tasks is actually pretty similar to how it is implemented for persons. This is a combination of adding support for two additional commands: `tasks edit` and `tasks delete` inside `TasksParser`, defining `EditCommand` and `DeleteCommand` themselves, and finally, adding `void updateTask(Task target, Task editedTask);` and `void deleteTask(Task target);` in the `Model` interface, and implementing them in the `ModelManager` class.
@@ -487,6 +488,8 @@ To explain more clearly, you can see below a diagram of what happens when the us
 image:EditCommandParser.jpg[]
 
 image:EditCommand.jpg[]
+
+// end::editdeletetasks[]
 
 // tag::assigning-tasks-and-contacts[]
 === Assigning tasks and contacts
@@ -963,6 +966,7 @@ Use case ends
 +
 Use case resumes at step 2
 
+// tag::batchdeletetasks[]
 === Batch delete tasks
 
 **MSS**
@@ -984,6 +988,7 @@ use case ends
 [nonc]
 ** 3a1. Cow shows an error message.
 Use case resumes at step 2
+// end::batchdeletetasks[]
 
 === Assign people to tasks
 
