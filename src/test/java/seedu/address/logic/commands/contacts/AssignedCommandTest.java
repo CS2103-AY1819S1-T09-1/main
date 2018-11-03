@@ -52,13 +52,13 @@ public class AssignedCommandTest {
     }
 
     // TODO: Change such that expectedModel is updated with filtered tasks
-//    @Test
-//    public void execute_validIndexFilteredList_success() {
-//        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-//        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-//
-//        assertExecutionSuccess(INDEX_FIRST_PERSON);
-//    }
+    // @Test
+    // public void execute_validIndexFilteredList_success() {
+    //     showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    //     showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+
+    //     assertExecutionSuccess(INDEX_FIRST_PERSON);
+    // }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
