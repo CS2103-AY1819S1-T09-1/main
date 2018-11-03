@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -69,6 +70,17 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    public static final String VALID_NAME_BRUSH = "Brush the cows";
+    public static final String VALID_NAME_SLAUGHTER = "Slaughter the cows";
+    public static final String VALID_START_DATE_BRUSH = "20180101";
+    public static final String VALID_START_DATE_SLAUGHTER = "20180228";
+    public static final String VALID_START_TIME_BRUSH = "0000";
+    public static final String VALID_START_TIME_SLAUGHTER = "0700";
+    public static final String VALID_END_DATE_BRUSH = "20181231";
+    public static final String VALID_END_DATE_SLAUGHTER = "20180228";
+    public static final String VALID_END_TIME_BRUSH = "2359";
+    public static final String VALID_END_TIME_SLAUGHTER = "1830";
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -137,6 +149,20 @@ public class CommandTestUtil {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
         model.commitAddressBook();
+    }
+
+    /**
+     * Updates {@code model}'s filtered task list to show only the task at the given {@code targetIndex} in the
+     * {@code model}
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitName = task.getName().name.split("\\s+");
+        model.updateFilteredTaskList(
+                new seedu.address.model.task.NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        assertEquals(1, model.getFilteredTaskList().size());
     }
 
 }
