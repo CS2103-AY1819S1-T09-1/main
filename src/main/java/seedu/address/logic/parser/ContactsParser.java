@@ -10,19 +10,19 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.contacts.AddCommand;
 import seedu.address.logic.commands.contacts.AssignCommand;
+import seedu.address.logic.commands.contacts.AssignedCommand;
 import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.logic.commands.contacts.DeleteCommand;
 import seedu.address.logic.commands.contacts.EditCommand;
 import seedu.address.logic.commands.contacts.FindCommand;
 import seedu.address.logic.commands.contacts.ListCommand;
-import seedu.address.logic.commands.contacts.SelectCommand;
 import seedu.address.logic.commands.contacts.UnassignCommand;
 import seedu.address.logic.parser.contacts.AddCommandParser;
 import seedu.address.logic.parser.contacts.AssignCommandParser;
+import seedu.address.logic.parser.contacts.AssignedCommandParser;
 import seedu.address.logic.parser.contacts.DeleteCommandParser;
 import seedu.address.logic.parser.contacts.EditCommandParser;
 import seedu.address.logic.parser.contacts.FindCommandParser;
-import seedu.address.logic.parser.contacts.SelectCommandParser;
 import seedu.address.logic.parser.contacts.UnassignCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -62,8 +62,8 @@ public class ContactsParser {
             case EditCommand.COMMAND_WORD:
                 return new EditCommandParser().parse(arguments);
 
-            case SelectCommand.COMMAND_WORD:
-                return new SelectCommandParser().parse(arguments);
+            case AssignedCommand.COMMAND_WORD:
+                return new AssignedCommandParser().parse(arguments);
 
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);

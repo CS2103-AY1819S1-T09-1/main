@@ -18,5 +18,4 @@ public class JumpToPersonListRequestEvent extends BaseEvent {
     public String toString() {
         return getClass().getSimpleName();
     }
-
 }

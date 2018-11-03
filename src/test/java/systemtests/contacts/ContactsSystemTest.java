@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.ContactsParser.MODULE_WORD;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.contacts.AssignedCommand;
 import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.logic.commands.contacts.FindCommand;
 import seedu.address.logic.commands.contacts.ListCommand;
-import seedu.address.logic.commands.contacts.SelectCommand;
 import systemtests.AppSystemTest;
 
 /**
@@ -35,7 +35,7 @@ public abstract class ContactsSystemTest extends AppSystemTest {
      * Selects the person at {@code index} of the displayed list.
      */
     protected void selectPerson(Index index) {
-        executeCommand(MODULE_WORD + " " + SelectCommand.COMMAND_WORD + " " + index.getOneBased());
+        executeCommand(MODULE_WORD + " " + AssignedCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     }
 

@@ -16,13 +16,13 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.contacts.AddCommand;
+import seedu.address.logic.commands.contacts.AssignedCommand;
 import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.logic.commands.contacts.DeleteCommand;
 import seedu.address.logic.commands.contacts.EditCommand;
 import seedu.address.logic.commands.contacts.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.contacts.FindCommand;
 import seedu.address.logic.commands.contacts.ListCommand;
-import seedu.address.logic.commands.contacts.SelectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -81,10 +81,10 @@ public class ContactsParserTest {
     }
 
     @Test
-    public void parseCommand_select() throws Exception {
-        SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_assigned() throws Exception {
+        AssignedCommand command = (AssignedCommand) parser.parseCommand(
+                AssignedCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new AssignedCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

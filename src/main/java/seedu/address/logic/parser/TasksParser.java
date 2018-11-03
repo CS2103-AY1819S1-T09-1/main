@@ -10,17 +10,21 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.tasks.AddCommand;
 import seedu.address.logic.commands.tasks.AssignCommand;
+import seedu.address.logic.commands.tasks.AssignedCommand;
 import seedu.address.logic.commands.tasks.DeleteCommand;
 import seedu.address.logic.commands.tasks.EditCommand;
 import seedu.address.logic.commands.tasks.FindCommand;
 import seedu.address.logic.commands.tasks.ListCommand;
+import seedu.address.logic.commands.tasks.SelectCommand;
 import seedu.address.logic.commands.tasks.UnassignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tasks.AddCommandParser;
 import seedu.address.logic.parser.tasks.AssignCommandParser;
+import seedu.address.logic.parser.tasks.AssignedCommandParser;
 import seedu.address.logic.parser.tasks.DeleteCommandParser;
 import seedu.address.logic.parser.tasks.EditCommandParser;
 import seedu.address.logic.parser.tasks.FindCommandParser;
+import seedu.address.logic.parser.tasks.SelectCommandParser;
 import seedu.address.logic.parser.tasks.UnassignCommandParser;
 
 /**
@@ -59,6 +63,9 @@ public class TasksParser {
             case EditCommand.COMMAND_WORD:
                 return new EditCommandParser().parse(arguments);
 
+            case AssignedCommand.COMMAND_WORD:
+                return new AssignedCommandParser().parse(arguments);
+
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);
 
@@ -73,6 +80,9 @@ public class TasksParser {
 
             case UnassignCommand.COMMAND_WORD:
                 return new UnassignCommandParser().parse(arguments);
+
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -403,40 +403,50 @@ It exposes the following operations via the `Model` interface:
 
 * `Model#updateCalendarMonth()` -- Saves the given calendar that encapsulates the month to be displayed in the calendar panel.
 * `Model#getCalendarMonth()` -- Returns an `ObservableValue<Calendar>` for the calendar panel to identify which weekday the month begins with.
-* `Model#updateCalendarTaskList()` -- Updates the model with a predicate to filter the tasks that should be displayed in the calendar.
-* `Model#getCalendarTaskList()` -- Returns an `ObservableList<Task>` for the calendar panel to display.
 
 Given below is an example usage scenario and how the calendar show mechanism behaves at each step.
 
-Step 1. The user launches the application. The `MainWindow` class calls `Model#getCalendarMonth()` and `Model#getCalendarTaskList()` when creating the calendar panel. This initialises the calendar panel with an `ObservableList<Task>` and `ObservableValue<Calendar>` to allow it to perform UI updates when necessary.
+Step 1. The user launches the application. The `MainWindow` class calls `Model#getCalendarMonth()` and `Model#getFilteredTaskList()` when creating the calendar panel. This initialises the calendar panel with an `ObservableList<Task>` and `ObservableValue<Calendar>` to allow it to perform UI updates when necessary.
 
 Step 2. The calendar panel constructs a `GridPane` and initialises the cells with empty containers.
 
-Step 3. The calendar panel registers listeners to both the `ObservableList<Task>` and `ObservableValue<Calendar>` with a task that would empty grid cells and repopulate them with `ListView` elements that display the tasks starting on the corresponding dates.
+Step 3. The calendar panel registers listeners to the `ObservableValue<Calendar>` with a task that would empty grid cells and repopulate them with `ListView` elements that display the tasks starting on the corresponding dates.
 
 Step 4. The user creates any number of tasks with start date in January 2018. The tasks will be stored appropriately.
 
-Step 5. The user executes `calendars show y/2018 m/1`. The `calendars show` command calls `Model#updateCalendarMonth()` and `Model#updateCalendarTaskList()`, listeners in the calendar panel to be notified of the changes.
+Step 5. The user executes `calendars show y/2018 m/1`. The `calendars show` command calls `Model#updateCalendarMonth()`, listeners in the calendar panel to be notified of the changes.
 
 ==== Design Considerations
 
 ===== Aspect: Where to filter tasks by month for displaying in the calendar.
 
-* **Alternative 1 (current choice):** Done in the model
-** Pros: Application logic does not reside in the view layer.
-** Cons: Repeated filtering at multiple steps. Tasks are duplicated in two data lists.
-* **Alternative 2:** Calendar object representing current month and full task list passed to calendar pane, all filter operations done in the calendar pane.
-** Pros: Less data duplication.
-** Cons: Poorer separation of concerns, less modularity.
+* **Alternative 1 (current choice):** Calendar object representing current month and full task list passed to calendar pane, all filter operations done in the calendar pane.
+** Pros:
+*** Less data duplication.
+*** Allows effect of task filtering via the CLI to also be visible in the calendar view.
+*** Allows display of tasks in adjacent months.
+** Cons:
+*** Slightly less efficient since each cell needs to filter the entire task list.
+* **Alternative 1:** Done in the model
+** Pros:
+*** Application logic does not reside in the view layer.
+** Cons:
+*** Repeated filtering at multiple steps.
+*** Task data is duplicated in multiple places.
+*** Difficult to display events from adjacent months.
 
-===== Aspect: Construction of grid cell list view.
+===== Aspect: Construction of grid cell.
 
-* **Alternative 1 (current choice):** Delete and regenerate `ListView` elements each time the moth is changed
-** Pros: Ease of implementation, especially since `GridPane` does not support random access.
-** Cons: Poorer performance, although this is likely insignificant since number of elements to be created/deleted is small.
+* **Alternative 1 (current choice):** Delete and regenerate cell contents each time the month is changed
+** Pros:
+*** Ease of implementation.
+** Cons:
+*** Poorer performance, although this is insignificant since number of elements to be created/deleted is small and fixed.
 * **Alternative 2:** Create and store `ListView` containers and reuse them.
-** Pros: Better performance, since deleting and recreating them incurs some computational cost.
-** Cons: Requires creating an auxillary data structure to store the elements to get around deficiencies in the `GridPane` API.
+** Pros:
+*** Better performance, since deleting and recreating them incurs some computational cost.
+** Cons:
+*** There were some difficulties around creating a separate `UiPart` component that could be added as a child of a `VBox` element.
 // end::calendarshow[]
 
 // tag::dataencryption[]
@@ -466,6 +476,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+// tag::editdeletetasks[]
 === Editing and Deleting Tasks
 
 The code for editing and deleting tasks is actually pretty similar to how it is implemented for persons. This is a combination of adding support for two additional commands: `tasks edit` and `tasks delete` inside `TasksParser`, defining `EditCommand` and `DeleteCommand` themselves, and finally, adding `void updateTask(Task target, Task editedTask);` and `void deleteTask(Task target);` in the `Model` interface, and implementing them in the `ModelManager` class.
@@ -478,6 +489,9 @@ image:EditCommandParser.jpg[]
 
 image:EditCommand.jpg[]
 
+// end::editdeletetasks[]
+
+// tag::assigning-tasks-and-contacts[]
 === Assigning tasks and contacts
 ==== Current implementation
 
@@ -492,6 +506,7 @@ An alternative implementation that was considered was to model the many-to-many 
 Both implementations of `AssignCommand` are almost identical, and should be refactored.
 
 Currently, assignments cannot be removed. The commands that will perform this task, `tasks unassign` and `contacts unassign`, are both slated to be implemented in v1.3.
+// end::assigning-tasks-and-contacts[]
 
 == Documentation
 
@@ -809,6 +824,29 @@ Use case resumes at step 2
 +
 Use case resumes at step 2
 
+=== Select a contact
+
+**MSS**
+
+1. User requests to list contacts
+2. Cow shows a list of contacts
+3. User requests to select a specific contact in the list
+4. Cow selects the contact
++
+Use case ends
+
+**Extensions**
+
+[none]
+* 2a. The list is empty.
++
+Use case ends
+* 3a. The given index is invalid.
+[none]
+** 3a1. Cow shows an error message
++
+Use case resumes at step 2
+
 === Delete a contact
 
 **MSS**
@@ -882,6 +920,29 @@ Use case resumes at step 2
 +
 Use case resumes at step 2
 
+=== Select a task
+
+**MSS**
+
+1. User requests to list tasks
+2. Cow shows a list of tasks
+3. User requests to select a specific task in the list
+4. Cow selects the task
++
+Use case ends
+
+**Extensions**
+
+[none]
+* 2a. The list is empty.
++
+Use case ends
+* 3a. The given index is invalid.
+[none]
+** 3a1. Cow shows an error message
++
+Use case resumes at step 2
+
 === Delete a task
 
 **MSS**
@@ -905,6 +966,7 @@ Use case ends
 +
 Use case resumes at step 2
 
+// tag::batchdeletetasks[]
 === Batch delete tasks
 
 **MSS**
@@ -926,6 +988,7 @@ use case ends
 [nonc]
 ** 3a1. Cow shows an error message.
 Use case resumes at step 2
+// end::batchdeletetasks[]
 
 === Assign people to tasks
 
