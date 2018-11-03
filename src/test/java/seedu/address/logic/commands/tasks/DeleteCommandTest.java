@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +35,22 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Test
+    public void execute_all_success() {
+        List<Task> tasksToDelete = new ArrayList<Task>(model.getFilteredTaskList());
+        DeleteCommand deleteCommand = new DeleteCommand(null);
+
+        String expectedMessage = generateExpectedMessage(tasksToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        for (Task taskToDelete : tasksToDelete) {
+            expectedModel.deleteTask(taskToDelete);
+        }
+        expectedModel.commitAddressBook();
+
+        assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
