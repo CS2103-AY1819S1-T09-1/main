@@ -31,7 +31,9 @@ public class SelectCommand extends Command {
 
     private final Index targetIndex;
 
-    public SelectCommand(Index targetIndex) { this.targetIndex = targetIndex; }
+    public SelectCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
