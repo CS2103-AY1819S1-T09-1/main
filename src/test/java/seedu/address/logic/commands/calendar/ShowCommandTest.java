@@ -7,16 +7,16 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Calendar;
-import javafx.util.Pair;
 
 import org.junit.Test;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
-import seedu.address.testutil.CalendarUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.CalendarUtil;
 
 /**
  * Contains integration tests (interaction with the Model) for
@@ -34,8 +34,8 @@ public class ShowCommandTest {
         Pair<Index, Index> jan2001IndexPair = CalendarUtil.getYearMonthIndices(2001, 1);
 
         ShowCommand showJan2000Command = new ShowCommand(jan2000IndexPair.getKey(), jan2000IndexPair.getValue());
-        ShowCommand showFeb2000Command = new ShowCommand(feb2000IndexPair.getKey(), jan2000IndexPair.getValue());
-        ShowCommand showJan2001Command = new ShowCommand(jan2001IndexPair.getKey(), jan2000IndexPair.getValue());
+        ShowCommand showFeb2000Command = new ShowCommand(feb2000IndexPair.getKey(), feb2000IndexPair.getValue());
+        ShowCommand showJan2001Command = new ShowCommand(jan2001IndexPair.getKey(), jan2001IndexPair.getValue());
 
         // same object -> returns true
         assertTrue(showJan2000Command.equals(showJan2000Command));

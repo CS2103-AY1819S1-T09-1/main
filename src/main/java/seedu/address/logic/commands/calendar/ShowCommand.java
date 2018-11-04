@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.calendar.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.calendar.CliSyntax.PREFIX_YEAR;
 
-import java.util.GregorianCalendar;
 import java.text.DateFormatSymbols;
+import java.util.GregorianCalendar;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;

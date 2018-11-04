@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.calendar.CliSyntax.PREFIX_MONTH;
+import static seedu.address.logic.parser.calendar.CliSyntax.PREFIX_YEAR;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.calendar.CliSyntax.PREFIX_MONTH;
-import static seedu.address.logic.parser.calendar.CliSyntax.PREFIX_YEAR;
 
 import java.util.ArrayList;
 import java.util.Arrays;

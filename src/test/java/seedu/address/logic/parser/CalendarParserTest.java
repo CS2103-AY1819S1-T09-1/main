@@ -4,15 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import javafx.util.Pair;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.calendar.ShowCommand;
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.calendar.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.CalendarUtil;
 
