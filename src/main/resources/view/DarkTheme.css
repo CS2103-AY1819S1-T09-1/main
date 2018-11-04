@@ -309,21 +309,50 @@
   -fx-padding: 8 1 8 1;
 }
 
-.calendar-panel-list-view .scroll-bar:vertical .increment-arrow,
-.calendar-panel-list-view .scroll-bar:vertical .decrement-arrow {
+.calendar-cell {
+  -fx-border-color: #4d4d4d;
+  -fx-border-radius: 0;
+  -fx-border-style: solid;
+  -fx-border-width: thin;
+  -fx-padding: 2 2 2 2;
+  -fx-background-radius: 0;
+}
+
+.calendar-header-cell {
+  -fx-alignment: center;
+  -fx-background-color: #515658;
+}
+
+.calendar-header-cell-text {
+  -fx-font-family: "Segoe UI";
+  -fx-font-size: 12pt;
+  -fx-fill: white;
+}
+
+.calendar-content-cell {
+  -fx-alignment: top-right;
+}
+
+.calendar-content-cell-header {
+  -fx-font-family: "Segoe UI";
+  -fx-font-size: 10pt;
+}
+
+.calendar-content-cell-list-view .scroll-bar:vertical .increment-arrow,
+.calendar-content-cell-list-view .scroll-bar:vertical .decrement-arrow {
   -fx-padding: 0 0 0 0;
 }
 
-.calendar-panel-list-view .scroll-bar:horizontal .increment-arrow,
-.calendar-panel-list-view .scroll-bar:horizontal .decrement-arrow {
+.calendar-content-cell-list-view .scroll-bar:horizontal .increment-arrow,
+.calendar-content-cell-list-view .scroll-bar:horizontal .decrement-arrow {
   -fx-padding: 0 0 0 0;
 }
 
-#calendarGridPane,
-#calendarGridPane .list-view,
-#calendarGridPane .list-cell,
-#calendarGridPane .list-cell:filled:even,
-#calendarGridPane .list-cell:filled:odd {
+.calendar-grid-pane,
+.calendar-grid-pane .list-view,
+.calendar-grid-pane .list-cell,
+.calendar-grid-pane .list-cell:filled:even,
+.calendar-grid-pane .list-cell:filled:odd {
   -fx-background-color: #3c3e3f;
 }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="calendarContentCell" fx:id="calendarContentCell" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" styleClass="calendar-content-cell, calendar-cell">
+    <Text fx:id="calendarContentCellHeader" styleClass="calendar-content-cell-header"/>
+    <ListView fx:id="calendarContentCellListView" VBox.vgrow="ALWAYS" styleClass="calendar-content-cell-list-view"/>
+</VBox>

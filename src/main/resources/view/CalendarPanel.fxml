@@ -8,6 +8,6 @@
 <Pane prefHeight="400.0" prefWidth="910.0" minWidth="910.0" maxWidth="910.0">
     <children>
         <Text id="calendarHeader" fx:id="calendarHeader" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" layoutY="40.0" />
-        <GridPane fx:id="calendarGridPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" layoutY="60.0"/>
+        <GridPane fx:id="calendarGridPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" layoutY="60.0" styleClass="calendar-grid-pane"/>
     </children>
 </Pane>
