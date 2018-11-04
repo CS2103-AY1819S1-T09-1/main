@@ -137,4 +137,7 @@ public class Task {
         return builder.toString();
     }
 
+    public boolean isValidDateTimeRange() {
+        return startDateTime.compareTo(endDateTime) <= 0;
+    }
 }
