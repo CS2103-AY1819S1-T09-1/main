@@ -70,8 +70,8 @@ public class TaskDetailsPaneHandle extends NodeHandle<Node> {
     public boolean equals(Task task) {
         return getName().equals(task.getName().toString())
                 && getStartDateTime().equals(
-                        task.getStartDateTime().getDate() + ", " + task.getStartDateTime().getTime())
-                && getEndDateTime().equals(task.getEndDateTime().getDate() + ", " + task.getEndDateTime().getTime())
+                        task.getStartDateTime().getDate())
+                && getEndDateTime().equals(task.getEndDateTime().getDate())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(task.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));

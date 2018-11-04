@@ -181,7 +181,7 @@ public class DateTime implements Comparable<DateTime> {
 
     @Override
     public String toString() {
-        return calendar.toString();
+        return getDate() + ", " + getTime();
     }
 
     @Override

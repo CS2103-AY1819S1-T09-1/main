@@ -62,7 +62,7 @@ public class TaskCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(Task task) {
         return getName().equals(task.getName().toString())
-                && getEndDateTime().equals(task.getEndDateTime().getDate() + ", " + task.getEndDateTime().getTime())
+                && getEndDateTime().equals("Due by: " + task.getEndDateTime().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(task.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));
