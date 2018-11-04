@@ -20,9 +20,15 @@ public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_SUCCESS = "Showed calendar";
-    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD) + ": Shows the calendar view.\n"
-            + "Parameters: " + PREFIX_YEAR + "YEAR " + PREFIX_MONTH + "MONTH" + "\n" + "Example: "
-            + getCommandFormat(COMMAND_WORD) + " " + PREFIX_YEAR + "2018 " + PREFIX_MONTH + "12";
+    public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
+            + ": Shows the calendar view.\n"
+            + "Parameters: "
+            + PREFIX_YEAR + "YEAR "
+            + PREFIX_MONTH + "MONTH"
+            + "\n" + "Example: "
+            + getCommandFormat(COMMAND_WORD) + " "
+            + PREFIX_YEAR + "2018 "
+            + PREFIX_MONTH + "12";
 
     private final Index year;
     private final Index month;

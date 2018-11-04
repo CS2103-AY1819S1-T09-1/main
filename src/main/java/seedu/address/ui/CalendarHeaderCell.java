@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 public class CalendarHeaderCell extends UiPart<Region> {
     private static final String FXML = "CalendarHeaderCell.fxml";
     private static final String[] HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-            "Friday", "Saturday" };
+        "Friday", "Saturday" };
 
     @FXML
     private Text calendarHeaderCellText;
