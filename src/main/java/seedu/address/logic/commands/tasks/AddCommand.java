@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.task.Task.MESSAGE_START_AFTER_END;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -55,6 +56,10 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!toAdd.isValidDateTimeRange()) {
+            throw new CommandException(MESSAGE_START_AFTER_END);
+        }
 
         if (model.hasTask(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

@@ -55,9 +55,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 argMultimap.getValue(PREFIX_START_TIME).orElse(nowTimeString));
         DateTime endDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_END_DATE).get(),
                 argMultimap.getValue(PREFIX_END_TIME).get());
-        if (startDateTime.compareTo(endDateTime) > 0) {
-            throw new ParseException(Task.MESSAGE_START_AFTER_END);
-        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<PersonId> personIds = new HashSet<>();
 
