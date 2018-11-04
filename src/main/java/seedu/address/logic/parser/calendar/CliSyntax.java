@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.calendars;
+package seedu.address.logic.parser.calendar;
 
 import seedu.address.logic.parser.Prefix;
 
