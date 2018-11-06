@@ -25,7 +25,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
-import seedu.address.model.task.Task;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -69,9 +68,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             DateTime endDateTime = ParserUtil.parseDateTime(argMultiMap.getValue(PREFIX_END_DATE).get(),
                     argMultiMap.getValue(PREFIX_END_TIME).get());
             editTaskDescriptor.setEndDateTime(endDateTime);
-        }
-        if (!editTaskDescriptor.isValidDateTimeRange()) {
-            throw new ParseException(Task.MESSAGE_START_AFTER_END);
         }
 
         parseTagsForEdit(argMultiMap.getAllValues(PREFIX_TAG)).ifPresent(editTaskDescriptor::setTags);

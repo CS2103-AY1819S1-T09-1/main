@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.task.Task.MESSAGE_START_AFTER_END;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -80,6 +81,10 @@ public class EditCommand extends Command {
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+
+        if (!editedTask.isValidDateTimeRange()) {
+            throw new CommandException(MESSAGE_START_AFTER_END);
+        }
 
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -212,10 +217,6 @@ public class EditCommand extends Command {
                     && getStartDateTime().equals(e.getStartDateTime())
                     && getEndDateTime().equals(e.getEndDateTime())
                     && getTags().equals(e.getTags());
-        }
-
-        public boolean isValidDateTimeRange() {
-            return startDateTime.compareTo(endDateTime) <= 0;
         }
     }
 }

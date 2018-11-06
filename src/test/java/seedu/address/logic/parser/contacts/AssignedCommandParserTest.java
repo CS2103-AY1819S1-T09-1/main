@@ -7,24 +7,24 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.contacts.SelectCommand;
+import seedu.address.logic.commands.contacts.AssignedCommand;
 
 /**
  * Test scope: similar to {@code DeleteCommandParserTest}.
  * @see DeleteCommandParserTest
  */
-public class SelectCommandParserTest {
+public class AssignedCommandParserTest {
 
-    private SelectCommandParser parser = new SelectCommandParser();
+    private AssignedCommandParser parser = new AssignedCommandParser();
 
     @Test
     public void parse_validArgs_returnsSelectCommand() {
-        assertParseSuccess(parser, "1", new SelectCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new AssignedCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
-                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), ""));
+                String.format(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignedCommand.MESSAGE_USAGE), ""));
     }
 }

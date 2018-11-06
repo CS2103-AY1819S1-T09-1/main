@@ -8,7 +8,6 @@ import seedu.address.model.task.Task;
  */
 public class TaskPanelSelectionChangedEvent extends BaseEvent {
 
-
     private final Task newSelection;
 
     public TaskPanelSelectionChangedEvent(Task newSelection) {
@@ -23,5 +22,4 @@ public class TaskPanelSelectionChangedEvent extends BaseEvent {
     public Task getNewSelection() {
         return newSelection;
     }
-
 }

@@ -13,17 +13,20 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.task.IsAssignedToTaskPredicate;
 import seedu.address.model.task.Task;
 
 /**
- * Selects a task identified by its displayed index from the task list.
+ * Selects a task identified using its displayed index,
+ * and the list of persons will update to show only the persons that are assigned to the task
  */
-public class SelectCommand extends Command {
+public class AssignedCommand extends Command {
 
-    public static final String COMMAND_WORD = "select";
+    public static final String COMMAND_WORD = "assigned";
 
     public static final String MESSAGE_USAGE = getCommandFormat(COMMAND_WORD)
-            + ": Selects the task identified by the index number used in the displayed task list.\n"
+            + ": Selects the task identified by the index number used in the displayed task "
+            + "list and shows the list of persons assigned to the task.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + getCommandFormat(COMMAND_WORD) + " 1";
 
@@ -31,7 +34,7 @@ public class SelectCommand extends Command {
 
     private final Index targetIndex;
 
-    public SelectCommand(Index targetIndex) {
+    public AssignedCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -44,15 +47,20 @@ public class SelectCommand extends Command {
         if (targetIndex.getZeroBased() >= filteredTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+        // Retrieve the desired task and update filter
+        Task desiredTask = filteredTaskList.get(targetIndex.getZeroBased());
+        model.updateFilteredPersonList(new IsAssignedToTaskPredicate(desiredTask));
 
+        // Update UI (purely cosmetic for now)
         EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex.getOneBased()));
+
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SelectCommand // instanceof handles nulls
-                && targetIndex.equals(((SelectCommand) other).targetIndex)); // state check
+                || (other instanceof AssignedCommand // instanceof handles nulls
+                && targetIndex.equals(((AssignedCommand) other).targetIndex)); // state check
     }
 }

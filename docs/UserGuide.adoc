@@ -72,12 +72,6 @@ Format:
 
 Format: `contacts find KEYWORD [MORE_KEYWORDS]`
 
-==== Select a contact: `contacts select`
-
-Format: `contacts select INDEX`
-
-Selects the contact identified by the index number used in the displayed contact list.
-
 ==== Delete contact: `contacts delete`
 
 Format: `contacts delete INDEX`
@@ -92,7 +86,7 @@ Format: `contacts assign c/CONTACT_INDEX k/TASK_INDEX`
 Format: `contacts unassign c/CONTACT_INDEX k/TASK_INDEX`
 // end::assigntasktocontact[]
 
-==== Show tasks assigned to contact:
+==== Show tasks assigned to contact: `contacts assigned`
 
 Format: `contacts assigned CONTACT_ID`
 
