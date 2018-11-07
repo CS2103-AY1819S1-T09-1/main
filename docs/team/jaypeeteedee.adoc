@@ -1,0 +1,66 @@
+= John Phua - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Cow
+
+This document serves to provide an introduction to the project and my contributions to it.
+
+== Overview
+
+Cow is a desktop task manager with project management capabilities, powered by a command-line interface.
+It is written in Java by a team of 4 undergraduates from the NUS School of Computing.
+
+The list of features include:
+
+* Management of tasks
+* Management of contacts
+* Assigning of tasks to contacts
+* Calendar view of tasks
+
+== Summary of contributions
+
+* *Major feature*: Finding of tasks by name, date and tags
+** Purpose: Allowing users to efficiently search for tasks
+** Value to project: Allowing users to sieve through their long list of tasks
+** Highlights: This feature was built to be flexible according to the users needs. Users are able to combine different
+search criteria to make their search more specific. This required the design of a new class that can accept and
+compound different search criteria together.
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.2` - `v1.3` (2 releases) on GitHub
+** Enhancements to existing features:
+*** Implemented initial `Storage` and `UI` components for tasks
+(Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/12[#12])
+*** Updated and maintained the task list GUI
+(Pull requests https://github.com/CS2103-AY1819S1-T09-1/main/pull/57[#57],
+https://github.com/CS2103-AY1819S1-T09-1/main/pull/90[#90],
+https://github.com/CS2103-AY1819S1-T09-1/main/pull/103[#103])
+*** Wrote task UI handlers for testing (Pull requests https://github.com/CS2103-AY1819S1-T09-1/main/pull/91[#91])
+** Documentation:
+*** Updated calendar commands in User Guide (Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/31[#31])
+*** Added guide for finding tasks in User Guide (Pull request (Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/100[#100])
+*** Added the implementation of listing and finding tasks in the Developer Guide
+(Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/66[#66])
+** Tools:
+*** Configured Reposense to track contributions from team.
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=listfindtasks]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=listfindtasks]
