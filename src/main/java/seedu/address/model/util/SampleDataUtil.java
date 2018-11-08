@@ -11,8 +11,12 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonId;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.DateTime;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -41,10 +45,43 @@ public class SampleDataUtil {
         };
     }
 
+    public static Task[] getSampleTasks() {
+        return new Task[] {
+            new Task(null, new seedu.address.model.task.Name("Make v2 release"),
+                    new DateTime("20181110", "1000"), new DateTime("20181130", "1000"),
+                    getTagSet("CS2103"), new HashSet<>()),
+            new Task(null, new seedu.address.model.task.Name("Update User Guide"),
+                    new DateTime("20181101", "1000"), new DateTime("20181109", "1000"),
+                    getTagSet("CS2103"), new HashSet<>()),
+            new Task(null, new seedu.address.model.task.Name("Update Developer Guide"),
+                    new DateTime("20181101", "1000"), new DateTime("20181109", "1000"),
+                    getTagSet("CS2103"), new HashSet<>()),
+            new Task(null, new seedu.address.model.task.Name("Milk the cows"),
+                    new DateTime("20181115", "1500"), new DateTime("20181115", "1800"),
+                    getTagSet("farm"), new HashSet<>())
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
+        Task[] tasks = getSampleTasks();
+        Person[] persons = getSamplePersons();
+
+        final int firstIndex = 0;
+        final int secondIndex = 1;
+        final int lastTaskIndex = tasks.length - 1;
+        final int lastPersonIndex = persons.length - 1;
+
+        assign(tasks, persons, firstIndex, firstIndex);
+        assign(tasks, persons, secondIndex, firstIndex);
+        assign(tasks, persons, firstIndex, secondIndex);
+        assign(tasks, persons, lastTaskIndex, lastPersonIndex);
+
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
+        for (Person samplePerson : persons) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Task sampleTask : tasks) {
+            sampleAb.addTask(sampleTask);
         }
         return sampleAb;
     }
@@ -58,4 +95,20 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Assigns a specific person from an array of persons and a specific task from an array of tasks
+     * in two ways so as to maintain consistency
+     */
+    private static void assign(Task[] tasks, Person[] persons, int taskIndex, int personIndex) {
+        Task task = tasks[taskIndex];
+        Person person = persons[personIndex];
+        Set<TaskId> taskIds = new HashSet<>(person.getTaskIds());
+        Set<PersonId> personIds = new HashSet<>(task.getPersonIds());
+        taskIds.add(task.getId());
+        personIds.add(person.getId());
+        tasks[taskIndex] = new Task(task.getId(), task.getName(), task.getStartDateTime(), task.getEndDateTime(),
+                task.getTags(), personIds);
+        persons[personIndex] = new Person(person.getId(), person.getName(), person.getPhone(), person.getEmail(),
+                person.getAddress(), person.getTags(), taskIds);
+    }
 }

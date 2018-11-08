@@ -48,9 +48,8 @@ public class TaskDetailsPane extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Task task = event.getNewSelection();
         name.setText(task.getName().toString());
-        startDateTime.setText("Starting from: "
-                + task.getStartDateTime().getDate() + ", " + task.getStartDateTime().getTime());
-        endDateTime.setText("Due by: " + task.getEndDateTime().getDate() + ", " + task.getEndDateTime().getTime());
+        startDateTime.setText("Starting from: " + task.getStartDateTime().getDate());
+        endDateTime.setText("Due by: " + task.getEndDateTime().toString());
         // Clear existing list of tags before populating with new tags
         tags.getChildren().clear();
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

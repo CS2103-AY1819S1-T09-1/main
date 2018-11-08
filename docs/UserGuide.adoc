@@ -113,6 +113,7 @@ If start date or time is not entered, the missing field(s) will default to the c
 Format:
 `tasks edit INDEX [n/TASK_NAME] [sd/START_DATE st/START_TIME ed/END_DATE et/END_TIME] [t/TAG]…`
 
+// tag::listfindtasks[]
 ==== Search for task: `tasks find`
 
 Find tasks that based on name, start date, end date and/or tags +
@@ -126,12 +127,14 @@ Format:
 * Searching based on different criteria will return tasks that match all criteria e.g. Searching on start date and end date
 will return tasks that match both
 ****
+// end::listfindtasks[]
 
 ==== Select a task: `tasks select`
 
 Format: `tasks select INDEX`
 
 Selects the task identified by the index number used in the displayed task list.
+
 
 ==== Delete task: `tasks delete`
 
