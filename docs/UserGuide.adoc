@@ -58,6 +58,9 @@ Format: `help`
 
 === Contacts
 
+[NOTE]
+You are allowed to have entries with the same name
+
 ==== View all contacts: `contacts list`
 
 Format: `contacts list`
@@ -100,6 +103,9 @@ This will display all tasks assigned to the contact in the tasks pane.
 Format for entering dates is YYYYMMDD. Format for entering times is HHMM
 in 24-hour time. (All commands from AB4 but prepend `tasks`)
 
+[NOTE]
+You are allowed to have entries with the same name
+
 ==== View all tasks: `tasks list`
 
 Format: `tasks list`
@@ -109,7 +115,7 @@ Format: `tasks list`
 Format:
 `tasks add n/TASK_NAME [sd/START_DATE] [st/START_TIME] ed/END_DATE et/END_TIME [t/TAG]…`
 
-If start date or time is not entered, the missing field(s) will default to the current date/time.
+If start date or time is not entered, the missing field(s) will default to the current date/time. 
 
 ==== Edit task: `tasks edit`
 
