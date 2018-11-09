@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.ContactsParser.MODULE_WORD;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.contacts.AssignedCommand;
-import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.logic.commands.contacts.FindCommand;
 import seedu.address.logic.commands.contacts.ListCommand;
 import systemtests.AppSystemTest;
@@ -40,10 +40,11 @@ public abstract class ContactsSystemTest extends AppSystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes everything in the address book.
      */
-    protected void deleteAllPersons() {
-        executeCommand(MODULE_WORD + " " + ClearCommand.COMMAND_WORD);
+    protected void clear() {
+        executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getAddressBook().getPersonList().size());
+        assertEquals(0, getModel().getAddressBook().getTaskList().size());
     }
 }

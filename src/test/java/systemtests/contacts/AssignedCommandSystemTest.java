@@ -102,7 +102,7 @@ public class AssignedCommandSystemTest extends ContactsSystemTest {
         assertCommandFailure(MODULE_WORD + " " + "SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: select from empty address book -> rejected */
-        deleteAllPersons();
+        clear();
         assertCommandFailure(MODULE_WORD + " "
                         + AssignedCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

@@ -1,20 +1,17 @@
-package systemtests.contacts;
+package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.ContactsParser.MODULE_WORD;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import systemtests.AppSystemTest;
 
-public class ClearCommandSystemTest extends ContactsSystemTest {
+public class ClearCommandSystemTest extends AppSystemTest {
 
     @Test
     public void clear() {
@@ -23,7 +20,7 @@ public class ClearCommandSystemTest extends ContactsSystemTest {
         /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
          */
-        String command = "   " + MODULE_WORD + " " + ClearCommand.COMMAND_WORD + " ab12   ";
+        String command = " " + ClearCommand.COMMAND_WORD + " ab12   ";
         assertCommandSuccess(command);
         assertSelectedCardUnchanged();
 
@@ -37,23 +34,6 @@ public class ClearCommandSystemTest extends ContactsSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, expectedResultMessage, new ModelManager());
-        assertSelectedCardUnchanged();
-
-        /* Case: selects first card in person list and clears address book -> cleared and no card selected */
-        command = MODULE_WORD + " " + ClearCommand.COMMAND_WORD;
-        executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
-        selectPerson(Index.fromOneBased(1));
-        assertCommandSuccess(command);
-        assertSelectedCardDeselected();
-
-        /* Case: filters the person list before clearing -> entire address book cleared */
-        executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        assertCommandSuccess(command);
-        assertSelectedCardUnchanged();
-
-        /* Case: clear empty address book -> cleared */
-        assertCommandSuccess(command);
         assertSelectedCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
