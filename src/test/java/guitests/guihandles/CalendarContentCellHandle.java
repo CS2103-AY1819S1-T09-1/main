@@ -5,8 +5,6 @@ import java.util.Set;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 
-import javafx.scene.text.Text;
-
 import seedu.address.model.task.Task;
 
 /**
@@ -16,15 +14,12 @@ import seedu.address.model.task.Task;
 public class CalendarContentCellHandle extends NodeHandle<Node> {
     public static final String CALENDAR_CONTENT_CELL_ID = "#calendarContentCell";
 
-    private static final String CELL_HEADER_ID = "#calendarContentCellHeader";
     private static final String TASK_LIST_VIEW_ID = "#calendarContentCellListView";
 
-    private final Text cellHeader;
     private final ListView<Task> taskListView;
 
     public CalendarContentCellHandle(Node calendarContentCellNode) {
         super(calendarContentCellNode);
-        cellHeader = getChildNode(CELL_HEADER_ID);
         taskListView = getChildNode(TASK_LIST_VIEW_ID);
     }
 
@@ -57,8 +52,8 @@ public class CalendarContentCellHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns the calendar task card handle of the task associated with the {@code index} in
-     * the list.
+     * Returns the calendar task card handle of the task associated with the
+     * {@code index} in the list.
      *
      * @throws IllegalStateException if the selected card is currently not in the
      *                               scene graph.
@@ -68,14 +63,22 @@ public class CalendarContentCellHandle extends NodeHandle<Node> {
                 .filter(handle -> handle.equals(getTask(index))).findFirst().orElseThrow(IllegalStateException::new);
     }
 
+    /**
+     * Returns whether the task list for this cell contains an element that matches
+     * how the {@code task} should be displayed.
+     */
+    public boolean isContainTask(Task task) {
+        return getChildCardNodes().stream().map(CalendarTaskCardHandle::new).anyMatch(handle -> handle.equals(task));
+    }
+
     private Task getTask(int index) {
         return taskListView.getItems().get(index);
     }
 
     /**
-     * Returns all child card nodes in the scene graph. Card nodes that are visible in the
-     * listview are definitely in the scene graph, while some nodes that are not
-     * visible in the listview may also be in the scene graph.
+     * Returns all child card nodes in the scene graph. Card nodes that are visible
+     * in the listview are definitely in the scene graph, while some nodes that are
+     * not visible in the listview may also be in the scene graph.
      */
     private Set<Node> getChildCardNodes() {
         return guiRobot.from(taskListView).lookup(CalendarTaskCardHandle.CALENDAR_TASK_CARD_ID).queryAll();

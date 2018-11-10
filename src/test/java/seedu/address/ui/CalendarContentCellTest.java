@@ -1,116 +1,109 @@
 package seedu.address.ui;
 
-import static java.time.Duration.ofMillis;
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BRUSH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SLAUGHTER;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.CalendarPanelHandle;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.ui.JumpToPersonListRequestEvent;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.person.Person;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.model.task.DateTime;
+import seedu.address.model.task.Task;
+import seedu.address.testutil.CalendarUtil;
+import seedu.address.testutil.TaskBuilder;
 
 public class CalendarContentCellTest extends GuiUnitTest {
-    private static final ObservableList<Person> TYPICAL_PERSONS = FXCollections.observableList(getTypicalPersons());
+    // All tasks here end in Jan 2017
+    private static final ObservableList<Task> TYPICAL_CALENDAR_TASKS = buildTypicalTasks();
 
-    private static final JumpToPersonListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToPersonListRequestEvent(
-            INDEX_SECOND_PERSON);
+    // Jan 2017 is chosen because the month starts on the Sunday, the first column
+    // of the Calendar
+    private static final ObservableValue<Calendar> TYPICAL_MONTH = new ReadOnlyObjectWrapper<>(
+            CalendarUtil.getCalendar(2017, 1));
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
+    private static final String DATE_STRING_5_JAN_2017 = "20170105";
+    private static final String DATE_STRING_10_JAN_2017 = "20170110";
+    private static final String TIME_STRING_NOON = "1200";
 
-    private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
+    private CalendarPanelHandle calendarPanelHandle;
 
-    private PersonListPanelHandle personListPanelHandle;
-
+    /**
+     * Test for when first day of month is first column of calendar.
+     */
     @Test
-    public void display() {
-        initUi(TYPICAL_PERSONS);
+    public void displayAligned() {
+        initUi(TYPICAL_CALENDAR_TASKS, TYPICAL_MONTH);
 
-        for (int i = 0; i < TYPICAL_PERSONS.size(); i++) {
-            personListPanelHandle.navigateToCard(TYPICAL_PERSONS.get(i));
-            Person expectedPerson = TYPICAL_PERSONS.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+        TYPICAL_CALENDAR_TASKS.stream()
+                .filter(task -> task.getEndDateTime().getCalendar().get(Calendar.DAY_OF_MONTH) == 5).forEach(task -> {
+                    assertTrue(calendarPanelHandle.getCellHandle(1, 4).isContainTask(task));
+                });
 
-            assertCardDisplaysPerson(expectedPerson, actualCard);
-            assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
-        }
-    }
-
-    @Test
-    public void handleJumpToListRequestEvent() {
-        initUi(TYPICAL_PERSONS);
-        postNow(JUMP_TO_SECOND_EVENT);
-        guiRobot.pauseForHuman();
-
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
-        assertCardEquals(expectedPerson, selectedPerson);
+        TYPICAL_CALENDAR_TASKS.stream()
+                .filter(task -> task.getEndDateTime().getCalendar().get(Calendar.DAY_OF_MONTH) == 10).forEach(task -> {
+                    assertTrue(calendarPanelHandle.getCellHandle(2, 2).isContainTask(task));
+                });
     }
 
     /**
-     * Verifies that creating and deleting large number of persons in
-     * {@code PersonListPanel} requires lesser than
-     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
+     * Test for when first day of month is not first column of calendar.
      */
+
     @Test
-    public void performanceTest() throws Exception {
-        ObservableList<Person> backingList = createBackingList(10000);
+    public void displayOffset() {
+        String dateString2Feb2017 = "20170202";
+        String dateString9Feb2017 = "20170209";
 
-        assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
-            initUi(backingList);
-            guiRobot.interact(backingList::clear);
-        }, "Creation and deletion of person cards exceeded time limit");
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.add(new TaskBuilder().withName(VALID_NAME_BRUSH)
+                .withEndDateTime(new DateTime(dateString2Feb2017, TIME_STRING_NOON)).build());
+        tasks.add(new TaskBuilder().withName(VALID_NAME_SLAUGHTER)
+                .withEndDateTime(new DateTime(dateString2Feb2017, TIME_STRING_NOON)).build());
+
+        tasks.add(new TaskBuilder().withName(VALID_NAME_SLAUGHTER)
+                .withEndDateTime(new DateTime(dateString9Feb2017, TIME_STRING_NOON)).build());
+
+        ObservableList<Task> taskList = FXCollections.observableList(tasks);
+        ObservableValue<Calendar> feb2017 = new ReadOnlyObjectWrapper<>(CalendarUtil.getCalendar(2017, 2));
+
+        initUi(taskList, feb2017);
+
+        taskList.stream().filter(task -> task.getEndDateTime().getCalendar().get(Calendar.DAY_OF_MONTH) == 2)
+                .forEach(task -> {
+                    assertTrue(calendarPanelHandle.getCellHandle(1, 4).isContainTask(task));
+                });
+
+        taskList.stream().filter(task -> task.getEndDateTime().getCalendar().get(Calendar.DAY_OF_MONTH) == 9)
+                .forEach(task -> {
+                    assertTrue(calendarPanelHandle.getCellHandle(2, 4).isContainTask(task));
+                });
     }
 
     /**
-     * Returns a list of persons containing {@code personCount} persons that is used
-     * to populate the {@code PersonListPanel}.
+     * Returns a {@code ObservableList<Task>} containing three tasks in the typical
+     * month.
+     *
+     * Two tasks with different names fall on 5th of the typical month. One task
+     * falls on 10th of the typical month.
      */
-    private ObservableList<Person> createBackingList(int personCount) throws Exception {
-        Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableAddressBook xmlAddressBook = XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
-    }
+    private static ObservableList<Task> buildTypicalTasks() {
+        ArrayList<Task> taskList = new ArrayList<>();
+        taskList.add(new TaskBuilder().withName(VALID_NAME_BRUSH)
+                .withEndDateTime(new DateTime(DATE_STRING_5_JAN_2017, TIME_STRING_NOON)).build());
+        taskList.add(new TaskBuilder().withName(VALID_NAME_SLAUGHTER)
+                .withEndDateTime(new DateTime(DATE_STRING_5_JAN_2017, TIME_STRING_NOON)).build());
 
-    /**
-     * Returns a .xml file containing {@code personCount} persons. This file will be
-     * deleted when the JVM terminates.
-     */
-    private Path createXmlFileWithPersons(int personCount) throws Exception {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<addressbook>\n");
-        for (int i = 0; i < personCount; i++) {
-            builder.append("<persons>\n");
-            builder.append("<id>").append(UUID.randomUUID().toString()).append("</id>\n");
-            builder.append("<name>").append(i).append("a</name>\n");
-            builder.append("<phone>000</phone>\n");
-            builder.append("<email>a@aa</email>\n");
-            builder.append("<address>a</address>\n");
-            builder.append("</persons>\n");
-        }
-        builder.append("</addressbook>\n");
+        taskList.add(new TaskBuilder().withName(VALID_NAME_SLAUGHTER)
+                .withEndDateTime(new DateTime(DATE_STRING_10_JAN_2017, TIME_STRING_NOON)).build());
 
-        Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
-        FileUtil.createFile(manyPersonsFile);
-        FileUtil.writeToFile(manyPersonsFile, builder.toString());
-        manyPersonsFile.toFile().deleteOnExit();
-        return manyPersonsFile;
+        return FXCollections.observableList(taskList);
     }
 
     /**
@@ -118,11 +111,10 @@ public class CalendarContentCellTest extends GuiUnitTest {
      * backed by {@code backingList}. Also shows the {@code Stage} that displays
      * only {@code PersonListPanel}.
      */
-    private void initUi(ObservableList<Person> backingList) {
-        PersonListPanel personListPanel = new PersonListPanel(backingList);
-        uiPartRule.setUiPart(personListPanel);
-
-        personListPanelHandle = new PersonListPanelHandle(
-                getChildNode(personListPanel.getRoot(), PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+    private void initUi(ObservableList<Task> backingList, ObservableValue<Calendar> backingCalendar) {
+        // PersonListPanel personListPanel = new PersonListPanel(backingList);
+        CalendarPanel calendarPanel = new CalendarPanel(backingList, backingCalendar);
+        uiPartRule.setUiPart(calendarPanel);
+        calendarPanelHandle = new CalendarPanelHandle(calendarPanel.getRoot());
     }
 }

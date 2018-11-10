@@ -1,12 +1,11 @@
 package guitests.guihandles;
 
-import java.util.Set;
-
-import javafx.scene.Node;
-
 import static seedu.address.ui.CalendarPanel.COLS;
 import static seedu.address.ui.CalendarPanel.ROWS;
 
+import java.util.Set;
+
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -40,7 +39,7 @@ public class CalendarPanelHandle extends NodeHandle<Node> {
         }
 
         return getAllContentCells().stream()
-                .filter(cell -> GridPane.getRowIndex(cell) == row - 1 && GridPane.getColumnIndex(cell) == col)
+                .filter(cell -> GridPane.getRowIndex(cell) == row && GridPane.getColumnIndex(cell) == col)
                 .map(CalendarContentCellHandle::new).findFirst().orElseThrow(IllegalStateException::new);
 
     }
