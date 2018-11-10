@@ -67,11 +67,10 @@ times e.g. `[t/TAG]...` can be used as
 ====
 
 [TIP]
-When `INDEX` is a parameter, it refers to the index of the item shown on the task or person list
+When `INDEX` is a parameter, it refers to the index of the item shown on the task or person list.
 
 [NOTE]
-You can add multiple people or multiple tasks with the same name because internally we track them with
-a unique id.
+Don't worry about having friends or tasks with the same name -- just add them and Cow will process them correctly.
 
 === Viewing help: `help`
 
@@ -88,7 +87,7 @@ around. This can be useful to refer to when using the app.
 === Contacts
 
 [NOTE]
-You are allowed to have entries with the same name
+You are allowed to have entries with the same name.
 
 ==== View all contacts: `contacts list`
 
@@ -101,7 +100,7 @@ Adds a person to Cow. +
 Format: `contacts add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 
 [TIP]
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0).
 
 Examples:
 
@@ -235,7 +234,7 @@ Format: `contacts assigned INDEX`
 
 [TIP]
 The person specified at `INDEX` will be highlighted, and the tasks assigned are
-displayed on the displayed tasks list
+displayed on the displayed tasks list.
 
 Examples:
 
@@ -253,10 +252,10 @@ Format for entering times is `HHMM` in 24-hour time, e.g. `2359`.
 
 [TIP]
 Most tasks commands has similar format to their equivalent in contacts, except
-that they have different prefixes (`tasks` vs `contacts`)
+that they have different prefixes (`tasks` vs `contacts`).
 
 [NOTE]
-You are allowed to have entries with the same name
+You are allowed to have entries with the same name.
 
 ==== View all tasks: `tasks list`
 
@@ -289,14 +288,14 @@ Format:
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can specify `t/` to indicate that you want to clear all existing tags.
-* Date and time are regarded as one field, and after editing, start DateTime
-must be before end DateTime.
+* Date and time are regarded as one field, and after editing, start date and time
+must be before end date and time.
 ****
 
 Examples:
 
 * `tasks edit 1 sd/20050108 st/1235` +
-Edits the start DateTime of the 1st task to be 8 January 2005, 12.35pm.
+Edits the start date and time of the 1st task to be 8 January 2005, 12:35pm.
 * `task edit 2 n/Brush the cows t/` +
 Edits the name of the 2nd task to be `Brush the cows` and clears all existing tags.
 // tag::listfindtasks[]
@@ -372,7 +371,7 @@ Format: `tasks delete all`
 
 [TIP]
 If you accidentally deleted all tasks in the displayed task list, use `undo` to
-recover deleted tasks
+recover deleted tasks.
 // end::tasksdeleteall[]
 
 // tag::assigncontacttotask[]
