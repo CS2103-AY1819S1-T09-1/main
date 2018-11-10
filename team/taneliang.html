@@ -120,25 +120,111 @@
 <div class="sect3">
 <h4 id="assign-tasks-to-contact-code-contacts-assign-code"><a class="link" href="#assign-tasks-to-contact-code-contacts-assign-code">Assign tasks to contact: <code>contacts assign</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts assign c/CONTACT_INDEX k/TASK_INDEX</code></p>
+<p>Assigns a task to a specified person in Cow.<br>
+Format: <code>contacts assign c/CONTACT_INDEX k/TASK_INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Assigns the person at the specified <code>CONTACT_INDEX</code> to the task at the specified
+<code>TASK_INDEX</code>.</p>
+</li>
+<li>
+<p><code>CONTACT_INDEX</code> refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p><code>TASK_INDEX</code> refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p>These indices <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks list</code><br>
+<code>contacts assign c/2 k/1</code><br>
+Assigns the 2nd person in Cow to the 1st task in Cow</p>
+</li>
+<li>
+<p><code>contacts find Alex</code><br>
+<code>tasks list</code><br>
+<code>contacts assign c/1 k/3</code>
+Assigns the 1st person in the list of people resulting from the <code>contacts find</code>
+command to the 3rd task in Cow</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="unassign-tasks-from-contact-code-contacts-unassign-code"><a class="link" href="#unassign-tasks-from-contact-code-contacts-unassign-code">Unassign tasks from contact: <code>contacts unassign</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts unassign c/CONTACT_INDEX k/TASK_INDEX</code></p>
+<p>Unassigns a task from a specified person in Cow.<br>
+Format: <code>contacts unassign c/CONTACT_INDEX k/TASK_INDEX</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="assign-person-to-task-code-tasks-assign-code"><a class="link" href="#assign-person-to-task-code-tasks-assign-code">Assign person to task: <code>tasks assign</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks assign k/TASK_INDEX c/CONTACT_INDEX</code></p>
+<p>Assigns a person to a specified task in Cow.<br>
+Format: <code>tasks assign k/TASK_INDEX c/CONTACT_INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Assigns the task at the specified <code>TASK_INDEX</code> to the person at the specified
+<code>CONTACT_INDEX</code>.</p>
+</li>
+<li>
+<p><code>TASK_INDEX</code> refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p><code>CONTACT_INDEX</code> refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p>These indices <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks list</code><br>
+<code>tasks assign k/1 c/2</code><br>
+Assigns the 1st task in Cow to the 2nd person in Cow</p>
+</li>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks find n/Cows</code><br>
+<code>contacts assign k/3 c/1</code><br>
+Assigns the 3rd task in the list of tasks resulting from the <code>tasks find</code>
+command to the first person in Cow</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="unassign-person-from-tasks-code-tasks-unassign-code"><a class="link" href="#unassign-person-from-tasks-code-tasks-unassign-code">Unassign person from tasks: <code>tasks unassign</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks unassign k/TASK_INDEX c/CONTACT_INDEX</code></p>
+<p>Unassigns a person from a specified task in Cow.<br>
+Format: <code>tasks unassign k/TASK_INDEX c/CONTACT_INDEX</code></p>
 </div>
 </div>
 </div>
@@ -189,4 +275,4 @@
 <p>During the same semester that I worked on Cow, I was also developing <a href="https://showface.io">ShowFace.io</a>, a React web app that allows groups to find the best time to meet. In this project, I was the lead developer, delivering features nearly every day.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 17:53:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 19:33:19 UTC</div></div></div></body></html>

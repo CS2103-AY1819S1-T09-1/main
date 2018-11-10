@@ -38,7 +38,6 @@
 <li><a href="#assign-person-to-task-code-tasks-assign-code">3.3.8. Assign person to task: <code>tasks assign</code></a></li>
 <li><a href="#unassign-person-from-tasks-code-tasks-unassign-code">3.3.9. Unassign person from tasks: <code>tasks unassign</code></a></li>
 <li><a href="#show-full-details-of-a-task-code-tasks-assigned-code">3.3.10. Show full details of a task: <code>tasks assigned</code></a></li>
-<li><a href="#display">3.3.11. Display</a></li>
 </ul>
 </li>
 <li><a href="#calendar">3.4. Calendar</a>
@@ -52,8 +51,9 @@
 <ul class="sectlevel3">
 <li><a href="#undo-previous-command-code-undo-code">3.5.1. Undo previous command <code>undo</code></a></li>
 <li><a href="#redo-previously-undone-command-code-redo-code">3.5.2. Redo previously undone command <code>redo</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.5.3. Exiting the program: <code>exit</code></a></li>
-<li><a href="#saving-data">3.5.4. Saving data</a></li>
+<li><a href="#clear-all-tasks-and-persons-code-clear-code">3.5.3. Clear all tasks and persons <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.5.4. Exiting the program: <code>exit</code></a></li>
+<li><a href="#saving-data">3.5.5. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -83,22 +83,68 @@ apps.</p>
 <p>Ensure you have JRE 9 or later installed.</p>
 </li>
 <li>
-<p>Download the <code>.jar</code>.</p>
+<p>Download the latest <code>.jar</code> file <a href="https://github.com/CS2103-AY1819S1-T09-1/main/releases">here</a>.</p>
 </li>
 <li>
 <p>Place it in the folder where you want the data files to be stored.</p>
 </li>
 <li>
-<p>Type in a command and press <code>Enter</code> to execute it. For a start, type
-<code>help</code> and press <code>Enter</code> to see the help text.</p>
+<p>Double-click the <code>.jar</code> file to start the app. The GUI should appear
+in a few seconds</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png" alt="Ui" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Type in a command and press <kbd>Enter</kbd> to execute it. For a start, type
+<code>help</code> and press <kbd>Enter</kbd> to see the help page.</p>
+</li>
+<li>
+<p>Some example commands you can try:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts list</code> : lists all contacts</p>
+</li>
+<li>
+<p><code>contacts add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney</code>: adds contact named <code>John Doe</code> to Cow</p>
+</li>
+<li>
+<p><code>tasks list</code> : lists all tasks</p>
+</li>
+<li>
+<p><code>tasks delete 2</code> : deletes the 2nd task shown in the list</p>
+</li>
+<li>
+<p><code>exit</code> : exits Cow</p>
+</li>
+</ul>
+</div>
 </li>
 </ol>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Ensure that your screen resolution is at least 1200x800, or the calendar
+might not show properly.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="features"><a class="link" href="#features">3. Features</a></h2>
 <div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p><strong>Command Format</strong></p>
 </div>
@@ -106,8 +152,8 @@ apps.</p>
 <ul>
 <li>
 <p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user
-e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as
-<code>add n/John Doe</code>.</p>
+e.g. in <code>contacts add n/NAME</code>, <code>NAME</code> is a parameter which can be used as
+<code>contacts add n/John Doe</code>.</p>
 </li>
 <li>
 <p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used
@@ -116,13 +162,15 @@ as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
 <li>
 <p>Items with <code>…</code> after them can be used multiple times including zero
 times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as
-<code>\</code> (i.e. 0 times),<code>t/friend</code>,<code>t/friend t/family</code> etc.</p>
+<code>\</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
 </li>
 <li>
 <p>Parameters can be in any order e.g. if the command specifies
 <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
 </li>
 </ul>
+</div>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -131,7 +179,19 @@ times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-When <code>INDEX</code> is a parameter, it refers to the index of the item shown on the task or person list
+When <code>INDEX</code> is a parameter, it refers to the index of the item shown on the task or person list.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Don&#8217;t worry about having friends or tasks with the same name&#8201;&#8212;&#8201;just add them and Cow will process them correctly.
 </td>
 </tr>
 </table>
@@ -140,6 +200,32 @@ When <code>INDEX</code> is a parameter, it refers to the index of the item shown
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help: <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Besides this help page, running a command with the wrong format will also show
+you how to use the command properly.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The help page will be shown in another window, but you can resize and move it
+around. This can be useful to refer to when using the app.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -151,7 +237,7 @@ When <code>INDEX</code> is a parameter, it refers to the index of the item shown
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You are allowed to have entries with the same name
+You are allowed to have entries with the same name.
 </td>
 </tr>
 </table>
@@ -159,61 +245,344 @@ You are allowed to have entries with the same name
 <div class="sect3">
 <h4 id="view-all-contacts-code-contacts-list-code"><a class="link" href="#view-all-contacts-code-contacts-list-code">3.2.1. View all contacts: <code>contacts list</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts list</code></p>
+<p>Shows a list of all people in Cow.<br>
+Format: <code>contacts list</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="add-contact-code-contacts-add-code"><a class="link" href="#add-contact-code-contacts-add-code">3.2.2. Add contact: <code>contacts add</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…</code></p>
+<p>Adds a person to Cow.<br>
+Format: <code>contacts add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A person can have any number of tags (including 0).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts add n/John Doe p/98765432 e/johnd@example.com a/1 Cow Ave, #02-25 t/intern</code></p>
+</li>
+<li>
+<p><code>contacts add n/Jane Smith p/92948232 e/janes@example.com a/10 Cow Boulevard #02-25 t/employee</code></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="edit-contact-code-contacts-edit-code"><a class="link" href="#edit-contact-code-contacts-edit-code">3.2.3. Edit contact: <code>contacts edit</code></a></h4>
 <div class="paragraph">
-<p>Format:
+<p>Edits an existing person in Cow.<br>
+Format:
 <code>contacts edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed person list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can specify <code>t/</code> to indicate that you want to clear all existing tags.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts edit 1 p/91234567 e/johndoe@example.com</code><br>
+Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>contacts edit 2 n/Jane Doe t/</code><br>
+Edits the name of the 2nd person to be <code>Jane Doe</code> and clears all existing tags.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="find-contact-code-contacts-find-code"><a class="link" href="#find-contact-code-contacts-find-code">3.2.4. Find contact: <code>contacts find</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts find KEYWORD [MORE_KEYWORDS]</code></p>
+<p>Finds people whose names contain any of the given keywords.<br>
+Format: <code>contacts find KEYWORD [MORE_KEYWORDS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts find John</code><br>
+Returns <code>john</code> and <code>John Doe</code></p>
+</li>
+<li>
+<p><code>find Betsy Tim John</code><br>
+Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="delete-contact-code-contacts-delete-code"><a class="link" href="#delete-contact-code-contacts-delete-code">3.2.5. Delete contact: <code>contacts delete</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts delete INDEX</code></p>
+<p>Deletes the specified person in Cow.<br>
+Format: <code>contacts delete INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts list</code><br>
+<code>contacts delete 2</code><br>
+Deletes the 2nd person in Cow</p>
+</li>
+<li>
+<p><code>contacts find Jane</code><br>
+<code>contacts delete 1</code><br>
+Deletes the 1st person in the list of people resulting from the <code>contacts find</code>
+command</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="assign-tasks-to-contact-code-contacts-assign-code"><a class="link" href="#assign-tasks-to-contact-code-contacts-assign-code">3.2.6. Assign tasks to contact: <code>contacts assign</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts assign c/CONTACT_INDEX k/TASK_INDEX</code></p>
+<p>Assigns a task to a specified person in Cow.<br>
+Format: <code>contacts assign c/CONTACT_INDEX k/TASK_INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Assigns the person at the specified <code>CONTACT_INDEX</code> to the task at the specified
+<code>TASK_INDEX</code>.</p>
+</li>
+<li>
+<p><code>CONTACT_INDEX</code> refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p><code>TASK_INDEX</code> refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p>These indices <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks list</code><br>
+<code>contacts assign c/2 k/1</code><br>
+Assigns the 2nd person in Cow to the 1st task in Cow</p>
+</li>
+<li>
+<p><code>contacts find Alex</code><br>
+<code>tasks list</code><br>
+<code>contacts assign c/1 k/3</code>
+Assigns the 1st person in the list of people resulting from the <code>contacts find</code>
+command to the 3rd task in Cow</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="unassign-tasks-from-contact-code-contacts-unassign-code"><a class="link" href="#unassign-tasks-from-contact-code-contacts-unassign-code">3.2.7. Unassign tasks from contact: <code>contacts unassign</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts unassign c/CONTACT_INDEX k/TASK_INDEX</code></p>
+<p>Unassigns a task from a specified person in Cow.<br>
+Format: <code>contacts unassign c/CONTACT_INDEX k/TASK_INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Unassigns an <strong>already existing assignment</strong> between the person at the specified
+<code>CONTACT_INDEX</code> to the task at the specified <code>TASK_INDEX</code>.</p>
+</li>
+<li>
+<p><code>CONTACT_INDEX</code> refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p><code>TASK_INDEX</code> refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p>These indices <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks list</code><br>
+<code>contacts unassign c/2 k/1</code><br>
+Unassigns the 2nd person in Cow from the 1st task in Cow</p>
+</li>
+<li>
+<p><code>contacts find Alex</code><br>
+<code>tasks list</code><br>
+<code>contacts assign c/1 k/3</code>
+Unassigns the 1st person in the list of people resulting from the <code>contacts find</code>
+command from the 3rd task in Cow</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="show-tasks-assigned-to-contact-code-contacts-assigned-code"><a class="link" href="#show-tasks-assigned-to-contact-code-contacts-assigned-code">3.2.8. Show tasks assigned to contact: <code>contacts assigned</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>contacts assigned CONTACT_ID</code></p>
+<p>Displays all tasks assigned to the specified contact in the tasks pane.
+Format: <code>contacts assigned INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Displays all tasks assigned to the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The person specified at <code>INDEX</code> will be highlighted, and the tasks assigned are
+displayed on the displayed tasks list.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>This will display all tasks assigned to the contact in the tasks pane.</p>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts assigned 2</code><br>
+Displays all tasks assigned to the 2nd person in the current displayed person list.</p>
+</li>
+<li>
+<p><code>contacts find Jane</code><br>
+<code>contacts assigned 1</code>
+Displays all tasks assigned to the 1st person in the list of people resulting
+from the <code>contacts find</code> command</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="tasks"><a class="link" href="#tasks">3.3. Tasks</a></h3>
 <div class="paragraph">
-<p>Format for entering dates is YYYYMMDD. Format for entering times is HHMM
-in 24-hour time. (All commands from AB4 but prepend <code>tasks</code>)</p>
+<p>Format for entering dates is <code>YYYYMMDD</code>, e.g. <code>20183112</code>.
+Format for entering times is <code>HHMM</code> in 24-hour time, e.g. <code>2359</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Most tasks commands has similar format to their equivalent in contacts, except
+that they have different prefixes (<code>tasks</code> vs <code>contacts</code>).
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -222,7 +591,7 @@ in 24-hour time. (All commands from AB4 but prepend <code>tasks</code>)</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You are allowed to have entries with the same name
+You are allowed to have entries with the same name.
 </td>
 </tr>
 </table>
@@ -230,24 +599,91 @@ You are allowed to have entries with the same name
 <div class="sect3">
 <h4 id="view-all-tasks-code-tasks-list-code"><a class="link" href="#view-all-tasks-code-tasks-list-code">3.3.1. View all tasks: <code>tasks list</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks list</code></p>
+<p>Shows a list of all tasks in Cow.<br>
+Format: <code>tasks list</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="add-task-code-tasks-add-code"><a class="link" href="#add-task-code-tasks-add-code">3.3.2. Add task: <code>tasks add</code></a></h4>
 <div class="paragraph">
-<p>Format:
+<p>Adds a task to Cow.<br>
+Format:
 <code>tasks add n/TASK_NAME [sd/START_DATE] [st/START_TIME] ed/END_DATE et/END_TIME [t/TAG]…</code></p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If start date or time is not entered, the missing field(s) will default to the current date/time.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>If start date or time is not entered, the missing field(s) will default to the current date/time.</p>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks add n/Math Assignment sd/20180101 st/0000 ed/20181231 et/2359 t/school t/urgent</code></p>
+</li>
+<li>
+<p><code>tasks add n/Milk the cows sd/20181001 st/0000 ed/20181129 et/2359 t/farm</code></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="edit-task-code-tasks-edit-code"><a class="link" href="#edit-task-code-tasks-edit-code">3.3.3. Edit task: <code>tasks edit</code></a></h4>
 <div class="paragraph">
-<p>Format:
-<code>tasks edit INDEX [n/TASK_NAME] [sd/START_DATE st/START_TIME ed/END_DATE et/END_TIME] [t/TAG]…</code></p>
+<p>Edits an existing task in Cow.<br>
+Format:
+<code>tasks edit INDEX [n/TASK_NAME] [sd/START_DATE st/START_TIME] [ed/END_DATE et/END_TIME] [t/TAG]…</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the task at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed task list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can specify <code>t/</code> to indicate that you want to clear all existing tags.</p>
+</li>
+<li>
+<p>Date and time are regarded as one field, and after editing, start date and time
+must be before end date and time.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks edit 1 sd/20050108 st/1235</code><br>
+Edits the start date and time of the 1st task to be 8 January 2005, 12:35pm.</p>
+</li>
+<li>
+<p><code>task edit 2 n/Brush the cows t/</code><br>
+Edits the name of the 2nd task to be <code>Brush the cows</code> and clears all existing tags.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -262,97 +698,339 @@ Format:
 <div class="ulist">
 <ul>
 <li>
-<p>Searching by keyword is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+<p>Searching by keyword is case insensitive. e.g <code>cows</code> will match <code>Cows</code></p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+<p>Only full words will be matched e.g. <code>Cow</code> will not match <code>Cows</code></p>
 </li>
 <li>
 <p>Providing multiple keywords or tags will return tasks that match any of the keywords or tags.</p>
 </li>
 <li>
-<p>Searching based on different criteria will return tasks that match all criteria e.g. Searching on start date and end date
-will return tasks that match both</p>
+<p>Searching based on different criteria will return tasks that match all criteria
+e.g. Searching on start date and end date will return tasks that match both</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks find ed/20181130</code><br>
+Displays all tasks whose end date is 30 November 2018</p>
+</li>
+<li>
+<p><code>tasks find n/Cows t/farm</code><br>
+Displays all tasks whose name contains <code>Cows</code> and has tag <code>farm</code></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="select-a-task-code-tasks-select-code"><a class="link" href="#select-a-task-code-tasks-select-code">3.3.5. Select a task: <code>tasks select</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks select INDEX</code></p>
+<p>Selects the task identified by the index number used in the displayed task list.<br>
+Format: <code>tasks select INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the task and shows information about it in the task details pane
+right below the displayed task list.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>Selects the task identified by the index number used in the displayed task list.</p>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks list</code><br>
+<code>tasks select 2</code><br>
+Selects the 2nd task in Cow.</p>
+</li>
+<li>
+<p><code>tasks find ed/20181130</code><br>
+<code>tasks select 1</code><br>
+Selects the 1st task whose end date is 30 November 2018</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="delete-task-code-tasks-delete-code"><a class="link" href="#delete-task-code-tasks-delete-code">3.3.6. Delete task: <code>tasks delete</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks delete INDEX1 [INDEX2] [INDEX3] &#8230;&#8203;</code></p>
+<p>Deletes all tasks corresponding to the indices provided.
+Format: <code>tasks delete INDEX1 [INDEX2] [INDEX3] &#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes tasks at the specified indices <code>INDEX1 [INDEX2] [INDEX3]&#8230;&#8203;</code>, and the
+indices need not be in order</p>
+</li>
+<li>
+<p>There must at least be one index specified</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>Delete all tasks corresponding to the indices provided.</p>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks delete 1</code><br>
+Deletes the 1st task on the displayed task list</p>
+</li>
+<li>
+<p><code>tasks delete 1 5 4</code><br>
+Deletes the 1st, 4th and 5th tasks in the displayed task list</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="delete-all-tasks-code-tasks-delete-all-code"><a class="link" href="#delete-all-tasks-code-tasks-delete-all-code">3.3.7. Delete all tasks: <code>tasks delete all</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks delete all</code></p>
+<p>Deletes all tasks that are shown in the displayed task list.
+Format: <code>tasks delete all</code></p>
 </div>
-<div class="paragraph">
-<p>Delete all tasks that are shown in the list.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you accidentally deleted all tasks in the displayed task list, use <code>undo</code> to
+recover deleted tasks.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
 <h4 id="assign-person-to-task-code-tasks-assign-code"><a class="link" href="#assign-person-to-task-code-tasks-assign-code">3.3.8. Assign person to task: <code>tasks assign</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks assign k/TASK_INDEX c/CONTACT_INDEX</code></p>
+<p>Assigns a person to a specified task in Cow.<br>
+Format: <code>tasks assign k/TASK_INDEX c/CONTACT_INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Assigns the task at the specified <code>TASK_INDEX</code> to the person at the specified
+<code>CONTACT_INDEX</code>.</p>
+</li>
+<li>
+<p><code>TASK_INDEX</code> refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p><code>CONTACT_INDEX</code> refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p>These indices <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks list</code><br>
+<code>tasks assign k/1 c/2</code><br>
+Assigns the 1st task in Cow to the 2nd person in Cow</p>
+</li>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks find n/Cows</code><br>
+<code>contacts assign k/3 c/1</code><br>
+Assigns the 3rd task in the list of tasks resulting from the <code>tasks find</code>
+command to the first person in Cow</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="unassign-person-from-tasks-code-tasks-unassign-code"><a class="link" href="#unassign-person-from-tasks-code-tasks-unassign-code">3.3.9. Unassign person from tasks: <code>tasks unassign</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks unassign k/TASK_INDEX c/CONTACT_INDEX</code></p>
+<p>Unassigns a person from a specified task in Cow.<br>
+Format: <code>tasks unassign k/TASK_INDEX c/CONTACT_INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Unassigns an <strong>already existing assignment</strong> between the person at the specified
+<code>CONTACT_INDEX</code> to the task at the specified <code>TASK_INDEX</code>.</p>
+</li>
+<li>
+<p><code>CONTACT_INDEX</code> refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p><code>TASK_INDEX</code> refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p>These indices <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks list</code><br>
+<code>tasks unassign k/1 c/2</code><br>
+Unassigns the 1st task in Cow to the 2nd person in Cow</p>
+</li>
+<li>
+<p><code>contacts list</code><br>
+<code>tasks find n/Cows</code><br>
+<code>tasks assign k/3 c/1</code><br>
+Unassigns the 3rd task in the list of tasks resulting from the <code>tasks find</code>
+command to the first person in Cow</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="show-full-details-of-a-task-code-tasks-assigned-code"><a class="link" href="#show-full-details-of-a-task-code-tasks-assigned-code">3.3.10. Show full details of a task: <code>tasks assigned</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>tasks assigned TASK_ID</code></p>
+<p>Displays the contacts assigned to the task.
+Format: <code>tasks assigned INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Displays all tasks assigned to the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed task list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The task specified at <code>INDEX</code> will be selected and showed in the task details pane,
+and the people assigned to it are displayed on the displayed person list.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>This will display the contacts assigned to the task in the contacts
-pane.</p>
+<p>Examples:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks assigned 2</code><br>
+Displays all people assigned to the 2nd task in the current displayed task list.</p>
+</li>
+<li>
+<p><code>tasks find n/Cows</code><br>
+<code>tasks assigned 1</code>
+Displays all people assigned to the 1st task in the list of tasks resulting
+from the <code>tasks find</code> command</p>
+</li>
+</ul>
 </div>
-<div class="sect3">
-<h4 id="display"><a class="link" href="#display">3.3.11. Display</a></h4>
-
 </div>
 </div>
 <div class="sect2">
 <h3 id="calendar"><a class="link" href="#calendar">3.4. Calendar</a></h3>
-<div class="paragraph">
-<p>Format for entering year is YYYY.
-Format for entering month is MM.
-Format for entering dates is YYYYMMDD.</p>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Format for entering year is <code>YYYY</code>.
+Format for entering month is <code>MM</code>.
+Format for entering dates is <code>YYYYMMDD</code>.</p>
+</li>
+<li>
+<p>Each cell in the calendar is populated with tasks that end on that day.</p>
+</li>
+<li>
+<p>Clicking on any task would cause its details to be displayed in the task details pane.</p>
+</li>
+<li>
+<p>Task filters applied via the <code>tasks find</code> command would also apply to the tasks displayed in the calendar.</p>
+</li>
+<li>
+<p>If there are more than 5 tasks ending on that day, the cell will be scrollable,
+but a scroll bar is not displayed due to space constraints.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Each cell in the calendar is populated with tasks that end on that day. Clicking on any task would cause its details to be displayed in the task details pane. Task filters applied via the <code>tasks find</code> command would also apply to the tasks displayed in the calendar.</p>
 </div>
-<div class="paragraph">
-<p>If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.</p>
 </div>
 <div class="sect3">
 <h4 id="view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code"><a class="link" href="#view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code">3.4.1. View calendar for tasks due within given year and month: <code>calendar show</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>calendar show y/YEAR m/MONTH</code></p>
+<p>Populates the calendar panel with tasks from the specified month.<br>
+Format: <code>calendar show y/YEAR m/MONTH</code></p>
 </div>
-<div class="paragraph">
-<p>This will populate the calendar panel with tasks from the specified month. Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -373,28 +1051,102 @@ Format for entering dates is YYYYMMDD.</p>
 <div class="sect3">
 <h4 id="undo-previous-command-code-undo-code"><a class="link" href="#undo-previous-command-code-undo-code">3.5.1. Undo previous command <code>undo</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>undo</code></p>
+<p>Restores Cow to the state before the previous <em>undoable</em> command was executed.<br>
+Format: <code>undo</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands are commands that modify tasks, contacts and assignments thereof in Cow
+(commands containing <code>add</code>, <code>delete</code>, <code>edit</code>, <code>assign</code> and <code>unassign</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks delete 1</code><br>
+<code>tasks list</code><br>
+<code>undo</code> (reverses the <code>tasks delete 1</code> command)</p>
+</li>
+<li>
+<p><code>tasks select 1</code><br>
+<code>tasks list</code><br>
+<code>undo</code><br>
+The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>contacts delete 1</code><br>
+<code>contacts assign c/1 k/2</code><br>
+<code>undo</code> (reverses the <code>contacts assign c/1 k/2</code> command)<br>
+<code>undo</code> (reverses the <code>contacts delete 1</code> command)</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="redo-previously-undone-command-code-redo-code"><a class="link" href="#redo-previously-undone-command-code-redo-code">3.5.2. Redo previously undone command <code>redo</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>redo</code></p>
+<p>Reverses the most recent <code>undo</code> command.<br>
+Format: <code>redo</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks delete 1</code><br>
+<code>tasks list</code><br>
+<code>undo</code> (reverses the <code>tasks delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>tasks delete 1</code> command)</p>
+</li>
+<li>
+<p><code>tasks delete 1</code><br>
+<code>redo</code><br>
+The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</li>
+<li>
+<p><code>contacts delete 1</code><br>
+<code>contacts assign c/1 k/2</code><br>
+<code>undo</code> (reverses the <code>contacts assign c/1 k/2</code> command)<br>
+<code>undo</code> (reverses the <code>contacts delete 1</code> command)<br>
+<code>redo</code> (reapplies the <code>contacts delete 1</code> command)
+<code>redo</code> (reapplies the <code>contacts assign c/1 k/2</code> command)<br></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.5.3. Exiting the program: <code>exit</code></a></h4>
+<h4 id="clear-all-tasks-and-persons-code-clear-code"><a class="link" href="#clear-all-tasks-and-persons-code-clear-code">3.5.3. Clear all tasks and persons <code>clear</code></a></h4>
+<div class="paragraph">
+<p>Clears all tasks and persons from Cow.<br>
+Format: <code>clear</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.5.4. Exiting the program: <code>exit</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="saving-data"><a class="link" href="#saving-data">3.5.4. Saving data</a></h4>
+<h4 id="saving-data"><a class="link" href="#saving-data">3.5.5. Saving data</a></h4>
 <div class="paragraph">
-<p>Data is saved in the hard disk automatically after any command that
-changes the data. There is no need to save manually.</p>
+<p>Data is saved to disk automatically after any command that changes the data.
+There is no need to save manually.</p>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 17:53:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 19:33:19 UTC</div></div></div></body></html>
