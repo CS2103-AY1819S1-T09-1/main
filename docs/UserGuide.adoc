@@ -536,6 +536,11 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `contacts delete 1` command)
 `redo` (reapplies the `contacts assign c/1 k/2` command) +
 
+==== Clear all tasks and persons `clear`
+
+Clears all tasks and persons from Cow. +
+Format: `clear`
+
 ==== Exiting the program: `exit`
 
 Format: `exit`
