@@ -85,13 +85,6 @@ Optionally, you can set up AppVeyor as a second CI (see <<UsingAppVeyor#, UsingA
 [NOTE]
 Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based)
 
-==== Getting started with coding
-
-When you are ready to start coding,
-
-1. Get some sense of the overall design by reading <<Design-Architecture>>.
-2. Take a look at <<GetStartedProgramming>>.
-
 == Design
 
 [[Design-Architecture]]
@@ -719,55 +712,47 @@ Low (unlikely to have) - `*`
 |Priority |As a… |I want to… |So that I can…
 |`* * *` |user |CRUD Tasks |
 
-|`* * *` |existing user |be alerted to tasks near their deadline |will
-not miss any of them and delay the completion of the project or face any
-other consequences
-
-|`* * *` |existing user |assign other tasks to people |I can track who’s
-supposed to complete them and notify them (by email) that they are
+|`* * *` |project manager |assign other tasks to people |track who’s
+supposed to complete them and notify them that they are
 supposed to complete the task
 
-|`* * *` |existing user |see an overview of all tasks and people
-assigned |so that I can quickly get a sense of the state of my project
+|`* * *` |project manager |see the tasks assigned to each person |know
+what they’re supposed to do
+
+|`* * *` |project manager |see an overview of all tasks and people
+assigned |get a sense of the state of my project
 and tasks
 
-|`* * *` |existing user |sort the overview |
-
-|`* * *` |existing user |see the tasks assigned to each person |I know
-what they’re supposed to do
+|`* * *` |existing user |search for people and tasks |quickly find the person or task I watn
 
 |`* * *` |existing user |group tasks according to categories/tags
 |manage a larger number of tasks easily
 
-|`* *` |user |send email notifications to people I assigned tasks to
-|send updates/reminders
+|`* *` |existing user |be alerted to tasks near their deadline |complete tasks on time
 
-|`* *` |user |see notifications on other messaging platforms
-|conveniently view my tasks
+|`* *` |project manager |send email notifications to people I assigned tasks to
+|ensure they are on track with tasks
 
-|`* *` |user |see all tasks in a visual manner |
-
-|`* *` |user |see milestones visualised using a calendar |
+|`* *` |user |see milestones visualised using a calendar |have a more chronological sense of my tasks
 
 |`* *` |user |view team members’ calendars and share my own |coordinate
 meetings and track progress
 
 |`* *` |user |track the extent of others’ involvement in each task
-|ensure that irresponsible do not get undue credit
+|ensure fair distribution of credit
 
 |`* *` |user |use this product as a web app |easily access my tasks/work
 on all platforms
 
-|`* *` |user |recurring tasks |need not to re-create recurring tasks
+|`* *` |user |create recurring tasks |avoid repeatedly creating a new task for each recurrence
 
-|`* *` |user |Autocomplete when typing tags |find tags faster
+|`* *` |user |have Autocomplete when typing tags |find existing tags faster
 
-|`* *` |user |vim-mode CLI |use the app more efficiently
+|`*` |power user |create command aliases |enter commands more efficiently
 
-|`* *` |user |emacs-mode CLI |use the app more efficiently
+|`*` |power user |vim-mode CLI |enter commands more efficiently
 
-|`*` |a self-respecting computing user |open a window that traces each
-line of code that is executed when I perform an action |
+|`*` |power user |emacs-mode CLI |enter commands more efficiently
 |=======================================================================
 
 [appendix]
@@ -777,73 +762,75 @@ line of code that is executed when I perform an action |
 
 **MSS**
 
-1.  User requests to add person, together with all the attributes
-2.  Cow adds that person to the contacts. Use case ends
+1.  User requests to add a person, together with all the attributes.
+2.  Cow adds that person to the contacts.
++
+Use case ends.
 
 **Extensions**
 
 [none]
-* 1a. Invalid attribute provided
+* 1a. User provides an invalid attribute.
 [none]
   ** 1a1. Cow shows an error message.
 +
-Use case ends
+Use case ends.
 
-=== Read contacts
+=== List contacts
 
-1.  User requests to list persons
-2.  Cow shows a list of persons
+1.  User requests to list persons.
+2.  Cow shows a list of persons.
 +
-Use case ends
+Use case ends.
 
 === Update a contact
 
 **MSS**
 
-1.  User requests to list persons
-2.  Cow shows a list of persons
+1.  User requests to list persons.
+2.  Cow shows a list of persons.
 3.  User requests to update a specific person in the list, together with
-the new attributes
-4.  Cow updates the person with the given attribute
+the new attributes.
+4.  Cow updates the person with the given attribute.
 +
-Use case ends
+Use case ends.
 
 **Extensions**
 [none]
 * 2a. The list is empty.
 +
-Use case ends
-* 3a. The given index is invalid.
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2
-* 3a. Invalid attribute provided
+Use case ends.
+* 3a. User provides an invalid index.
 [none]
 ** 3a1. Cow shows an error message.
 +
-Use case resumes at step 2
+Use case resumes at step 2.
+* 3a. User provides an invalid attribute.
+[none]
+** 3a1. Cow shows an error message.
++
+Use case resumes at step 2.
 
 === Select a contact
 
 **MSS**
 
-1. User requests to list contacts
-2. Cow shows a list of contacts
-3. User requests to select a specific contact in the list
-4. Cow selects the contact
+1. User requests to list contacts.
+2. Cow shows a list of contacts.
+3. User requests to select a specific contact in the list.
+4. Cow selects the contact.
 +
-Use case ends
+Use case ends.
 
 **Extensions**
 
 [none]
 * 2a. The list is empty.
 +
-Use case ends
-* 3a. The given index is invalid.
+Use case ends.
+* 3a. User provides an invalid index.
 [none]
-** 3a1. Cow shows an error message
+** 3a1. Cow shows an error message.
 +
 Use case resumes at step 2
 
@@ -851,12 +838,12 @@ Use case resumes at step 2
 
 **MSS**
 
-1.  User requests to list persons
-2.  Cow shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  Cow deletes the person
+1.  User requests to list persons.
+2.  Cow shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  Cow deletes the person.
 +
-Use case ends
+Use case ends.
 
 **Extensions**
 
@@ -864,57 +851,58 @@ Use case ends
 * 2a. The list is empty.
 +
 Use case ends
-* 3a. The given index is invalid.
+* 3a. User provides an invalid index.
 [none]
 ** 3a1. AddressBook shows an error message.
 +
-Use case resumes at step 2
+Use case resumes at step 2.
 
 === Create a task
 
 **MSS**
 
-1.  User requests to add task, together with all the attributes
+1.  User requests to add a task, together with all the attributes.
 2.  Cow adds that task.
 +
-Use case ends
+Use case ends.
 
 **Extensions**
 [none]
-* 1a. Invalid attribute provided
+* 1a. User provides an invalid attribute.
 [none]
 ** 1a1. Cow shows an error message.
 +
-Use case ends
+Use case ends.
 
-=== Read tasks
+=== List tasks
 
-1.  User requests to list tasks
-2.  Cow shows a list of tasks
+1.  User requests to list tasks.
+2.  Cow shows a list of tasks.
 +
-Use case ends
+Use case ends.
 
 === Update a task
 
 **MSS**
 
-1.  User requests to list tasks
-2.  Cow shows a list of tasks
-3.  User requests to update a specific task in the list, together with
-the new attributes
-4.  Cow updates the task with the given attribute
+1.  User requests to list tasks.
+2.  Cow shows a list of tasks.
+3.  User requests to update a specific task in the list, together with the new attributes.
+4.  Cow updates the task with the given attribute.
 +
-Use case ends
+Use case ends.
 
 **Extensions**
 [none]
-* 2a. The list if empty Use case ends
-* 3a. The given index is invalid.
-[none]
-** 3a1. AddressBook shows an error message.
+* 2a. The list is empty.
 +
-Use case resumes at step 2
-* 3a. Invalid attribute provided
+Use case ends.
+* 3a. User provides an invalid index.
+[none]
+** 3a1. Cow shows an error message.
++
+Use case resumes at step 2.
+* 3a. User provides an invalid attribute.
 [none]
 ** 3a1. Cow shows an error message.
 +
@@ -924,12 +912,12 @@ Use case resumes at step 2
 
 **MSS**
 
-1. User requests to list tasks
-2. Cow shows a list of tasks
-3. User requests to select a specific task in the list
-4. Cow selects the task
+1. User requests to list tasks.
+2. Cow shows a list of tasks.
+3. User requests to select a specific task in the list.
+4. Cow selects the task.
 +
-Use case ends
+Use case ends.
 
 **Extensions**
 
@@ -937,22 +925,22 @@ Use case ends
 * 2a. The list is empty.
 +
 Use case ends
-* 3a. The given index is invalid.
+* 3a. User provides an invalid index.
 [none]
-** 3a1. Cow shows an error message
+** 3a1. Cow shows an error message.
 +
-Use case resumes at step 2
+Use case resumes at step 2.
 
 === Delete a task
 
 **MSS**
 
-1.  User requests to list tasks
-2.  Cow shows a list of tasks
-3.  User requests to delete a specific task in the list
-4.  Cow deletes the task
+1.  User requests to list tasks.
+2.  Cow shows a list of tasks.
+3.  User requests to delete a specific task in the list.
+4.  Cow deletes the task.
 +
-Use case ends
+Use case ends.
 
 **Extensions**
 
@@ -960,9 +948,9 @@ Use case ends
 * 2a. The list is empty.
 +
 Use case ends
-* 3a. The given index is invalid.
+* 3a. User provides an invalid index.
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. Cow shows an error message.
 +
 Use case resumes at step 2
 
@@ -971,21 +959,21 @@ Use case resumes at step 2
 
 **MSS**
 
-1. User requests to list tasks
-2. Cow shows a list of tasks
-3. User requests to delete a number or all tasks in the list
-4. Cow deletes the specified tasks
+1. User requests to list tasks.
+2. Cow shows a list of tasks.
+3. User requests to delete a number of tasks in the list.
+4. Cow deletes the specified tasks.
 +
-Use case ends
+Use case ends.
 
 **Extensions**
 
 [none]
 * 2a. The list is empty.
 +
-use case ends
-* 3a. Any of the given indices is invalid.
-[nonc]
+Use case ends.
+* 3a. User provides a list of indices containing an invalid index.
+[none]
 ** 3a1. Cow shows an error message.
 Use case resumes at step 2
 // end::batchdeletetasks[]
@@ -994,31 +982,47 @@ Use case resumes at step 2
 
 **MSS**
 
-1.  Create a task
-2.  Assign people to task
-3.  Email people involved about the task
+1. User requests to list people.
+2. Cow shows a list of people.
+3. User requests to list tasks.
+4. Cow shows a list of tasks.
+5. User requests to assign a person to a task.
+6. Cow assigns the person to the task.
 +
 Use case ends
 
 **Extensions**
+
 [none]
-* 3a. Email could not be sent.
-[none]
-** 3a1. Cow shows an error message.
+* 2a. The list is empty.
 +
-Use case ends
+Use case ends.
+* 4a. The list is empty.
++
+Use case ends.
+[none]
+* 5a. User provides an invalid person or task index.
+** 5a1. Cow shows an error message.
++
+Use case ends.
+* 5b. User requests to assign a person already assigned to the task.
+** 5b1. Cow shows a message telling the user the person is already assigned.
++
+Use case ends.
 
 === Remove person from all tasks
 
 **MSS**
 
-1.  Find a contact by entering `find_contact <contact_name>`
-2.  View tasks assigned to the contact
-3.  Unassign contact from all tasks by entering
+1. User searches for a contact.
+2. Cow displays the contact.
+3. User requests to view tasks assigned to the contact.
+4. Cow displays a list of tasks assigned to the contact.
+3. Unassign contact from all tasks by entering
 `unassign_contact <contact_id> <task_id>`
-4.  Assign new contact to all tasks by entering
+4. Assign new contact to all tasks by entering
 `unassign_contact <contact_id> <task_id>`.
-5.  Use case ends
+5. Use case ends
 
 === View calendar
 
@@ -1068,7 +1072,7 @@ Use case ends
 * Should work on any mainstream OS as long as it has Java 9 or higher
 installed.
 * Advanced analytics on tasks for work efficiency insights
-* Remove all latexmath:[$n+1$] queries and latexmath:[$\geq O(n)$]
+* Remove all N+1 queries and O(n)
 lookups
 
 [appendix]
@@ -1080,7 +1084,7 @@ lookups
 ** Text describing work to be done, may be attached to one or more
 contacts
 * Alternative storage
-** Local/Remote databses
+** Local/Remote databases
 * Contact
 ** Represents a person, with name, email, etc.
 
@@ -1096,32 +1100,3 @@ contacts
 * Pen and paper
 * Email
 * Orgmode
-
-[appendix]
-== Division of the labour force
-
-* Jolene: Contact transfer & Tasks Add
-** v1.1: Create basic task addition
-** v1.2: Change existing contacts commands to fit CowBae
-** v1.3: Refine task format
-* Julius: Tasks Edit Delete
-** v1.1: Delete
-** v1.2: Edit
-** v1.3: Batch delete
-* John: Tasks List Find
-** v1.1: Add task GUI & task list
-** v1.2: Task Find
-** v1.3: Pagination
-* Shaowei: Calendar Show
-** v1.1: Draw a grid with date numbers
-** v1.2: Fill in grid with contents
-** v1.3: Nice formatting
-* E-Liang: Assign Unassign
-** v1.1: Contacts Assign
-** v1.2: Task assign
-** v1.3: Task unassign, contacts unassign
-
-__________________________________________________________________________________
-Seize the means of production ! Supreme leader demands that everyone do
-their best
-__________________________________________________________________________________
