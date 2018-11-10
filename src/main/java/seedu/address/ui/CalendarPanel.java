@@ -18,10 +18,11 @@ import seedu.address.model.task.Task;
  * Panel for displaying the calendar.
  */
 public class CalendarPanel extends UiPart<Region> {
+    public static final int COLS = 7; // 7 Days in a week
+    public static final int ROWS = 7; // 6 Rows + header
+
     private static final String FXML = "CalendarPanel.fxml";
 
-    private static final int COLS = 7; // 7 Days in a week
-    private static final int ROWS = 7; // 6 Rows + header
     private static final int HEADER_ROW = 0;
     private static final int ROW_HEIGHT = 100;
     private static final int COL_WIDTH = 130;
