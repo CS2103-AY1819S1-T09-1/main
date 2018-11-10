@@ -250,7 +250,7 @@ image::AddTaskSequenceDiagram.png[width="800"]
 
 1. The `AddCommandParser` receives the input string and calls `ArgumentTokenizer.tokenize()` to create an `ArgumentMultiMap`.
 2. It then creates a Date object for the current moment in time and uses the `INPUT_DATE_FORMAT` and `INPUT_TIME_FORMAT` `DateFormat` s in `DateTime` to parse the Date object into date and time strings in the correct format.
-3. It then retrieves the start date and start time strings from `argMultiMap`, which returns `Optional<String>` for each of them.
+3. It then retrieves the start date and start time strings from `argMultiMap`, which returns an `Optional<String>` for each of them.
 4. `orElse()` is then called on each `Optional<String>` to obtain the string encapsulated by the `Optional`, or the string for the current date/time if the `Optional` is empty.
 5. Finally, `ParserUtil.parseDateTime()` is called with the resultant date and time strings.
 // end::addtasks[]
