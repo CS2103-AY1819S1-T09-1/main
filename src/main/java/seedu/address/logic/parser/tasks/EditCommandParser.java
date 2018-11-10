@@ -3,6 +3,7 @@ package seedu.address.logic.parser.tasks;
 import static java.util.Objects.requireNonNull;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_MISSING_DATETIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME;
@@ -56,6 +57,15 @@ public class EditCommandParser implements Parser<EditCommand> {
             editTaskDescriptor.setName(ParserUtil.parseName(argMultiMap.getValue(PREFIX_NAME).get()));
         }
 
+
+        if (argMultiMap.getValue(PREFIX_START_DATE).isPresent()
+                ^ argMultiMap.getValue(PREFIX_START_TIME).isPresent()) {
+            throw new ParseException(MESSAGE_MISSING_DATETIME);
+        }
+        if (argMultiMap.getValue(PREFIX_END_DATE).isPresent()
+                ^ argMultiMap.getValue(PREFIX_END_TIME).isPresent()) {
+            throw new ParseException(MESSAGE_MISSING_DATETIME);
+        }
 
         if (argMultiMap.getValue(PREFIX_START_DATE).isPresent()
                 && argMultiMap.getValue(PREFIX_START_TIME).isPresent()) {
