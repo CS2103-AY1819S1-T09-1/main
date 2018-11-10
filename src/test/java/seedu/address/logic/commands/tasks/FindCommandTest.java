@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.FIND_BRUSH_BY_END_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_NAME_AND_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_START_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.BRUSH;
@@ -22,6 +23,8 @@ import seedu.address.logic.commands.tasks.FindCommand.TaskPredicateAssembler;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.HasTagsPredicate;
 import seedu.address.model.task.MatchesEndDatePredicate;
 import seedu.address.model.task.MatchesStartDatePredicate;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
@@ -96,6 +99,19 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_wrongTag_noTaskFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
+        TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
+        predicateBuilder.setHasTagsPredicate(
+                new HasTagsPredicate(Collections.singletonList(new Tag("wrongtag")))
+        );
+        FindCommand command = new FindCommand(predicateBuilder);
+        expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredTaskList());
+    }
+
+    @Test
     public void execute_correctName_taskFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
@@ -129,11 +145,38 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_correctTag_taskFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
+        TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
+        predicateBuilder.setHasTagsPredicate(
+                new HasTagsPredicate(Collections.singletonList(new Tag("messy")))
+        );
+        FindCommand command = new FindCommand(predicateBuilder);
+        expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(SLAUGHTER), model.getFilteredTaskList());
+    }
+
+    @Test
     public void execute_compoundNameStartDate_taskFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
         predicateBuilder.setNamePredicate(prepareNamePredicate("Slaughter"));
         predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate("20180228"));
+        FindCommand command = new FindCommand(predicateBuilder);
+        expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(SLAUGHTER), model.getFilteredTaskList());
+    }
+
+    @Test
+    public void execute_compoundTagEndDate_taskFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
+        TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
+        predicateBuilder.setEndDatePredicate(new MatchesEndDatePredicate("20180228"));
+        predicateBuilder.setHasTagsPredicate(
+                new HasTagsPredicate(Collections.singletonList(new Tag("messy")))
+        );
         FindCommand command = new FindCommand(predicateBuilder);
         expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);

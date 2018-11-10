@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_NAME_PREDIC
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_NAME_SEARCH;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_START_DATE_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_START_DATE_SEARCH;
+import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_TAG_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_TAG_SEARCH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_TAG;
@@ -54,6 +56,12 @@ public class FindCommandParserTest {
                 new FindTaskPredicateAssemblerBuilder().withEndDatePredicate(BRUSH_END_DATE_PREDICATE).build();
         expectedCommand = new FindCommand(predicateBuilder);
         assertParseSuccess(parser, BRUSH_END_DATE_SEARCH, expectedCommand);
+
+        // Tag
+        predicateBuilder =
+                new FindTaskPredicateAssemblerBuilder().withTagsPredicate(SLAUGHTER_TAG_PREDICATE).build();
+        expectedCommand = new FindCommand(predicateBuilder);
+        assertParseSuccess(parser, SLAUGHTER_TAG_SEARCH, expectedCommand);
     }
 
 
@@ -66,6 +74,15 @@ public class FindCommandParserTest {
                         .withStartDatePredicate(SLAUGHTER_START_DATE_PREDICATE)
                         .build();
         FindCommand expectedCommand = new FindCommand(predicateBuilder);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        userInput = SLAUGHTER_TAG_SEARCH + BRUSH_END_DATE_SEARCH;
+        predicateBuilder =
+                new FindTaskPredicateAssemblerBuilder()
+                        .withEndDatePredicate(BRUSH_END_DATE_PREDICATE)
+                        .withTagsPredicate(SLAUGHTER_TAG_PREDICATE)
+                        .build();
+        expectedCommand = new FindCommand(predicateBuilder);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

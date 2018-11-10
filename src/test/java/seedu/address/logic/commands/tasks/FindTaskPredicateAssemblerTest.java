@@ -8,10 +8,12 @@ import static seedu.address.logic.commands.CommandTestUtil.FIND_BRUSH_BY_END_DAT
 import static seedu.address.logic.commands.CommandTestUtil.FIND_BRUSH_BY_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_NAME_AND_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_START_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_BRUSH_NAME_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_END_DATE_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_NAME_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_START_DATE_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_TAG_PREDICATE;
 
 import org.junit.Test;
 
@@ -31,6 +33,9 @@ public class FindTaskPredicateAssemblerTest {
 
         TaskPredicateAssembler startDatePredicateAssembler = new TaskPredicateAssembler(FIND_SLAUGHTER_BY_START_DATE);
         assertTrue(FIND_SLAUGHTER_BY_START_DATE.equals(startDatePredicateAssembler));
+
+        TaskPredicateAssembler tagPredicateAssembler = new TaskPredicateAssembler(FIND_SLAUGHTER_BY_TAG);
+        assertTrue(FIND_SLAUGHTER_BY_TAG.equals(tagPredicateAssembler));
 
         TaskPredicateAssembler compoundPredicateAssembler =
                 new TaskPredicateAssembler(FIND_SLAUGHTER_BY_NAME_AND_START_DATE);
