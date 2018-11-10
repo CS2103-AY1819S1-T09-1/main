@@ -29,100 +29,277 @@ apps.
 == Quick Start
 
 1.  Ensure you have JRE 9 or later installed.
-2.  Download the `.jar`.
+2.  Download the latest `.jar` file link:{repoURL}/releases[here].
 3.  Place it in the folder where you want the data files to be stored.
-4.  Type in a command and press `Enter` to execute it. For a start, type
-`help` and press `Enter` to see the help text.
+4.  Double-click the `.jar` file to start the app. The GUI should appear
+in a few seconds
++
+image::Ui.png[width="800"]
++
+5.  Type in a command and press kbd:[Enter] to execute it. For a start, type
+`help` and press kbd:[Enter] to see the help page.
+6.  Some example commands you can try:
+* `contacts list` : lists all contacts
+* `contacts add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`: adds contact named `John Doe` to Cow
+* `tasks list` : lists all tasks
+* `tasks delete 2` : deletes the 2nd task shown in the list
+* `exit` : exits Cow
+
+[WARNING]
+Ensure that your screen resolution is at least 1200x800, or the calendar
+might not show properly.
 
 == Features
 
-**Command Format**
+====
+*Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user
-e.g. in `add n/NAME`, `NAME` is a parameter which can be used as
-`add n/John Doe`.
+e.g. in `contacts add n/NAME`, `NAME` is a parameter which can be used as
+`contacts add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used
 as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…` after them can be used multiple times including zero
 times e.g. `[t/TAG]...` can be used as
-`\` (i.e. 0 times),`t/friend`,`t/friend t/family` etc.
+`\` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies
 `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+====
 
 [TIP]
-When `INDEX` is a parameter, it refers to the index of the item shown on the task or person list
+When `INDEX` is a parameter, it refers to the index of the item shown on the task or person list.
+
+[NOTE]
+Don't worry about having friends or tasks with the same name -- just add them and Cow will process them correctly.
 
 === Viewing help: `help`
 
 Format: `help`
 
+[TIP]
+Besides this help page, running a command with the wrong format will also show
+you how to use the command properly.
+
+[NOTE]
+The help page will be shown in another window, but you can resize and move it
+around. This can be useful to refer to when using the app.
+
 === Contacts
 
 [NOTE]
-You are allowed to have entries with the same name
+You are allowed to have entries with the same name.
 
 ==== View all contacts: `contacts list`
 
+Shows a list of all people in Cow. +
 Format: `contacts list`
 
 ==== Add contact: `contacts add`
 
+Adds a person to Cow. +
 Format: `contacts add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
+
+[TIP]
+A person can have any number of tags (including 0).
+
+Examples:
+
+* `contacts add n/John Doe p/98765432 e/johnd@example.com a/1 Cow Ave, #02-25 t/intern`
+* `contacts add n/Jane Smith p/92948232 e/janes@example.com a/10 Cow Boulevard #02-25 t/employee`
 
 ==== Edit contact: `contacts edit`
 
+Edits an existing person in Cow. +
 Format:
 `contacts edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
+****
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can specify `t/` to indicate that you want to clear all existing tags.
+****
+
+Examples:
+
+* `contacts edit 1 p/91234567 e/johndoe@example.com` +
+Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `contacts edit 2 n/Jane Doe t/` +
+Edits the name of the 2nd person to be `Jane Doe` and clears all existing tags.
+
 ==== Find contact: `contacts find`
 
+Finds people whose names contain any of the given keywords. +
 Format: `contacts find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `contacts find John` +
+Returns `john` and `John Doe`
+* `find Betsy Tim John` +
+Returns any person having names `Betsy`, `Tim`, or `John`
 
 ==== Delete contact: `contacts delete`
 
+Deletes the specified person in Cow. +
 Format: `contacts delete INDEX`
+
+****
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `contacts list` +
+`contacts delete 2` +
+Deletes the 2nd person in Cow
+* `contacts find Jane` +
+`contacts delete 1` +
+Deletes the 1st person in the list of people resulting from the `contacts find`
+command
 
 // tag::assigntasktocontact[]
 ==== Assign tasks to contact: `contacts assign`
 
+Assigns a task to a specified person in Cow. +
 Format: `contacts assign c/CONTACT_INDEX k/TASK_INDEX`
+
+****
+* Assigns the person at the specified `CONTACT_INDEX` to the task at the specified
+`TASK_INDEX`.
+* `CONTACT_INDEX` refers to the index number shown in the displayed person list.
+* `TASK_INDEX` refers to the index number shown in the displayed task list.
+* These indices *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `contacts list` +
+`tasks list` +
+`contacts assign c/2 k/1` +
+Assigns the 2nd person in Cow to the 1st task in Cow
+* `contacts find Alex` +
+`tasks list` +
+`contacts assign c/1 k/3`
+Assigns the 1st person in the list of people resulting from the `contacts find`
+command to the 3rd task in Cow
 
 ==== Unassign tasks from contact: `contacts unassign`
 
+Unassigns a task from a specified person in Cow. +
 Format: `contacts unassign c/CONTACT_INDEX k/TASK_INDEX`
 // end::assigntasktocontact[]
 
+****
+* Unassigns an *already existing assignment* between the person at the specified
+`CONTACT_INDEX` to the task at the specified `TASK_INDEX`.
+* `CONTACT_INDEX` refers to the index number shown in the displayed person list.
+* `TASK_INDEX` refers to the index number shown in the displayed task list.
+* These indices *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `contacts list` +
+`tasks list` +
+`contacts unassign c/2 k/1` +
+Unassigns the 2nd person in Cow from the 1st task in Cow
+* `contacts find Alex` +
+`tasks list` +
+`contacts assign c/1 k/3`
+Unassigns the 1st person in the list of people resulting from the `contacts find`
+command from the 3rd task in Cow
+
 ==== Show tasks assigned to contact: `contacts assigned`
 
-Format: `contacts assigned CONTACT_ID`
+Displays all tasks assigned to the specified contact in the tasks pane.
+Format: `contacts assigned INDEX`
 
-This will display all tasks assigned to the contact in the tasks pane.
+****
+* Displays all tasks assigned to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+[TIP]
+The person specified at `INDEX` will be highlighted, and the tasks assigned are
+displayed on the displayed tasks list.
+
+Examples:
+
+* `contacts assigned 2` +
+Displays all tasks assigned to the 2nd person in the current displayed person list.
+* `contacts find Jane` +
+`contacts assigned 1`
+Displays all tasks assigned to the 1st person in the list of people resulting
+from the `contacts find` command
 
 === Tasks
 
-Format for entering dates is YYYYMMDD. Format for entering times is HHMM
-in 24-hour time. (All commands from AB4 but prepend `tasks`)
+Format for entering dates is `YYYYMMDD`, e.g. `20183112`.
+Format for entering times is `HHMM` in 24-hour time, e.g. `2359`.
+
+[TIP]
+Most tasks commands has similar format to their equivalent in contacts, except
+that they have different prefixes (`tasks` vs `contacts`).
 
 [NOTE]
-You are allowed to have entries with the same name
+You are allowed to have entries with the same name.
 
 ==== View all tasks: `tasks list`
 
+Shows a list of all tasks in Cow. +
 Format: `tasks list`
 
 ==== Add task: `tasks add`
 
+Adds a task to Cow. +
 Format:
 `tasks add n/TASK_NAME [sd/START_DATE] [st/START_TIME] ed/END_DATE et/END_TIME [t/TAG]…`
 
+[TIP]
 If start date or time is not entered, the missing field(s) will default to the current date/time.
+
+Examples:
+
+* `tasks add n/Math Assignment sd/20180101 st/0000 ed/20181231 et/2359 t/school t/urgent`
+* `tasks add n/Milk the cows sd/20181001 st/0000 ed/20181129 et/2359 t/farm`
 
 ==== Edit task: `tasks edit`
 
+Edits an existing task in Cow. +
 Format:
-`tasks edit INDEX [n/TASK_NAME] [sd/START_DATE st/START_TIME ed/END_DATE et/END_TIME] [t/TAG]…`
+`tasks edit INDEX [n/TASK_NAME] [sd/START_DATE st/START_TIME] [ed/END_DATE et/END_TIME] [t/TAG]…`
 
+****
+* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can specify `t/` to indicate that you want to clear all existing tags.
+* Date and time are regarded as one field, and after editing, start date and time
+must be before end date and time.
+****
+
+Examples:
+
+* `tasks edit 1 sd/20050108 st/1235` +
+Edits the start date and time of the 1st task to be 8 January 2005, 12:35pm.
+* `task edit 2 n/Brush the cows t/` +
+Edits the name of the 2nd task to be `Brush the cows` and clears all existing tags.
 // tag::listfindtasks[]
+
 ==== Search for task: `tasks find`
 
 Find tasks that based on name, start date, end date and/or tags +
@@ -130,73 +307,173 @@ Format:
 `tasks find [n/KEYWORD]... [sd/START_DATE] [ed/END_DATE] [t/TAG]…`
 
 ****
-* Searching by keyword is case insensitive. e.g `hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Searching by keyword is case insensitive. e.g `cows` will match `Cows`
+* Only full words will be matched e.g. `Cow` will not match `Cows`
 * Providing multiple keywords or tags will return tasks that match any of the keywords or tags.
-* Searching based on different criteria will return tasks that match all criteria e.g. Searching on start date and end date
-will return tasks that match both
+* Searching based on different criteria will return tasks that match all criteria
+e.g. Searching on start date and end date will return tasks that match both
 ****
 // end::listfindtasks[]
 
+Examples:
+
+* `tasks find ed/20181130` +
+Displays all tasks whose end date is 30 November 2018
+* `tasks find n/Cows t/farm` +
+Displays all tasks whose name contains `Cows` and has tag `farm`
+
 ==== Select a task: `tasks select`
 
+Selects the task identified by the index number used in the displayed task list. +
 Format: `tasks select INDEX`
 
-Selects the task identified by the index number used in the displayed task list.
+****
+* Selects the task and shows information about it in the task details pane
+right below the displayed task list.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
 
+Examples:
+
+* `tasks list` +
+`tasks select 2` +
+Selects the 2nd task in Cow.
+* `tasks find ed/20181130` +
+`tasks select 1` +
+Selects the 1st task whose end date is 30 November 2018
 
 ==== Delete task: `tasks delete`
 
+Deletes all tasks corresponding to the indices provided.
 Format: `tasks delete INDEX1 [INDEX2] [INDEX3] ...`
 
-Delete all tasks corresponding to the indices provided.
+****
+* Deletes tasks at the specified indices `INDEX1 [INDEX2] [INDEX3]...`, and the
+indices need not be in order
+* There must at least be one index specified
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `tasks delete 1` +
+Deletes the 1st task on the displayed task list
+* `tasks delete 1 5 4` +
+Deletes the 1st, 4th and 5th tasks in the displayed task list
 
 // tag::tasksdeleteall[]
 ==== Delete all tasks: `tasks delete all`
 
+Deletes all tasks that are shown in the displayed task list.
 Format: `tasks delete all`
 
-Delete all tasks that are shown in the list.
+[TIP]
+If you accidentally deleted all tasks in the displayed task list, use `undo` to
+recover deleted tasks.
 // end::tasksdeleteall[]
 
 // tag::assigncontacttotask[]
 ==== Assign person to task: `tasks assign`
 
+Assigns a person to a specified task in Cow. +
 Format: `tasks assign k/TASK_INDEX c/CONTACT_INDEX`
+
+****
+* Assigns the task at the specified `TASK_INDEX` to the person at the specified
+`CONTACT_INDEX`.
+* `TASK_INDEX` refers to the index number shown in the displayed task list.
+* `CONTACT_INDEX` refers to the index number shown in the displayed person list.
+* These indices *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `contacts list` +
+`tasks list` +
+`tasks assign k/1 c/2` +
+Assigns the 1st task in Cow to the 2nd person in Cow
+* `contacts list` +
+`tasks find n/Cows` +
+`contacts assign k/3 c/1` +
+Assigns the 3rd task in the list of tasks resulting from the `tasks find`
+command to the first person in Cow
 
 ==== Unassign person from tasks: `tasks unassign`
 
+Unassigns a person from a specified task in Cow. +
 Format: `tasks unassign k/TASK_INDEX c/CONTACT_INDEX`
 // end::assigncontacttotask[]
 
+****
+* Unassigns an *already existing assignment* between the person at the specified
+`CONTACT_INDEX` to the task at the specified `TASK_INDEX`.
+* `CONTACT_INDEX` refers to the index number shown in the displayed person list.
+* `TASK_INDEX` refers to the index number shown in the displayed task list.
+* These indices *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `contacts list` +
+`tasks list` +
+`tasks unassign k/1 c/2` +
+Unassigns the 1st task in Cow to the 2nd person in Cow
+* `contacts list` +
+`tasks find n/Cows` +
+`tasks assign k/3 c/1` +
+Unassigns the 3rd task in the list of tasks resulting from the `tasks find`
+command to the first person in Cow
+
 ==== Show full details of a task: `tasks assigned`
 
-Format: `tasks assigned TASK_ID`
+Displays the contacts assigned to the task.
+Format: `tasks assigned INDEX`
 
-This will display the contacts assigned to the task in the contacts
-pane.
+****
+* Displays all tasks assigned to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
 
-==== Display
+[TIP]
+The task specified at `INDEX` will be selected and showed in the task details pane,
+and the people assigned to it are displayed on the displayed person list.
+
+Examples:
+
+* `tasks assigned 2` +
+Displays all people assigned to the 2nd task in the current displayed task list.
+* `tasks find n/Cows` +
+`tasks assigned 1`
+Displays all people assigned to the 1st task in the list of tasks resulting
+from the `tasks find` command
 
 // tag::calendar[]
-
 === Calendar
 
-Format for entering year is YYYY.
-Format for entering month is MM.
-Format for entering dates is YYYYMMDD.
-
-Each cell in the calendar is populated with tasks that end on that day. Clicking on any task would cause its details to be displayed in the task details pane. Task filters applied via the `tasks find` command would also apply to the tasks displayed in the calendar.
-
-If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.
+****
+* Format for entering year is `YYYY`.
+Format for entering month is `MM`.
+Format for entering dates is `YYYYMMDD`.
+* Each cell in the calendar is populated with tasks that end on that day.
+* Clicking on any task would cause its details to be displayed in the task details pane.
+* Task filters applied via the `tasks find` command would also apply to the tasks displayed in the calendar.
+* If there are more than 5 tasks ending on that day, the cell will be scrollable,
+but a scroll bar is not displayed due to space constraints.
+****
 // end::calendar[]
 
 // tag::calendarshow[]
 ==== View calendar for tasks due within given year and month: `calendar show`
 
+Populates the calendar panel with tasks from the specified month. +
 Format: `calendar show y/YEAR m/MONTH`
 
-This will populate the calendar panel with tasks from the specified month. Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.
+[NOTE]
+Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.
+
 // end::calendarshow[]
 
 ==== List tasks for a specific day: `calendars list` `[coming in v2.0]`
@@ -211,11 +488,58 @@ Format: `calendars share CONTACT_INDEX`
 
 ==== Undo previous command `undo`
 
+Restores Cow to the state before the previous _undoable_ command was executed. +
 Format: `undo`
+
+[NOTE]
+====
+Undoable commands are commands that modify tasks, contacts and assignments thereof in Cow
+(commands containing `add`, `delete`, `edit`, `assign` and `unassign`).
+====
+
+Examples:
+
+* `tasks delete 1` +
+`tasks list` +
+`undo` (reverses the `tasks delete 1` command)
+
+* `tasks select 1` +
+`tasks list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
+
+* `contacts delete 1` +
+`contacts assign c/1 k/2` +
+`undo` (reverses the `contacts assign c/1 k/2` command) +
+`undo` (reverses the `contacts delete 1` command)
 
 ==== Redo previously undone command `redo`
 
+Reverses the most recent `undo` command. +
 Format: `redo`
+
+Examples:
+
+* `tasks delete 1` +
+`tasks list` +
+`undo` (reverses the `tasks delete 1` command) +
+`redo` (reapplies the `tasks delete 1` command)
+
+* `tasks delete 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `contacts delete 1` +
+`contacts assign c/1 k/2` +
+`undo` (reverses the `contacts assign c/1 k/2` command) +
+`undo` (reverses the `contacts delete 1` command) +
+`redo` (reapplies the `contacts delete 1` command)
+`redo` (reapplies the `contacts assign c/1 k/2` command) +
+
+==== Clear all tasks and persons `clear`
+
+Clears all tasks and persons from Cow. +
+Format: `clear`
 
 ==== Exiting the program: `exit`
 
@@ -223,5 +547,5 @@ Format: `exit`
 
 ==== Saving data
 
-Data is saved in the hard disk automatically after any command that
-changes the data. There is no need to save manually.
+Data is saved to disk automatically after any command that changes the data.
+There is no need to save manually.
