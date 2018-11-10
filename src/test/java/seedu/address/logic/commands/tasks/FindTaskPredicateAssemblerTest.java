@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_BRUSH_NAME_
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_END_DATE_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_NAME_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_START_DATE_PREDICATE;
-import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_TAG_PREDICATE;
 
 import org.junit.Test;
 
