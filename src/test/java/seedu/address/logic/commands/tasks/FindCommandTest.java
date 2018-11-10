@@ -7,7 +7,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.FIND_BRUSH_BY_END_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_NAME_AND_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_START_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.FIND_SLAUGHTER_BY_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.BRUSH;
