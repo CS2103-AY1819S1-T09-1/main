@@ -130,6 +130,8 @@ public class Task {
                 .append(getEndDateTime().getTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" # of persons assigned: ")
+                .append(personIds.size());
         return builder.toString();
     }
 
