@@ -10,7 +10,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Tan E-Liang
 image::taneliang.png[width="150", align="left"]
-{empty}[http://www.eliangtan.com[homepage]] [https://github.com/taneliang[github]] [https://www.eliangtan.com/experience.html[portfolio]]
+{empty}[http://www.eliangtan.com[homepage]] [https://github.com/taneliang[github]] [<<taneliang#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: Integration
@@ -19,7 +19,7 @@ Responsibilities: Integration
 
 === Julius Putra Tanu Setiaji
 image::indocomsoft.png[width="150", align="left"]
-{empty}[http://github.com/indocomsoft[github]]
+{empty}[http://github.com/indocomsoft[github]] [<<indocomsoft#, portfolio>>]
 
 Role: Developer +
 Responsibilities: QC
@@ -28,7 +28,7 @@ Responsibilities: QC
 
 === Jolene Tan
 image::zxjtan.png[width="150", align="left"]
-{empty}[http://github.com/zxjtan[github]]
+{empty}[http://github.com/zxjtan[github]] [<<zxjtan#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Task management
@@ -37,7 +37,7 @@ Responsibilities: Task management
 
 === John Phua Tai Da
 image::jaypeeteedee.png[width="150", align="left"]
-{empty}[http://github.com/JayPeeTeeDee[github]]
+{empty}[http://github.com/JayPeeTeeDee[github]] [<<jaypeeteedee#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Testing
@@ -46,7 +46,7 @@ Responsibilities: Testing
 
 === Chen Shaowei
 image::tuesmiddt.png[width="150", align="left"]
-{empty}[http://github.com/tuesmiddt[github]]
+{empty}[http://github.com/tuesmiddt[github]] [<<tuesmiddt#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Documentation

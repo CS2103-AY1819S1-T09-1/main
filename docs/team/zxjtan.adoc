@@ -1,0 +1,48 @@
+= Jolene Tan - Project Portfolio
+
+== PROJECT: Cow
+
+---
+
+== Overview
+
+Cow is a task management program with a view towards team projects. It includes an integrated contacts management module and assignment of tasks to contacts. Its command-line interface (CLI) is geared towards power users, letting them carry out operations efficiently without their hands leaving the keyboard.
+
+This project portfolio documents my personal contributions to this project, including 1.5k lines of code (LoC) and contributions to user and developer documentation.
+
+== Summary of contributions
+This section documents the features I contributed to the project.
+
+* *Major enhancement*: added *structural scaffolding for the tasks module*
+** Created the logic for tasks. This included creating a parser for task commands, and implementing a two-level parser to direct user commands the parser for either the contacts module or the tasks module, maintaining modularity of the parsers.
+** Created the model for tasks. This included auxillary classes including a DateTime class containing input validation and formatted text output tailored to this project.
+
+* *Major enhancement*: added *ability to create tasks in Cow*
+** Created a command for creating a task. Made start date and time of the task optional, defaulting to the date and time of the current moment.
+
+== Contributions to the User Guide
+
+|===
+|_This section includes my contributions to the user guide, displaying my ability to write user-targeted documentation._
+|===
+
+include::../UserGuide.adoc[tag=addtasks]
+
+== Contributions to the Developer Guide
+
+|===
+|_You may see below my contributions to the developer guide, showcasing my technical writing skills as well as the technical depth of my code contributions._
+|===
+
+== Design
+
+include::../DeveloperGuide.adoc[tag=logiccomponent]
+
+include::../DeveloperGuide.adoc[tag=modelcomponent]
+
+== Implementation
+
+include::../DeveloperGuide.adoc[tag=taskclass]
+
+include::../DeveloperGuide.adoc[tag=addtasks]
+

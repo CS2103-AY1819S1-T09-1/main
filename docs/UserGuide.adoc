@@ -251,7 +251,7 @@ Format for entering dates is `YYYYMMDD`, e.g. `20183112`.
 Format for entering times is `HHMM` in 24-hour time, e.g. `2359`.
 
 [TIP]
-Most tasks commands has similar format to their equivalent in contacts, except
+Most task commands have a similar format to their equivalents for contacts, except
 that they have different prefixes (`tasks` vs `contacts`).
 
 [NOTE]
@@ -262,6 +262,7 @@ You are allowed to have entries with the same name.
 Shows a list of all tasks in Cow. +
 Format: `tasks list`
 
+// tag::addtasks[]
 ==== Add task: `tasks add`
 
 Adds a task to Cow. +
@@ -274,7 +275,8 @@ If start date or time is not entered, the missing field(s) will default to the c
 Examples:
 
 * `tasks add n/Math Assignment sd/20180101 st/0000 ed/20181231 et/2359 t/school t/urgent`
-* `tasks add n/Milk the cows sd/20181001 st/0000 ed/20181129 et/2359 t/farm`
+* `tasks add n/Milk the cows ed/20181129 et/2359 t/farm`
+// end::addtasks[]
 
 ==== Edit task: `tasks edit`
 
