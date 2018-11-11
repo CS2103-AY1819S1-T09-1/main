@@ -6,15 +6,15 @@ import java.util.function.Predicate;
  * Tests that a {@code Task}'s start date matches the start date given.
  */
 public class MatchesStartDatePredicate implements Predicate<Task> {
-    private final String startDate;
+    private final DateTime startDate;
 
-    public MatchesStartDatePredicate(String startDate) {
+    public MatchesStartDatePredicate(DateTime startDate) {
         this.startDate = startDate;
     }
 
     @Override
     public boolean test(Task task) {
-        return task.getStartDateTime().getInputDate().equals(startDate);
+        return task.getStartDateTime().hasSameDate(startDate);
     }
 
     @Override

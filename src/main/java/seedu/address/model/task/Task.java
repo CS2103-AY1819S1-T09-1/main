@@ -120,8 +120,6 @@ public class Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" ID: ")
-                .append(getId())
                 .append(" Start date: ")
                 .append(getStartDateTime().getDate())
                 .append(" Start time: ")
@@ -132,8 +130,8 @@ public class Task {
                 .append(getEndDateTime().getTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" PersonIds: ");
-        getPersonIds().forEach(builder::append);
+        builder.append(" # of persons assigned: ")
+                .append(personIds.size());
         return builder.toString();
     }
 
