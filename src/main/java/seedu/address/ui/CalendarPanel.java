@@ -40,7 +40,7 @@ public class CalendarPanel extends UiPart<Region> {
         setGridContent(taskList, calendar);
 
         // Write it once initially. Subsequent updates will be handled by callback.
-        writeMonthHeader(calendar.getValue());
+        handleUpdateCalendar(calendar.getValue());
 
         setConnections(calendar);
         registerAsAnEventHandler(this);
@@ -51,7 +51,7 @@ public class CalendarPanel extends UiPart<Region> {
      */
     private void setConnections(ObservableValue<Calendar> calendar) {
         calendar.addListener((cal, oldCal, newCal) -> {
-            writeMonthHeader(newCal);
+            handleUpdateCalendar(newCal);
         });
     }
 
@@ -59,7 +59,7 @@ public class CalendarPanel extends UiPart<Region> {
      * Updates the calendar header to the month represented by the {@code Calendar}
      * object
      */
-    private void writeMonthHeader(Calendar calendar) {
+    private void handleUpdateCalendar(Calendar calendar) {
         calendarHeader.setText(new DateFormatSymbols().getMonths()[calendar.get(Calendar.MONTH)] + " "
                 + Integer.toString(calendar.get(Calendar.YEAR)));
     }
