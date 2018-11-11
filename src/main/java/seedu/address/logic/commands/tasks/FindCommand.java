@@ -40,7 +40,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_END_DATE + "END DATE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + getCommandFormat(COMMAND_WORD) + " "
-            + PREFIX_NAME + "math"
+            + PREFIX_NAME + "math "
             + PREFIX_START_DATE + "20180101 "
             + PREFIX_END_DATE + "20181231 "
             + PREFIX_TAG + "school ";
