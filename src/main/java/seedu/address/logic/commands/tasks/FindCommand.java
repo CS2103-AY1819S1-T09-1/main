@@ -45,16 +45,16 @@ public class FindCommand extends Command {
             + PREFIX_END_DATE + "20181231 "
             + PREFIX_TAG + "school ";
 
-    private final Predicate<Task> predicate;
+    private final TaskPredicateAssembler predicateBuilder;
 
-    public FindCommand(Predicate<Task> predicate) {
-        this.predicate = predicate;
+    public FindCommand(TaskPredicateAssembler predicateBuilder) {
+        this.predicateBuilder = predicateBuilder;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredTaskList(predicate);
+        model.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
         return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
     }
@@ -63,7 +63,7 @@ public class FindCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                && predicateBuilder.equals(((FindCommand) other).predicateBuilder)); // state check
     }
 
     /**

@@ -9,21 +9,30 @@ import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_DATE;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.contacts.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.tasks.FindCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.HasTagsPredicate;
+import seedu.address.model.task.MatchesEndDatePredicate;
+import seedu.address.model.task.MatchesStartDatePredicate;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.FindTaskPredicateAssemblerBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -94,6 +103,56 @@ public class CommandTestUtil {
     public static final String VALID_END_DATE_SLAUGHTER = "20180228";
     public static final String VALID_END_TIME_BRUSH = "2359";
     public static final String VALID_END_TIME_SLAUGHTER = "1830";
+    public static final String VALID_TAG_SLAUGHTER = "messy";
+
+    public static final FindCommand.TaskPredicateAssembler FIND_BRUSH_BY_NAME;
+    public static final FindCommand.TaskPredicateAssembler FIND_SLAUGHTER_AND_BRUSH_BY_NAME;
+    public static final FindCommand.TaskPredicateAssembler FIND_BRUSH_BY_END_DATE;
+    public static final FindCommand.TaskPredicateAssembler FIND_SLAUGHTER_BY_START_DATE;
+    public static final FindCommand.TaskPredicateAssembler FIND_SLAUGHTER_BY_NAME_AND_START_DATE;
+    public static final FindCommand.TaskPredicateAssembler FIND_SLAUGHTER_BY_TAG;
+
+    public static final String BRUSH_NAME_SEARCH = " " + PREFIX_NAME + "Brush";
+    public static final String SLAUGHTER_NAME_SEARCH = " " + PREFIX_NAME + "Slaughter";
+    public static final String SLAUGHTER_BRUSH_NAME_SEARCH = " " + PREFIX_NAME + "cows";
+    public static final String SLAUGHTER_START_DATE_SEARCH = " " + PREFIX_START_DATE + VALID_START_DATE_SLAUGHTER;
+    public static final String BRUSH_END_DATE_SEARCH = " " + PREFIX_END_DATE + VALID_END_DATE_BRUSH;
+    public static final String SLAUGHTER_TAG_SEARCH = " " + PREFIX_TAG + VALID_TAG_SLAUGHTER;
+    public static final seedu.address.model.task.NameContainsKeywordsPredicate BRUSH_NAME_PREDICATE =
+            new seedu.address.model.task.NameContainsKeywordsPredicate(Arrays.asList("Brush"));
+    public static final seedu.address.model.task.NameContainsKeywordsPredicate SLAUGHTER_NAME_PREDICATE =
+            new seedu.address.model.task.NameContainsKeywordsPredicate(Arrays.asList("Slaughter"));
+    public static final seedu.address.model.task.NameContainsKeywordsPredicate SLAUGHTER_BRUSH_NAME_PREDICATE =
+            new seedu.address.model.task.NameContainsKeywordsPredicate(Arrays.asList("cows"));
+    public static final MatchesStartDatePredicate BRUSH_START_DATE_PREDICATE =
+            new MatchesStartDatePredicate(VALID_START_DATE_BRUSH);
+    public static final MatchesEndDatePredicate BRUSH_END_DATE_PREDICATE =
+            new MatchesEndDatePredicate(VALID_END_DATE_BRUSH);
+    public static final MatchesStartDatePredicate SLAUGHTER_START_DATE_PREDICATE =
+            new MatchesStartDatePredicate(VALID_START_DATE_SLAUGHTER);
+    public static final MatchesEndDatePredicate SLAUGHTER_END_DATE_PREDICATE =
+            new MatchesEndDatePredicate(VALID_END_DATE_SLAUGHTER);
+    public static final HasTagsPredicate SLAUGHTER_TAG_PREDICATE =
+            new HasTagsPredicate(Collections.singletonList(new Tag(VALID_TAG_SLAUGHTER)));
+
+    static {
+        FIND_BRUSH_BY_NAME = new FindTaskPredicateAssemblerBuilder().withNamePredicate(BRUSH_NAME_PREDICATE).build();
+        FIND_BRUSH_BY_END_DATE =
+                new FindTaskPredicateAssemblerBuilder().withEndDatePredicate(BRUSH_END_DATE_PREDICATE).build();
+        FIND_SLAUGHTER_BY_START_DATE =
+                new FindTaskPredicateAssemblerBuilder().withStartDatePredicate(SLAUGHTER_START_DATE_PREDICATE).build();
+        FIND_SLAUGHTER_AND_BRUSH_BY_NAME =
+                new FindTaskPredicateAssemblerBuilder().withNamePredicate(SLAUGHTER_BRUSH_NAME_PREDICATE).build();
+        FIND_SLAUGHTER_BY_NAME_AND_START_DATE =
+                new FindTaskPredicateAssemblerBuilder()
+                        .withNamePredicate(SLAUGHTER_NAME_PREDICATE)
+                        .withStartDatePredicate(SLAUGHTER_START_DATE_PREDICATE)
+                        .build();
+        FIND_SLAUGHTER_BY_TAG =
+                new FindTaskPredicateAssemblerBuilder()
+                        .withTagsPredicate(SLAUGHTER_TAG_PREDICATE)
+                        .build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
