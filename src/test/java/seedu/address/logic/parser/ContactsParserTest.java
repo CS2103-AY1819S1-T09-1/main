@@ -17,7 +17,6 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.contacts.AddCommand;
 import seedu.address.logic.commands.contacts.AssignedCommand;
-import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.logic.commands.contacts.DeleteCommand;
 import seedu.address.logic.commands.contacts.EditCommand;
 import seedu.address.logic.commands.contacts.EditCommand.EditPersonDescriptor;
@@ -42,12 +41,6 @@ public class ContactsParserTest {
         String commandText = PersonUtil.getAddCommand(person).substring(ContactsParser.MODULE_WORD.length() + 1);
         AddCommand command = (AddCommand) parser.parseCommand(commandText);
         assertEquals(new AddCommand(person), command);
-    }
-
-    @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
