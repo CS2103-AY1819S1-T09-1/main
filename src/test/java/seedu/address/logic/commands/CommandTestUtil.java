@@ -10,7 +10,9 @@ import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_DATE;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
+import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.contacts.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.tasks.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.tasks.FindCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -33,6 +36,7 @@ import seedu.address.model.task.MatchesEndDatePredicate;
 import seedu.address.model.task.MatchesStartDatePredicate;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 import seedu.address.testutil.FindTaskPredicateAssemblerBuilder;
 
 /**
@@ -50,6 +54,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_FARM = "farm";
 
     public static final String VALID_MONTH = " " + PREFIX_MONTH + "1";
     public static final String VALID_YEAR = " " + PREFIX_YEAR + "2000";
@@ -64,6 +69,41 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_FARM = " " + PREFIX_TAG + VALID_TAG_FARM;
+
+    public static final String INVALID_VALUE_DATE = "20180229";
+    public static final String INVALID_VALUE_TIME = "2567";
+    public static final String INVALID_FORMAT_DATE = "2018-01-02";
+    public static final String INVALID_FORMAT_TIME = "21:11";
+    public static final String VALID_DATE = "20180101";
+    public static final String VALID_TIME = "0100";
+
+    public static final String VALID_START_DATE_DESC = " " + PREFIX_START_DATE + VALID_DATE;
+    public static final String VALID_START_TIME_DESC = " " + PREFIX_START_TIME + VALID_TIME;
+    public static final String VALID_START_DATETIME_DESC =
+            " " + VALID_START_DATE_DESC + " " + VALID_START_TIME_DESC;
+    public static final String VALID_END_DATE_DESC = " " + PREFIX_END_DATE + VALID_DATE;
+    public static final String VALID_END_TIME_DESC = " " + PREFIX_END_TIME + VALID_TIME;
+    public static final String VALID_END_DATETIME_DESC =
+            " " + VALID_END_DATE_DESC + " " + VALID_END_TIME_DESC;
+
+    public static final String INVALID_VALUE_START_DATE_DESC = " " + PREFIX_START_DATE + INVALID_VALUE_DATE;
+    public static final String INVALID_VALUE_START_TIME_DESC = " " + PREFIX_START_TIME + INVALID_VALUE_TIME;
+    public static final String INVALID_VALUE_START_DATETIME_DESC =
+            " " + INVALID_VALUE_START_DATE_DESC + " " + INVALID_VALUE_START_TIME_DESC;
+    public static final String INVALID_VALUE_END_DATE_DESC = " " + PREFIX_END_DATE + INVALID_VALUE_DATE;
+    public static final String INVALID_VALUE_END_TIME_DESC = " " + PREFIX_END_TIME + INVALID_VALUE_TIME;
+    public static final String INVALID_VALUE_END_DATETIME_DESC =
+            " " + INVALID_VALUE_END_DATE_DESC + " " + INVALID_VALUE_END_TIME_DESC;
+
+    public static final String INVALID_FORMAT_START_DATE_DESC = " " + PREFIX_START_DATE + INVALID_FORMAT_DATE;
+    public static final String INVALID_FORMAT_START_TIME_DESC = " " + PREFIX_START_TIME + INVALID_FORMAT_TIME;
+    public static final String INVALID_FORMAT_START_DATETIME_DESC =
+            " " + INVALID_FORMAT_START_DATE_DESC + " " + INVALID_FORMAT_START_TIME_DESC;
+    public static final String INVALID_FORMAT_END_DATE_DESC = " " + PREFIX_END_DATE + INVALID_FORMAT_DATE;
+    public static final String INVALID_FORMAT_END_TIME_DESC = " " + PREFIX_END_TIME + INVALID_FORMAT_TIME;
+    public static final String INVALID_FORMAT_END_DATETIME_DESC =
+            " " + INVALID_FORMAT_END_DATE_DESC + " " + INVALID_FORMAT_END_TIME_DESC;
 
     public static final String YEAR_2000 = VALID_YEAR;
     public static final String YEAR_2001 = " " + PREFIX_YEAR + "2001";
@@ -153,6 +193,35 @@ public class CommandTestUtil {
                 new FindTaskPredicateAssemblerBuilder()
                         .withTagsPredicate(SLAUGHTER_TAG_PREDICATE)
                         .build();
+    }
+
+    public static final String NAME_DESC_BRUSH =
+            " " + seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME + VALID_NAME_BRUSH;
+    public static final String START_DATETIME_DESC_BRUSH =
+            " " + PREFIX_START_DATE + VALID_START_DATE_BRUSH + " " + PREFIX_START_TIME + VALID_START_TIME_BRUSH;
+    public static final String END_DATETIME_DESC_BRUSH =
+            " " + PREFIX_END_DATE + VALID_END_DATE_BRUSH + " " + PREFIX_END_TIME + VALID_END_TIME_BRUSH;
+    public static final String NAME_DESC_SLAUGHTER =
+            " " + seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME + VALID_NAME_SLAUGHTER;
+    public static final String START_DATETIME_DESC_SLAUGHTER =
+            " " + PREFIX_START_DATE + VALID_START_DATE_SLAUGHTER + " " + PREFIX_START_TIME + VALID_START_TIME_SLAUGHTER;
+    public static final String END_DATETIME_DESC_SLAUGHTER =
+            " " + PREFIX_END_DATE + VALID_END_DATE_SLAUGHTER + " " + PREFIX_END_TIME + VALID_END_TIME_SLAUGHTER;
+
+    public static final EditTaskDescriptor DESC_BRUSH;
+    public static final EditTaskDescriptor DESC_SLAUGHTER;
+
+    static {
+        DESC_BRUSH = new EditTaskDescriptorBuilder()
+                .withName(VALID_NAME_BRUSH)
+                .withStartDateTime(new DateTime(VALID_START_DATE_BRUSH, VALID_END_TIME_BRUSH))
+                .withEndDateTime(new DateTime(VALID_END_DATE_BRUSH, VALID_END_TIME_BRUSH))
+                .build();
+        DESC_SLAUGHTER = new EditTaskDescriptorBuilder()
+                .withName(VALID_NAME_SLAUGHTER)
+                .withStartDateTime(new DateTime(VALID_START_DATE_SLAUGHTER, VALID_START_TIME_SLAUGHTER))
+                .withEndDateTime(new DateTime(VALID_END_DATE_SLAUGHTER, VALID_END_TIME_SLAUGHTER))
+                .build();
     }
 
     /**
