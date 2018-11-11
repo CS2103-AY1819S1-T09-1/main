@@ -26,6 +26,10 @@ public class DateTime implements Comparable<DateTime> {
             "The date string must be 8 digits long and the time string must be 4 digits long.";
     public static final String MESSAGE_DATETIME_VALUE_CONSTRAINTS =
             "The date must be a valid calendar date and the time must be from 0000-2359 inclusive.";
+    public static final String MESSAGE_DATE_FORMAT_CONSTRAINTS =
+            "The date string must be 8 digits long of format yyyyMMdd.";
+    public static final String MESSAGE_DATE_VALUE_CONSTRAINTS =
+            "The date must be a valid calendar date.";
 
     /*
      * Date string must be 8 digits long.
@@ -36,6 +40,8 @@ public class DateTime implements Comparable<DateTime> {
      * Time string must be 4 digits long.
      */
     public static final String TIME_VALIDATION_REGEX = "\\d{4}";
+
+    private static final String DUMMY_TIME = "0000";
 
     public final Calendar calendar;
 
@@ -50,6 +56,18 @@ public class DateTime implements Comparable<DateTime> {
         checkArgument(isValidDateTimeFormat(date, time), MESSAGE_DATETIME_FORMAT_CONSTRAINTS);
         checkArgument(isValidDateTimeValues(date, time), MESSAGE_DATETIME_VALUE_CONSTRAINTS);
         this.calendar = createCalendar(date, time);
+    }
+
+    /**
+     * Constructs a {@code DateTime} from only date input.
+     *
+     * @param date a valid date string.
+     */
+    public DateTime(String date) {
+        requireAllNonNull(date);
+        checkArgument(isValidDateTimeFormat(date, DUMMY_TIME), MESSAGE_DATETIME_FORMAT_CONSTRAINTS);
+        checkArgument(isValidDateTimeValues(date, DUMMY_TIME), MESSAGE_DATETIME_VALUE_CONSTRAINTS);
+        this.calendar = createCalendar(date, DUMMY_TIME);
     }
 
     /**
@@ -91,6 +109,13 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
+     * Returns true if the given date string is of the correct format.
+     */
+    public static boolean isValidDateFormat(String date) {
+        return date.matches(DATE_VALIDATION_REGEX);
+    }
+
+    /**
      * Returns true if the given strings are a valid date and time.
      */
     public static boolean isValidDateTimeValues(String date, String time) {
@@ -105,11 +130,22 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
+     * Returns true if the given string is a valid date.
+     */
+    public static boolean isValidDateValue(String date) {
+        int[] dateArray = splitDate(date);
+        int year = dateArray[0];
+        int month = dateArray[1];
+        int day = dateArray[2];
+        return isValidDate(year, month, day);
+    }
+
+    /**
      * Returns true if the given year, date and month are valid.
      */
     private static boolean isValidDate(int year, int month, int day) {
         if (month < 1 || month > 12
-            || day < 1 || day > 31) {
+                || day < 1 || day > 31) {
             return false;
         }
 
@@ -144,6 +180,7 @@ public class DateTime implements Comparable<DateTime> {
 
     /**
      * Splits a date string into year, month and day.
+     *
      * @param date The date string to split.
      * @return an {@code int} array of year, month and day in that order.
      */
@@ -157,6 +194,7 @@ public class DateTime implements Comparable<DateTime> {
 
     /**
      * Splits a time string into hour and minutes.
+     *
      * @param time The time string to split.
      * @return an {@code int} array of hour and minutes in that order.
      */
@@ -169,6 +207,7 @@ public class DateTime implements Comparable<DateTime> {
 
     /**
      * Creates a calendar from the given date and time strings.
+     *
      * @param date A valid date string.
      * @param time A valid time string.
      * @return a {@code Calendar} with the given date and time.
@@ -177,6 +216,17 @@ public class DateTime implements Comparable<DateTime> {
         Calendar result = Calendar.getInstance();
         result.setTime(INPUT_DATE_TIME_FORMAT.parse(date + time, new ParsePosition(0)));
         return result;
+    }
+
+    /**
+     * Checks if given DateTime object has the same date as this object.
+     *
+     * @param other A valid DateTime object.
+     * @return true if other has same date as this Datetime object.
+     */
+    public boolean hasSameDate(DateTime other) {
+        return other == this // short circuit if same object
+                || this.getDate().equals(other.getDate()); // checks date
     }
 
     @Override
