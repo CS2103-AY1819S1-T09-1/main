@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BRUS
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_BRUSH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_SLAUGHTER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SLAUGHTER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ public class TypicalTasks {
     public static final Task SLAUGHTER = new TaskBuilder().withName(VALID_NAME_SLAUGHTER)
             .withStartDateTime(new DateTime(VALID_START_DATE_SLAUGHTER, VALID_START_TIME_SLAUGHTER))
             .withEndDateTime(new DateTime(VALID_END_DATE_SLAUGHTER, VALID_END_TIME_SLAUGHTER))
+            .withTags(VALID_TAG_SLAUGHTER)
             .build();
 
     private TypicalTasks() {} // prevents instantiation
