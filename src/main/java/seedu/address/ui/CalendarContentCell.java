@@ -43,8 +43,8 @@ public class CalendarContentCell extends UiPart<Region> {
 
         setConnections(calendar);
 
-        // Call {@code setContents} once initially
-        setContents(calendar.getValue());
+        // Call {@code handleUpdateCalendar} once initially
+        handleUpdateMonth(calendar.getValue());
         registerAsAnEventHandler(this);
     }
 
@@ -56,7 +56,7 @@ public class CalendarContentCell extends UiPart<Region> {
         calendarContentCellListView.setCellFactory(listView -> new CalendarTaskListCell());
 
         calendar.addListener((cal, oldCal, newCal) -> {
-            this.setContents(newCal);
+            this.handleUpdateMonth(newCal);
         });
     }
 
@@ -96,7 +96,7 @@ public class CalendarContentCell extends UiPart<Region> {
     /**
      * Sets the cell content based on the current month.
      */
-    private void setContents(Calendar curMonth) {
+    private void handleUpdateMonth(Calendar curMonth) {
         Pair<Calendar, Integer> cellCalendarAndDate = getCellCalendarAndDate(curMonth);
         Calendar filterCalendar = cellCalendarAndDate.getKey();
         int displayDate = cellCalendarAndDate.getValue();
