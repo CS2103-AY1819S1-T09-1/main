@@ -397,6 +397,10 @@ It exposes the following operations via the `Model` interface:
 * `Model#updateCalendarMonth()` -- Saves the given calendar that encapsulates the month to be displayed in the calendar panel.
 * `Model#getCalendarMonth()` -- Returns an `ObservableValue<Calendar>` for the calendar panel to identify which weekday the month begins with.
 
+The basic flow when a user executes a `calendar show y/2018 m/12` command is illustrated in the following diagram:
+
+image::CalendarShowCommandSequence.png[width="1280"]
+
 Given below is an example usage scenario and how the calendar show mechanism behaves at each step.
 
 Step 1. The user launches the application. The `MainWindow` class calls `Model#getCalendarMonth()` and `Model#getFilteredTaskList()` when creating the calendar panel. This initialises the calendar panel with an `ObservableList<Task>` and `ObservableValue<Calendar>` to allow it to perform UI updates when necessary.
