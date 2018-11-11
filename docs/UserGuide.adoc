@@ -300,27 +300,34 @@ Edits the start date and time of the 1st task to be 8 January 2005, 12:35pm.
 Edits the name of the 2nd task to be `Brush the cows` and clears all existing tags.
 // tag::listfindtasks[]
 
-==== Search for task: `tasks find`
+==== Search for tasks: `tasks find`
 
-Find tasks that based on name, start date, end date and/or tags +
+Find tasks based on name, start date, end date and/or tags +
 Format:
 `tasks find [n/KEYWORD]... [sd/START_DATE] [ed/END_DATE] [t/TAG]…`
 
 ****
 * Searching by keyword is case insensitive. e.g `cows` will match `Cows`
 * Only full words will be matched e.g. `Cow` will not match `Cows`
-* Providing multiple keywords or tags will return tasks that match any of the keywords or tags.
-* Searching based on different criteria will return tasks that match all criteria
-e.g. Searching on start date and end date will return tasks that match both
+* Providing multiple keywords or tags will return tasks that match any of the keywords or tags. +
+e.g. `tasks find n/cow n/farm` will search for tasks with either `cow` or `farm` in the name.
+* Providing multiple start dates or end dates will only use the last one for filtering. +
+e.g. `tasks find ed/20181130 ed/20181212` will search with end date `20181212`.
+* Searching based on different criteria will return tasks that match all criteria. +
+e.g. Searching on start date and end date will return tasks that match both.
 ****
-// end::listfindtasks[]
 
 Examples:
 
 * `tasks find ed/20181130` +
 Displays all tasks whose end date is 30 November 2018
+* `tasks find n/cows n/brush` +
+Displays all tasks whose name contains either `cows` or `brush`
+* `tasks find t/farm t/land` +
+Displays all tasks that contains either the `farm` or `land` tags.
 * `tasks find n/Cows t/farm` +
-Displays all tasks whose name contains `Cows` and has tag `farm`
+Displays all tasks whose name contains `Cows` and has the `farm` tag.
+// end::listfindtasks[]
 
 ==== Select a task: `tasks select`
 
@@ -432,7 +439,7 @@ Displays the contacts assigned to the task.
 Format: `tasks assigned INDEX`
 
 ****
-* Displays all tasks assigned to the person at the specified `INDEX`.
+* Displays all persons assigned to the task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****

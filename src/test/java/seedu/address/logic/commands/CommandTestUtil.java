@@ -166,13 +166,13 @@ public class CommandTestUtil {
     public static final seedu.address.model.task.NameContainsKeywordsPredicate SLAUGHTER_BRUSH_NAME_PREDICATE =
             new seedu.address.model.task.NameContainsKeywordsPredicate(Arrays.asList("cows"));
     public static final MatchesStartDatePredicate BRUSH_START_DATE_PREDICATE =
-            new MatchesStartDatePredicate(VALID_START_DATE_BRUSH);
+            new MatchesStartDatePredicate(new DateTime(VALID_START_DATE_BRUSH));
     public static final MatchesEndDatePredicate BRUSH_END_DATE_PREDICATE =
-            new MatchesEndDatePredicate(VALID_END_DATE_BRUSH);
+            new MatchesEndDatePredicate(new DateTime(VALID_END_DATE_BRUSH));
     public static final MatchesStartDatePredicate SLAUGHTER_START_DATE_PREDICATE =
-            new MatchesStartDatePredicate(VALID_START_DATE_SLAUGHTER);
+            new MatchesStartDatePredicate(new DateTime(VALID_START_DATE_SLAUGHTER));
     public static final MatchesEndDatePredicate SLAUGHTER_END_DATE_PREDICATE =
-            new MatchesEndDatePredicate(VALID_END_DATE_SLAUGHTER);
+            new MatchesEndDatePredicate(new DateTime(VALID_END_DATE_SLAUGHTER));
     public static final HasTagsPredicate SLAUGHTER_TAG_PREDICATE =
             new HasTagsPredicate(Collections.singletonList(new Tag(VALID_TAG_SLAUGHTER)));
 
