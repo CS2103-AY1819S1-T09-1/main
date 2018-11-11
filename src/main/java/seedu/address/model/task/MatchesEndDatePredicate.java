@@ -6,15 +6,15 @@ import java.util.function.Predicate;
  * Tests that a {@code Task}'s end date matches the end date given.
  */
 public class MatchesEndDatePredicate implements Predicate<Task> {
-    private final String endDate;
+    private final DateTime endDate;
 
-    public MatchesEndDatePredicate(String endDate) {
+    public MatchesEndDatePredicate(DateTime endDate) {
         this.endDate = endDate;
     }
 
     @Override
     public boolean test(Task task) {
-        return task.getEndDateTime().getInputDate().equals(endDate);
+        return task.getEndDateTime().hasSameDate(endDate);
     }
 
     @Override
