@@ -1,6 +1,8 @@
 @startuml CalendarRenderSequence
 
 scale 2
+scale 500 height
+
 skinparam defaultFontName Calibri
 skinparam defaultFontSize 16
 skinparam BoxPadding 10
@@ -12,6 +14,9 @@ skinparam sequence {
     BoxBorderColor transparent
     BoxFontSize 20
 
+    ParticipantBorderColor<<main>> #C00000
+    ParticipantBackgroundColor<<main>> #C00000
+
     ParticipantBorderColor<<ui>> #00B050
     ParticipantBackgroundColor<<ui>> #00B050
 
@@ -20,6 +25,8 @@ skinparam sequence {
 
     ParticipantBorderColor<<model>> #7030A0
     ParticipantBackgroundColor<<model>> #7030A0
+
+    groupBodyBackgroundColor transparent
 
     LifeLineBorderColor DarkGrey
     LifeLineBackgroundColor #00B050
@@ -32,15 +39,9 @@ skinparam sequence {
 
 box "Model" #E6E0EC
     participant model as ":Model" <<model>>
+    participant month as "m:ObservableValue<Calendar>" <<model>>
+    participant taskList as "tl:FilteredList<Task>" <<model>>
 end box
-' box "Logic" #DCE6F2
-'     participant logicManager as ":LogicManager" <<logic>>
-'     participant appParser as ":AppParser" <<logic>>
-'     participant calendarParser as ":CalendarParser" <<logic>>
-'     participant showCommandParser as ":ShowCommandParser" <<logic>>
-'     participant showCommand as "s:ShowCommand" <<logic>>
-'     participant result as "result:Command Result" <<logic>>
-' end box
 box "UI" #C0E399
     participant mainWindow as ":MainWindow" <<ui>>
     participant calendarPanel as ":CalendarPanel" <<ui>>
@@ -49,19 +50,49 @@ end box
 
 ' autoactivate on
 hide footbox
-
-[-[#000000]>mainWindow: <color:#000000> Startup
-activate mainWindow
-mainWindow -> model: <color:#7030A0> getFilteredTaskList()
+[-[#000000]>model: <color:#000000> Startup
 activate model #7030A0
-model --[#7030A0]> mainWindow: month
+create month
+model -[#7030A0]> month
+activate month #7030A0
+month --[#7030A0]>model: <color:#7030A0> m
+deactivate month
+create taskList
+model -[#7030A0]> taskList
+activate taskList #7030A0
+taskList --[#7030A0]>model: <color:#7030A0> m
+deactivate taskList
+
+mainWindow -> model: <color:#7030A0> getFilteredTaskList()
+activate mainWindow
+model --[#7030A0]> mainWindow: m
 mainWindow -> model: <color:#7030A0> getCalendarMonth()
-model --[#7030A0]> mainWindow: taskList
+model --[#7030A0]> mainWindow: tl
 create calendarPanel
-mainWindow -> calendarPanel: CalendarPanel\n(taskList, Month)
+mainWindow -> calendarPanel: CalendarPanel(tl, m)
 activate calendarPanel
 create calendarContentCell
-calendarPanel -> calendarContentCell : CalendarContentCell\n(row, col, taskList, month)
+calendarPanel -> calendarContentCell : CalendarContentCell(row, col, tl, m)
+activate calendarContentCell
+calendarContentCell --> calendarPanel
+deactivate calendarContentCell
+calendarPanel --> mainWindow
+deactivate calendarPanel
+deactivate mainWindow
+deactivate model
+loop
+[-[#0070C0]>model: <color:#7030A0> updateCalendarMonth\n<color:#7030A0>(newMonth)
+activate model #7030A0
+model -[#7030A0]>month: <color:#7030A0> set(newMonth)
+activate month #7030A0
+month --[#7030A0]> model
+deactivate model
+month -[#7030A0]> calendarContentCell: handleUpdateCalendar(newMonth)
+activate calendarContentCell
+calendarContentCell --> month
+deactivate calendarContentCell
+deactivate month
+end loop
 
 
 

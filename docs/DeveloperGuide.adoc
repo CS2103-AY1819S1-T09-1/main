@@ -429,6 +429,10 @@ Step 4. The user creates any number of tasks with start date in January 2018. Th
 
 Step 5. The user executes `calendars show y/2018 m/1`. The `calendars show` command calls `Model#updateCalendarMonth()`, listeners in the calendar panel to be notified of the changes.
 
+The image below summarises the abovementioned mechanism for a single cell in the calendar.
+
+image::CalendarRenderSequence.png[width="1280"]
+
 ==== Design Considerations
 
 ===== Aspect: Where to filter tasks by month for displaying in the calendar.
