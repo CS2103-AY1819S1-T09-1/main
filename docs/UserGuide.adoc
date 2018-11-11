@@ -309,9 +309,12 @@ Format:
 ****
 * Searching by keyword is case insensitive. e.g `cows` will match `Cows`
 * Only full words will be matched e.g. `Cow` will not match `Cows`
-* Providing multiple keywords or tags will return tasks that match any of the keywords or tags.
-* Searching based on different criteria will return tasks that match all criteria
-e.g. Searching on start date and end date will return tasks that match both
+* Providing multiple keywords or tags will return tasks that match any of the keywords or tags. +
+e.g. `tasks find n/cow n/farm` will search for tasks with either `cow` or `farm` in the name.
+* Providing multiple start dates or end dates will only use the last one for filtering. +
+e.g. `tasks find ed/20181130 ed/20181212` will search with end date `20181212`.
+* Searching based on different criteria will return tasks that match all criteria. +
+e.g. Searching on start date and end date will return tasks that match both.
 ****
 // end::listfindtasks[]
 
