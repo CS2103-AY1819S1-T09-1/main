@@ -20,6 +20,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.HasTagsPredicate;
 import seedu.address.model.task.MatchesEndDatePredicate;
 import seedu.address.model.task.MatchesStartDatePredicate;
@@ -49,14 +50,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             );
         }
         if (argMultiMap.getValue(PREFIX_START_DATE).isPresent()) {
-            combinedPredicate.setStartDatePredicate(new MatchesStartDatePredicate(
-                    argMultiMap.getValue(PREFIX_START_DATE).get())
-            );
+            DateTime startDate = ParserUtil.parseDateToDateTime(argMultiMap.getValue(PREFIX_START_DATE).get());
+            combinedPredicate.setStartDatePredicate(new MatchesStartDatePredicate(startDate));
         }
         if (argMultiMap.getValue(PREFIX_END_DATE).isPresent()) {
-            combinedPredicate.setEndDatePredicate(new MatchesEndDatePredicate(
-                    argMultiMap.getValue(PREFIX_END_DATE).get())
-            );
+            DateTime endDate = ParserUtil.parseDateToDateTime(argMultiMap.getValue(PREFIX_END_DATE).get());
+            combinedPredicate.setEndDatePredicate(new MatchesEndDatePredicate(endDate));
         }
         parseTagsForMatching(argMultiMap.getAllValues(PREFIX_TAG)).ifPresent((tags) ->
                 combinedPredicate.setHasTagsPredicate(new HasTagsPredicate(new ArrayList<>(tags)))
