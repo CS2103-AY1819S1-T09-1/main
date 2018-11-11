@@ -556,7 +556,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>It then creates a Date object for the current moment in time and uses the <code>INPUT_DATE_FORMAT</code> and <code>INPUT_TIME_FORMAT</code> <code>DateFormat</code> s in <code>DateTime</code> to parse the Date object into date and time strings in the correct format.</p>
 </li>
 <li>
-<p>It then retrieves the start date and start time strings from <code>argMultiMap</code>, which returns <code>Optional&lt;String&gt;</code> for each of them.</p>
+<p>It then retrieves the start date and start time strings from <code>argMultiMap</code>, which returns an <code>Optional&lt;String&gt;</code> for each of them.</p>
 </li>
 <li>
 <p><code>orElse()</code> is then called on each <code>Optional&lt;String&gt;</code> to obtain the string encapsulated by the <code>Optional</code>, or the string for the current date/time if the <code>Optional</code> is empty.</p>
@@ -2559,4 +2559,4 @@ their best</p>
 </blockquote>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 19:33:19 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:05:16 UTC</div></div></div></body></html>
