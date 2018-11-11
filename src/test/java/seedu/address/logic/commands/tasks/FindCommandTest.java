@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.HasTagsPredicate;
 import seedu.address.model.task.MatchesEndDatePredicate;
 import seedu.address.model.task.MatchesStartDatePredicate;
@@ -79,7 +80,7 @@ public class FindCommandTest {
     public void execute_wrongStartDate_noTaskFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
-        predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate("20181231"));
+        predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate(new DateTime("20181231")));
         FindCommand command = new FindCommand(predicateBuilder);
         expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -90,7 +91,7 @@ public class FindCommandTest {
     public void execute_wrongEndDate_noTaskFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
-        predicateBuilder.setEndDatePredicate(new MatchesEndDatePredicate("20181111"));
+        predicateBuilder.setEndDatePredicate(new MatchesEndDatePredicate(new DateTime("20181111")));
         FindCommand command = new FindCommand(predicateBuilder);
         expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -125,7 +126,7 @@ public class FindCommandTest {
     public void execute_correctStartDate_taskFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
-        predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate("20180228"));
+        predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate(new DateTime("20180228")));
         FindCommand command = new FindCommand(predicateBuilder);
         expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -136,7 +137,7 @@ public class FindCommandTest {
     public void execute_correctEndDate_taskFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
-        predicateBuilder.setEndDatePredicate(new MatchesEndDatePredicate("20181231"));
+        predicateBuilder.setEndDatePredicate(new MatchesEndDatePredicate(new DateTime("20181231")));
         FindCommand command = new FindCommand(predicateBuilder);
         expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -161,7 +162,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
         predicateBuilder.setNamePredicate(prepareNamePredicate("Slaughter"));
-        predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate("20180228"));
+        predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate(new DateTime("20180228")));
         FindCommand command = new FindCommand(predicateBuilder);
         expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -172,7 +173,7 @@ public class FindCommandTest {
     public void execute_compoundTagEndDate_taskFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
-        predicateBuilder.setEndDatePredicate(new MatchesEndDatePredicate("20180228"));
+        predicateBuilder.setEndDatePredicate(new MatchesEndDatePredicate(new DateTime("20180228")));
         predicateBuilder.setHasTagsPredicate(
                 new HasTagsPredicate(Collections.singletonList(new Tag("messy")))
         );
