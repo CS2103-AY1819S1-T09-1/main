@@ -1,0 +1,61 @@
+@startuml
+scale 2
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+skinparam shadowing false
+skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+    ParticipantBorderColor #0070C0
+    ParticipantBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    LifeLineBorderColor #0070C0
+    LifeLineBackgroundColor #0070C0
+    ArrowColor #0070C0
+    ArrowBorderColor #0070C0
+    ArrowFontColor #0070C0
+}
+
+autoactivate on
+hide footbox
+
+box "Model" #E6E0EC
+    participant modelManager as "model:ModelManager"
+    participant versionedAddressBook as "versionedAddressBook:VersionedAddressBook"
+    participant tasks as "tasks:UniqueTaskList"
+end box
+
+participant addressBookChangedEvent as ":AddressBookChangedEvent"
+
+[-> modelManager: updateTask(tasksToEdit, editedTask)
+
+modelManager -> versionedAddressBook: updateTask(target, editedTask)
+
+versionedAddressBook -> tasks: setTask(target, editedTask)
+
+tasks --> versionedAddressBook
+
+versionedAddressBook --> modelManager
+
+modelManager -> modelManager: indicateAddressBookChanged()
+
+create addressBookChangedEvent
+modelManager -> addressBookChangedEvent
+addressBookChangedEvent --> modelManager
+
+modelManager --> modelManager
+
+modelManager -->[
+
+
+
+[-> modelManager: commitAddressBook()
+
+modelManager -> versionedAddressBook: commit()
+
+versionedAddressBook --> modelManager
+
+modelManager -->[
+@enduml

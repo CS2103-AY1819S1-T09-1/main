@@ -1,0 +1,82 @@
+@startuml
+scale 2
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+skinparam shadowing false
+skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+    ParticipantBorderColor #0070C0
+    ParticipantBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    LifeLineBorderColor #0070C0
+    LifeLineBackgroundColor #0070C0
+    ArrowColor #0070C0
+    ArrowBorderColor #0070C0
+    ArrowFontColor #0070C0
+}
+
+autoactivate on
+hide footbox
+
+box "Logic" #DCE6F2
+    participant logicManager as "logic:LogicManager"
+    participant appParser as "appParser:AppParser"
+    participant taskParser as ":TaskParser"
+    participant editCommandParser as ":EditCommandParser"
+    participant editCommand as ":EditCommand"
+    participant commandResult as ":ResultCommand"
+end box
+box "Model" #E6E0EC
+    participant model as "Model"
+end box
+
+[-> logicManager: execute("tasks edit 1 n/Brush the cows")
+
+logicManager -> appParser: parseCommand(commandText)
+
+create taskParser
+appParser -> taskParser
+taskParser --> appParser
+
+appParser -> taskParser: parseCommand(arguments)
+
+create editCommandParser
+taskParser -> editCommandParser
+editCommandParser --> taskParser
+
+taskParser -> editCommandParser: parse(arguments)
+
+create editCommand
+editCommandParser -> editCommand
+editCommand --> editCommandParser
+
+editCommandParser --> taskParser
+
+destroy editCommandParser
+
+taskParser --> appParser
+
+destroy taskParser
+
+appParser --> logicManager
+
+logicManager -> editCommand: execute(model, history)
+
+editCommand -> model: updateTask(taskToEdit, editedTask)
+model --> editCommand
+
+editCommand -> model: commitAddressBook()
+model --> editCommand
+
+create commandResult
+editCommand -> commandResult
+commandResult --> editCommand
+
+editCommand --> logicManager
+destroy editCommand
+
+logicManager -->[
+@enduml
