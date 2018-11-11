@@ -71,12 +71,12 @@
 <li><a href="#use-cases">Appendix C: Use cases</a>
 <ul class="sectlevel2">
 <li><a href="#create-a-contact">C.1. Create a contact</a></li>
-<li><a href="#read-contacts">C.2. Read contacts</a></li>
+<li><a href="#list-contacts">C.2. List contacts</a></li>
 <li><a href="#update-a-contact">C.3. Update a contact</a></li>
 <li><a href="#select-a-contact">C.4. Select a contact</a></li>
 <li><a href="#delete-a-contact">C.5. Delete a contact</a></li>
 <li><a href="#create-a-task">C.6. Create a task</a></li>
-<li><a href="#read-tasks">C.7. Read tasks</a></li>
+<li><a href="#list-tasks">C.7. List tasks</a></li>
 <li><a href="#update-a-task">C.8. Update a task</a></li>
 <li><a href="#select-a-task">C.9. Select a task</a></li>
 <li><a href="#delete-a-task">C.10. Delete a task</a></li>
@@ -91,7 +91,6 @@
 <li><a href="#non-functional-requirements">Appendix D: Non-Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
 <li><a href="#product-survey">Appendix F: Product survey</a></li>
-<li><a href="#division-of-the-labour-force">Appendix G: Division of the labour force</a></li>
 </ul>
 </div>
 </div>
@@ -276,22 +275,6 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </td>
 </tr>
 </table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">1.4.3. Getting started with coding</a></h4>
-<div class="paragraph">
-<p>When you are ready to start coding,</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 2.1, &#8220;Architecture&#8221;</a>.</p>
-</li>
-<li>
-<p>Take a look at <a href="#GetStartedProgramming">[GetStartedProgramming]</a>.</p>
-</li>
-</ol>
 </div>
 </div>
 </div>
@@ -1576,40 +1559,32 @@ Low (unlikely to have) - <code></strong></code></p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be alerted to tasks near their deadline</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">will
-not miss any of them and delay the completion of the project or face any
-other consequences</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project manager</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">assign other tasks to people</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">I can track who’s
-supposed to complete them and notify them (by email) that they are
+<td class="tableblock halign-left valign-top"><p class="tableblock">track who’s
+supposed to complete them and notify them that they are
 supposed to complete the task</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project manager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see the tasks assigned to each person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know
+what they’re supposed to do</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project manager</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">see an overview of all tasks and people
 assigned</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">so that I can quickly get a sense of the state of my project
+<td class="tableblock halign-left valign-top"><p class="tableblock">get a sense of the state of my project
 and tasks</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort the overview</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see the tasks assigned to each person</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">I know
-what they’re supposed to do</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search for people and tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">quickly find the person or task I watn</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -1619,27 +1594,21 @@ what they’re supposed to do</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be alerted to tasks near their deadline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">complete tasks on time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project manager</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">send email notifications to people I assigned tasks to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">send updates/reminders</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see notifications on other messaging platforms</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">conveniently view my tasks</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see all tasks in a visual manner</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ensure they are on track with tasks</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">see milestones visualised using a calendar</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a more chronological sense of my tasks</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -1652,7 +1621,7 @@ meetings and track progress</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">track the extent of others’ involvement in each task</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ensure that irresponsible do not get undue credit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ensure fair distribution of credit</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -1664,33 +1633,32 @@ on all platforms</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recurring tasks</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">need not to re-create recurring tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create recurring tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">avoid repeatedly creating a new task for each recurrence</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Autocomplete when typing tags</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find tags faster</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">vim-mode CLI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use the app more efficiently</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">emacs-mode CLI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use the app more efficiently</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have Autocomplete when typing tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find existing tags faster</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a self-respecting computing user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">open a window that traces each
-line of code that is executed when I perform an action</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">power user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create command aliases</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enter commands more efficiently</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">power user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vim-mode CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enter commands more efficiently</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">power user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">emacs-mode CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enter commands more efficiently</p></td>
 </tr>
 </tbody>
 </table>
@@ -1707,10 +1675,13 @@ line of code that is executed when I perform an action</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to add person, together with all the attributes</p>
+<p>User requests to add a person, together with all the attributes.</p>
 </li>
 <li>
-<p>Cow adds that person to the contacts. Use case ends</p>
+<p>Cow adds that person to the contacts.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ol>
 </div>
@@ -1720,13 +1691,13 @@ line of code that is executed when I perform an action</p></td>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. Invalid attribute provided</p>
+<p>1a. User provides an invalid attribute.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
 <p>1a1. Cow shows an error message.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ul>
@@ -1736,16 +1707,16 @@ line of code that is executed when I perform an action</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="read-contacts"><a class="link" href="#read-contacts">C.2. Read contacts</a></h3>
+<h3 id="list-contacts"><a class="link" href="#list-contacts">C.2. List contacts</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User requests to list persons.</p>
 </li>
 <li>
-<p>Cow shows a list of persons</p>
+<p>Cow shows a list of persons.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -1759,19 +1730,19 @@ line of code that is executed when I perform an action</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User requests to list persons.</p>
 </li>
 <li>
-<p>Cow shows a list of persons</p>
+<p>Cow shows a list of persons.</p>
 </li>
 <li>
 <p>User requests to update a specific person in the list, together with
-the new attributes</p>
+the new attributes.</p>
 </li>
 <li>
-<p>Cow updates the person with the given attribute</p>
+<p>Cow updates the person with the given attribute.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -1784,30 +1755,30 @@ the new attributes</p>
 <li>
 <p>2a. The list is empty.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 <li>
-<p>3a. The given index is invalid.</p>
+<p>3a. User provides an invalid index.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. Cow shows an error message.</p>
 <div class="paragraph">
-<p>Use case resumes at step 2</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>3a. Invalid attribute provided</p>
+<p>3a. User provides an invalid attribute.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
 <p>3a1. Cow shows an error message.</p>
 <div class="paragraph">
-<p>Use case resumes at step 2</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -1824,18 +1795,18 @@ the new attributes</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list contacts</p>
+<p>User requests to list contacts.</p>
 </li>
 <li>
-<p>Cow shows a list of contacts</p>
+<p>Cow shows a list of contacts.</p>
 </li>
 <li>
-<p>User requests to select a specific contact in the list</p>
+<p>User requests to select a specific contact in the list.</p>
 </li>
 <li>
-<p>Cow selects the contact</p>
+<p>Cow selects the contact.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -1848,15 +1819,15 @@ the new attributes</p>
 <li>
 <p>2a. The list is empty.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 <li>
-<p>3a. The given index is invalid.</p>
+<p>3a. User provides an invalid index.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. Cow shows an error message</p>
+<p>3a1. Cow shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2</p>
 </div>
@@ -1875,18 +1846,18 @@ the new attributes</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User requests to list persons.</p>
 </li>
 <li>
-<p>Cow shows a list of persons</p>
+<p>Cow shows a list of persons.</p>
 </li>
 <li>
-<p>User requests to delete a specific person in the list</p>
+<p>User requests to delete a specific person in the list.</p>
 </li>
 <li>
-<p>Cow deletes the person</p>
+<p>Cow deletes the person.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -1903,13 +1874,13 @@ the new attributes</p>
 </div>
 </li>
 <li>
-<p>3a. The given index is invalid.</p>
+<p>3a. User provides an invalid index.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
 <p>3a1. AddressBook shows an error message.</p>
 <div class="paragraph">
-<p>Use case resumes at step 2</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -1926,12 +1897,12 @@ the new attributes</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to add task, together with all the attributes</p>
+<p>User requests to add a task, together with all the attributes.</p>
 </li>
 <li>
 <p>Cow adds that task.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -1942,13 +1913,13 @@ the new attributes</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. Invalid attribute provided</p>
+<p>1a. User provides an invalid attribute.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
 <p>1a1. Cow shows an error message.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ul>
@@ -1958,16 +1929,16 @@ the new attributes</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="read-tasks"><a class="link" href="#read-tasks">C.7. Read tasks</a></h3>
+<h3 id="list-tasks"><a class="link" href="#list-tasks">C.7. List tasks</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list tasks</p>
+<p>User requests to list tasks.</p>
 </li>
 <li>
-<p>Cow shows a list of tasks</p>
+<p>Cow shows a list of tasks.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -1981,19 +1952,18 @@ the new attributes</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list tasks</p>
+<p>User requests to list tasks.</p>
 </li>
 <li>
-<p>Cow shows a list of tasks</p>
+<p>Cow shows a list of tasks.</p>
 </li>
 <li>
-<p>User requests to update a specific task in the list, together with
-the new attributes</p>
+<p>User requests to update a specific task in the list, together with the new attributes.</p>
 </li>
 <li>
-<p>Cow updates the task with the given attribute</p>
+<p>Cow updates the task with the given attribute.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -2004,23 +1974,26 @@ the new attributes</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. The list if empty Use case ends</p>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 <li>
-<p>3a. The given index is invalid.</p>
+<p>3a. User provides an invalid index.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. Cow shows an error message.</p>
 <div class="paragraph">
-<p>Use case resumes at step 2</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>3a. Invalid attribute provided</p>
+<p>3a. User provides an invalid attribute.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -2043,18 +2016,18 @@ the new attributes</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list tasks</p>
+<p>User requests to list tasks.</p>
 </li>
 <li>
-<p>Cow shows a list of tasks</p>
+<p>Cow shows a list of tasks.</p>
 </li>
 <li>
-<p>User requests to select a specific task in the list</p>
+<p>User requests to select a specific task in the list.</p>
 </li>
 <li>
-<p>Cow selects the task</p>
+<p>Cow selects the task.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -2071,13 +2044,13 @@ the new attributes</p>
 </div>
 </li>
 <li>
-<p>3a. The given index is invalid.</p>
+<p>3a. User provides an invalid index.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. Cow shows an error message</p>
+<p>3a1. Cow shows an error message.</p>
 <div class="paragraph">
-<p>Use case resumes at step 2</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -2094,18 +2067,18 @@ the new attributes</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list tasks</p>
+<p>User requests to list tasks.</p>
 </li>
 <li>
-<p>Cow shows a list of tasks</p>
+<p>Cow shows a list of tasks.</p>
 </li>
 <li>
-<p>User requests to delete a specific task in the list</p>
+<p>User requests to delete a specific task in the list.</p>
 </li>
 <li>
-<p>Cow deletes the task</p>
+<p>Cow deletes the task.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -2122,11 +2095,11 @@ the new attributes</p>
 </div>
 </li>
 <li>
-<p>3a. The given index is invalid.</p>
+<p>3a. User provides an invalid index.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. Cow shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2</p>
 </div>
@@ -2145,18 +2118,18 @@ the new attributes</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list tasks</p>
+<p>User requests to list tasks.</p>
 </li>
 <li>
-<p>Cow shows a list of tasks</p>
+<p>Cow shows a list of tasks.</p>
 </li>
 <li>
-<p>User requests to delete a number or all tasks in the list</p>
+<p>User requests to delete a number of tasks in the list.</p>
 </li>
 <li>
-<p>Cow deletes the specified tasks</p>
+<p>Cow deletes the specified tasks.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -2169,13 +2142,13 @@ the new attributes</p>
 <li>
 <p>2a. The list is empty.</p>
 <div class="paragraph">
-<p>use case ends</p>
+<p>Use case ends.</p>
 </div>
 </li>
 <li>
-<p>3a. Any of the given indices is invalid.</p>
-<div class="ulist nonc">
-<ul class="nonc">
+<p>3a. User provides a list of indices containing an invalid index.</p>
+<div class="ulist none">
+<ul class="none">
 <li>
 <p>3a1. Cow shows an error message.
 Use case resumes at step 2</p>
@@ -2194,13 +2167,22 @@ Use case resumes at step 2</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create a task</p>
+<p>User requests to list people.</p>
 </li>
 <li>
-<p>Assign people to task</p>
+<p>Cow shows a list of people.</p>
 </li>
 <li>
-<p>Email people involved about the task</p>
+<p>User requests to list tasks.</p>
+</li>
+<li>
+<p>Cow shows a list of tasks.</p>
+</li>
+<li>
+<p>User requests to assign a person to a task.</p>
+</li>
+<li>
+<p>Cow assigns the person to the task.</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -2213,13 +2195,38 @@ Use case resumes at step 2</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a. Email could not be sent.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a1. Cow shows an error message.</p>
+<p>2a. The list is empty.</p>
 <div class="paragraph">
-<p>Use case ends</p>
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>4a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>5a. User provides an invalid person or task index.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>5a1. Cow shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5b. User requests to assign a person already assigned to the task.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>5b1. Cow shows a message telling the user the person is already assigned.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
 </div>
 </li>
 </ul>
@@ -2236,10 +2243,16 @@ Use case resumes at step 2</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Find a contact by entering <code>find_contact &lt;contact_name&gt;</code></p>
+<p>User searches for a contact.</p>
 </li>
 <li>
-<p>View tasks assigned to the contact</p>
+<p>Cow displays the contact.</p>
+</li>
+<li>
+<p>User requests to view tasks assigned to the contact.</p>
+</li>
+<li>
+<p>Cow displays a list of tasks assigned to the contact.</p>
 </li>
 <li>
 <p>Unassign contact from all tasks by entering
@@ -2370,7 +2383,7 @@ installed.</p>
 <p>Advanced analytics on tasks for work efficiency insights</p>
 </li>
 <li>
-<p>Remove all \($n+1$\) queries and \($\geq O(n)$\)
+<p>Remove all N+1 queries and O(n)
 lookups</p>
 </li>
 </ul>
@@ -2408,7 +2421,7 @@ contacts</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Local/Remote databses</p>
+<p>Local/Remote databases</p>
 </li>
 </ul>
 </div>
@@ -2462,101 +2475,4 @@ contacts</p>
 </ul>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="division-of-the-labour-force"><a class="link" href="#division-of-the-labour-force">Appendix G: Division of the labour force</a></h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Jolene: Contact transfer &amp; Tasks Add</p>
-<div class="ulist">
-<ul>
-<li>
-<p>v1.1: Create basic task addition</p>
-</li>
-<li>
-<p>v1.2: Change existing contacts commands to fit CowBae</p>
-</li>
-<li>
-<p>v1.3: Refine task format</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Julius: Tasks Edit Delete</p>
-<div class="ulist">
-<ul>
-<li>
-<p>v1.1: Delete</p>
-</li>
-<li>
-<p>v1.2: Edit</p>
-</li>
-<li>
-<p>v1.3: Batch delete</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>John: Tasks List Find</p>
-<div class="ulist">
-<ul>
-<li>
-<p>v1.1: Add task GUI &amp; task list</p>
-</li>
-<li>
-<p>v1.2: Task Find</p>
-</li>
-<li>
-<p>v1.3: Pagination</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Shaowei: Calendar Show</p>
-<div class="ulist">
-<ul>
-<li>
-<p>v1.1: Draw a grid with date numbers</p>
-</li>
-<li>
-<p>v1.2: Fill in grid with contents</p>
-</li>
-<li>
-<p>v1.3: Nice formatting</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>E-Liang: Assign Unassign</p>
-<div class="ulist">
-<ul>
-<li>
-<p>v1.1: Contacts Assign</p>
-</li>
-<li>
-<p>v1.2: Task assign</p>
-</li>
-<li>
-<p>v1.3: Task unassign, contacts unassign</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>Seize the means of production ! Supreme leader demands that everyone do
-their best</p>
-</div>
-</blockquote>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:05:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:14:09 UTC</div></div></div></body></html>
