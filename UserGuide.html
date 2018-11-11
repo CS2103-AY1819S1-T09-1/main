@@ -31,7 +31,7 @@
 <li><a href="#view-all-tasks-code-tasks-list-code">3.3.1. View all tasks: <code>tasks list</code></a></li>
 <li><a href="#add-task-code-tasks-add-code">3.3.2. Add task: <code>tasks add</code></a></li>
 <li><a href="#edit-task-code-tasks-edit-code">3.3.3. Edit task: <code>tasks edit</code></a></li>
-<li><a href="#search-for-task-code-tasks-find-code">3.3.4. Search for task: <code>tasks find</code></a></li>
+<li><a href="#search-for-tasks-code-tasks-find-code">3.3.4. Search for tasks: <code>tasks find</code></a></li>
 <li><a href="#select-a-task-code-tasks-select-code">3.3.5. Select a task: <code>tasks select</code></a></li>
 <li><a href="#delete-task-code-tasks-delete-code">3.3.6. Delete task: <code>tasks delete</code></a></li>
 <li><a href="#delete-all-tasks-code-tasks-delete-all-code">3.3.7. Delete all tasks: <code>tasks delete all</code></a></li>
@@ -687,9 +687,9 @@ Edits the name of the 2nd task to be <code>Brush the cows</code> and clears all 
 </div>
 </div>
 <div class="sect3">
-<h4 id="search-for-task-code-tasks-find-code"><a class="link" href="#search-for-task-code-tasks-find-code">3.3.4. Search for task: <code>tasks find</code></a></h4>
+<h4 id="search-for-tasks-code-tasks-find-code"><a class="link" href="#search-for-tasks-code-tasks-find-code">3.3.4. Search for tasks: <code>tasks find</code></a></h4>
 <div class="paragraph">
-<p>Find tasks that based on name, start date, end date and/or tags<br>
+<p>Find tasks based on name, start date, end date and/or tags<br>
 Format:
 <code>tasks find [n/KEYWORD]&#8230;&#8203; [sd/START_DATE] [ed/END_DATE] [t/TAG]…</code></p>
 </div>
@@ -704,11 +704,16 @@ Format:
 <p>Only full words will be matched e.g. <code>Cow</code> will not match <code>Cows</code></p>
 </li>
 <li>
-<p>Providing multiple keywords or tags will return tasks that match any of the keywords or tags.</p>
+<p>Providing multiple keywords or tags will return tasks that match any of the keywords or tags.<br>
+e.g. <code>tasks find n/cow n/farm</code> will search for tasks with either <code>cow</code> or <code>farm</code> in the name.</p>
 </li>
 <li>
-<p>Searching based on different criteria will return tasks that match all criteria
-e.g. Searching on start date and end date will return tasks that match both</p>
+<p>Providing multiple start dates or end dates will only use the last one for filtering.<br>
+e.g. <code>tasks find ed/20181130 ed/20181212</code> will search with end date <code>20181212</code>.</p>
+</li>
+<li>
+<p>Searching based on different criteria will return tasks that match all criteria.<br>
+e.g. Searching on start date and end date will return tasks that match both.</p>
 </li>
 </ul>
 </div>
@@ -724,8 +729,16 @@ e.g. Searching on start date and end date will return tasks that match both</p>
 Displays all tasks whose end date is 30 November 2018</p>
 </li>
 <li>
+<p><code>tasks find n/cows n/brush</code><br>
+Displays all tasks whose name contains either <code>cows</code> or <code>brush</code></p>
+</li>
+<li>
+<p><code>tasks find t/farm t/land</code><br>
+Displays all tasks that contains either the <code>farm</code> or <code>land</code> tags.</p>
+</li>
+<li>
 <p><code>tasks find n/Cows t/farm</code><br>
-Displays all tasks whose name contains <code>Cows</code> and has tag <code>farm</code></p>
+Displays all tasks whose name contains <code>Cows</code> and has the <code>farm</code> tag.</p>
 </li>
 </ul>
 </div>
@@ -942,7 +955,7 @@ Format: <code>tasks assigned INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Displays all tasks assigned to the person at the specified <code>INDEX</code>.</p>
+<p>Displays all persons assigned to the task at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the displayed task list.</p>
@@ -1149,4 +1162,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 10:10:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 10:19:24 UTC</div></div></div></body></html>
