@@ -1,0 +1,82 @@
+@startuml CalendarShowCommandSequence
+
+scale 2
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+skinparam shadowing false
+hide stereotype
+
+skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+
+    ParticipantBorderColor<<ui>> #00B050
+    ParticipantBackgroundColor<<ui>> #00B050
+
+    ParticipantBorderColor<<logic>> #0070C0
+    ParticipantBackgroundColor<<logic>> #0070C0
+
+    ParticipantBorderColor<<model>> #7030A0
+    ParticipantBackgroundColor<<model>> #7030A0
+
+    LifeLineBorderColor DarkGrey
+    LifeLineBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+
+    ArrowColor #0070C0
+    ArrowBorderColor #0070C0
+    ArrowFontColor #0070C0
+}
+
+box "Logic" #DCE6F2
+    participant logicManager as ":LogicManager" <<logic>>
+    participant appParser as ":AppParser" <<logic>>
+    participant calendarParser as ":CalendarParser" <<logic>>
+    participant showCommandParser as ":ShowCommandParser" <<logic>>
+    participant showCommand as "s:ShowCommand" <<logic>>
+    participant result as "result:Command Result" <<logic>>
+end box
+box "Model" #E6E0EC
+    participant model as ":Model" <<model>>
+end box
+
+' autoactivate on
+hide footbox
+[-[#00B050]> logicManager: execute\n("calendar show y/2018 m/12")
+activate logicManager
+logicManager -> appParser: parseCommand\n("calendar show y/2018 m/12")
+activate appParser
+appParser -> calendarParser: parseCommand\n("show y/2018 m/12")
+activate calendarParser
+calendarParser -> showCommandParser: parse("y/2018 m/12")
+activate showCommandParser
+create showCommand
+showCommandParser -> showCommand
+activate showCommand
+showCommand --> showCommandParser
+deactivate showCommand
+showCommandParser --> calendarParser: s
+destroy showCommandParser
+calendarParser --> appParser: s
+destroy calendarParser
+appParser --> logicManager: s
+deactivate appParser
+logicManager -> showCommand: execute()
+activate showCommand
+showCommand -> model : <color:#7030A0> updateCalendarMonth(Calendar)
+activate model #7030A0
+model --[#7030A0]> showCommand
+deactivate model
+create result
+showCommand -> result
+activate result
+result --> showCommand
+deactivate result
+showCommand --> logicManager
+destroy showCommand
+logicManager -->[ : result
+deactivate logicManager
+
+@enduml
