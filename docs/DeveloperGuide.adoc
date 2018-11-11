@@ -510,6 +510,9 @@ And here is a more detailed sequence diagram inside `Model` itself, implemented 
 
 image:EditTaskModelSequenceDiagram.png[]
 
+[TIP]
+These diagrams are generated using http://plantuml.com/[PlantUML]. The files used to generate the image files are stored inside `docs/plantuml`.
+
 Please do note that `DeleteCommand` for `Task` is different from that of `Person` in that the former actually takes in a list of indices to be deleted, which is required to support batch deleting tasks. Changes are also made in `DeleteCommandParser` to add support for multiple indices user input, and to recognise the keyword `"all"`. Should the keyword `"all"` be encountered, the list passed to `DeleteCommand` is `null`, which is a special value to indicate to `DeleteCommand` to delete all tasks in the current displayed list.
 
 ==== Future Enhancements
