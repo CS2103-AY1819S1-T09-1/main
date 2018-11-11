@@ -86,6 +86,25 @@ public class ParserUtil {
         return new DateTime(date, time);
     }
 
+
+    /**
+     * Parses a {@code String date} into a {@code DateTime} with a dummy time.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static DateTime parseDateToDateTime(String date) throws ParseException {
+        requireAllNonNull(date);
+        String trimmedDate = date.trim();
+        if (!DateTime.isValidDateFormat(trimmedDate)) {
+            throw new ParseException(DateTime.MESSAGE_DATE_FORMAT_CONSTRAINTS);
+        }
+        if (!DateTime.isValidDateValue(trimmedDate)) {
+            throw new ParseException(DateTime.MESSAGE_DATE_VALUE_CONSTRAINTS);
+        }
+        return new DateTime(trimmedDate);
+    }
+
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
