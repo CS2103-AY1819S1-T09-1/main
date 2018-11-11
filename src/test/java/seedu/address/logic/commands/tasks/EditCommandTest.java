@@ -20,9 +20,9 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.contacts.ClearCommand;
 import seedu.address.logic.commands.tasks.EditCommand.EditTaskDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
