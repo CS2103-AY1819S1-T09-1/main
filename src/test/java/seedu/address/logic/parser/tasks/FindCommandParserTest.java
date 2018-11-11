@@ -14,6 +14,8 @@ import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_TAG_SEARCH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.contacts.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.task.DateTime.MESSAGE_DATE_FORMAT_CONSTRAINTS;
+import static seedu.address.model.task.DateTime.MESSAGE_DATE_VALUE_CONSTRAINTS;
 
 import org.junit.Test;
 
@@ -35,6 +37,14 @@ public class FindCommandParserTest {
         // no field specified
         assertParseFailure(parser, "         ", MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_wrongDate_failure() {
+        // no field specified
+        assertParseFailure(parser, " ed/invalidDate", MESSAGE_DATE_FORMAT_CONSTRAINTS);
+        assertParseFailure(parser, " ed/110011", MESSAGE_DATE_FORMAT_CONSTRAINTS);
+        assertParseFailure(parser, " ed/10290193", MESSAGE_DATE_VALUE_CONSTRAINTS);
     }
 
     @Test

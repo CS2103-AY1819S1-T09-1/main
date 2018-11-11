@@ -135,8 +135,8 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" TaskIds: ");
-        getTaskIds().forEach(builder::append);
+        builder.append(" # of tasks assigned: ")
+                .append(taskIds.size());
         return builder.toString();
     }
 
