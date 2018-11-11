@@ -1,12 +1,11 @@
 @startuml CalendarRenderSequence
 
-scale 2
-scale 500 height
+scale 1
 
 skinparam defaultFontName Calibri
 skinparam defaultFontSize 16
-skinparam BoxPadding 10
-skinparam ParticipantPadding 20
+skinparam BoxPadding 16
+skinparam ParticipantPadding 10
 skinparam shadowing false
 hide stereotype
 
@@ -36,7 +35,7 @@ skinparam sequence {
     ArrowBorderColor #00B050
     ArrowFontColor #00B050
 }
-
+participant main as ":MainApp" <<main>>
 box "Model" #E6E0EC
     participant model as ":Model" <<model>>
     participant month as "m:ObservableValue<Calendar>" <<model>>
@@ -50,7 +49,8 @@ end box
 
 ' autoactivate on
 hide footbox
-[-[#000000]>model: <color:#000000> Startup
+create model
+main-[#C00000]>model
 activate model #7030A0
 create month
 model -[#7030A0]> month
@@ -68,18 +68,20 @@ activate mainWindow
 model --[#7030A0]> mainWindow: m
 mainWindow -> model: <color:#7030A0> getCalendarMonth()
 model --[#7030A0]> mainWindow: tl
+deactivate model
 create calendarPanel
 mainWindow -> calendarPanel: CalendarPanel(tl, m)
 activate calendarPanel
 create calendarContentCell
 calendarPanel -> calendarContentCell : CalendarContentCell(row, col, tl, m)
 activate calendarContentCell
+calendarContentCell -> calendarContentCell: handleUpdateCalendar\n(m.getValue())
 calendarContentCell --> calendarPanel
 deactivate calendarContentCell
+calendarPanel -> calendarPanel: handleUpdateCalendar(m.getValue())
 calendarPanel --> mainWindow
 deactivate calendarPanel
 deactivate mainWindow
-deactivate model
 loop
 [-[#0070C0]>model: <color:#7030A0> updateCalendarMonth\n<color:#7030A0>(newMonth)
 activate model #7030A0
@@ -87,8 +89,14 @@ model -[#7030A0]>month: <color:#7030A0> set(newMonth)
 activate month #7030A0
 month --[#7030A0]> model
 deactivate model
+month -[#7030A0]> calendarPanel: handleUpdateCalendar(newMonth)
+activate calendarPanel
+calendarPanel -> calendarPanel: handleUpdateCalendar(newMonth)
+calendarPanel --> month
+deactivate calendarPanel
 month -[#7030A0]> calendarContentCell: handleUpdateCalendar(newMonth)
 activate calendarContentCell
+calendarContentCell -> calendarContentCell: handleUpdateCalendar\n(newMonth)
 calendarContentCell --> month
 deactivate calendarContentCell
 deactivate month
