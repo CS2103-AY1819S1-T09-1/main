@@ -1,0 +1,55 @@
+@startuml CalendarShowCommandSequence
+
+scale 2
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam backgroundColor #DCE6F2
+skinparam shadowing false
+
+skinparam sequence {
+    ParticipantBorderColor #0070C0
+    ParticipantBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+
+    LifeLineBorderColor #0070C0
+    LifeLineBackgroundColor #0070C0
+
+    ArrowColor #0070C0
+    ArrowBorderColor #0070C0
+    ArrowFontColor #0070C0
+
+}
+
+participant logicManager as ":LogicManager"
+participant appParser as ":AppParser"
+participant calendarParser as ":CalendarParser"
+participant showCommandParser as ":ShowCommandParser"
+participant showCommand as "s:ShowCommand"
+participant result as "result:Command Result"
+participant model as "Model"
+
+autoactivate on
+[-> logicManager: execute("calendar show y/2018 m/12")
+logicManager -> appParser: parseCommand("calendar show y/2018 m/12")
+appParser -> calendarParser: parseCommand("show y/2018 m/12")
+calendarParser -> showCommandParser: parse("y/2018 m/12")
+create showCommand
+showCommandParser -> showCommand
+showCommand --> showCommandParser
+showCommandParser --> calendarParser: s
+destroy showCommandParser
+calendarParser --> appParser: s
+destroy calendarParser
+appParser --> logicManager: s
+destroy appParser
+logicManager -> showCommand: execute()
+showCommand -> model: updateCalendarMonth(Calendar)
+model --> showCommand
+create result
+showCommand -> result
+result --> showCommand
+showCommand --> logicManager
+destroy showCommand
+logicManager -->[ : result
+
+@enduml
