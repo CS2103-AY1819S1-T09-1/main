@@ -166,6 +166,7 @@ The `UI` component,
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 ////
 
+// tag::logiccomponent[]
 [[Design-Logic]]
 === Logic component
 
@@ -186,7 +187,9 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 .Interactions Inside the Logic Component for the `contacts delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
+// end::logiccomponent[]
 
+// tag::modelcomponent[]
 [[Design-Model]]
 === Model component
 
@@ -198,11 +201,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores Person and Task data.
 * exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+// end::modelcomponent[]
 
-////
+// tag::storage[]
 [[Design-Storage]]
 === Storage component
 
@@ -215,7 +219,11 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
-////
+
+[NOTE]
+`XmlAdaptedPerson` depends on `XmlAdaptedTaskId` to keep track of tasks assigned to the person. +
+`XmlAdaptedTask` depends on `XmlAdaptedPersonId` to keep track of persons assigned to the task.
+// end::storage[]
 
 [[Design-Commons]]
 === Common classes
@@ -226,19 +234,22 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::tasks[]
-=== Tasks class
+// tag::taskclass[]
+=== Task class
+
+.Structure of the Task class
 image::TaskComponentClassDiagram.png[width="800"]
 
 The `Task` class consists of list of `Tag` objects and a `Name` object, corresponding to the same classes in the `Person` namespace. It also has two `DateTime` objects, one for the start date and time and the other for the end date and time of the task.
 
 The `DateTime` class encapsulates a Java `Calendar` object to store a date and time. It also includes methods to parse and validate date/time inputs from the user, and methods to return the date or time as a `String`.
-// end::tasks[]
+// end::taskclass[]
 
 // tag::addtasks[]
 === Addition of tasks
 Adding a task is fairly straightforward. The user command is given to the parser, which validates the input and creates the task and the objects it is associated with. One aspect with a more involved implementation is the accomodation of optional start date and time fields in the user input, which is illustrated here.
 
+.Interactions for derivation of start date and time from optional input in AddCommandParser
 image::AddTaskSequenceDiagram.png[width="800"]
 
 1. The `AddCommandParser` receives the input string and calls `ArgumentTokenizer.tokenize()` to create an `ArgumentMultiMap`.
@@ -272,23 +283,35 @@ Exposed through the `Logic` and `Model` interfaces.
 To find specific tasks, the appropriate predicate is passed into `ModelManager#updateFilteredTaskList()`, which updates
 the `filteredTasks` list, propagating the change up to the `TaskListPanel` display.
 
-Currently, there are 2 use cases where `ModelManager#updateFilteredTaskList()` is called, examples are given below.
-
+.Filtering of Tasks in Model Component
 image::TaskListFindModelSequenceDiagram.png[width="800"]
+
+Currently, there are 2 use cases where `ModelManager#updateFilteredTaskList()` is called, examples are given below.
 
 Case 1: On application startup or after running `tasks list` command
 
 `ModelManager#updateFilteredTaskList()` is called with
-`Model#PREDICATE_SHOW_ALL_TASKS` which returns _true_ for all tasks
+`Model#PREDICATE_SHOW_ALL_TASKS` which returns _true_ for all tasks.
 
+.Sequence Diagram of Tasks List Command
 image::TaskListLogicSequenceDiagram.png[width="800"]
 
-Case 2: After running `tasks find [KEYWORDS]` command
+Case 2: After running `tasks find [n/KEYWORD]... [sd/START_DATE] [ed/END_DATE] [t/TAG]…` command
 
-`ModelManager#updateFilteredTaskList()` is called with
-`NameContainsKeywordsPredicate` formed with the keywords provided,
-which returns true only for tasks with keywords in the name.
+`ModelManager#updateFilteredTaskList()` is called with predicate built by `TaskPredicateAssembler`
+ which combines the different predicates from input.
 
+[NOTE]
+====
+`TaskPredicateAssembler` combines the following predicates:
+
+* `NameContainsKeywordsPredicate`: Returns true if tasks name contains any of the full keywords
+* `MatchesStartDatePredicate`: Returns true if start date of task matches input
+* `MatchesEndDatePredicate`: Returns true if end date of task matches input
+* `HasTagsPredicate`: Returns true if task contains any of the specified tags
+====
+
+.Sequence Diagram of Tasks Find Command
 image::TaskFindLogicSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
@@ -301,8 +324,8 @@ If we were use Java Lists instead, events will need to be raised to update lists
 
 ==== Future Enhancements
 
-Currently, users can only search for tasks by name. Additional predicates can be added and exposed via commands to allow
-users to search by assigned people or dates.
+Currently, searching by task name only matches full keywords. In the future, part of words can be matched to
+allow users to search with incomplete keywords.
 
 // end::listfindtasks[]
 
