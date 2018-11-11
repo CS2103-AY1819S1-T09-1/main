@@ -22,7 +22,7 @@ skinparam sequence {
     ParticipantBackgroundColor<<model>> #7030A0
 
     LifeLineBorderColor DarkGrey
-    LifeLineBackgroundColor #0070C0
+    LifeLineBackgroundColor #00A0E0
     ParticipantFontColor #FFFFFF
 
     ArrowColor #0070C0
@@ -44,7 +44,7 @@ end box
 
 ' autoactivate on
 hide footbox
-[-> logicManager: execute\n("calendar show y/2018 m/12")
+[-[#00B050]> logicManager: execute\n("calendar show y/2018 m/12")
 activate logicManager
 logicManager -> appParser: parseCommand\n("calendar show y/2018 m/12")
 activate appParser
