@@ -216,7 +216,7 @@ The `Model`,
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:https://github.com/CS2103-AY1819S1-T09-1/main/blob/master/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
