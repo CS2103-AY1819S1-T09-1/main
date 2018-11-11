@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Jolene Tan - Project Portfolio</title><link rel="stylesheet" href="./gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Cow</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-T09-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Jolene Tan - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-cow"><a class="link" href="#project-cow">PROJECT: Cow</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cow is a task management program with a view towards team projects. It includes an integrated contacts management module and assignment of tasks to contacts. Its command-line interface (CLI) is geared towards power users, letting them carry out operations efficiently without their hands leaving the keyboard.</p>
+</div>
+<div class="paragraph">
+<p>This project portfolio documents my personal contributions to this project, including 1.5k lines of code (LoC) and contributions to user and developer documentation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section documents the features I contributed to the project.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>structural scaffolding for the tasks module</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Created the logic for tasks. This included creating a parser for task commands, and implementing a two-level parser to direct user commands the parser for either the contacts module or the tasks module, maintaining modularity of the parsers.</p>
+</li>
+<li>
+<p>Created the model for tasks. This included auxillary classes including a DateTime class containing input validation and formatted text output tailored to this project.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>ability to create tasks in Cow</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Created a command for creating a task. Made start date and time of the task optional, defaulting to the date and time of the current moment.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>This section includes my contributions to the user guide, displaying my ability to write user-targeted documentation.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="add-task-code-tasks-add-code"><a class="link" href="#add-task-code-tasks-add-code">Add task: <code>tasks add</code></a></h4>
+<div class="paragraph">
+<p>Adds a task to Cow.<br>
+Format:
+<code>tasks add n/TASK_NAME [sd/START_DATE] [st/START_TIME] ed/END_DATE et/END_TIME [t/TAG]…</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If start date or time is not entered, the missing field(s) will default to the current date/time.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks add n/Math Assignment sd/20180101 st/0000 ed/20181231 et/2359 t/school t/urgent</code></p>
+</li>
+<li>
+<p><code>tasks add n/Milk the cows ed/20181129 et/2359 t/farm</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>You may see below my contributions to the developer guide, showcasing my technical writing skills as well as the technical depth of my code contributions.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="design"><a class="link" href="#design">Design</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">Logic component</a></h3>
+<div id="fig-LogicClassDiagram" class="imageblock">
+<div class="content">
+<img src="LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+</div>
+<div class="title">Figure 1. Structure of the Logic Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> :
+<a href="{repoURL}/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Logic</code> uses the <code>AppParser</code> class to parse the user command.</p>
+</li>
+<li>
+<p><code>AppParser</code> then sends the command to the appropriate module parser.</p>
+</li>
+<li>
+<p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The command execution can affect the <code>Model</code> (e.g. adding a person) and/or raise events.</p>
+</li>
+<li>
+<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("contacts delete 1")</code> API call.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
+</div>
+<div class="title">Figure 2. Interactions Inside the Logic Component for the <code>contacts delete 1</code> Command</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Model"><a class="link" href="#Design-Model">Model component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+</div>
+<div class="title">Figure 3. Structure of the Model Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Model</code>,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+</li>
+<li>
+<p>stores Person and Task data.</p>
+</li>
+<li>
+<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> and <code>ObservableList&lt;Task&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li>
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implementation"><a class="link" href="#implementation">Implementation</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="task-class"><a class="link" href="#task-class">Task class</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="TaskComponentClassDiagram.png" alt="TaskComponentClassDiagram" width="800">
+</div>
+<div class="title">Figure 4. Structure of the Task class</div>
+</div>
+<div class="paragraph">
+<p>The <code>Task</code> class consists of list of <code>Tag</code> objects and a <code>Name</code> object, corresponding to the same classes in the <code>Person</code> namespace. It also has two <code>DateTime</code> objects, one for the start date and time and the other for the end date and time of the task.</p>
+</div>
+<div class="paragraph">
+<p>The <code>DateTime</code> class encapsulates a Java <code>Calendar</code> object to store a date and time. It also includes methods to parse and validate date/time inputs from the user, and methods to return the date or time as a <code>String</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="addition-of-tasks"><a class="link" href="#addition-of-tasks">Addition of tasks</a></h3>
+<div class="paragraph">
+<p>Adding a task is fairly straightforward. The user command is given to the parser, which validates the input and creates the task and the objects it is associated with. One aspect with a more involved implementation is the accomodation of optional start date and time fields in the user input, which is illustrated here.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="AddTaskSequenceDiagram.png" alt="AddTaskSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 5. Interactions for derivation of start date and time from optional input in AddCommandParser</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>AddCommandParser</code> receives the input string and calls <code>ArgumentTokenizer.tokenize()</code> to create an <code>ArgumentMultiMap</code>.</p>
+</li>
+<li>
+<p>It then creates a Date object for the current moment in time and uses the <code>INPUT_DATE_FORMAT</code> and <code>INPUT_TIME_FORMAT</code> <code>DateFormat</code> s in <code>DateTime</code> to parse the Date object into date and time strings in the correct format.</p>
+</li>
+<li>
+<p>It then retrieves the start date and start time strings from <code>argMultiMap</code>, which returns an <code>Optional&lt;String&gt;</code> for each of them.</p>
+</li>
+<li>
+<p><code>orElse()</code> is then called on each <code>Optional&lt;String&gt;</code> to obtain the string encapsulated by the <code>Optional</code>, or the string for the current date/time if the <code>Optional</code> is empty.</p>
+</li>
+<li>
+<p>Finally, <code>ParserUtil.parseDateTime()</code> is called with the resultant date and time strings.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 11:02:59 UTC</div></div></div></body></html>
