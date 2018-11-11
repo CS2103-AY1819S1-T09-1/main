@@ -2,32 +2,51 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:sectnums:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+:experimental:
+endif::[]
+:toc:
+:toc-title:
+:toc-placement: preamble
 
-== PROJECT: Cow
+image::jaypeeteedee.png[width=200px]
+{empty}[https://github.com/JayPeeTeeDee[Github]] | [https://www.linkedin.com/in/john-phua-a15628147[LinkedIn]]
 
-This document serves to provide an introduction to the project and my contributions to it.
+Hello! I am John Phua, a Year 2 Computer Science undergraduate student at the National University of Singapore.
+Over the semester, my team and I built _Cow_, a project management application.
+This portfolio will introduce you to _Cow_ and my contributions towards its development.
 
+= PROJECT: Cow
 == Overview
 
 Cow is a desktop task manager with project management capabilities, powered by a command-line interface.
-It is written in Java by a team of 4 undergraduates from the NUS School of Computing.
+It is written in Java by a team of 5 undergraduates from the NUS School of Computing.
 
-The list of features include:
+image::Ui.png[]
 
-* Management of tasks
-* Management of contacts
-* Assigning of tasks to contacts
-* Calendar view of tasks
+By entering commands, Cow allows you to efficiently:
+
+* Manage a list of tasks
+* Manage a list of group members across different project groups
+* Assign tasks to people
+* View the monthly workload of people through a calendar view
 
 == Summary of contributions
 
-* *Major feature*: Finding of tasks by name, date and tags
-** Purpose: Allowing users to efficiently search for tasks
-** Value to project: Allowing users to sieve through their long list of tasks
-** Highlights: This feature was built to be flexible according to the users needs. Users are able to combine different
-search criteria to make their search more specific. This required the design of a new class that can accept and
+* *Major feature*: Searching of tasks by name, date and tags
+** Purpose: Allowing you to efficiently search for tasks
+** Value to project: Task lists can get long and cluttered,
+this feature allows you to easily filter through your long list of tasks and retrieve what you want.
+** Highlights: This feature was built to be flexible according to your needs. You can combine different
+search criteria to make your search more specific. This required the design of a new class that can accept and
 compound different search criteria together.
 
+* *Code contributions*: [https://github.com/CS2103-AY1819S1-T09-1/main/commits/master?author=jaypeeteedee[All code commits]]
+ [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jaypeeteedee[Project Dashboard View]]
 * *Other contributions*:
 
 ** Project management:
@@ -35,24 +54,28 @@ compound different search criteria together.
 ** Enhancements to existing features:
 *** Implemented initial `Storage` and `UI` components for tasks
 (Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/12[#12])
-*** Updated and maintained the task list GUI
+*** Updated and maintained the graphical user interface for the list of tasks
 (Pull requests https://github.com/CS2103-AY1819S1-T09-1/main/pull/57[#57],
 https://github.com/CS2103-AY1819S1-T09-1/main/pull/90[#90],
 https://github.com/CS2103-AY1819S1-T09-1/main/pull/103[#103])
 *** Wrote task UI handlers for testing (Pull requests https://github.com/CS2103-AY1819S1-T09-1/main/pull/91[#91])
+*** Wrote tests for my features that increased code coverage from 71% to 75%
+(Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/162[#162])
 ** Documentation:
 *** Updated calendar commands in User Guide (Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/31[#31])
 *** Added guide for finding tasks in User Guide (Pull request (Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/100[#100])
 *** Added the implementation of listing and finding tasks in the Developer Guide
 (Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/66[#66])
 ** Tools:
-*** Configured Reposense to track contributions from team.
+*** Configured Reposense to track contributions from the team.
 
 == Contributions to the User Guide
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_You can see my contributions to the User Guide for Cow below.
+ They showcase my ability to write documentation that is easy for end-users to follow and understand,
+ while accounting for possible errors in usage._
 |===
 
 include::../UserGuide.adoc[tag=listfindtasks]
@@ -60,7 +83,11 @@ include::../UserGuide.adoc[tag=listfindtasks]
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_You can see my contributions to the Developer Guide for Cow below.
+ They showcase my ability to communicate technical concepts to other developers
+ and the technical depth of my contributions to the project._
 |===
+
+include::../DeveloperGuide.adoc[tag=storage]
 
 include::../DeveloperGuide.adoc[tag=listfindtasks]
