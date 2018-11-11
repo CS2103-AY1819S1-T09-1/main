@@ -202,7 +202,7 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-////
+// tag::storage[]
 [[Design-Storage]]
 === Storage component
 
@@ -215,7 +215,11 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
-////
+
+[NOTE]
+`XmlAdaptedPerson` depends on `XmlAdaptedTaskId` to keep track of tasks assigned to the person. +
+`XmlAdaptedTask` depends on `XmlAdaptedPersonId` to keep track of persons assigned to the task.
+// end::storage[]
 
 [[Design-Commons]]
 === Common classes
