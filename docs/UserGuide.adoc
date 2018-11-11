@@ -467,23 +467,23 @@ from the `tasks find` command
 Format for entering month is `MM`.
 Format for entering dates is `YYYYMMDD`.
 * Each cell in the calendar is populated with tasks that end on that day.
-* Clicking on any task would cause its details to be displayed in the task details pane.
 * Task filters applied via the `tasks find` command would also apply to the tasks displayed in the calendar.
 * If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.
 ****
+
+[TIP]
+Clicking on an entry in the calendar would display it in the task details panel.
+
 // end::calendar[]
 
 // tag::calendarshow[]
 ==== View calendar for tasks due within given year and month: `calendar show`
 
-Populates the calendar panel with tasks from the specified month. +
+Displays the specified month in the calendar panel. +
 Format: `calendar show y/YEAR m/MONTH`
 
 [NOTE]
 Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.
-
-[TIP]
-Clicking on an entry in the calendar would display it in the task details panel.
 
 Examples:
 

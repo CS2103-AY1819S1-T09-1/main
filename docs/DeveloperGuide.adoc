@@ -516,7 +516,7 @@ image::CalendarRenderSequence.png[width="1280"]
 *** Ease of implementation.
 ** Cons:
 *** Poorer performance.
-*** Messy code. One huge class for the entire calendar.
+*** Messy code. One huge class will be used for the entire calendar.
 // end::calendarshow[]
 
 // tag::dataencryption[]
