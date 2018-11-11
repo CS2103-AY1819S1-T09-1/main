@@ -145,7 +145,7 @@ public class FindCommandSystemTest extends ContactsSystemTest {
         assertSelectedCardDeselected();
 
         /* Case: find person in empty address book -> 0 persons found */
-        deleteAllPersons();
+        clear();
         command = MODULE_WORD + " " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
