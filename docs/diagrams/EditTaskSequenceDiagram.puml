@@ -12,7 +12,7 @@ skinparam sequence {
     ParticipantBackgroundColor #0070C0
     ParticipantFontColor #FFFFFF
     LifeLineBorderColor #0070C0
-    LifeLineBackgroundColor #0070C0
+    LifeLineBackgroundColor #00A0E0
     ArrowColor #0070C0
     ArrowBorderColor #0070C0
     ArrowFontColor #0070C0
@@ -38,19 +38,19 @@ end box
 logicManager -> appParser: parseCommand(commandText)
 
 create taskParser
-appParser -> taskParser
+appParser -> taskParser: TaskParser()
 taskParser --> appParser
 
 appParser -> taskParser: parseCommand(arguments)
 
 create editCommandParser
-taskParser -> editCommandParser
+taskParser -> editCommandParser: EditCommandParser()
 editCommandParser --> taskParser
 
 taskParser -> editCommandParser: parse(arguments)
 
 create editCommand
-editCommandParser -> editCommand
+editCommandParser -> editCommand: EditCommand(...)
 editCommand --> editCommandParser
 
 editCommandParser --> taskParser
@@ -72,7 +72,7 @@ editCommand -> model: commitAddressBook()
 model --> editCommand
 
 create commandResult
-editCommand -> commandResult
+editCommand -> commandResult: CommandResult(...)
 commandResult --> editCommand
 
 editCommand --> logicManager

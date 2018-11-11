@@ -12,7 +12,7 @@ skinparam sequence {
     ParticipantBackgroundColor #0070C0
     ParticipantFontColor #FFFFFF
     LifeLineBorderColor #0070C0
-    LifeLineBackgroundColor #0070C0
+    LifeLineBackgroundColor #00A0E0
     ArrowColor #0070C0
     ArrowBorderColor #0070C0
     ArrowFontColor #0070C0
@@ -42,7 +42,7 @@ versionedAddressBook --> modelManager
 modelManager -> modelManager: indicateAddressBookChanged()
 
 create addressBookChangedEvent
-modelManager -> addressBookChangedEvent
+modelManager -> addressBookChangedEvent: AddressBookChangedEvent(versionedAddressBook)
 addressBookChangedEvent --> modelManager
 
 modelManager --> modelManager
