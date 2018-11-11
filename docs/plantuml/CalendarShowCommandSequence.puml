@@ -3,10 +3,15 @@
 scale 2
 skinparam defaultFontName Calibri
 skinparam defaultFontSize 16
-skinparam backgroundColor #DCE6F2
+' skinparam minClassWidth 100
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
 skinparam shadowing false
 
 skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+
     ParticipantBorderColor #0070C0
     ParticipantBackgroundColor #0070C0
     ParticipantFontColor #FFFFFF
@@ -17,18 +22,23 @@ skinparam sequence {
     ArrowColor #0070C0
     ArrowBorderColor #0070C0
     ArrowFontColor #0070C0
-
 }
 
-participant logicManager as ":LogicManager"
-participant appParser as ":AppParser"
-participant calendarParser as ":CalendarParser"
-participant showCommandParser as ":ShowCommandParser"
-participant showCommand as "s:ShowCommand"
-participant result as "result:Command Result"
-participant model as "Model"
+box "Logic" #DCE6F2
+    participant logicManager as ":LogicManager"
+    participant appParser as ":AppParser"
+    participant calendarParser as ":CalendarParser"
+    participant showCommandParser as ":ShowCommandParser"
+    participant showCommand as "s:ShowCommand"
+    participant result as "result:Command Result"
+end box
+box "Model" #E6E0EC
+    participant model as "Model"
+end box
 
 autoactivate on
+hide footbox
+
 [-> logicManager: execute("calendar show y/2018 m/12")
 logicManager -> appParser: parseCommand("calendar show y/2018 m/12")
 appParser -> calendarParser: parseCommand("show y/2018 m/12")
