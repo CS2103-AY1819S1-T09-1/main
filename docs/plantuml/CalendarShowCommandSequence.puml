@@ -22,7 +22,7 @@ skinparam sequence {
     ParticipantBackgroundColor<<model>> #7030A0
 
     LifeLineBorderColor DarkGrey
-    LifeLineBackgroundColor #00A0E0
+    LifeLineBackgroundColor #0070C0
     ParticipantFontColor #FFFFFF
 
     ArrowColor #0070C0
