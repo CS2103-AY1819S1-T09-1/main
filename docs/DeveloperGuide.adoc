@@ -1028,35 +1028,43 @@ Use case ends.
 
 **MSS**
 
-1.  Enter command to open calendar
-2.  See calendar selected
+1. User requests to display calendar for specified month and year.
+2. Cow displays the specified month and year in the calendar panel populated with tasks based on task end date.
 +
 Use case ends
 
-=== List shared calendars
+=== List calendars
 
 **MSS**
 
-1.  Enter command to list calendars
-2.  See list of all calendars I have access to, including shared
-calendars
+1. User requests to list calendars.
+2. Cow displays list of all calendars I have access to, including shared calendars.
 +
 Use case ends
+
+=== Import calendar
+
+**MSS**
+
+1. User requests to import calendar XML file and specifies calendar name.
+2. Cow imports tasks contained in XML file into the a calendar with the specified name.
++
+Use case ends
+
+**Extensions**
+
+[none]
+* 2a. A calendar already exists with the specified name.
+** 2a1. Cow notifies the user and merges the incoming calendar with the pre-existing calendar.
++
+Use case ends.
 
 === Share calendar
 
 **MSS**
 
-1.  Share calendar with a contact
-2.  Recipient would be able to see calendar in Calendar list
-+
-Use case ends
-
-**Extensions**
-[none]
-* 1a. Email could not be sent.
-[none]
-** 1a1. Cow shows an error message.
+1. User requests to share his calendar.
+2. Cow exports an XML file containing all current existing tasks to the specified path.
 +
 Use case ends
 
