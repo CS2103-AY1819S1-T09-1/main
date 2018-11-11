@@ -358,6 +358,7 @@ Selects the 2nd task in Cow.
 `tasks select 1` +
 Selects the 1st task whose end date is 30 November 2018
 
+// tag::tasksdelete[]
 ==== Delete task: `tasks delete`
 
 Deletes all tasks corresponding to the indices provided.
@@ -378,7 +379,6 @@ Deletes the 1st task on the displayed task list
 * `tasks delete 1 5 4` +
 Deletes the 1st, 4th and 5th tasks in the displayed task list
 
-// tag::tasksdeleteall[]
 ==== Delete all tasks: `tasks delete all`
 
 Deletes all tasks that are shown in the displayed task list.
@@ -387,7 +387,7 @@ Format: `tasks delete all`
 [TIP]
 If you accidentally deleted all tasks in the displayed task list, use `undo` to
 recover deleted tasks.
-// end::tasksdeleteall[]
+// end::tasksdelete[]
 
 // tag::assigncontacttotask[]
 ==== Assign person to task: `tasks assign`
