@@ -1,10 +1,10 @@
 package seedu.address.logic.parser.calendar;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONTH_SMALL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONTH_BIG;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_YEAR_SMALL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONTH_SMALL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_YEAR_BIG;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_YEAR_SMALL;
 import static seedu.address.logic.commands.CommandTestUtil.MONTH_FEB;
 import static seedu.address.logic.commands.CommandTestUtil.MONTH_JAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTH;
