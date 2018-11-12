@@ -2,6 +2,7 @@ package seedu.address.logic.parser.tasks;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_KEYWORD;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
@@ -10,6 +11,7 @@ import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -45,6 +47,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         TaskPredicateAssembler combinedPredicate = new TaskPredicateAssembler();
 
         if (!argMultiMap.getAllValues(PREFIX_NAME).isEmpty()) {
+            List<String> keywords = argMultiMap.getAllValues(PREFIX_NAME);
+            if (isAnyKeywordInvalid(keywords)) {
+                throw new ParseException(
+                        MESSAGE_INVALID_KEYWORD, true);
+            }
             combinedPredicate.setNamePredicate(new NameContainsKeywordsPredicate(
                     argMultiMap.getAllValues(PREFIX_NAME))
             );
@@ -68,6 +75,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(combinedPredicate);
     }
 
+
+    /**
+     * Checks if any keyword contains more than 1 word.
+     */
+    private boolean isAnyKeywordInvalid(List<String> keywords) {
+        assert keywords != null;
+        return keywords.stream()
+                .anyMatch(keyword -> keyword.trim().split("\\s+").length > 1);
+    }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
