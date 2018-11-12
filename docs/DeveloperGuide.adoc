@@ -1380,7 +1380,7 @@ Expected: Similar to previous.
 
 .. Prerequisites: List tasks using the `tasks list` or `tasks find` commands, and list contacts using the `contacts list` or `contacts find` commands. There must be at least 1 task and 2 contacts on screen.
 .. Test case: `tasks assign c/1 k/1` +
-   Expected: First task is assigned to the first contact. Details of the assignment are shown in the status maesage. Timestamp in the status bar is updated.
+   Expected: First task is assigned to the first contact. Details of the assignment are shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `tasks assign c/1 k/1` +
    Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
 .. Test case: `contacts assign c/1 k/1` +
@@ -1398,7 +1398,7 @@ Expected: Similar to previous.
 
 .. Prerequisites: List tasks using the `tasks list` or `tasks find` commands, and list contacts using the `contacts list` or `contacts find` commands. There must be at least 1 task and 2 contacts on screen. Task 1 must be assigned to contacts 1 and 2, as detailed in the previous test case.
 .. Test case: `tasks unassign c/1 k/1` +
-   Expected: First task is unassigned from the first contact. Details of the unassignment are shown in the status maesage. Timestamp in the status bar is updated.
+   Expected: First task is unassigned from the first contact. Details of the unassignment are shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `tasks unassign c/1 k/1` +
    Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
 .. Test case: `contacts unassign c/1 k/1` +
