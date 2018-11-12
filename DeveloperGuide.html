@@ -98,7 +98,7 @@
 <ul class="sectlevel2">
 <li><a href="#something">G.1. Something</a></li>
 <li><a href="#something-else">G.2. Something else</a></li>
-<li><a href="#one-last-thing">G.3. One last thing</a></li>
+<li><a href="#calendar-show">G.3. Calendar Show</a></li>
 </ul>
 </li>
 </ul>
@@ -2969,8 +2969,144 @@ contacts</p>
 
 </div>
 <div class="sect2">
-<h3 id="one-last-thing"><a class="link" href="#one-last-thing">G.3. One last thing</a></h3>
-
+<h3 id="calendar-show"><a class="link" href="#calendar-show">G.3. Calendar Show</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Tasks with long names will be truncated in the calendar.<br>
+If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Calendar show command displays specified month in calendar.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>calendar show y/2018 m/1</code><br>
+Expected: Calendar header changes to "January 2018". Days of the week should be correctly displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Calendar displays tasks ending in specified month.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Pre-requisites:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>List all tasks using the <code>tasks list</code> command.</p>
+</li>
+<li>
+<p>Display calendar for January 2018 using the <code>calendar show y/2018 m/1</code> command.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Test case: <code>tasks add n/test calendar show sd/20170101 ed/20180115 et/1200</code><br>
+Expected: Cell corresponding to 15 Jan 2018 contains the entry displaying "test calendar show".</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Calendar displays multiple tasks due on the same day</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Pre-requisites: List all tasks using the <code>tasks list</code> command.</p>
+</li>
+<li>
+<p>Enter the <code>tasks add n/test calendar multiple sd/20170101 ed/20181212 et/1200</code> command 3 times.</p>
+</li>
+<li>
+<p>Enter the <code>calendar show y/2018 m/12</code> command.<br>
+Expected: Cell corresponding to 12 December 2018 has multiple entries displaying "test calendar multiple".</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Calendar displays adjacent months correctly.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Pre-requisites:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>List all tasks using the <code>tasks list</code> command.</p>
+</li>
+<li>
+<p>Display calendar for December 2018 using the <code>calendar show y/2018 m/12</code> command.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Test case: <code>tasks add n/test calendar previous month sd/20170101 ed/20181127 et/1200</code>.<br>
+Expected: Cell corresponding to 27 November 2018 has one new entry displaying "test calendar previous month".</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/test calendar following month sd/20170101 ed/20190102 et/1200</code><br>
+Expected: Cell corresponding to 2 Jan 2019 has one new entry displaying "test calendar following month".</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Default displayed calendar on app startup.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Create task ending in the current month.</p>
+</li>
+<li>
+<p>Shut down the app</p>
+</li>
+<li>
+<p>Launch the app<br>
+Expected: Calendar displays the current month. Calendar should be populated with tasks ending in the current month.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>User input is validated.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>calendar show y/0 m/12</code><br>
+Expected: Calendar is unchanged. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>calendar show y/10000 m/12</code><br>
+Expected: Calendar is unchanged. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>calendar show y/2018 m/0</code><br>
+Expected: Calendar is unchanged. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>calendar show y/2018 m/13</code><br>
+Expected: Calendar is unchanged. Error details shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:07:14 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:18:16 UTC</div></div></div></body></html>
