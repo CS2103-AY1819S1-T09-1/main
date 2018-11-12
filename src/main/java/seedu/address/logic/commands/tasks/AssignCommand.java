@@ -41,6 +41,7 @@ public class AssignCommand extends Command {
             + PREFIX_TASK_ID + "4";
 
     public static final String MESSAGE_ASSIGN_TASK_SUCCESS = "Assigned Task %1$s to Person %2$s";
+    public static final String MESSAGE_ALREADY_ASSIGNED = "This task has already been assigned to this person";
 
     private final Index targetContactIndex;
     private final Index targetTaskIndex;
@@ -67,14 +68,20 @@ public class AssignCommand extends Command {
         Person personToEdit = filteredPersonList.get(targetContactIndex.getZeroBased());
         Task taskToAssign = filteredTaskList.get(targetTaskIndex.getZeroBased());
 
+        TaskId taskId = taskToAssign.getId();
+        PersonId personId = personToEdit.getId();
+        if (personToEdit.getTaskIds().contains(taskId) || taskToAssign.getPersonIds().contains(personId)) {
+            throw new CommandException(MESSAGE_ALREADY_ASSIGNED);
+        }
+
         Set<TaskId> updatedTaskIds = new HashSet<>(personToEdit.getTaskIds());
-        updatedTaskIds.add(taskToAssign.getId());
-        Person editedPerson = new Person(personToEdit.getId(), personToEdit.getName(), personToEdit.getPhone(),
+        updatedTaskIds.add(taskId);
+        Person editedPerson = new Person(personId, personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), updatedTaskIds);
 
         Set<PersonId> updatedPersonIds = new HashSet<>(taskToAssign.getPersonIds());
-        updatedPersonIds.add(personToEdit.getId());
-        Task editedTask = new Task(taskToAssign.getId(), taskToAssign.getName(), taskToAssign.getStartDateTime(),
+        updatedPersonIds.add(personId);
+        Task editedTask = new Task(taskId, taskToAssign.getName(), taskToAssign.getStartDateTime(),
                 taskToAssign.getEndDateTime(), taskToAssign.getTags(), updatedPersonIds);
 
         model.updatePerson(personToEdit, editedPerson);
@@ -84,7 +91,6 @@ public class AssignCommand extends Command {
         EventsCenter.getInstance().post(new JumpToPersonListRequestEvent(targetContactIndex));
         return new CommandResult(String.format(MESSAGE_ASSIGN_TASK_SUCCESS,
                 targetTaskIndex.getOneBased(), targetContactIndex.getOneBased()));
-
     }
 
     @Override
