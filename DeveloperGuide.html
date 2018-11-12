@@ -79,16 +79,17 @@
 <li><a href="#delete-a-contact">C.5. Delete a contact</a></li>
 <li><a href="#create-a-task">C.6. Create a task</a></li>
 <li><a href="#list-tasks">C.7. List tasks</a></li>
-<li><a href="#update-a-task">C.8. Update a task</a></li>
+<li><a href="#edit-a-task">C.8. Edit a task</a></li>
 <li><a href="#select-a-task">C.9. Select a task</a></li>
 <li><a href="#delete-a-task">C.10. Delete a task</a></li>
 <li><a href="#batch-delete-tasks">C.11. Batch delete tasks</a></li>
-<li><a href="#assign-people-to-a-task">C.12. Assign people to a task</a></li>
-<li><a href="#unassign-person-from-a-task">C.13. Unassign person from a task</a></li>
-<li><a href="#view-calendar">C.14. View calendar</a></li>
-<li><a href="#list-calendars">C.15. List calendars</a></li>
-<li><a href="#import-calendar">C.16. Import calendar</a></li>
-<li><a href="#share-calendar">C.17. Share calendar</a></li>
+<li><a href="#delete-all-tasks">C.12. Delete all tasks</a></li>
+<li><a href="#assign-people-to-a-task">C.13. Assign people to a task</a></li>
+<li><a href="#unassign-person-from-a-task">C.14. Unassign person from a task</a></li>
+<li><a href="#view-calendar">C.15. View calendar</a></li>
+<li><a href="#list-calendars">C.16. List calendars</a></li>
+<li><a href="#import-calendar">C.17. Import calendar</a></li>
+<li><a href="#share-calendar">C.18. Share calendar</a></li>
 </ul>
 </li>
 <li><a href="#non-functional-requirements">Appendix D: Non-Functional Requirements</a></li>
@@ -1425,10 +1426,16 @@ UI elements to determine the month to display and the weekday it starts on.</p>
 <p><span class="image"><img src="images/EditTaskSequenceDiagram.png" alt="EditTaskSequenceDiagram"></span></p>
 </div>
 <div class="paragraph">
-<p>And here is a more detailed sequence diagram inside <code>Model</code> itself, implemented by <code>ModelManager</code>. Note the <code>AddressBookChangedEvent</code> that is raised&#8201;&#8212;&#8201;this will notify <code>StorageManager</code> that there is a change in the <code>AddressBook</code>, and so to save to disk.</p>
+<p><span class="image"><img src="images/EditTaskModelSequenceDiagram.png" alt="EditTaskModelSequenceDiagram"></span></p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/EditTaskModelSequenceDiagram.png" alt="EditTaskModelSequenceDiagram"></span></p>
+<p>Please do note that <code>DeleteCommand</code> for <code>Task</code> is different from that of <code>Person</code> in that the former actually takes in a list of indices to be deleted, which is required to support batch deleting tasks. Changes are also made in <code>DeleteCommandParser</code> to add support for multiple indices user input, and to recognise the keyword <code>"all"</code>. Should the keyword <code>"all"</code> be encountered, the list passed to <code>DeleteCommand</code> is <code>null</code>, which is a special value to indicate to <code>DeleteCommand</code> to delete all tasks in the current displayed list. You can find below the sequence diagram for batch-deleting task(s).</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/DeleteTaskModelSequenceDiagram.png" alt="DeleteTaskModelSequenceDiagram"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/DeleteTaskSequenceDiagram.png" alt="DeleteTaskSequenceDiagram"></span></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1443,7 +1450,7 @@ These diagrams are generated using <a href="http://plantuml.com/">PlantUML</a>. 
 </table>
 </div>
 <div class="paragraph">
-<p>Please do note that <code>DeleteCommand</code> for <code>Task</code> is different from that of <code>Person</code> in that the former actually takes in a list of indices to be deleted, which is required to support batch deleting tasks. Changes are also made in <code>DeleteCommandParser</code> to add support for multiple indices user input, and to recognise the keyword <code>"all"</code>. Should the keyword <code>"all"</code> be encountered, the list passed to <code>DeleteCommand</code> is <code>null</code>, which is a special value to indicate to <code>DeleteCommand</code> to delete all tasks in the current displayed list.</p>
+<p>Note the <code>AddressBookChangedEvent</code> that is raised&#8201;&#8212;&#8201;this will notify <code>StorageManager</code> that there is a change in the <code>AddressBook</code>, and so to save to disk.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2336,7 +2343,7 @@ the new attributes.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="update-a-task"><a class="link" href="#update-a-task">C.8. Update a task</a></h3>
+<h3 id="edit-a-task"><a class="link" href="#edit-a-task">C.8. Edit a task</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2349,10 +2356,10 @@ the new attributes.</p>
 <p>Cow shows a list of tasks.</p>
 </li>
 <li>
-<p>User requests to update a specific task in the list, together with the new attributes.</p>
+<p>User requests to edit a specific task in the list, together with the new attributes.</p>
 </li>
 <li>
-<p>Cow updates the task with the given attribute.</p>
+<p>Cow edits the task with the given attribute.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2551,7 +2558,29 @@ Use case resumes at step 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="assign-people-to-a-task"><a class="link" href="#assign-people-to-a-task">C.12. Assign people to a task</a></h3>
+<h3 id="delete-all-tasks"><a class="link" href="#delete-all-tasks">C.12. Delete all tasks</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list tasks.</p>
+</li>
+<li>
+<p>Cow shows a list of tasks.</p>
+</li>
+<li>
+<p>User requests to delete all tasks in the list.</p>
+</li>
+<li>
+<p>Cow deletes all tasks in the list.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="assign-people-to-a-task"><a class="link" href="#assign-people-to-a-task">C.13. Assign people to a task</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2627,7 +2656,7 @@ Use case resumes at step 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="unassign-person-from-a-task"><a class="link" href="#unassign-person-from-a-task">C.13. Unassign person from a task</a></h3>
+<h3 id="unassign-person-from-a-task"><a class="link" href="#unassign-person-from-a-task">C.14. Unassign person from a task</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2703,7 +2732,7 @@ Use case resumes at step 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-calendar"><a class="link" href="#view-calendar">C.14. View calendar</a></h3>
+<h3 id="view-calendar"><a class="link" href="#view-calendar">C.15. View calendar</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2722,7 +2751,7 @@ Use case resumes at step 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-calendars"><a class="link" href="#list-calendars">C.15. List calendars</a></h3>
+<h3 id="list-calendars"><a class="link" href="#list-calendars">C.16. List calendars</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2741,7 +2770,7 @@ Use case resumes at step 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-calendar"><a class="link" href="#import-calendar">C.16. Import calendar</a></h3>
+<h3 id="import-calendar"><a class="link" href="#import-calendar">C.17. Import calendar</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2780,7 +2809,7 @@ Use case resumes at step 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="share-calendar"><a class="link" href="#share-calendar">C.17. Share calendar</a></h3>
+<h3 id="share-calendar"><a class="link" href="#share-calendar">C.18. Share calendar</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2927,4 +2956,4 @@ contacts</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:35:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:46:27 UTC</div></div></div></body></html>
