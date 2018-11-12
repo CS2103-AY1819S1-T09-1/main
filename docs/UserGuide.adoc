@@ -224,6 +224,9 @@ command from the 3rd task in Cow
 ==== Show tasks assigned to contact: `contacts assigned`
 
 Displays all tasks assigned to the specified contact in the tasks pane.
+When the command is entered, you should see the list of tasks update to show only the
+tasks that are assigned to the specified contact. +
+
 Format: `contacts assigned INDEX`
 
 ****
@@ -307,6 +310,7 @@ Edits the name of the 2nd task to be `Brush the cows` and clears all existing ta
 Find tasks based on name, start date, end date and/or tags. +
 When the command is entered, you should see the list of tasks update to show only the
 tasks that match your search request. +
+
 Format:
 `tasks find [n/KEYWORD]... [sd/START_DATE] [ed/END_DATE] [t/TAG]…`
 
@@ -439,7 +443,10 @@ command to the first person in Cow
 
 ==== Show full details of a task: `tasks assigned`
 
-Displays the contacts assigned to the task.
+Displays the contacts assigned to the task. +
+When the command is entered, you should see the list of contacts update to show only the
+contacts that are assigned to the specified task. +
+
 Format: `tasks assigned INDEX`
 
 ****
