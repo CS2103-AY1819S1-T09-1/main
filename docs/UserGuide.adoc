@@ -26,6 +26,7 @@ of a Graphical User Interface (GUI). If you can type fast, Cow can
 get your contact and task management done faster than traditional GUI
 apps.
 
+// tag::quickstart[]
 == Quick Start
 
 1.  Ensure you have JRE 9 or later installed.
@@ -48,6 +49,7 @@ image::Ui.png[width="800"]
 [WARNING]
 Ensure that your screen resolution is at least 1920x1080, or the calendar
 might not show properly.
+// end::quickstart[]
 
 == Features
 

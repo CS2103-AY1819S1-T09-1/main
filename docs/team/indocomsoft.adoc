@@ -82,6 +82,8 @@ This enhancement required me to use an Event already wrote by my teammate, `Jump
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=quickstart]
+
 include::../UserGuide.adoc[tag=edittasks]
 
 include::../UserGuide.adoc[tag=tasksdelete]

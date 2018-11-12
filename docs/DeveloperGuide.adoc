@@ -576,15 +576,19 @@ As for validation, in `EditCommandParser`, user input will be checked whether th
 
 To explain more clearly, you can see below a sequence diagram of what happens when the user asks the program to edit a task:
 
-image:EditTaskSequenceDiagram.png[]
+.Sequence Diagram of `tasks edit` Command in the `Logic` Component
+image::EditTaskSequenceDiagram.png[]
 
-image:EditTaskModelSequenceDiagram.png[]
+.Sequence Diagram of `tasks edit` Command in the `Model` Component
+image::EditTaskModelSequenceDiagram.png[]
 
 Please do note that `DeleteCommand` for `Task` is different from that of `Person` in that the former actually takes in a list of indices to be deleted, which is required to support batch deleting tasks. Changes are also made in `DeleteCommandParser` to add support for multiple indices user input, and to recognise the keyword `"all"`. Should the keyword `"all"` be encountered, the list passed to `DeleteCommand` is `null`, which is a special value to indicate to `DeleteCommand` to delete all tasks in the current displayed list. You can find below the sequence diagram for batch-deleting task(s).
 
-image:DeleteTaskModelSequenceDiagram.png[]
+.Sequence Diagram of `tasks delete` Command in the `Logic` Component
+image::DeleteTaskModelSequenceDiagram.png[]
 
-image:DeleteTaskSequenceDiagram.png[]
+.Sequence Diagram of `tasks delete` Command in the `Model` Component
+image::DeleteTaskSequenceDiagram.png[]
 
 [TIP]
 These diagrams are generated using http://plantuml.com/[PlantUML]. The files used to generate the image files are stored inside `docs/plantuml`.
@@ -1273,6 +1277,77 @@ contacts
 
 [appendix]
 == Instructions for Manual Testing
+
+Given below are instructions to test the app manually.
+
+=== Launch and Shutdown
+. Initial launch
+
+.. Download the jar file and copy into an empty folder
+.. Double-click the jar file +
+   Expected: Shows the GUI with a set of sample contacts and tasks.
+   The window size should be optimum if your screen's resolution is at least 1920x1080.
+
+. Saving window preferences
+
+.. In case window size is not optimum, resize the window to an optimum size.
+Move the window to a different location. Close the window.
+.. Re-launch the app by double-clicking the jar file. +
+   Expected: The most recent window size and location is retained.
+
+=== Editing Tasks
+. Editing a task while all tasks are listed
+
+.. Prerequisites: List all tasks using the `tasks list` command. There are at least 4 tasks in the list.
+.. Test case: `tasks edit 1 n/Slaughter the cow` +
+   Expected: First task is edited such that its name is now `Slaughter the cow`. New details of the edited task are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `tasks edit 1 sd/20180101 st/0000 ed/20180101 et/2359` +
+   Expected: First task is edited such that its start date and time are 1 January 2018, 00.00am and its end date and time are 1 January 2018, 23.59pm.
+   New details of the edited task are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `tasks edit 1 t/` +
+   Expected: First task is cleared of any tags that it might have had.
+   New details of the edited task are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `tasks edit 1 t/messy` +
+   Expected: First task's tag is now only `messy`.
+   New details of the edited task are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `tasks edit 1 t/messy t/mean` +
+   Expected: First task's tags are now `mean` and `messy`. They are shown in no particular order.
+   New details of the edited task are shown in the status message. Timestamp in the status bar is updated.
+.. Other correct tasks edit command to try: Combining editing name with start and/or end date and time and/or tags,
+   Editing only start date and time as long as they are before the end date and time.
+.. Test case: `tasks edit 0 n/Slaughter the cow` +
+   Expected: No task is edited. Error detail is shown in the status message. Status bar remains the same.
+.. Test case: `tasks edit 1 sd/20181231 st/0000 ed/20180101 et/2359` +
+   Expected: No task is edited. Error detail is shown in the status message. Status bar remains the same.
+.. Test case: `tasks edit 1` +
+   Expected: No task is edited. Error detail is shown in the status message. Status bar remains the same.
+.. Other incorrect tasks edit command to try: `tasks edit`, `tasks edit x` (where x is negative or larger than the list size),
+   Editing with invalid start and/or date and/or time, Editing with non-alphanumeric characters in the task name.
+
+=== Deleting Task(s)
+. Deleting a task while all tasks are listed
+
+.. Prerequisites: List all tasks using the `tasks list` command. There are at least 4 tasks in the list.
+.. Test case: `tasks delete 1` +
+   Expected: First task is deleted from the task list. Details of the deleted task are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `tasks delete 0` +
+   Expected: No task is deleted. Error detail is shown in the status message. Status bar remains the same.
+.. Other incorrect tasks delete command to try: `tasks delete`, `tasks delete x` (where x is negative or larger than the list size)
+
+. Deleting multiple tasks while all tasks are listed
+
+.. Prerequisites: List all tasks using the `tasks list` command. There are at least 4 tasks in the list.
+.. Test case: `tasks delete 1 3 2` +
+   Expected: First, second and third tasks are deleted from the task list. Details of the deleted tasks are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `tasks delete 1 4 0` +
+   Expected: No task is deleted. Error detail is shown in the status message. Status bar remains the same.
+.. Other incorrect tasks delete command to try: `tasks delete 1 2 x` (where x is negative or larger than the list size)
+
+. Deleting all tasks shown in the task list
+
+.. Prerequisites: List all tasks using the `tasks list` command. There are at least 1 task.
+.. Test case: `tasks delete all` +
+   Expected: All tasks shown in the task list are deleted. Details of the deleted tasks are shown in the status message. Timestamp in the status bar is updated.
 
 === Something
 
