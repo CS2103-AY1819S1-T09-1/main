@@ -46,7 +46,7 @@ image::Ui.png[width="800"]
 * `exit` : exits Cow
 
 [WARNING]
-Ensure that your screen resolution is at least 1200x800, or the calendar
+Ensure that your screen resolution is at least 1920x1080, or the calendar
 might not show properly.
 
 == Features

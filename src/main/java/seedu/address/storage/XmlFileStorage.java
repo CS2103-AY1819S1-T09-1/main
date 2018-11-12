@@ -13,7 +13,7 @@ import seedu.address.commons.util.XmlUtil;
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given cow data to the specified file.
      */
     public static void saveDataToFile(Path file, XmlSerializableAddressBook addressBook)
             throws FileNotFoundException {
@@ -25,7 +25,7 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns cow data in the file or an empty cow data
      */
     public static XmlSerializableAddressBook loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {

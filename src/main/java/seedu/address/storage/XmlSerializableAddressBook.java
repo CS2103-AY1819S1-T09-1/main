@@ -20,7 +20,7 @@ import seedu.address.model.task.Task;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_TASK = "Persons list contains duplicate task(s).";
+    public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
