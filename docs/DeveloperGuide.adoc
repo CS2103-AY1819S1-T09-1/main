@@ -1295,6 +1295,11 @@ Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+. Closing the application
+
+.. Test case: `exit`
+   Expected: the application should exit and the window should disappear.
+
 === Editing Tasks
 . Editing a task while all tasks are listed
 
