@@ -1286,23 +1286,32 @@ contacts
 Tasks with long names will be truncated in the calendar. +
 If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.
 
-. Default displayed calendar on app startup.
-.. Create task ending in the current month.
-.. Shut down the app
-.. Launch the app +
-Expected: Calendar displays the current month. Calendar should be populated with tasks ending in the current month.
+. Calendar show command displays specified month in calendar.
+.. Test case: `calendar show y/2018 m/1` +
+Expected: Calendar header changes to "January 2018". Days of the week should be correctly displayed.
+. Calendar displays tasks ending in specified month.
+.. Pre-requisites:
+... List all tasks using the `tasks list` command.
+... Display calendar for January 2018 using the `calendar show y/2018 m/1` command.
+.. Test case: `tasks add n/test calendar show sd/20170101 ed/20180115 et/1200` +
+Expected: Cell corresponding to 15 Jan 2018 contains the entry displaying "test calendar show".
 . Calendar displays multiple tasks due on the same day
 .. Pre-requisites: List all tasks using the `tasks list` command.
-.. Enter the `tasks add n/test calendar multiple ed/20181212 et/1200` command 3 times.
+.. Enter the `tasks add n/test calendar multiple sd/20170101 ed/20181212 et/1200` command 3 times.
 .. Enter the `calendar show y/2018 m/12` command. +
 Expected: Cell corresponding to 12 December 2018 has multiple entries displaying "test calendar multiple".
 . Calendar displays adjacent months correctly.
 .. Pre-requisites:
 ... List all tasks using the `tasks list` command.
 ... Display calendar for December 2018 using the `calendar show y/2018 m/12` command.
-.. Test case: `tasks add n/test calendar previous month ed/20181127 et/1200`. +
+.. Test case: `tasks add n/test calendar previous month sd/20170101 ed/20181127 et/1200`. +
 Expected: Cell corresponding to 27 November 2018 has one new entry displaying "test calendar previous month".
-.. Test case: `tasks add n/test calendar following month ed/20190102 et/1200` +
+.. Test case: `tasks add n/test calendar following month sd/20170101 ed/20190102 et/1200` +
 Expected: Cell corresponding to 2 Jan 2019 has one new entry displaying "test calendar following month".
+. Default displayed calendar on app startup.
+.. Create task ending in the current month.
+.. Shut down the app
+.. Launch the app +
+Expected: Calendar displays the current month. Calendar should be populated with tasks ending in the current month.
 
 // end::calendarManualTestInstructions[]
