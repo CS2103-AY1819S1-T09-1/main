@@ -25,7 +25,7 @@ image::Ui_assign.png[]
 
 * *Minor enhancement*: added unique identifiers to contacts and tasks so that Cow is able to identify tasks and contacts between edits, and also to differentiate between nearly-identical tasks and people.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=taneliang[Collated code at RepoSense]] 
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=taneliang[Collated code at RepoSense]]
 
 * *Other contributions*:
 
