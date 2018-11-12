@@ -41,6 +41,7 @@ public class UnassignCommand extends Command {
             + PREFIX_TASK_ID + "4";
 
     public static final String MESSAGE_ASSIGN_PERSON_SUCCESS = "Unassigned Person %1$s from Task %2$s";
+    public static final String MESSAGE_NOT_ASSIGNED = "This person has not been assigned to this task";
 
     private final Index targetContactIndex;
     private final Index targetTaskIndex;
@@ -67,14 +68,20 @@ public class UnassignCommand extends Command {
         Person personToEdit = filteredPersonList.get(targetContactIndex.getZeroBased());
         Task taskToUnassign = filteredTaskList.get(targetTaskIndex.getZeroBased());
 
+        TaskId taskId = taskToUnassign.getId();
+        PersonId personId = personToEdit.getId();
+        if (!personToEdit.getTaskIds().contains(taskId) || !taskToUnassign.getPersonIds().contains(personId)) {
+            throw new CommandException(MESSAGE_NOT_ASSIGNED);
+        }
+
         Set<TaskId> updatedTaskIds = new HashSet<>(personToEdit.getTaskIds());
-        updatedTaskIds.remove(taskToUnassign.getId());
-        Person editedPerson = new Person(personToEdit.getId(), personToEdit.getName(), personToEdit.getPhone(),
+        updatedTaskIds.remove(taskId);
+        Person editedPerson = new Person(personId, personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), updatedTaskIds);
 
         Set<PersonId> updatedPersonIds = new HashSet<>(taskToUnassign.getPersonIds());
-        updatedPersonIds.remove(personToEdit.getId());
-        Task editedTask = new Task(taskToUnassign.getId(), taskToUnassign.getName(), taskToUnassign.getStartDateTime(),
+        updatedPersonIds.remove(personId);
+        Task editedTask = new Task(taskId, taskToUnassign.getName(), taskToUnassign.getStartDateTime(),
                 taskToUnassign.getEndDateTime(), taskToUnassign.getTags(), updatedPersonIds);
 
         model.updatePerson(personToEdit, editedPerson);

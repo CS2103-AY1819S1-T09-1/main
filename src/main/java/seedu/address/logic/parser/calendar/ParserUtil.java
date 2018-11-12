@@ -10,7 +10,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_YEAR = "Year must be a non-negative integer.";
+    public static final String MESSAGE_INVALID_YEAR = "Year must be an integer between 1 and "
+            + Integer.toString(Integer.MAX_VALUE) + ".";
     public static final String MESSAGE_INVALID_MONTH = "Month must be an integer between 1 and 12";
 
     /**

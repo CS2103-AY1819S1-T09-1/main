@@ -416,24 +416,73 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Calendar show feature
 ==== Current Implementation
 
-The calendar show feature is facilitated by the `ModelManager`. It extends `ModelManager` with a calendar panel that allows the user to more easily view the tasks.
+The calendar show feature is facilitated by the `ModelManager` and displayed through the `CalendarPanel`. The purpose of this feature is to allow the user to more easily view his tasks.
 
-It exposes the following operations via the `Model` interface:
+This feature can be broken down into two stages: updating the model based on user input and rendering the UI.
+
+===== Stage 1: Input handling
+
+The following operation is exposed via the `Model` interface:
 
 * `Model#updateCalendarMonth()` -- Saves the given calendar that encapsulates the month to be displayed in the calendar panel.
-* `Model#getCalendarMonth()` -- Returns an `ObservableValue<Calendar>` for the calendar panel to identify which weekday the month begins with.
 
-Given below is an example usage scenario and how the calendar show mechanism behaves at each step.
+The basic flow of the `calendar show` command is as such:
 
-Step 1. The user launches the application. The `MainWindow` class calls `Model#getCalendarMonth()` and `Model#getFilteredTaskList()` when creating the calendar panel. This initialises the calendar panel with an `ObservableList<Task>` and `ObservableValue<Calendar>` to allow it to perform UI updates when necessary.
+Step 1. The user enters the command `calendar show y/2018 m/12`
 
-Step 2. The calendar panel constructs a `GridPane` and initialises the cells with empty containers.
+Step 2. The command is parsed and a `ShowCommand` object is created with the appropate values for year and month.
 
-Step 3. The calendar panel registers listeners to the `ObservableValue<Calendar>` with a task that would empty grid cells and repopulate them with `ListView` elements that display the tasks starting on the corresponding dates.
+Step 3. The `ShowCommand#execute()` method is invoked, and `Model#updateCalendarMont()` is called with a `Calendar` object encapsulating the first day of the specified month `1 Dec 2018`.
 
-Step 4. The user creates any number of tasks with start date in January 2018. The tasks will be stored appropriately.
+[NOTE]
+The date of the month is arbitrarily chosen. However this is not strictly necessary as the necessary processing will be done by the UI component when rendering the calendar.
 
-Step 5. The user executes `calendars show y/2018 m/1`. The `calendars show` command calls `Model#updateCalendarMonth()`, listeners in the calendar panel to be notified of the changes.
+This is summarised in the following image.
+
+.Calendar Show Command Logic Sequence Diagram
+image::CalendarShowCommandSequence.png[width="1280"]
+
+===== Stage 2: UI Rendering
+
+The following operation is exposed via the `Model` interface:
+
+* `Model#getCalendarMonth()` -- Returns an `ObservableValue<Calendar>` for the calendar
+UI elements to determine the month to display and the weekday it starts on.
+
+Given below is how the calendar UI is initialised.
+
+Step 1. The user launches the application. The `Model` is initialised with a `ObservableValue<Calendar>` representing the current date. The `MainWindow` class calls `Model#getCalendarMonth()` and `Model#getFilteredTaskList()` when creating the `CalendarPanel`. This initialises the `CalendarPanel` with an `ObservableList<Task>` and `ObservableValue<Calendar>` to allow it to perform UI updates when necessary.
+
+Step 2. The `CalendarPanel` constructs a `GridPane` and sets the row and column constraints.
+
+Step 3. The `CalendarPanel` populates the `GridPane`. The cells in the header row are populated with `CalendarHeaderCell` elements containing the days of a week. All other cells are populated with `CalendarContentCell` elements based on its position in the grid. The `CalendarContentCell` elements are intialised with the `ObservableList<Task>` and `ObservableValue<Calendar>`.
+
+Step 4. The `CalendarContentCell` computes the date that it represents based on the calendar it receives and its position in the grid. It then creates a `FilteredList<Task>` from the `ObservableList<Task>` that only contains tasks belonging to that state. Finally, the `ListView<Task>` element configured to display elements in the `FilteredList<Task>` with `CalendarTaskCard` elements.
+
+Step 5. The `CalendarContentCell` listens to updates to the `ObservableValue<Calendar>` that would update the predicate for the `FilteredList<Task>`.
+
+Step 6. The `CalendarPanel` writes the header for the month and year it is displaying.
+
+Step 7. The `CalendarPanel` listens to updates to the `ObservableValue<Calendar>` that would update the calendar header with the month and year of the new value.
+
+Initialisation complete. +
+ +
+
+Given below is how `calendar show` command is handled by the UI components.
+
+Step 1. The user enters `calendar show y/2018 m/1`. This causes `Model#updateCalendarMonth` to called, which sets the new value for the `ObservableValue<Calendar>`.
+
+Step 2. The update to the `ObservableValue<Calendar>` triggers the listener registered by the `CalendarPanel`. This causes the calendar header to be updated via `CalendarPanel#handleUpdateCalendar`.
+
+Step 3. The update to the `ObservableValue<Calendar>` triggers the listener registered by the `CalendarContentCell`. This causes it to recompute the date that it represents and update the predicate for its `FilteredList<Task>`. This causes cell to display the appropriate tasks based on the new designated month.
+
+Update complete. +
+ +
+
+The image below summarises the abovementioned mechanism for a single cell in the calendar.
+
+.Calendar UI Rendering Sequence Diagram
+image::CalendarRenderSequence.png[width="1280"]
 
 ==== Design Considerations
 
@@ -456,16 +505,18 @@ Step 5. The user executes `calendars show y/2018 m/1`. The `calendars show` comm
 
 ===== Aspect: Construction of grid cell.
 
-* **Alternative 1 (current choice):** Delete and regenerate cell contents each time the month is changed
+* **Alternative 1 (current choice):** Cells are constructed once and contents are updated each time the month is changed
+** Pros:
+*** Better performance: Deleting and recreating elements incurs some computational cost.
+*** Cleaner abstraction: Code better follows Single Responsibility Principle. Updating of predicate for a `FilteredList<Task>` more accurately represents the actual behaviour being modelled.
+** Cons:
+*** Increased compleity of implementation.
+* **Alternative 2:** Delete and regenerate cell contents each time the month is changed
 ** Pros:
 *** Ease of implementation.
 ** Cons:
-*** Poorer performance, although this is insignificant since number of elements to be created/deleted is small and fixed.
-* **Alternative 2:** Create and store `ListView` containers and reuse them.
-** Pros:
-*** Better performance, since deleting and recreating them incurs some computational cost.
-** Cons:
-*** There were some difficulties around creating a separate `UiPart` component that could be added as a child of a `VBox` element.
+*** Poorer performance.
+*** Messy code. One huge class will be used for the entire calendar.
 // end::calendarshow[]
 
 // tag::dataencryption[]
@@ -1064,35 +1115,43 @@ Use case ends.
 
 **MSS**
 
-1.  Enter command to open calendar
-2.  See calendar selected
+1. User requests to display calendar for specified month and year.
+2. Cow displays the specified month and year in the calendar panel populated with tasks based on task end date.
 +
 Use case ends
 
-=== List shared calendars
+=== List calendars
 
 **MSS**
 
-1.  Enter command to list calendars
-2.  See list of all calendars I have access to, including shared
-calendars
+1. User requests to list calendars.
+2. Cow displays list of all calendars I have access to, including shared calendars.
 +
 Use case ends
+
+=== Import calendar
+
+**MSS**
+
+1. User requests to import calendar XML file and specifies calendar name.
+2. Cow imports tasks contained in XML file into the a calendar with the specified name.
++
+Use case ends
+
+**Extensions**
+
+[none]
+* 2a. A calendar already exists with the specified name.
+** 2a1. Cow notifies the user and merges the incoming calendar with the pre-existing calendar.
++
+Use case ends.
 
 === Share calendar
 
 **MSS**
 
-1.  Share calendar with a contact
-2.  Recipient would be able to see calendar in Calendar list
-+
-Use case ends
-
-**Extensions**
-[none]
-* 1a. Email could not be sent.
-[none]
-** 1a1. Cow shows an error message.
+1. User requests to share his calendar.
+2. Cow exports an XML file containing all current existing tasks to the specified path.
 +
 Use case ends
 

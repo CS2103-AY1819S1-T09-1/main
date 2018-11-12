@@ -467,31 +467,44 @@ from the `tasks find` command
 Format for entering month is `MM`.
 Format for entering dates is `YYYYMMDD`.
 * Each cell in the calendar is populated with tasks that end on that day.
-* Clicking on any task would cause its details to be displayed in the task details pane.
 * Task filters applied via the `tasks find` command would also apply to the tasks displayed in the calendar.
-* If there are more than 5 tasks ending on that day, the cell will be scrollable,
-but a scroll bar is not displayed due to space constraints.
+* If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.
 ****
+
+[TIP]
+Clicking on an entry in the calendar would display it in the task details panel.
+
 // end::calendar[]
 
 // tag::calendarshow[]
 ==== View calendar for tasks due within given year and month: `calendar show`
 
-Populates the calendar panel with tasks from the specified month. +
+Displays the specified month in the calendar panel. +
 Format: `calendar show y/YEAR m/MONTH`
 
 [NOTE]
 Entries from the end of the previous month and the start of the following month may also be displayed depending on the length and start day of the specified month.
 
+Examples:
+
+* `calendar show y/2018 m/12` +
+Displays tasks due in December 2018 in the calendar.
+
 // end::calendarshow[]
 
-==== List tasks for a specific day: `calendars list` `[coming in v2.0]`
+==== List all calendars available: `calendars list` `[coming in v2.0]`
 
-Format: `calendars list ed/END_DATE`
+Format: `calendars list`
+
+==== Import calendar: `calendars import` `[coming in v2.0]`
+
+Format: `calendars import f/PATH_TO_FILE n/CALENDAR_NAME`
 
 ==== Share calendar: `calendars share` `[coming in v2.0]`
 
-Format: `calendars share CONTACT_INDEX`
+Writes all tasks into a XML file at the specified path.
+
+Format: `calendars share f/PATH_TO_FILE`
 
 === Global
 
