@@ -1,10 +1,14 @@
 package seedu.address.logic.parser.tasks;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_KEYWORD;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.BRUSH_END_DATE_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.BRUSH_END_DATE_SEARCH;
 import static seedu.address.logic.commands.CommandTestUtil.BRUSH_NAME_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.BRUSH_NAME_SEARCH;
+import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_BRUSH_NAME_PREDICATE;
+import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_BRUSH_NAME_SEARCH;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_NAME_PREDICATE;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_NAME_SEARCH;
 import static seedu.address.logic.commands.CommandTestUtil.SLAUGHTER_START_DATE_PREDICATE;
@@ -42,9 +46,26 @@ public class FindCommandParserTest {
     @Test
     public void parse_wrongDate_failure() {
         // no field specified
-        assertParseFailure(parser, " ed/invalidDate", MESSAGE_DATE_FORMAT_CONSTRAINTS);
+        assertParseFailure(parser, " sd/invalidDate", MESSAGE_DATE_FORMAT_CONSTRAINTS);
+        assertParseFailure(parser, " ed/", MESSAGE_DATE_FORMAT_CONSTRAINTS);
         assertParseFailure(parser, " ed/110011", MESSAGE_DATE_FORMAT_CONSTRAINTS);
         assertParseFailure(parser, " ed/10290193", MESSAGE_DATE_VALUE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidKeyword_failure() {
+        // no field specified
+        assertParseFailure(parser, " n/Not A Keyword", MESSAGE_INVALID_KEYWORD);
+        assertParseFailure(parser, " n/", MESSAGE_INVALID_KEYWORD);
+        assertParseFailure(parser, " n/      ", MESSAGE_INVALID_KEYWORD);
+    }
+
+    @Test
+    public void parse_invalidTag_failure() {
+        // no field specified
+        assertParseFailure(parser, " t/Not A TAG", MESSAGE_INVALID_TAG);
+        assertParseFailure(parser, " t/", MESSAGE_INVALID_TAG);
+        assertParseFailure(parser, " t/      ", MESSAGE_INVALID_TAG);
     }
 
     @Test
@@ -91,6 +112,15 @@ public class FindCommandParserTest {
                 new FindTaskPredicateAssemblerBuilder()
                         .withEndDatePredicate(BRUSH_END_DATE_PREDICATE)
                         .withTagsPredicate(SLAUGHTER_TAG_PREDICATE)
+                        .build();
+        expectedCommand = new FindCommand(predicateBuilder);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        userInput = SLAUGHTER_BRUSH_NAME_SEARCH + BRUSH_END_DATE_SEARCH;
+        predicateBuilder =
+                new FindTaskPredicateAssemblerBuilder()
+                        .withNamePredicate(SLAUGHTER_BRUSH_NAME_PREDICATE)
+                        .withEndDatePredicate(BRUSH_END_DATE_PREDICATE)
                         .build();
         expectedCommand = new FindCommand(predicateBuilder);
         assertParseSuccess(parser, userInput, expectedCommand);

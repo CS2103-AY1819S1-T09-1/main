@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SLAUGHTER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import seedu.address.model.task.DateTime;
@@ -39,5 +40,14 @@ public class TypicalTasks {
 
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(BRUSH, SLAUGHTER));
+    }
+
+    public static Task getBrushCurrentDateTime() {
+        Date currentDate = new Date();
+        String nowDateString = DateTime.INPUT_DATE_FORMAT.format(currentDate);
+        String nowTimeString = DateTime.INPUT_TIME_FORMAT.format(currentDate);
+        return new TaskBuilder(BRUSH)
+                .withStartDateTime(new DateTime(nowDateString, nowTimeString))
+                .build();
     }
 }

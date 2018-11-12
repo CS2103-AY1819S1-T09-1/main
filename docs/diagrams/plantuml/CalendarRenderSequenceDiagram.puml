@@ -1,0 +1,107 @@
+@startuml CalendarRenderSequence
+
+scale 1
+
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam BoxPadding 16
+skinparam ParticipantPadding 10
+skinparam shadowing false
+hide stereotype
+
+skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+
+    ParticipantBorderColor<<main>> #C00000
+    ParticipantBackgroundColor<<main>> #C00000
+
+    ParticipantBorderColor<<ui>> #00B050
+    ParticipantBackgroundColor<<ui>> #00B050
+
+    ParticipantBorderColor<<logic>> #0070C0
+    ParticipantBackgroundColor<<logic>> #0070C0
+
+    ParticipantBorderColor<<model>> #7030A0
+    ParticipantBackgroundColor<<model>> #7030A0
+
+    groupBodyBackgroundColor transparent
+
+    LifeLineBorderColor DarkGrey
+    LifeLineBackgroundColor #00B050
+    ParticipantFontColor #FFFFFF
+
+    ArrowColor #00B050
+    ArrowBorderColor #00B050
+    ArrowFontColor #00B050
+}
+participant main as ":MainApp" <<main>>
+box "Model" #E6E0EC
+    participant model as ":Model" <<model>>
+    participant month as "m:ObservableValue<Calendar>" <<model>>
+    participant taskList as "tl:FilteredList<Task>" <<model>>
+end box
+box "UI" #C0E399
+    participant mainWindow as ":MainWindow" <<ui>>
+    participant calendarPanel as ":CalendarPanel" <<ui>>
+    participant calendarContentCell as ":CalendarContentCell" <<ui>>
+end box
+
+' autoactivate on
+hide footbox
+create model
+main-[#C00000]>model
+activate model #7030A0
+create month
+model -[#7030A0]> month
+activate month #7030A0
+month --[#7030A0]>model: <color:#7030A0> m
+deactivate month
+create taskList
+model -[#7030A0]> taskList
+activate taskList #7030A0
+taskList --[#7030A0]>model: <color:#7030A0> m
+deactivate taskList
+
+mainWindow -> model: <color:#7030A0> getFilteredTaskList()
+activate mainWindow
+model --[#7030A0]> mainWindow: m
+mainWindow -> model: <color:#7030A0> getCalendarMonth()
+model --[#7030A0]> mainWindow: tl
+deactivate model
+create calendarPanel
+mainWindow -> calendarPanel: CalendarPanel(tl, m)
+activate calendarPanel
+create calendarContentCell
+calendarPanel -> calendarContentCell : CalendarContentCell(row, col, tl, m)
+activate calendarContentCell
+calendarContentCell -> calendarContentCell: handleUpdateCalendar\n(m.getValue())
+calendarContentCell --> calendarPanel
+deactivate calendarContentCell
+calendarPanel -> calendarPanel: handleUpdateCalendar(m.getValue())
+calendarPanel --> mainWindow
+deactivate calendarPanel
+deactivate mainWindow
+loop
+[-[#0070C0]>model: <color:#7030A0> updateCalendarMonth\n<color:#7030A0>(newMonth)
+activate model #7030A0
+model -[#7030A0]>month: <color:#7030A0> set(newMonth)
+activate month #7030A0
+month --[#7030A0]> model
+deactivate model
+month -[#7030A0]> calendarPanel: handleUpdateCalendar(newMonth)
+activate calendarPanel
+calendarPanel -> calendarPanel: handleUpdateCalendar(newMonth)
+calendarPanel --> month
+deactivate calendarPanel
+month -[#7030A0]> calendarContentCell: handleUpdateCalendar(newMonth)
+activate calendarContentCell
+calendarContentCell -> calendarContentCell: handleUpdateCalendar\n(newMonth)
+calendarContentCell --> month
+deactivate calendarContentCell
+deactivate month
+end loop
+
+
+
+@enduml

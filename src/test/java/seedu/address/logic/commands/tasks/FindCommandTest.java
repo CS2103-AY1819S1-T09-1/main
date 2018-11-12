@@ -159,11 +159,20 @@ public class FindCommandTest {
 
     @Test
     public void execute_compoundNameStartDate_taskFound() {
+        // 1 possible outcome from name and start date
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         TaskPredicateAssembler predicateBuilder = new TaskPredicateAssembler();
         predicateBuilder.setNamePredicate(prepareNamePredicate("Slaughter"));
         predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate(new DateTime("20180228")));
         FindCommand command = new FindCommand(predicateBuilder);
+        expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(SLAUGHTER), model.getFilteredTaskList());
+
+        // 2 possible outcomes based on name only, start date narrows to 1.
+        predicateBuilder.setNamePredicate(prepareNamePredicate("cows"));
+        predicateBuilder.setStartDatePredicate(new MatchesStartDatePredicate(new DateTime("20180228")));
+        command = new FindCommand(predicateBuilder);
         expectedModel.updateFilteredTaskList(predicateBuilder.getCombinedPredicate());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.singletonList(SLAUGHTER), model.getFilteredTaskList());

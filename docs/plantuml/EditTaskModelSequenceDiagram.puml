@@ -1,0 +1,82 @@
+@startuml
+scale 2
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+skinparam shadowing false
+hide stereotype
+
+skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+    ParticipantBorderColor #0070C0
+    ParticipantBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    ParticipantBorderColor<<ui>> #00B050
+    ParticipantBackgroundColor<<ui>> #00B050
+    ParticipantBorderColor<<logic>> #0070C0
+    ParticipantBackgroundColor<<logic>> #0070C0
+    ParticipantBorderColor<<model>> #7030A0
+    ParticipantBackgroundColor<<model>> #7030A0
+    LifeLineBorderColor DarkGrey
+    LifeLineBackgroundColor #7030A0
+    ParticipantFontColor #FFFFFF
+    ArrowColor #7030A0
+    ArrowBorderColor #7030A0
+    ArrowFontColor #7030A0
+}
+
+hide footbox
+
+box "Model" #E6E0EC
+    participant modelManager as "model:ModelManager" <<model>>
+    participant versionedAddressBook as "versionedAddressBook:VersionedAddressBook" <<model>>
+    participant tasks as "tasks:UniqueTaskList" <<model>>
+end box
+
+participant addressBookChangedEvent as ":AddressBookChangedEvent"
+
+[-[#00B050]> modelManager: <color: #0070C0> updateTask(tasksToEdit, editedTask)
+activate modelManager
+
+modelManager -> versionedAddressBook: updateTask(target, editedTask)
+activate versionedAddressBook
+
+versionedAddressBook -> tasks: setTask(target, editedTask)
+activate tasks
+
+tasks --> versionedAddressBook
+deactivate tasks
+
+versionedAddressBook --> modelManager
+deactivate versionedAddressBook
+
+modelManager -> modelManager: indicateAddressBookChanged()
+activate modelManager
+
+create addressBookChangedEvent
+modelManager -> addressBookChangedEvent
+activate addressBookChangedEvent #0070C0
+addressBookChangedEvent --[#0070C0]> modelManager
+deactivate addressBookChangedEvent
+
+modelManager --> modelManager
+deactivate modelManager
+
+modelManager -->[
+deactivate modelManager
+
+
+[-[#00B050]> modelManager: <color: #0070C0> commitAddressBook()
+activate modelManager
+
+modelManager -> versionedAddressBook: commit()
+activate versionedAddressBook
+
+versionedAddressBook --> modelManager
+deactivate versionedAddressBook
+
+modelManager -->[
+deactivate modelManager
+@enduml

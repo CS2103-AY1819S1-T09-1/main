@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.task.Task.MESSAGE_START_AFTER_END;
+import static seedu.address.model.task.Task.MESSAGE_END_BEFORE_START;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -83,7 +83,7 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         if (!editedTask.isValidDateTimeRange()) {
-            throw new CommandException(MESSAGE_START_AFTER_END);
+            throw new CommandException(MESSAGE_END_BEFORE_START);
         }
 
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {

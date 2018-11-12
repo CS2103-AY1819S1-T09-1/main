@@ -1,0 +1,111 @@
+@startuml
+scale 2
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+skinparam shadowing false
+hide stereotype
+
+skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+    ParticipantBorderColor #0070C0
+    ParticipantBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    ParticipantBorderColor<<ui>> #00B050
+    ParticipantBackgroundColor<<ui>> #00B050
+    ParticipantBorderColor<<logic>> #0070C0
+    ParticipantBackgroundColor<<logic>> #0070C0
+    ParticipantBorderColor<<model>> #7030A0
+    ParticipantBackgroundColor<<model>> #7030A0
+    LifeLineBorderColor DarkGrey
+    LifeLineBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    ArrowColor #0070C0
+    ArrowBorderColor #0070C0
+    ArrowFontColor #0070C0
+}
+
+hide footbox
+
+box "Logic" #DCE6F2
+    participant logicManager as "logic:LogicManager" <<logic>>
+    participant appParser as "appParser:AppParser" <<logic>>
+    participant taskParser as ":TaskParser" <<logic>>
+    participant editCommandParser as ":EditCommandParser" <<logic>>
+    participant editCommand as ":EditCommand" <<logic>>
+    participant commandResult as ":ResultCommand" <<logic>>
+end box
+box "Model" #E6E0EC
+    participant model as "Model" <<model>>
+end box
+
+[-[#00B050]> logicManager: execute(commandText)
+activate logicManager
+
+logicManager -> appParser: parseCommand(commandText)
+
+create taskParser
+activate appParser
+appParser -> taskParser
+activate taskParser
+taskParser --> appParser
+deactivate taskParser
+
+appParser -> taskParser: parseCommand(arguments)
+activate taskParser
+
+create editCommandParser
+taskParser -> editCommandParser
+activate editCommandParser
+editCommandParser --> taskParser
+deactivate editCommandParser
+
+taskParser -> editCommandParser: parse(arguments)
+activate editCommandParser
+
+create editCommand
+editCommandParser -> editCommand
+activate editCommand
+editCommand --> editCommandParser
+deactivate editCommand
+
+editCommandParser --> taskParser
+deactivate editCommandParser
+destroy editCommandParser
+
+taskParser --> appParser
+deactivate taskParser
+destroy taskParser
+
+appParser --> logicManager
+deactivate appParser
+
+logicManager -> editCommand: execute(model, history)
+activate editCommand
+
+editCommand -> model: <color:#7030A0> updateTask(taskToEdit, editedTask)
+activate model #7030A0
+model --[#7030A0]> editCommand
+deactivate model
+
+editCommand -> model: <color:#7030A0> commitAddressBook()
+activate model #7030A0
+model --[#7030A0]> editCommand
+deactivate model
+
+create commandResult
+editCommand -> commandResult
+activate commandResult
+commandResult --> editCommand
+deactivate commandResult
+
+editCommand --> logicManager
+deactivate editCommand
+destroy editCommand
+
+
+logicManager -->[
+deactivate logicManager
+@enduml
