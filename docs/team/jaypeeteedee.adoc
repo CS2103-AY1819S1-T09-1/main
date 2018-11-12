@@ -91,3 +91,5 @@ include::../UserGuide.adoc[tag=listfindtasks]
 include::../DeveloperGuide.adoc[tag=storage]
 
 include::../DeveloperGuide.adoc[tag=listfindtasks]
+
+include::../DeveloperGuide.adoc[tag=filterTasksManualTestInstructions]

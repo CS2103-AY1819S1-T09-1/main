@@ -1354,9 +1354,26 @@ Move the window to a different location. Close the window.
 .. Test case: `tasks delete all` +
    Expected: All tasks shown in the task list are deleted. Details of the deleted tasks are shown in the status message. Timestamp in the status bar is updated.
 
-=== Something
 
-=== Something else
+// tag::filterTasksManualTestInstructions[]
+
+=== Filtering tasks
+. Searching for tasks
+.. Prerequisites: There are multiple tasks in the list for visible results.
+.. Test case: `tasks find n/work` +
+Expected: Any tasks with `work` in the name are listed in the tasks list panel. Number of tasks listed is shown in the status message.
+.. Test case: `tasks find t/farm` +
+Expected: Any tasks with the `farm` tag are listed in the tasks list panel. Number of tasks listed is shown in the status message.
+.. Test case: `tasks find sd/20180105` +
+Expected: Any tasks that starts at `20180105` are listed in the tasks list panel. Number of tasks listed is shown in the status message.
+.. Test case: `tasks find n/hello sd/20181103` +
+Expected: Any tasks with `hello` in the name and start date `20181103` are listed in the tasks list panel. Number of tasks listed is shown in the status message.
+.. Test case: `tasks find t/` +
+Expected: Task list is not changed. Error details is shown in the status message.
+.. Other incorrect commands to try: `tasks find n/`, `tasks find sd/invaliddate`, `tasks find ed/` +
+Expected: Similar to previous.
+
+// end::filterTasksManualTestInstructions[]
 
 // tag::calendarManualTestInstructions[]
 
