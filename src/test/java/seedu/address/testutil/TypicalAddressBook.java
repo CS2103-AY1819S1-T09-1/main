@@ -14,7 +14,29 @@ public class TypicalAddressBook {
     private TypicalAddressBook() {} // prevents instantiation
 
     /**
-     * @return a typical AddressBook with all the typical Person and Task
+     * @return a typical AddressBook with all the typical Persons
+     */
+    public static AddressBook getTypicalAddressBookPersons() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * @return a typical AddressBook with all the typical Tasks
+     */
+    public static AddressBook getTypicalAddressBookTasks() {
+        AddressBook ab = new AddressBook();
+        for (Task task: getTypicalTasks()) {
+            ab.addTask(task);
+        }
+        return ab;
+    }
+
+    /**
+     * @return a typical AddressBook with all the typical Persons and Tasks
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
