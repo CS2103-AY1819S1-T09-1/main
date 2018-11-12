@@ -434,12 +434,12 @@ Examples:
 * `contacts list` +
 `tasks list` +
 `tasks unassign k/1 c/2` +
-Unassigns the 1st task in Cow to the 2nd person in Cow
+Unassigns the 1st task in Cow from the 2nd person in Cow
 * `contacts list` +
 `tasks find n/Cows` +
 `tasks assign k/3 c/1` +
 Unassigns the 3rd task in the list of tasks resulting from the `tasks find`
-command to the first person in Cow
+command from the first person in Cow
 
 ==== Show full details of a task: `tasks assigned`
 
