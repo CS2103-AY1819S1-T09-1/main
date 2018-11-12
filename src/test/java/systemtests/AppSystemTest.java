@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.testutil.GuiTestAssert.assertPersonsListMatching;
+import static seedu.address.ui.testutil.GuiTestAssert.assertTasksListMatching;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -134,17 +135,19 @@ public abstract class AppSystemTest {
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
         assertPersonsListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+        assertTasksListMatching(getTaskListPanel(), expectedModel.getFilteredTaskList());
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
-     * their current state.
+     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle}, {@code TaskListPanelHandle}
+     * and {@code StatusBarFooterHandle} to remember their current state.
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
         getPersonListPanel().rememberSelectedPersonCard();
+        getTaskListPanel().rememberSelectedTaskCard();
     }
 
     /**

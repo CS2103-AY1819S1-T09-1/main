@@ -8,6 +8,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.contacts.AssignedCommand;
 import seedu.address.logic.commands.contacts.FindCommand;
 import seedu.address.logic.commands.contacts.ListCommand;
+import seedu.address.model.AddressBook;
+import seedu.address.testutil.TypicalAddressBook;
 import systemtests.AppSystemTest;
 
 /**
@@ -36,5 +38,10 @@ public abstract class ContactsSystemTest extends AppSystemTest {
     protected void selectPerson(Index index) {
         executeCommand(MODULE_WORD + " " + AssignedCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+    }
+
+    @Override
+    protected AddressBook getInitialData() {
+        return TypicalAddressBook.getTypicalAddressBookPersons();
     }
 }

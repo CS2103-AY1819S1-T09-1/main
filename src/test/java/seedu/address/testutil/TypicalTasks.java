@@ -1,14 +1,19 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BRUSH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_FEED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_BRUSH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_FEED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BRUSH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FEED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BRUSH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_FEED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_BRUSH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_FEED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SLAUGHTER;
 
@@ -35,6 +40,13 @@ public class TypicalTasks {
             .withEndDateTime(new DateTime(VALID_END_DATE_SLAUGHTER, VALID_END_TIME_SLAUGHTER))
             .withTags(VALID_TAG_SLAUGHTER)
             .build();
+
+    public static final Task FEED = new TaskBuilder().withName(VALID_NAME_FEED)
+            .withStartDateTime(new DateTime(VALID_START_DATE_FEED, VALID_START_TIME_FEED))
+            .withEndDateTime(new DateTime(VALID_END_DATE_FEED, VALID_END_TIME_FEED))
+            .build();
+
+    public static final String KEYWORD_MATCHING_BRUSH = "Brush"; // A keyword that matches MEIER
 
     private TypicalTasks() {} // prevents instantiation
 

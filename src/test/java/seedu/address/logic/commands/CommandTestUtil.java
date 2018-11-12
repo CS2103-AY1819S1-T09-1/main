@@ -138,14 +138,19 @@ public class CommandTestUtil {
     }
 
     public static final String VALID_NAME_BRUSH = "Brush the cows";
+    public static final String VALID_NAME_FEED = "Feed the cows";
     public static final String VALID_NAME_SLAUGHTER = "Slaughter the cows";
     public static final String VALID_START_DATE_BRUSH = "20180101";
+    public static final String VALID_START_DATE_FEED = "20190101";
     public static final String VALID_START_DATE_SLAUGHTER = "20180228";
     public static final String VALID_START_TIME_BRUSH = "0000";
+    public static final String VALID_START_TIME_FEED = "1200";
     public static final String VALID_START_TIME_SLAUGHTER = "0700";
     public static final String VALID_END_DATE_BRUSH = "20181231";
+    public static final String VALID_END_DATE_FEED = "20191231";
     public static final String VALID_END_DATE_SLAUGHTER = "20180228";
     public static final String VALID_END_TIME_BRUSH = "2359";
+    public static final String VALID_END_TIME_FEED = "2200";
     public static final String VALID_END_TIME_SLAUGHTER = "1830";
     public static final String VALID_TAG_SLAUGHTER = "messy";
 
@@ -198,22 +203,26 @@ public class CommandTestUtil {
                         .build();
     }
 
-    public static final String NAME_DESC_BRUSH =
-            " " + seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME + VALID_NAME_BRUSH;
+    public static final String NAME_DESC_BRUSH = " " + PREFIX_NAME + VALID_NAME_BRUSH;
     public static final String START_DATE_DESC_BRUSH = " " + PREFIX_START_DATE + VALID_START_DATE_BRUSH;
     public static final String START_TIME_DESC_BRUSH = " " + PREFIX_START_TIME + VALID_START_TIME_BRUSH;
     public static final String START_DATETIME_DESC_BRUSH = START_DATE_DESC_BRUSH + START_TIME_DESC_BRUSH;
     public static final String END_DATE_DESC_BRUSH = " " + PREFIX_END_DATE + VALID_END_DATE_BRUSH;
     public static final String END_TIME_DESC_BRUSH = " " + PREFIX_END_TIME + VALID_END_TIME_BRUSH;
     public static final String END_DATETIME_DESC_BRUSH = END_DATE_DESC_BRUSH + END_TIME_DESC_BRUSH;
-    public static final String NAME_DESC_SLAUGHTER =
-            " " + seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME + VALID_NAME_SLAUGHTER;
+    public static final String NAME_DESC_FEED = " " + PREFIX_NAME + VALID_NAME_FEED;
+    public static final String START_DATE_DESC_FEED = " " + PREFIX_START_DATE + VALID_START_DATE_FEED;
+    public static final String START_TIME_DESC_FEED = " " + PREFIX_START_TIME + VALID_START_TIME_FEED;
+    public static final String END_DATE_DESC_FEED = " " + PREFIX_END_DATE + VALID_END_DATE_FEED;
+    public static final String END_TIME_DESC_FEED = " " + PREFIX_END_TIME + VALID_END_TIME_FEED;
+    public static final String NAME_DESC_SLAUGHTER = " " + PREFIX_NAME + VALID_NAME_SLAUGHTER;
     public static final String START_DATE_DESC_SLAUGHTER = " " + PREFIX_START_DATE + VALID_START_DATE_SLAUGHTER;
     public static final String START_TIME_DESC_SLAUGHTER = " " + PREFIX_START_TIME + VALID_START_TIME_SLAUGHTER;
     public static final String START_DATETIME_DESC_SLAUGHTER = START_DATE_DESC_SLAUGHTER + START_TIME_DESC_SLAUGHTER;
     public static final String END_DATE_DESC_SLAUGHTER = " " + PREFIX_END_DATE + VALID_END_DATE_SLAUGHTER;
     public static final String END_TIME_DESC_SLAUGHTER = " " + PREFIX_END_TIME + VALID_END_TIME_SLAUGHTER;
     public static final String END_DATETIME_DESC_SLAUGHTER = END_DATE_DESC_SLAUGHTER + END_TIME_DESC_SLAUGHTER;
+    public static final String TAG_DESC_SLAUGHTER = " " + PREFIX_TAG + VALID_TAG_SLAUGHTER;
 
     public static final EditTaskDescriptor DESC_BRUSH;
     public static final EditTaskDescriptor DESC_SLAUGHTER;
