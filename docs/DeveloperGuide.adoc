@@ -1373,46 +1373,6 @@ Expected: Task list is not changed. Error details is shown in the status message
 Expected: Similar to previous.
 
 // end::filterTasksManualTestInstructions[]
-// tag::assignManualTestInstructions[]
-
-=== Assigning a Task to a Contact
-. Assigning a task to a contact and vice versa while some or all tasks and contacts are listed.
-
-.. Prerequisites: List tasks using the `tasks list` or `tasks find` commands, and list contacts using the `contacts list` or `contacts find` commands. There must be at least 1 task and 2 contacts on screen.
-.. Test case: `tasks assign c/1 k/1` +
-   Expected: First task is assigned to the first contact. Details of the assignment are shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `tasks assign c/1 k/1` +
-   Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
-.. Test case: `contacts assign c/1 k/1` +
-   Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
-.. Test case: `contacts assign c/2 k/1` +
-   Expected: Second contact is assigned to the first task. Details of the assignment are shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `contacts assign c/2 k/1` +
-   Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
-.. Test case: `tasks assign c/2 k/1` +
-   Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
-.. Other incorrect assign commands to try: `tasks assign` or `contacts assign`, `tasks assign c/x` or `contacts assign c/x` (where x is any integer), `tasks assign k/x` or `contacts assign k/x` (where x in any integer), `tasks assign c/x k/y` or `contacts assign c/x k/y` (where x is negative or larger than the contacts list size and/or y is negative or larger than the task list size).
-
-=== Unassigning a Task from a Contact
-. Unassigning a task from a contact and vice versa while some or all tasks and contacts are listed.
-
-.. Prerequisites: List tasks using the `tasks list` or `tasks find` commands, and list contacts using the `contacts list` or `contacts find` commands. There must be at least 1 task and 2 contacts on screen. Task 1 must be assigned to contacts 1 and 2, as detailed in the previous test case.
-.. Test case: `tasks unassign c/1 k/1` +
-   Expected: First task is unassigned from the first contact. Details of the unassignment are shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `tasks unassign c/1 k/1` +
-   Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
-.. Test case: `contacts unassign c/1 k/1` +
-   Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
-.. Test case: `contacts unassign c/2 k/1` +
-   Expected: Second contact is unassigned from the first task. Details of the unassignment are shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `contacts unassign c/2 k/1` +
-   Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
-.. Test case: `tasks unassign c/2 k/1` +
-   Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
-.. Other incorrect unassign commands to try: `tasks unassign` or `contacts unassign`, `tasks unassign c/x` or `contacts unassign c/x` (where x is any integer), `tasks unassign k/x` or `contacts unassign k/x` (where x in any integer), `tasks unassign c/x k/y` or `contacts unassign c/x k/y` (where x is negative or larger than the contacts list size and/or y is negative or larger than the task list size).
-
-// end::assignManualTestInstructions[]
-
 // tag::calendarManualTestInstructions[]
 
 === Calendar Show
@@ -1459,3 +1419,43 @@ Expected: Calendar displays the current month. Calendar should be populated with
 Expected: Calendar is unchanged. Error details shown in the status message.
 
 // end::calendarManualTestInstructions[]
+
+// tag::assignManualTestInstructions[]
+
+=== Assigning a Task to a Contact
+. Assigning a task to a contact and vice versa while some or all tasks and contacts are listed.
+
+.. Prerequisites: List tasks using the `tasks list` or `tasks find` commands, and list contacts using the `contacts list` or `contacts find` commands. There must be at least 1 task and 2 contacts on screen.
+.. Test case: `tasks assign c/1 k/1` +
+   Expected: First task is assigned to the first contact. Details of the assignment are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `tasks assign c/1 k/1` +
+   Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
+.. Test case: `contacts assign c/1 k/1` +
+   Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
+.. Test case: `contacts assign c/2 k/1` +
+   Expected: Second contact is assigned to the first task. Details of the assignment are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `contacts assign c/2 k/1` +
+   Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
+.. Test case: `tasks assign c/2 k/1` +
+   Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.
+.. Other incorrect assign commands to try: `tasks assign` or `contacts assign`, `tasks assign c/x` or `contacts assign c/x` (where x is any integer), `tasks assign k/x` or `contacts assign k/x` (where x in any integer), `tasks assign c/x k/y` or `contacts assign c/x k/y` (where x is negative or larger than the contacts list size and/or y is negative or larger than the task list size).
+
+=== Unassigning a Task from a Contact
+. Unassigning a task from a contact and vice versa while some or all tasks and contacts are listed.
+
+.. Prerequisites: List tasks using the `tasks list` or `tasks find` commands, and list contacts using the `contacts list` or `contacts find` commands. There must be at least 1 task and 2 contacts on screen. Task 1 must be assigned to contacts 1 and 2, as detailed in the previous test case.
+.. Test case: `tasks unassign c/1 k/1` +
+   Expected: First task is unassigned from the first contact. Details of the unassignment are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `tasks unassign c/1 k/1` +
+   Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
+.. Test case: `contacts unassign c/1 k/1` +
+   Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
+.. Test case: `contacts unassign c/2 k/1` +
+   Expected: Second contact is unassigned from the first task. Details of the unassignment are shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `contacts unassign c/2 k/1` +
+   Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
+.. Test case: `tasks unassign c/2 k/1` +
+   Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
+.. Other incorrect unassign commands to try: `tasks unassign` or `contacts unassign`, `tasks unassign c/x` or `contacts unassign c/x` (where x is any integer), `tasks unassign k/x` or `contacts unassign k/x` (where x in any integer), `tasks unassign c/x k/y` or `contacts unassign c/x k/y` (where x is negative or larger than the contacts list size and/or y is negative or larger than the task list size).
+
+// end::assignManualTestInstructions[]
