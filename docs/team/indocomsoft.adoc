@@ -46,10 +46,10 @@ To get familiar with Cow, the user needs some sample data to play and experiment
 This enhancement required me to write a helper function inside `SampleDataUtil` to do assignment. This is to ensure data integrity by doing two-way assignment (task to person and person to task) as one transaction.
 
 * *Minor enhancement 2*: Added **tasks select** command to select a task and show its details in the task details pane.
-** What it does:
-** Justification:
+** What it does: It selects a task from the displayed task list, and show the task in the task details pane.
+** Justification: The space available in the tasks lists is very small, so most times the task name is cut off. In order to see more details, the user needs a command to select from that list to show in the task details pane.
 ** Highlights:
-This enhancement required me to use an Event already wrote by my teammate, `JumpToTaskListRequestEvent`. In order to use my teammate's code successfully, I need to know how to use it properly.
+This enhancement required me to use an Event already wrote by my teammate, `JumpToTaskListRequestEvent`. In order to use it, I need to be able to understand the documentation written by my teammate. This showcases my ability to work in with modular code written by several developers.
 
 * *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=indocomsoft
 
@@ -59,6 +59,8 @@ This enhancement required me to use an Event already wrote by my teammate, `Jump
 *** Managed release `v1.3.2` and `v1.4` (2 releases) on GitHub
 *** Managed milestone `v1.4` issue tracker on GitHub
 ** Enhancements to existing features:
+*** Refactor all branding from AddressBook to Cow: link:{prURL}/183[#183]
+*** Made sure that when main window opened, it is big enough to show the calendar pane: link:{prURL}/183[#183]
 *** Added module name in usage messages: link:{prURL}/87[#87]
 *** Allow editing task's either start or end datetime: link:{prURL}/94[#94]
 ** Documentation:
