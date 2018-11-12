@@ -3,6 +3,7 @@ package seedu.address.logic.parser.tasks;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_KEYWORD;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TAG;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.tasks.CliSyntax.PREFIX_START_DATE;
@@ -64,9 +65,16 @@ public class FindCommandParser implements Parser<FindCommand> {
             DateTime endDate = ParserUtil.parseDateToDateTime(argMultiMap.getValue(PREFIX_END_DATE).get());
             combinedPredicate.setEndDatePredicate(new MatchesEndDatePredicate(endDate));
         }
-        parseTagsForMatching(argMultiMap.getAllValues(PREFIX_TAG)).ifPresent((tags) ->
-                combinedPredicate.setHasTagsPredicate(new HasTagsPredicate(new ArrayList<>(tags)))
-        );
+        if (!argMultiMap.getAllValues(PREFIX_TAG).isEmpty()) {
+            List<String> tagNames = argMultiMap.getAllValues(PREFIX_TAG);
+            if (isAnyTagNameInvalid(tagNames)) {
+                throw new ParseException(
+                        MESSAGE_INVALID_TAG, true);
+            }
+            parseTagsForMatching(argMultiMap.getAllValues(PREFIX_TAG)).ifPresent((tags) ->
+                    combinedPredicate.setHasTagsPredicate(new HasTagsPredicate(new ArrayList<>(tags)))
+            );
+        }
 
         if (!combinedPredicate.isAnyPredicateProvided()) {
             throw new ParseException(
@@ -77,12 +85,21 @@ public class FindCommandParser implements Parser<FindCommand> {
 
 
     /**
-     * Checks if any keyword contains more than 1 word.
+     * Checks if any keyword is an empty string or contains more than 1 word.
      */
     private boolean isAnyKeywordInvalid(List<String> keywords) {
         assert keywords != null;
         return keywords.stream()
-                .anyMatch(keyword -> keyword.trim().split("\\s+").length > 1);
+                .anyMatch(keyword -> keyword.trim().equals("") || keyword.trim().split("\\s+").length > 1);
+    }
+
+    /**
+     * Checks if any tag name is an empty string contains more than 1 word.
+     */
+    private boolean isAnyTagNameInvalid(List<String> tagNames) {
+        assert tagNames != null;
+        return tagNames.stream()
+                .anyMatch(tagName -> tagName.trim().equals("") || tagName.trim().split("\\s+").length > 1);
     }
 
     /**
