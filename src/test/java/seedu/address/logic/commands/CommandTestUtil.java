@@ -82,28 +82,30 @@ public class CommandTestUtil {
 
     public static final String VALID_START_DATE_DESC = " " + PREFIX_START_DATE + VALID_DATE;
     public static final String VALID_START_TIME_DESC = " " + PREFIX_START_TIME + VALID_TIME;
-    public static final String VALID_START_DATETIME_DESC = " " + VALID_START_DATE_DESC + " " + VALID_START_TIME_DESC;
+    public static final String VALID_START_DATETIME_DESC =
+            " " + VALID_START_DATE_DESC + " " + VALID_START_TIME_DESC;
     public static final String VALID_END_DATE_DESC = " " + PREFIX_END_DATE + VALID_DATE;
     public static final String VALID_END_TIME_DESC = " " + PREFIX_END_TIME + VALID_TIME;
-    public static final String VALID_END_DATETIME_DESC = " " + VALID_END_DATE_DESC + " " + VALID_END_TIME_DESC;
+    public static final String VALID_END_DATETIME_DESC =
+            " " + VALID_END_DATE_DESC + " " + VALID_END_TIME_DESC;
 
     public static final String INVALID_VALUE_START_DATE_DESC = " " + PREFIX_START_DATE + INVALID_VALUE_DATE;
     public static final String INVALID_VALUE_START_TIME_DESC = " " + PREFIX_START_TIME + INVALID_VALUE_TIME;
-    public static final String INVALID_VALUE_START_DATETIME_DESC = " " + INVALID_VALUE_START_DATE_DESC + " "
-            + INVALID_VALUE_START_TIME_DESC;
+    public static final String INVALID_VALUE_START_DATETIME_DESC =
+            " " + INVALID_VALUE_START_DATE_DESC + " " + INVALID_VALUE_START_TIME_DESC;
     public static final String INVALID_VALUE_END_DATE_DESC = " " + PREFIX_END_DATE + INVALID_VALUE_DATE;
     public static final String INVALID_VALUE_END_TIME_DESC = " " + PREFIX_END_TIME + INVALID_VALUE_TIME;
-    public static final String INVALID_VALUE_END_DATETIME_DESC = " " + INVALID_VALUE_END_DATE_DESC + " "
-            + INVALID_VALUE_END_TIME_DESC;
+    public static final String INVALID_VALUE_END_DATETIME_DESC =
+            " " + INVALID_VALUE_END_DATE_DESC + " " + INVALID_VALUE_END_TIME_DESC;
 
     public static final String INVALID_FORMAT_START_DATE_DESC = " " + PREFIX_START_DATE + INVALID_FORMAT_DATE;
     public static final String INVALID_FORMAT_START_TIME_DESC = " " + PREFIX_START_TIME + INVALID_FORMAT_TIME;
-    public static final String INVALID_FORMAT_START_DATETIME_DESC = " " + INVALID_FORMAT_START_DATE_DESC + " "
-            + INVALID_FORMAT_START_TIME_DESC;
+    public static final String INVALID_FORMAT_START_DATETIME_DESC =
+            " " + INVALID_FORMAT_START_DATE_DESC + " " + INVALID_FORMAT_START_TIME_DESC;
     public static final String INVALID_FORMAT_END_DATE_DESC = " " + PREFIX_END_DATE + INVALID_FORMAT_DATE;
     public static final String INVALID_FORMAT_END_TIME_DESC = " " + PREFIX_END_TIME + INVALID_FORMAT_TIME;
-    public static final String INVALID_FORMAT_END_DATETIME_DESC = " " + INVALID_FORMAT_END_DATE_DESC + " "
-            + INVALID_FORMAT_END_TIME_DESC;
+    public static final String INVALID_FORMAT_END_DATETIME_DESC =
+            " " + INVALID_FORMAT_END_DATE_DESC + " " + INVALID_FORMAT_END_TIME_DESC;
 
     public static final String YEAR_2000 = VALID_YEAR;
     public static final String YEAR_2001 = " " + PREFIX_YEAR + "2001";
@@ -113,8 +115,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for
-                                                                            // addresses
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String INVALID_MONTH_SMALL = " " + PREFIX_MONTH + "-1";
@@ -161,48 +162,52 @@ public class CommandTestUtil {
     public static final String SLAUGHTER_START_DATE_SEARCH = " " + PREFIX_START_DATE + VALID_START_DATE_SLAUGHTER;
     public static final String BRUSH_END_DATE_SEARCH = " " + PREFIX_END_DATE + VALID_END_DATE_BRUSH;
     public static final String SLAUGHTER_TAG_SEARCH = " " + PREFIX_TAG + VALID_TAG_SLAUGHTER;
-    public static final seedu.address.model.task.NameContainsKeywordsPredicate BRUSH_NAME_PREDICATE = new seedu.address.model.task.NameContainsKeywordsPredicate(
-            Arrays.asList("Brush"));
-    public static final seedu.address.model.task.NameContainsKeywordsPredicate SLAUGHTER_NAME_PREDICATE = new seedu.address.model.task.NameContainsKeywordsPredicate(
-            Arrays.asList("Slaughter"));
-    public static final seedu.address.model.task.NameContainsKeywordsPredicate SLAUGHTER_BRUSH_NAME_PREDICATE = new seedu.address.model.task.NameContainsKeywordsPredicate(
-            Arrays.asList("cows"));
-    public static final MatchesStartDatePredicate BRUSH_START_DATE_PREDICATE = new MatchesStartDatePredicate(
-            new DateTime(VALID_START_DATE_BRUSH));
-    public static final MatchesEndDatePredicate BRUSH_END_DATE_PREDICATE = new MatchesEndDatePredicate(
-            new DateTime(VALID_END_DATE_BRUSH));
-    public static final MatchesStartDatePredicate SLAUGHTER_START_DATE_PREDICATE = new MatchesStartDatePredicate(
-            new DateTime(VALID_START_DATE_SLAUGHTER));
-    public static final MatchesEndDatePredicate SLAUGHTER_END_DATE_PREDICATE = new MatchesEndDatePredicate(
-            new DateTime(VALID_END_DATE_SLAUGHTER));
-    public static final HasTagsPredicate SLAUGHTER_TAG_PREDICATE = new HasTagsPredicate(
-            Collections.singletonList(new Tag(VALID_TAG_SLAUGHTER)));
+    public static final seedu.address.model.task.NameContainsKeywordsPredicate BRUSH_NAME_PREDICATE =
+            new seedu.address.model.task.NameContainsKeywordsPredicate(Arrays.asList("Brush"));
+    public static final seedu.address.model.task.NameContainsKeywordsPredicate SLAUGHTER_NAME_PREDICATE =
+            new seedu.address.model.task.NameContainsKeywordsPredicate(Arrays.asList("Slaughter"));
+    public static final seedu.address.model.task.NameContainsKeywordsPredicate SLAUGHTER_BRUSH_NAME_PREDICATE =
+            new seedu.address.model.task.NameContainsKeywordsPredicate(Arrays.asList("cows"));
+    public static final MatchesStartDatePredicate BRUSH_START_DATE_PREDICATE =
+            new MatchesStartDatePredicate(new DateTime(VALID_START_DATE_BRUSH));
+    public static final MatchesEndDatePredicate BRUSH_END_DATE_PREDICATE =
+            new MatchesEndDatePredicate(new DateTime(VALID_END_DATE_BRUSH));
+    public static final MatchesStartDatePredicate SLAUGHTER_START_DATE_PREDICATE =
+            new MatchesStartDatePredicate(new DateTime(VALID_START_DATE_SLAUGHTER));
+    public static final MatchesEndDatePredicate SLAUGHTER_END_DATE_PREDICATE =
+            new MatchesEndDatePredicate(new DateTime(VALID_END_DATE_SLAUGHTER));
+    public static final HasTagsPredicate SLAUGHTER_TAG_PREDICATE =
+            new HasTagsPredicate(Collections.singletonList(new Tag(VALID_TAG_SLAUGHTER)));
 
     static {
         FIND_BRUSH_BY_NAME = new FindTaskPredicateAssemblerBuilder().withNamePredicate(BRUSH_NAME_PREDICATE).build();
-        FIND_BRUSH_BY_END_DATE = new FindTaskPredicateAssemblerBuilder().withEndDatePredicate(BRUSH_END_DATE_PREDICATE)
-                .build();
-        FIND_SLAUGHTER_BY_START_DATE = new FindTaskPredicateAssemblerBuilder()
-                .withStartDatePredicate(SLAUGHTER_START_DATE_PREDICATE).build();
-        FIND_SLAUGHTER_AND_BRUSH_BY_NAME = new FindTaskPredicateAssemblerBuilder()
-                .withNamePredicate(SLAUGHTER_BRUSH_NAME_PREDICATE).build();
-        FIND_SLAUGHTER_BY_NAME_AND_START_DATE = new FindTaskPredicateAssemblerBuilder()
-                .withNamePredicate(SLAUGHTER_NAME_PREDICATE).withStartDatePredicate(SLAUGHTER_START_DATE_PREDICATE)
-                .build();
-        FIND_SLAUGHTER_BY_TAG = new FindTaskPredicateAssemblerBuilder().withTagsPredicate(SLAUGHTER_TAG_PREDICATE)
-                .build();
+        FIND_BRUSH_BY_END_DATE =
+                new FindTaskPredicateAssemblerBuilder().withEndDatePredicate(BRUSH_END_DATE_PREDICATE).build();
+        FIND_SLAUGHTER_BY_START_DATE =
+                new FindTaskPredicateAssemblerBuilder().withStartDatePredicate(SLAUGHTER_START_DATE_PREDICATE).build();
+        FIND_SLAUGHTER_AND_BRUSH_BY_NAME =
+                new FindTaskPredicateAssemblerBuilder().withNamePredicate(SLAUGHTER_BRUSH_NAME_PREDICATE).build();
+        FIND_SLAUGHTER_BY_NAME_AND_START_DATE =
+                new FindTaskPredicateAssemblerBuilder()
+                        .withNamePredicate(SLAUGHTER_NAME_PREDICATE)
+                        .withStartDatePredicate(SLAUGHTER_START_DATE_PREDICATE)
+                        .build();
+        FIND_SLAUGHTER_BY_TAG =
+                new FindTaskPredicateAssemblerBuilder()
+                        .withTagsPredicate(SLAUGHTER_TAG_PREDICATE)
+                        .build();
     }
 
-    public static final String NAME_DESC_BRUSH = " " + seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME
-            + VALID_NAME_BRUSH;
+    public static final String NAME_DESC_BRUSH =
+            " " + seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME + VALID_NAME_BRUSH;
     public static final String START_DATE_DESC_BRUSH = " " + PREFIX_START_DATE + VALID_START_DATE_BRUSH;
     public static final String START_TIME_DESC_BRUSH = " " + PREFIX_START_TIME + VALID_START_TIME_BRUSH;
     public static final String START_DATETIME_DESC_BRUSH = START_DATE_DESC_BRUSH + START_TIME_DESC_BRUSH;
     public static final String END_DATE_DESC_BRUSH = " " + PREFIX_END_DATE + VALID_END_DATE_BRUSH;
     public static final String END_TIME_DESC_BRUSH = " " + PREFIX_END_TIME + VALID_END_TIME_BRUSH;
     public static final String END_DATETIME_DESC_BRUSH = END_DATE_DESC_BRUSH + END_TIME_DESC_BRUSH;
-    public static final String NAME_DESC_SLAUGHTER = " " + seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME
-            + VALID_NAME_SLAUGHTER;
+    public static final String NAME_DESC_SLAUGHTER =
+            " " + seedu.address.logic.parser.tasks.CliSyntax.PREFIX_NAME + VALID_NAME_SLAUGHTER;
     public static final String START_DATE_DESC_SLAUGHTER = " " + PREFIX_START_DATE + VALID_START_DATE_SLAUGHTER;
     public static final String START_TIME_DESC_SLAUGHTER = " " + PREFIX_START_TIME + VALID_START_TIME_SLAUGHTER;
     public static final String START_DATETIME_DESC_SLAUGHTER = START_DATE_DESC_SLAUGHTER + START_TIME_DESC_SLAUGHTER;
@@ -214,12 +219,16 @@ public class CommandTestUtil {
     public static final EditTaskDescriptor DESC_SLAUGHTER;
 
     static {
-        DESC_BRUSH = new EditTaskDescriptorBuilder().withName(VALID_NAME_BRUSH)
+        DESC_BRUSH = new EditTaskDescriptorBuilder()
+                .withName(VALID_NAME_BRUSH)
                 .withStartDateTime(new DateTime(VALID_START_DATE_BRUSH, VALID_END_TIME_BRUSH))
-                .withEndDateTime(new DateTime(VALID_END_DATE_BRUSH, VALID_END_TIME_BRUSH)).build();
-        DESC_SLAUGHTER = new EditTaskDescriptorBuilder().withName(VALID_NAME_SLAUGHTER)
+                .withEndDateTime(new DateTime(VALID_END_DATE_BRUSH, VALID_END_TIME_BRUSH))
+                .build();
+        DESC_SLAUGHTER = new EditTaskDescriptorBuilder()
+                .withName(VALID_NAME_SLAUGHTER)
                 .withStartDateTime(new DateTime(VALID_START_DATE_SLAUGHTER, VALID_START_TIME_SLAUGHTER))
-                .withEndDateTime(new DateTime(VALID_END_DATE_SLAUGHTER, VALID_END_TIME_SLAUGHTER)).build();
+                .withEndDateTime(new DateTime(VALID_END_DATE_SLAUGHTER, VALID_END_TIME_SLAUGHTER))
+                .build();
     }
 
     /**
@@ -229,7 +238,7 @@ public class CommandTestUtil {
      * - the {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            String expectedMessage, Model expectedModel) {
+                                            String expectedMessage, Model expectedModel) {
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
             CommandResult result = command.execute(actualModel, actualCommandHistory);
@@ -250,7 +259,7 @@ public class CommandTestUtil {
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            String expectedMessage) {
+                                            String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
@@ -294,8 +303,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered task list to show only the task at the given
-     * {@code targetIndex} in the {@code model}
+     * Updates {@code model}'s filtered task list to show only the task at the given {@code targetIndex} in the
+     * {@code model}
      */
     public static void showTaskAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
