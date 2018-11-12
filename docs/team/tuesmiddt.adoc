@@ -2,14 +2,25 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:sectnums:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+:experimental:
+endif::[]
+:toc:
+:toc-title:
+:toc-placement: auto
+:repoURL: https://github.com/CS2103-AY1819S1-T09-1/main
+:pullURL: https://github.com/CS2103-AY1819S1-T09-1/main/pull
 
-== PROJECT: Cow
-
----
-
+= PROJECT: Cow
 == Overview
 
-Cow is a project management app with an emphasis on Command Line Interface ("CLI") interaction. It is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 10k LoC.
+Cow is a project management app with an emphasis on Command Line Interface ("CLI") interaction. It allows users to completely manage their contacts and tasks without taking their fingers off the keyboard. In addition, a calendar view is available the user to visualise his tasks.
+
+It is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 10k LoC.
 
 == Summary of contributions
 
@@ -32,9 +43,12 @@ https://github.com/CS2103-AY1819S1-T09-1/main/pull/160[#160]
 
 == Contributions to the User Guide
 
+Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
+
+'''
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Calendar features section_
 |===
 
 include::../UserGuide.adoc[tag=calendar]
@@ -43,18 +57,28 @@ include::../UserGuide.adoc[tag=calendarShow]
 
 == Contributions to the Developer Guide
 
-|===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
-|===
+Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
 
-=== *Implementation details of the calendar show feature*
+'''
+
+|===
+|_Implementation details of the calendar show feature_
+|===
 
 include::../DeveloperGuide.adoc[tag=calendarShow]
 
-=== *Use cases of the calendar show feature*
+'''
+
+|===
+|_Use cases of the calendar show feature_
+|===
 
 include::../DeveloperGuide.adoc[tag=calendarUseCases]
 
-=== *Manual testing instructions for the calendar show feature*
+'''
+
+|===
+|_Manual testing instructions for the calendar show feature_
+|===
 
 include::../DeveloperGuide.adoc[tag=calendarManualTestInstructions]

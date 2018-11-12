@@ -1313,5 +1313,14 @@ Expected: Cell corresponding to 2 Jan 2019 has one new entry displaying "test ca
 .. Shut down the app
 .. Launch the app +
 Expected: Calendar displays the current month. Calendar should be populated with tasks ending in the current month.
+. User input is validated.
+.. Test case: `calendar show y/0 m/12` +
+Expected: Calendar is unchanged. Error details shown in the status message.
+.. Test case: `calendar show y/10000 m/12` +
+Expected: Calendar is unchanged. Error details shown in the status message.
+.. Test case: `calendar show y/2018 m/0` +
+Expected: Calendar is unchanged. Error details shown in the status message.
+.. Test case: `calendar show y/2018 m/13` +
+Expected: Calendar is unchanged. Error details shown in the status message.
 
 // end::calendarManualTestInstructions[]
