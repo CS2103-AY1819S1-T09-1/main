@@ -581,7 +581,7 @@ The code for editing and deleting tasks is actually pretty similar to how it is 
 
 As for validation, in `EditCommandParser`, user input will be checked whether they conform to the format, else `ParseException` is thrown and usage message will be shown to the user. Meanwhile, `EditCommand` does another kind of validation: that the start date and time are before the end date and time, else `CommandException` is thrown and the user will be informed to ensure the chronological order of start and end `DateTime`. All these validations are done using methods defined inside `DateTime`.
 
-To explain more clearly, you can see below a sequence diagram of what happens when the user asked the program to edit a task:
+To explain more clearly, you can see below a sequence diagram of what happens when the user asks the program to edit a task:
 
 image:EditTaskSequenceDiagram.png[]
 
@@ -600,20 +600,35 @@ Currently, the methods `void updateTask(Task target, Task editedTask)` and `void
 // end::editdeletetasks[]
 
 // tag::assigning-tasks-and-contacts[]
-=== Assigning tasks and contacts
+=== Assigning and unassigning tasks and contacts
 ==== Current implementation
 
-Tasks and contacts can be assigned to each other using the commands `tasks assign` and `contacts assign`. This many-to-many relationship is stored simply as a list of task IDs and person IDs in the Person and Task classes respectively.
+Tasks and contacts can be assigned to each other using the commands `tasks assign` and `contacts assign`, and unassigned by the `tasks unassign` and `contacts unassign` commands.
 
-The commands are parsed by `AssignCommand` in both `TasksParser` and `ContactsParser`. If both the specified task and contact are found, the task and person IDs will be added to `Person.taskIds` and `Task.personIds` respectively, and the edited objects will be saved to disk. As happens when the edit commands are run, `indicateAddressBookChanged()` is called to update the UI. The data flow is similar to the one for `EditCommand` in the previous section.
+This many-to-many relationship is stored as a list of task IDs and person IDs in the Person and Task classes respectively. The IDs are UUIDs, chosen because they are guaranteed to be globally unique and are not dependent on the IDs of other tasks and persons. The IDs are generated randomly by the Person and Task classes if they are not provided to their respective constructors.
+
+The commands are parsed by `AssignCommandParser` and `UnassignCommandParser`, which are used by both `TasksParser` and `ContactsParser`. Both parsers will execute their respective `AssignCommand` and `UnassignCommand`. If both the specified task and contact are found, the task and person IDs will be added to `Person.taskIds` and `Task.personIds` respectively, and the edited objects will be saved to disk. As happens when the edit commands are run, `indicateAddressBookChanged()` is called to update the UI. The data flow is similar to the one for `EditCommand` in the previous section.
+
+The figure below is a sequence diagram that illustrates what happens when the user assigns a contact to a task. The process for assigning tasks to contacts and the unassign process are both very similar to this.
+
+.Sequence Diagram of Task Assign Command
+image::AssignTaskSequenceDiagram.png[]
+
+[TIP]
+These diagrams are generated using http://plantuml.com/[PlantUML]. The files used to generate the image files can be found in `docs/diagrams/plantuml`.
+
+==== Error handling
+
+`AssignCommand` will also throw errors if a user tries to assign a task to a contact when the contact has already been assigned. Although this is not strictly necessary as the IDs are stored in sets and it would have been impossible to assign someone twice, the error message assures the user that no double assignments will be made, and thus improves the user experience. Similarly, `UnassignCommand` throws errors if the user attempts to unassign a contact from a task when the contact is not assigned to it.
+
+==== Alternative implementations considered
 
 An alternative implementation that was considered was to model the many-to-many relationship using an `Assignment` class, which will act like a join table in relational databases. This would have slightly decoupled the `Person` and `Task` classes. However, we chose not to implement it this way as a `Person` will always be assigned to a `Task`, and also because implementing such a relationship with manually managed IDs is extremely complex without a relational database to abstract away the complexity.
 
 ==== Future Enhancements
 
-Both implementations of `AssignCommand` are almost identical, and should be refactored.
+Both `AssignCommand` and `UnassignCommand` have nearly identical implementations for both tasks and contacts. This is intentional, as this leaves room for the implementation of task or contact specific features. An example of such a possibility is an unassign all feature, e.g. `contacts unassign c/3`, which will be able to unassign contact 3 from all his tasks.
 
-Currently, assignments cannot be removed. The commands that will perform this task, `tasks unassign` and `contacts unassign`, are both slated to be implemented in v1.3.
 // end::assigning-tasks-and-contacts[]
 
 == Documentation
@@ -1093,7 +1108,8 @@ Use case ends.
 Use case resumes at step 2
 // end::batchdeletetasks[]
 
-=== Assign people to tasks
+// tag::assignpeopletotask[]
+=== Assign people to a task
 
 **MSS**
 
@@ -1125,7 +1141,7 @@ Use case ends.
 +
 Use case ends.
 
-=== Remove person from all tasks
+=== Unassign person from a task
 
 **MSS**
 
@@ -1133,11 +1149,30 @@ Use case ends.
 2. Cow displays the contact.
 3. User requests to view tasks assigned to the contact.
 4. Cow displays a list of tasks assigned to the contact.
-3. Unassign contact from all tasks by entering
-`unassign_contact <contact_id> <task_id>`
-4. Assign new contact to all tasks by entering
-`unassign_contact <contact_id> <task_id>`.
-5. Use case ends
+5. User requests to unassign a contact from a task.
+6. Cow unassigns the contact from the task.
++
+Use case ends
+
+**Extensions**
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+* 4a. The list is empty.
++
+Use case ends.
+[none]
+* 5a. User provides an invalid person or task index.
+** 5a1. Cow shows an error message.
++
+Use case ends.
+* 5b. User requests to unassign a person that is not assigned to the task.
+** 5b1. Cow shows a message telling the user the person is not assigned.
++
+Use case ends.
+// end::assignpeopletotask[]
 
 === View calendar
 

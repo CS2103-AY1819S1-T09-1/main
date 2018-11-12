@@ -1,0 +1,126 @@
+@startuml
+scale 2
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+skinparam shadowing false
+hide stereotype
+
+skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+    ParticipantBorderColor #0070C0
+    ParticipantBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    ParticipantBorderColor<<ui>> #00B050
+    ParticipantBackgroundColor<<ui>> #00B050
+    ParticipantBorderColor<<logic>> #0070C0
+    ParticipantBackgroundColor<<logic>> #0070C0
+    ParticipantBorderColor<<model>> #7030A0
+    ParticipantBackgroundColor<<model>> #7030A0
+    LifeLineBorderColor DarkGrey
+    LifeLineBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    ArrowColor #0070C0
+    ArrowBorderColor #0070C0
+    ArrowFontColor #0070C0
+}
+
+hide footbox
+
+box "Logic" #DCE6F2
+    participant logicManager as "logic:LogicManager" <<logic>>
+    participant appParser as "appParser:AppParser" <<logic>>
+    participant taskParser as ":TaskParser" <<logic>>
+    participant assignCommandParser as ":AssignCommandParser" <<logic>>
+    participant assignCommand as ":AssignCommand" <<logic>>
+    participant commandResult as ":CommandResult" <<logic>>
+end box
+box "Model" #E6E0EC
+    participant model as "Model" <<model>>
+end box
+
+[-[#00B050]> logicManager: execute(commandText)
+activate logicManager
+
+logicManager -> appParser: parseCommand(commandText)
+
+create taskParser
+activate appParser
+appParser -> taskParser
+activate taskParser
+taskParser --> appParser
+deactivate taskParser
+
+appParser -> taskParser: parseCommand(arguments)
+activate taskParser
+
+create assignCommandParser
+taskParser -> assignCommandParser
+activate assignCommandParser
+assignCommandParser --> taskParser
+deactivate assignCommandParser
+
+taskParser -> assignCommandParser: parse(arguments)
+activate assignCommandParser
+
+create assignCommand
+assignCommandParser -> assignCommand
+activate assignCommand
+assignCommand --> assignCommandParser
+deactivate assignCommand
+
+assignCommandParser --> taskParser
+deactivate assignCommandParser
+destroy assignCommandParser
+
+taskParser --> appParser
+deactivate taskParser
+destroy taskParser
+
+appParser --> logicManager
+deactivate appParser
+
+logicManager -> assignCommand: execute(model, history)
+activate assignCommand
+
+assignCommand -> model: <color:#7030A0> getFilteredPersonList()
+activate model #7030A0
+model --[#7030A0]> assignCommand
+deactivate model
+
+assignCommand -> model: <color:#7030A0> getFilteredTaskList()
+activate model #7030A0
+model --[#7030A0]> assignCommand
+deactivate model
+
+assignCommand -> model: <color:#7030A0> updatePerson(personToEdit, editedPerson)
+activate model #7030A0
+model --[#7030A0]> assignCommand
+deactivate model
+
+assignCommand -> model: <color:#7030A0> updateTask(taskToAssign, editedTask)
+activate model #7030A0
+model --[#7030A0]> assignCommand
+deactivate model
+
+assignCommand -> model: <color:#7030A0> commitAddressBook()
+activate model #7030A0
+model --[#7030A0]> assignCommand
+deactivate model
+
+create commandResult
+assignCommand -> commandResult
+activate commandResult
+commandResult --> assignCommand
+deactivate commandResult
+
+assignCommand --> logicManager
+deactivate assignCommand
+destroy assignCommand
+
+
+logicManager -->[
+deactivate logicManager
+@enduml
