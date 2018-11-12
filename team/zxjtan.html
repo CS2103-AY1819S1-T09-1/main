@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Jolene Tan - Project Portfolio</title><link rel="stylesheet" href="./gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Jolene Tan - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Cow</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-T09-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Jolene Tan - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Cow</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-T09-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Jolene Tan - Project Portfolio</h1></div><div id="content"><div class="sect1">
 <h2 id="project-cow"><a class="link" href="#project-cow">PROJECT: Cow</a></h2>
 <div class="sectionbody">
 <hr>
@@ -13,7 +13,7 @@
 <p>Cow is a task management program with a view towards team projects. It includes an integrated contacts management module and assignment of tasks to contacts. Its command-line interface (CLI) is geared towards power users, letting them carry out operations efficiently without their hands leaving the keyboard.</p>
 </div>
 <div class="paragraph">
-<p>This project portfolio documents my personal contributions to this project, including 1.5k lines of code (LoC) and contributions to user and developer documentation.</p>
+<p>Cow was developed by a team of five Computer Science students from the National University of Singapore, including myself. This project portfolio documents my personal contributions to this project, including 1.5k lines of code (LoC) and contributions to user and developer documentation.</p>
 </div>
 </div>
 </div>
@@ -43,10 +43,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Created a command for creating a task. Made start date and time of the task optional, defaulting to the date and time of the current moment.</p>
+<p>Created a command for creating a task.</p>
+</li>
+<li>
+<p>Made entry of start date and time of the task optional, defaulting to the date and time of the current moment. This enables faster entry of tasks that are already in progress.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: <a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=zxjtan" class="bare">https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=zxjtan</a></p>
 </li>
 </ul>
 </div>
@@ -72,6 +78,17 @@
 Format:
 <code>tasks add n/TASK_NAME [sd/START_DATE] [st/START_TIME] ed/END_DATE et/END_TIME [t/TAG]…</code></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The end date and time cannot be earlier than the start date and time.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -80,6 +97,7 @@ Format:
 </td>
 <td class="content">
 If start date or time is not entered, the missing field(s) will default to the current date/time.
+Therefore, it is invalid to enter an end date and time before the current date and time.
 </td>
 </tr>
 </table>
@@ -122,7 +140,7 @@ If start date or time is not entered, the missing field(s) will default to the c
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">Logic component</a></h3>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
-<img src="LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+<img src="../images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
 <div class="title">Figure 1. Structure of the Logic Component</div>
 </div>
@@ -154,7 +172,7 @@ If start date or time is not entered, the missing field(s) will default to the c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
+<img src="../images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
 </div>
 <div class="title">Figure 2. Interactions Inside the Logic Component for the <code>contacts delete 1</code> Command</div>
 </div>
@@ -163,7 +181,7 @@ If start date or time is not entered, the missing field(s) will default to the c
 <h3 id="Design-Model"><a class="link" href="#Design-Model">Model component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
 <div class="title">Figure 3. Structure of the Model Component</div>
 </div>
@@ -199,7 +217,7 @@ If start date or time is not entered, the missing field(s) will default to the c
 <h3 id="task-class"><a class="link" href="#task-class">Task class</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="TaskComponentClassDiagram.png" alt="TaskComponentClassDiagram" width="800">
+<img src="../images/TaskComponentClassDiagram.png" alt="TaskComponentClassDiagram" width="800">
 </div>
 <div class="title">Figure 4. Structure of the Task class</div>
 </div>
@@ -217,7 +235,7 @@ If start date or time is not entered, the missing field(s) will default to the c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="AddTaskSequenceDiagram.png" alt="AddTaskSequenceDiagram" width="800">
+<img src="../images/AddTaskSequenceDiagram.png" alt="AddTaskSequenceDiagram" width="800">
 </div>
 <div class="title">Figure 5. Interactions for derivation of start date and time from optional input in AddCommandParser</div>
 </div>
@@ -242,4 +260,241 @@ If start date or time is not entered, the missing field(s) will default to the c
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:38:20 UTC</div></div></div></body></html>
+</div>
+<div class="sect1">
+<h2 id="user-stories"><a class="link" href="#user-stories">User Stories</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>While the whole group contributed to the table of user stories, I was the one who collated it at the end, streamlining redundancies and standardising the format and grammar.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Priorities: High (must have) - <code>* * <strong></code>, Medium (nice to have) - <code></strong> <strong></code>,
+Low (unlikely to have) - <code></strong></code></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a…</th>
+<th class="tableblock halign-left valign-top">I want to…</th>
+<th class="tableblock halign-left valign-top">So that I can…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRUD Tasks</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project manager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">assign other tasks to people</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">track who’s
+supposed to complete them and notify them that they are
+supposed to complete the task</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project manager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see the tasks assigned to each person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know
+what they’re supposed to do</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project manager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see an overview of all tasks and people
+assigned</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get a sense of the state of my project
+and tasks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search for people and tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">quickly find the person or task I watn</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">group tasks according to categories/tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manage a larger number of tasks easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">existing user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be alerted to tasks near their deadline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">complete tasks on time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project manager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">send email notifications to people I assigned tasks to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ensure they are on track with tasks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see milestones visualised using a calendar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a more chronological sense of my tasks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view team members’ calendars and share my own</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coordinate
+meetings and track progress</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">track the extent of others’ involvement in each task</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ensure fair distribution of credit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use this product as a web app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily access my tasks/work
+on all platforms</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create recurring tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">avoid repeatedly creating a new task for each recurrence</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have Autocomplete when typing tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find existing tags faster</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">power user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create command aliases</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enter commands more efficiently</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">power user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vim-mode CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enter commands more efficiently</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">power user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">emacs-mode CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enter commands more efficiently</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Use cases</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="create-a-task"><a class="link" href="#create-a-task">Create a task</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add a task, together with all the attributes.</p>
+</li>
+<li>
+<p>Cow adds that task.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. User provides an invalid attribute.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. Cow shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Instructions for Manual Testing</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="adding-tasks"><a class="link" href="#adding-tasks">Adding Tasks</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a task while all tasks are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all tasks using the <code>tasks list</code> command. There can be any number of tasks in the list.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Brush the cows sd/20180101 st/0000 ed/20181231 et/2359 t/Chill</code>
+Expected: A new task with the fields entered is added to the bottom of the task list.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Slaughter the cows ed/20190101 et/1200</code>
+Expected: A new task with the entered name and end date and time is added with the current date and time as the
+start date and time.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Feed the cows sd/20180101 st/2359 ed/20180101 et/0000</code>
+Expected: No task is added. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Feed the cows ed/19700101 et/0000</code>
+Expected: No task is added. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Feed the cows sd/20180101 st/0000 ed/20180231 et/2500</code>
+Expected: No task is added. An error message is shown.</p>
+</li>
+<li>
+<p>Other incorrect tasks add commands to try: Names containing non-alphanumeric characters, dates that don&#8217;t exist on
+the calendar, times outside the range 0000-2359 inclusive, wrongly formatted dates and times.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:46:46 UTC</div></div></div></body></html>

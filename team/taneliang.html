@@ -460,6 +460,94 @@ These diagrams are generated using <a href="http://plantuml.com/">PlantUML</a>. 
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="assigning-a-task-to-a-contact"><a class="link" href="#assigning-a-task-to-a-contact">Assigning a Task to a Contact</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Assigning a task to a contact and vice versa while some or all tasks and contacts are listed.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List tasks using the <code>tasks list</code> or <code>tasks find</code> commands, and list contacts using the <code>contacts list</code> or <code>contacts find</code> commands. There must be at least 1 task and 2 contacts on screen.</p>
+</li>
+<li>
+<p>Test case: <code>tasks assign c/1 k/1</code><br>
+Expected: First task is assigned to the first contact. Details of the assignment are shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>tasks assign c/1 k/1</code><br>
+Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>contacts assign c/1 k/1</code><br>
+Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>contacts assign c/2 k/1</code><br>
+Expected: Second contact is assigned to the first task. Details of the assignment are shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>contacts assign c/2 k/1</code><br>
+Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>tasks assign c/2 k/1</code><br>
+Expected: No assignment is made. Error detail is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect assign commands to try: <code>tasks assign</code> or <code>contacts assign</code>, <code>tasks assign c/x</code> or <code>contacts assign c/x</code> (where x is any integer), <code>tasks assign k/x</code> or <code>contacts assign k/x</code> (where x in any integer), <code>tasks assign c/x k/y</code> or <code>contacts assign c/x k/y</code> (where x is negative or larger than the contacts list size and/or y is negative or larger than the task list size).</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unassigning-a-task-from-a-contact"><a class="link" href="#unassigning-a-task-from-a-contact">Unassigning a Task from a Contact</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Unassigning a task from a contact and vice versa while some or all tasks and contacts are listed.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List tasks using the <code>tasks list</code> or <code>tasks find</code> commands, and list contacts using the <code>contacts list</code> or <code>contacts find</code> commands. There must be at least 1 task and 2 contacts on screen. Task 1 must be assigned to contacts 1 and 2, as detailed in the previous test case.</p>
+</li>
+<li>
+<p>Test case: <code>tasks unassign c/1 k/1</code><br>
+Expected: First task is unassigned from the first contact. Details of the unassignment are shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>tasks unassign c/1 k/1</code><br>
+Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>contacts unassign c/1 k/1</code><br>
+Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>contacts unassign c/2 k/1</code><br>
+Expected: Second contact is unassigned from the first task. Details of the unassignment are shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>contacts unassign c/2 k/1</code><br>
+Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>tasks unassign c/2 k/1</code><br>
+Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect unassign commands to try: <code>tasks unassign</code> or <code>contacts unassign</code>, <code>tasks unassign c/x</code> or <code>contacts unassign c/x</code> (where x is any integer), <code>tasks unassign k/x</code> or <code>contacts unassign k/x</code> (where x in any integer), <code>tasks unassign c/x k/y</code> or <code>contacts unassign c/x k/y</code> (where x is negative or larger than the contacts list size and/or y is negative or larger than the task list size).</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -469,4 +557,4 @@ These diagrams are generated using <a href="http://plantuml.com/">PlantUML</a>. 
 <p>During the same semester that I worked on Cow, I was also developing <a href="https://showface.io">ShowFace.io</a>, a React web app that allows groups to find the best time to meet. In this project, I was the lead developer, delivering features nearly every day.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:38:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:46:46 UTC</div></div></div></body></html>
