@@ -16,8 +16,8 @@ import seedu.address.model.tag.Tag;
  */
 public class Task {
 
-    public static final String MESSAGE_START_AFTER_END =
-            "Start date and time cannot be later than end date and time.";
+    public static final String MESSAGE_END_BEFORE_START =
+            "End date and time cannot be earlier than start date and time";
 
     private final TaskId id;
     private final Name name;
