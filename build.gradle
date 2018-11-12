@@ -180,6 +180,7 @@ task headless {
                 'testfx.headless': 'true',
                 'prism.order': 'sw',
                 'prism.text': 't2k',
+                'headless.geometry': '1920x1080-32'
             ]
         }
     }
