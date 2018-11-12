@@ -118,9 +118,10 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    public static final String INVALID_MONTH_NEGATIVE = " " + PREFIX_MONTH + "-1";
-    public static final String INVALID_MONTH_POSITIVE = " " + PREFIX_MONTH + "13";
-    public static final String INVALID_YEAR_NEGATIVE = " " + PREFIX_YEAR + "-1";
+    public static final String INVALID_MONTH_SMALL = " " + PREFIX_MONTH + "-1";
+    public static final String INVALID_MONTH_BIG = " " + PREFIX_MONTH + "13";
+    public static final String INVALID_YEAR_SMALL = " " + PREFIX_YEAR + "-1";
+    public static final String INVALID_YEAR_BIG = " " + PREFIX_YEAR + "10000";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

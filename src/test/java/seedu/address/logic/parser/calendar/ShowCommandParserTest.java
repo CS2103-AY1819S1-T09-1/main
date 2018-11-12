@@ -1,9 +1,10 @@
 package seedu.address.logic.parser.calendar;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONTH_NEGATIVE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONTH_POSITIVE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_YEAR_NEGATIVE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONTH_BIG;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONTH_SMALL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_YEAR_BIG;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_YEAR_SMALL;
 import static seedu.address.logic.commands.CommandTestUtil.MONTH_FEB;
 import static seedu.address.logic.commands.CommandTestUtil.MONTH_JAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTH;
@@ -43,13 +44,16 @@ public class ShowCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // negative year value
-        assertParseFailure(parser, VALID_MONTH + INVALID_YEAR_NEGATIVE, MESSAGE_INVALID_YEAR);
+        assertParseFailure(parser, VALID_MONTH + INVALID_YEAR_SMALL, MESSAGE_INVALID_YEAR);
+
+        // year > 9999
+        assertParseFailure(parser, VALID_MONTH + INVALID_YEAR_BIG, MESSAGE_INVALID_YEAR);
 
         // negative month value
-        assertParseFailure(parser, VALID_YEAR + INVALID_MONTH_NEGATIVE, MESSAGE_INVALID_MONTH);
+        assertParseFailure(parser, VALID_YEAR + INVALID_MONTH_SMALL, MESSAGE_INVALID_MONTH);
 
         // month > 12
-        assertParseFailure(parser, VALID_YEAR + INVALID_MONTH_POSITIVE, MESSAGE_INVALID_MONTH);
+        assertParseFailure(parser, VALID_YEAR + INVALID_MONTH_BIG, MESSAGE_INVALID_MONTH);
     }
 
     @Test
@@ -76,7 +80,7 @@ public class ShowCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
 
         Pair<Index, Index> jan2000IndexPair = CalendarUtil.getYearMonthIndices(2000, 1);
-        String userInput = INVALID_YEAR_NEGATIVE + YEAR_2000 + MONTH_JAN;
+        String userInput = INVALID_YEAR_SMALL + YEAR_2000 + MONTH_JAN;
 
         ShowCommand expectedCommand = new ShowCommand(jan2000IndexPair.getKey(), jan2000IndexPair.getValue());
 

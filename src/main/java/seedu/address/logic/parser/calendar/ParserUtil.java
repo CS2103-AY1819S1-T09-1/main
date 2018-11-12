@@ -10,8 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_YEAR = "Year must be an integer between 1 and "
-            + Integer.toString(Integer.MAX_VALUE) + ".";
+    public static final String MESSAGE_INVALID_YEAR = "Year must be an integer between 1 and 9999.";
     public static final String MESSAGE_INVALID_MONTH = "Month must be an integer between 1 and 12";
 
     /**
@@ -26,7 +25,13 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedYearString)) {
             throw new ParseException(MESSAGE_INVALID_YEAR);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedYearString));
+        int year = Integer.parseInt(trimmedYearString);
+
+        if (year > 9999) {
+            throw new ParseException(MESSAGE_INVALID_YEAR);
+        }
+
+        return Index.fromOneBased(year);
     }
 
     /**
@@ -43,7 +48,7 @@ public class ParserUtil {
 
         int month = Integer.parseInt(trimmedMonthString);
 
-        if (month < 1 || month > 12) {
+        if (month > 12) {
             throw new ParseException(MESSAGE_INVALID_MONTH);
         }
 
