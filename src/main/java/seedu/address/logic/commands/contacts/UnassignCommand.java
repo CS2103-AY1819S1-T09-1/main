@@ -40,7 +40,7 @@ public class UnassignCommand extends Command {
             + PREFIX_CONTACT_ID + "2 "
             + PREFIX_TASK_ID + "4";
 
-    public static final String MESSAGE_ASSIGN_PERSON_SUCCESS = "Unassigned Person %1$s from Task %2$s";
+    public static final String MESSAGE_UNASSIGN_PERSON_SUCCESS = "Unassigned Person %1$s from Task %2$s";
     public static final String MESSAGE_NOT_ASSIGNED = "This person has not been assigned to this task";
 
     private final Index targetContactIndex;
@@ -89,7 +89,7 @@ public class UnassignCommand extends Command {
         model.commitAddressBook();
 
         EventsCenter.getInstance().post(new JumpToPersonListRequestEvent(targetContactIndex));
-        return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_SUCCESS,
+        return new CommandResult(String.format(MESSAGE_UNASSIGN_PERSON_SUCCESS,
                 targetContactIndex.getOneBased(), targetTaskIndex.getOneBased()));
 
     }

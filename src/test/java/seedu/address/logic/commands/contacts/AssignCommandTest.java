@@ -49,7 +49,7 @@ public class AssignCommandTest {
                 task.getEndDateTime(), task.getTags(), personIdSet);
         Person editedPerson = new Person(person.getId(), person.getName(), person.getPhone(),
                 person.getEmail(), person.getAddress(), person.getTags(), taskIdSet);
-        AssignCommand editCommand = new AssignCommand(personIndex, taskIndex);
+        AssignCommand assignCommand = new AssignCommand(personIndex, taskIndex);
 
         String expectedMessage = String.format(AssignCommand.MESSAGE_ASSIGN_PERSON_SUCCESS,
                 taskIndex.getOneBased(), personIndex.getOneBased());
@@ -59,7 +59,7 @@ public class AssignCommandTest {
         expectedModel.updateTask(task, editedTask);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(assignCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
