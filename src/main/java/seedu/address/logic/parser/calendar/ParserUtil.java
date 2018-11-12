@@ -31,7 +31,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_YEAR);
         }
 
-        return Index.fromOneBased(Integer.parseInt(trimmedYearString));
+        return Index.fromOneBased(year);
     }
 
     /**
