@@ -37,13 +37,19 @@ command instead.
 ** Highlights:
 This enhancement was built such that the command format between tasks and contacts are similar to improve the user experience. Moreover, the batch delete tasks syntax is also built on top of the original single delete command. Efforts were taken to ensure that code duplication remains minimum between delete and batch delete.
 
-* *Minor enhancement*: Updated **sample tasks** to include tasks as well assignment between some tasks and contacts
+* *Minor enhancement 1*: Updated **sample tasks** to include tasks as well assignment between some tasks and contacts
 ** What it does:
 Upon initial launch, these sets of contacts, tasks and assignment thereof are loaded as default data.
 ** Justification:
 To get familiar with Cow, the user needs some sample data to play and experiment with. Once the user is ready, he/she can run `clear` to clear all the data in Cow.
 ** Highlights:
 This enhancement required me to write a helper function inside `SampleDataUtil` to do assignment. This is to ensure data integrity by doing two-way assignment (task to person and person to task) as one transaction.
+
+* *Minor enhancement 2*: Added **tasks select** command to select a task and show its details in the task details pane.
+** What it does:
+** Justification:
+** Highlights:
+This enhancement required me to use an Event already wrote by my teammate, `JumpToTaskListRequestEvent`. In order to use my teammate's code successfully, I need to know how to use it properly.
 
 * *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=indocomsoft
 
@@ -84,5 +90,7 @@ include::../UserGuide.adoc[tag=tasksdelete]
 include::../DeveloperGuide.adoc[tag=uiclassdiagram]
 
 include::../DeveloperGuide.adoc[tag=editdeletetasks]
+
+include::../DeveloperGuide.adoc[tag=editselectdeleteusecases]
 
 include::../DeveloperGuide.adoc[tag=batchdeletetasks]

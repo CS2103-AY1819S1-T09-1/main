@@ -1,0 +1,120 @@
+@startuml
+scale 2
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 16
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+skinparam shadowing false
+hide stereotype
+
+skinparam sequence {
+    BoxBorderColor transparent
+    BoxFontSize 20
+    ParticipantBorderColor #0070C0
+    ParticipantBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    ParticipantBorderColor<<ui>> #00B050
+    ParticipantBackgroundColor<<ui>> #00B050
+    ParticipantBorderColor<<logic>> #0070C0
+    ParticipantBackgroundColor<<logic>> #0070C0
+    ParticipantBorderColor<<model>> #7030A0
+    ParticipantBackgroundColor<<model>> #7030A0
+    LifeLineBorderColor DarkGrey
+    LifeLineBackgroundColor #0070C0
+    ParticipantFontColor #FFFFFF
+    ArrowColor #0070C0
+    ArrowBorderColor #0070C0
+    ArrowFontColor #0070C0
+    groupBodyBackgroundColor transparent
+}
+
+hide footbox
+
+box "Logic" #DCE6F2
+    participant logicManager as "logic:LogicManager" <<logic>>
+    participant appParser as "appParser:AppParser" <<logic>>
+    participant taskParser as ":TaskParser" <<logic>>
+    participant deleteCommandParser as ":DeleteCommandParser" <<logic>>
+    participant deleteCommand as ":DeleteCommand" <<logic>>
+    participant commandResult as ":ResultCommand" <<logic>>
+end box
+box "Model" #E6E0EC
+    participant model as "Model" <<model>>
+end box
+
+[-[#00B050]> logicManager: execute(commandText)
+activate logicManager
+
+logicManager -> appParser: parseCommand(commandText)
+
+create taskParser
+activate appParser
+appParser -> taskParser
+activate taskParser
+taskParser --> appParser
+deactivate taskParser
+
+appParser -> taskParser: parseCommand(arguments)
+activate taskParser
+
+create deleteCommandParser
+taskParser -> deleteCommandParser
+activate deleteCommandParser
+deleteCommandParser --> taskParser
+deactivate deleteCommandParser
+
+taskParser -> deleteCommandParser: parse(arguments)
+activate deleteCommandParser
+
+create deleteCommand
+deleteCommandParser -> deleteCommand
+activate deleteCommand
+deleteCommand --> deleteCommandParser
+deactivate deleteCommand
+
+deleteCommandParser --> taskParser
+deactivate deleteCommandParser
+destroy deleteCommandParser
+
+taskParser --> appParser
+deactivate taskParser
+destroy taskParser
+
+appParser --> logicManager
+deactivate appParser
+
+logicManager -> deleteCommand: execute(model, history)
+activate deleteCommand
+
+deleteCommand -> deleteCommand: getTasksToDelete(model.getFilteredTaskList())
+activate deleteCommand
+deleteCommand --> deleteCommand
+deactivate deleteCommand
+
+
+loop
+deleteCommand -> model: <color:#7030A0> deleteTask(taskTodelete)
+activate model #7030A0
+model --[#7030A0]> deleteCommand
+deactivate model
+end loop
+
+deleteCommand -> model: <color:#7030A0> commitAddressBook()
+activate model #7030A0
+model --[#7030A0]> deleteCommand
+deactivate model
+
+create commandResult
+deleteCommand -> commandResult
+activate commandResult
+commandResult --> deleteCommand
+deactivate commandResult
+
+deleteCommand --> logicManager
+deactivate deleteCommand
+destroy deleteCommand
+
+
+logicManager -->[
+deactivate logicManager
+@enduml

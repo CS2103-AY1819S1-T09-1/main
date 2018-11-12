@@ -585,14 +585,18 @@ To explain more clearly, you can see below a sequence diagram of what happens wh
 
 image:EditTaskSequenceDiagram.png[]
 
-And here is a more detailed sequence diagram inside `Model` itself, implemented by `ModelManager`. Note the `AddressBookChangedEvent` that is raised -- this will notify `StorageManager` that there is a change in the `AddressBook`, and so to save to disk.
-
 image:EditTaskModelSequenceDiagram.png[]
+
+Please do note that `DeleteCommand` for `Task` is different from that of `Person` in that the former actually takes in a list of indices to be deleted, which is required to support batch deleting tasks. Changes are also made in `DeleteCommandParser` to add support for multiple indices user input, and to recognise the keyword `"all"`. Should the keyword `"all"` be encountered, the list passed to `DeleteCommand` is `null`, which is a special value to indicate to `DeleteCommand` to delete all tasks in the current displayed list. You can find below the sequence diagram for batch-deleting task(s).
+
+image:DeleteTaskModelSequenceDiagram.png[]
+
+image:DeleteTaskSequenceDiagram.png[]
 
 [TIP]
 These diagrams are generated using http://plantuml.com/[PlantUML]. The files used to generate the image files are stored inside `docs/plantuml`.
 
-Please do note that `DeleteCommand` for `Task` is different from that of `Person` in that the former actually takes in a list of indices to be deleted, which is required to support batch deleting tasks. Changes are also made in `DeleteCommandParser` to add support for multiple indices user input, and to recognise the keyword `"all"`. Should the keyword `"all"` be encountered, the list passed to `DeleteCommand` is `null`, which is a special value to indicate to `DeleteCommand` to delete all tasks in the current displayed list.
+Note the `AddressBookChangedEvent` that is raised -- this will notify `StorageManager` that there is a change in the `AddressBook`, and so to save to disk.
 
 ==== Future Enhancements
 Currently, the methods `void updateTask(Task target, Task editedTask)` and `void updatePerson(Person target, Person editedPerson)` in the `Model` interface are very similar. Perhaps in the future `Model` can be refactored as a generic so that there is minimum code duplication.
@@ -1011,14 +1015,15 @@ Use case ends.
 +
 Use case ends.
 
-=== Update a task
+// tag::editselectdeleteusecases[]
+=== Edit a task
 
 **MSS**
 
 1.  User requests to list tasks.
 2.  Cow shows a list of tasks.
-3.  User requests to update a specific task in the list, together with the new attributes.
-4.  Cow updates the task with the given attribute.
+3.  User requests to edit a specific task in the list, together with the new attributes.
+4.  Cow edits the task with the given attribute.
 +
 Use case ends.
 
@@ -1083,6 +1088,7 @@ Use case ends
 ** 3a1. Cow shows an error message.
 +
 Use case resumes at step 2
+// end::editselectdeleteusecases[]
 
 // tag::batchdeletetasks[]
 === Batch delete tasks
@@ -1106,6 +1112,15 @@ Use case ends.
 [none]
 ** 3a1. Cow shows an error message.
 Use case resumes at step 2
+
+=== Delete all tasks
+
+**MSS**
+
+1. User requests to list tasks.
+2. Cow shows a list of tasks.
+3. User requests to delete all tasks in the list.
+4. Cow deletes all tasks in the list.
 // end::batchdeletetasks[]
 
 // tag::assignpeopletotask[]
