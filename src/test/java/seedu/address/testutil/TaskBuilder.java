@@ -51,6 +51,14 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the {@code Id} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withId(TaskId id) {
+        this.id = new TaskId(id.toString());
+        return this;
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Task} that we are building.
      */
     public TaskBuilder withName(String name) {

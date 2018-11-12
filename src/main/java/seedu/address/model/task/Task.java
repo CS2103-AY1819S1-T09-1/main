@@ -77,8 +77,7 @@ public class Task {
     }
 
     /**
-     * Returns true if both tasks of the same name have the same start datetime and end datetime.
-     * This defines a weaker notion of equality between two tasks.
+     * Returns true if both tasks have the same ID.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -91,7 +90,6 @@ public class Task {
 
     /**
      * Returns true if both tasks have the same name, start datetime, end datetime and tags.
-     * This defines a stronger notion of equality between two tasks.
      */
     @Override
     public boolean equals(Object other) {
