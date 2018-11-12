@@ -4,15 +4,12 @@
 :stylesDir: ../stylesheets
 :prURL: https://github.com/CS2103-AY1819S1-T09-1/main/pull
 
-== PROJECT: Cow
-
----
-
+= PROJECT: Cow
 == Overview
 
-Cow is a project management app where you can manage both tasks and contacts,
+Cow is a desktop project management application where you can manage both tasks and contacts,
 as well as assign tasks to contacts and vice versa. It also features a calendar
-to provide easy visual reference of tasks chronologically.
+to provide an easy visual reference of tasks chronologically.
 
 Cow has an emphasis on interaction using Command Line Interface ("CLI").
 It is written in Java, and it has a Graphical User Interface ("GUI") created
@@ -26,44 +23,43 @@ as a base for development.
 
 * *Major enhancement*: added *the ability to edit, delete and batch delete tasks*
 ** What it does:
-This feature allows the user to edit tasks as well as delete either one or
-multiple tasks at a time
+This feature allows you to edit tasks as well as delete one or more tasks at a time
 ** Justification:
-This feature improves the product significantly because sometimes user may add
+This feature improves the product significantly because sometimes you may add
 duplicate tasks or add tasks with wrong details, thus task editing is essential.
-Moreover, sometimes a user may need to delete more than one tasks at a time.
-Instead of doing it one-by-one which is time consuming, they can do it in one
+Moreover, sometimes you may need to delete more than one tasks at a time.
+Instead of doing it one-by-one which is time-consuming, they can do it in one
 command instead.
 ** Highlights:
-This enhancement was built such that the command format between tasks and contacts are similar to improve the user experience. Moreover, the batch delete tasks syntax is also built on top of the original single delete command. Efforts were taken to ensure that code duplication remains minimum between delete and batch delete.
+This enhancement was built such that the command format between tasks and contacts are similar to improve your experience. Moreover, the batch delete tasks syntax is also built on top of the original single delete command. Efforts were taken to ensure that code duplication remains minimum between delete and batch delete to ensure that the code is maintainable.
 
 * *Minor enhancement 1*: Updated **sample tasks** to include tasks as well assignment between some tasks and contacts
 ** What it does:
 Upon initial launch, these sets of contacts, tasks and assignment thereof are loaded as default data.
 ** Justification:
-To get familiar with Cow, the user needs some sample data to play and experiment with. Once the user is ready, he/she can run `clear` to clear all the data in Cow.
+To get familiar with Cow, it is good to have some sample data to play and experiment with. Once you are ready, you can run `clear` to clear all the data in Cow.
 ** Highlights:
-This enhancement required me to write a helper function inside `SampleDataUtil` to do assignment. This is to ensure data integrity by doing two-way assignment (task to person and person to task) as one transaction.
+This enhancement required me to write a helper function inside `SampleDataUtil` to do assignments between tasks and contacts. This is to ensure data integrity by doing a two-way assignment (task-to-person and person-to-task) as one transaction.
 
 * *Minor enhancement 2*: Added **tasks select** command to select a task and show its details in the task details pane.
 ** What it does: It selects a task from the displayed task list, and show the task in the task details pane.
-** Justification: The space available in the tasks lists is very small, so most times the task name is cut off. In order to see more details, the user needs a command to select from that list to show in the task details pane.
+** Justification: The space available in the tasks lists is very small, so most times the task name is cut off. In order to see more details, you need a command to select from that list to show in the task details pane.
 ** Highlights:
 This enhancement required me to use an Event already wrote by my teammate, `JumpToTaskListRequestEvent`. In order to use it, I need to be able to understand the documentation written by my teammate. This showcases my ability to work in with modular code written by several developers.
 
-* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=indocomsoft
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=indocomsoft[Collated code at RepoSense]
 
 * *Other contributions*:
 
 ** Project Management:
-*** Managed release `v1.3.2` and `v1.4` (2 releases) on GitHub
+*** Managed releases `v1.3.2` and `v1.4` (2 releases) on GitHub
 *** Managed milestone `v1.4` issue tracker on GitHub
 ** Enhancements to existing features:
 *** Enlarged headless framebuffer for GUI tests to 1920x1080 so that GUI unit tests will not fail in Travis CI: link:{prURL}/183[#183]
 *** Refactor all branding from AddressBook to Cow: link:{prURL}/183[#183]
-*** Made sure that when main window opened, it is big enough to show the calendar pane: link:{prURL}/183[#183]
+*** Made sure that when the main window opens, it is big enough to show the calendar pane: link:{prURL}/183[#183]
 *** Added module name in usage messages: link:{prURL}/87[#87]
-*** Allow editing task's either start or end datetime: link:{prURL}/94[#94]
+*** Allow editing task's either start or end DateTime: link:{prURL}/94[#94]
 ** Documentation:
 *** Totally revamped the User Guide: link:{prURL}/158[#158]
 *** Updated the User Guide to include new features: link:{prURL}/84[#84]
@@ -98,6 +94,10 @@ include::../DeveloperGuide.adoc[tag=uiclassdiagram]
 
 include::../DeveloperGuide.adoc[tag=editdeletetasks]
 
-include::../DeveloperGuide.adoc[tag=editselectdeleteusecases]
+include::../DeveloperGuide.adoc[tag=editusecases]
+
+include::../DeveloperGuide.adoc[tag=deleteusecases]
 
 include::../DeveloperGuide.adoc[tag=batchdeletetasks]
+
+include::../DeveloperGuide.adoc[tag=manualtestingindocomsoft]

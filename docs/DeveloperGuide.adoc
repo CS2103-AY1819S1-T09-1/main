@@ -1012,7 +1012,7 @@ Use case ends.
 +
 Use case ends.
 
-// tag::editselectdeleteusecases[]
+// tag::editusecases[]
 === Edit a task
 
 **MSS**
@@ -1039,6 +1039,7 @@ Use case resumes at step 2.
 ** 3a1. Cow shows an error message.
 +
 Use case resumes at step 2
+// end::editusecases[]
 
 === Select a task
 
@@ -1063,6 +1064,7 @@ Use case ends
 +
 Use case resumes at step 2.
 
+// tag::deleteusecases[]
 === Delete a task
 
 **MSS**
@@ -1085,7 +1087,7 @@ Use case ends
 ** 3a1. Cow shows an error message.
 +
 Use case resumes at step 2
-// end::editselectdeleteusecases[]
+// end::deleteusecases[]
 
 // tag::batchdeletetasks[]
 === Batch delete tasks
@@ -1275,6 +1277,7 @@ contacts
 * Email
 * Orgmode
 
+// tag::manualtestingindocomsoft[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -1353,6 +1356,7 @@ Move the window to a different location. Close the window.
 .. Prerequisites: List all tasks using the `tasks list` command. There are at least 1 task.
 .. Test case: `tasks delete all` +
    Expected: All tasks shown in the task list are deleted. Details of the deleted tasks are shown in the status message. Timestamp in the status bar is updated.
+// end::manualtestingindocomsoft[]
 
 === Something
 
