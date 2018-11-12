@@ -32,6 +32,7 @@ This portfolio will introduce you to <em>Cow</em> and my contributions towards i
 <ul class="sectlevel2">
 <li><a href="#Design-Storage">4.1. Storage component</a></li>
 <li><a href="#listing-and-finding-of-tasks">4.2. Listing and finding of tasks</a></li>
+<li><a href="#filtering-tasks">4.3. Filtering tasks</a></li>
 </ul>
 </li>
 </ul>
@@ -560,5 +561,46 @@ allow users to search with incomplete keywords.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="filtering-tasks"><a class="link" href="#filtering-tasks">4.3. Filtering tasks</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Searching for tasks</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There are multiple tasks in the list for visible results.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find n/work</code><br>
+Expected: Any tasks with <code>work</code> in the name are listed in the tasks list panel. Number of tasks listed is shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find t/farm</code><br>
+Expected: Any tasks with the <code>farm</code> tag are listed in the tasks list panel. Number of tasks listed is shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find sd/20180105</code><br>
+Expected: Any tasks that starts at <code>20180105</code> are listed in the tasks list panel. Number of tasks listed is shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find n/hello sd/20181103</code><br>
+Expected: Any tasks with <code>hello</code> in the name and start date <code>20181103</code> are listed in the tasks list panel. Number of tasks listed is shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find t/</code><br>
+Expected: Task list is not changed. Error details is shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>tasks find n/</code>, <code>tasks find sd/invaliddate</code>, <code>tasks find ed/</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:12:52 UTC</div></div></div></body></html>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:34:53 UTC</div></div></div></body></html>

@@ -97,10 +97,10 @@
 <li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#editing-tasks">G.2. Editing Tasks</a></li>
-<li><a href="#deleting-task-s">G.3. Deleting Task(s)</a></li>
-<li><a href="#something">G.4. Something</a></li>
-<li><a href="#something-else">G.5. Something else</a></li>
+<li><a href="#adding-tasks">G.2. Adding Tasks</a></li>
+<li><a href="#editing-tasks">G.3. Editing Tasks</a></li>
+<li><a href="#deleting-task-s">G.4. Deleting Task(s)</a></li>
+<li><a href="#filtering-tasks">G.5. Filtering tasks</a></li>
 <li><a href="#calendar-show">G.6. Calendar Show</a></li>
 </ul>
 </li>
@@ -3027,7 +3027,49 @@ Expected: the application should exit and the window should disappear.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-tasks"><a class="link" href="#editing-tasks">G.2. Editing Tasks</a></h3>
+<h3 id="adding-tasks"><a class="link" href="#adding-tasks">G.2. Adding Tasks</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a task while all tasks are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all tasks using the <code>tasks list</code> command. There can be any number of tasks in the list.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Brush the cows sd/20180101 st/0000 ed/20181231 et/2359 t/Chill</code>
+Expected: A new task with the fields entered is added to the bottom of the task list.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Slaughter the cows ed/20190101 et/1200</code>
+Expected: A new task with the entered name and end date and time is added with the current date and time as the
+start date and time.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Feed the cows sd/20180101 st/2359 ed/20180101 et/0000</code>
+Expected: No task is added. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Feed the cows ed/19700101 et/0000</code>
+Expected: No task is added. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>tasks add n/Feed the cows sd/20180101 st/0000 ed/20180231 et/2500</code>
+Expected: No task is added. An error message is shown.</p>
+</li>
+<li>
+<p>Other incorrect tasks add commands to try: Names containing non-alphanumeric characters, dates that don&#8217;t exist on
+the calendar, times outside the range 0000-2359 inclusive, wrongly formatted dates and times.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-tasks"><a class="link" href="#editing-tasks">G.3. Editing Tasks</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3088,7 +3130,7 @@ Editing with invalid start and/or date and/or time, Editing with non-alphanumeri
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-task-s"><a class="link" href="#deleting-task-s">G.3. Deleting Task(s)</a></h3>
+<h3 id="deleting-task-s"><a class="link" href="#deleting-task-s">G.4. Deleting Task(s)</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3151,12 +3193,45 @@ Expected: All tasks shown in the task list are deleted. Details of the deleted t
 </div>
 </div>
 <div class="sect2">
-<h3 id="something"><a class="link" href="#something">G.4. Something</a></h3>
-
+<h3 id="filtering-tasks"><a class="link" href="#filtering-tasks">G.5. Filtering tasks</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Searching for tasks</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There are multiple tasks in the list for visible results.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find n/work</code><br>
+Expected: Any tasks with <code>work</code> in the name are listed in the tasks list panel. Number of tasks listed is shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find t/farm</code><br>
+Expected: Any tasks with the <code>farm</code> tag are listed in the tasks list panel. Number of tasks listed is shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find sd/20180105</code><br>
+Expected: Any tasks that starts at <code>20180105</code> are listed in the tasks list panel. Number of tasks listed is shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find n/hello sd/20181103</code><br>
+Expected: Any tasks with <code>hello</code> in the name and start date <code>20181103</code> are listed in the tasks list panel. Number of tasks listed is shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>tasks find t/</code><br>
+Expected: Task list is not changed. Error details is shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>tasks find n/</code>, <code>tasks find sd/invaliddate</code>, <code>tasks find ed/</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
 </div>
-<div class="sect2">
-<h3 id="something-else"><a class="link" href="#something-else">G.5. Something else</a></h3>
-
+</li>
+</ol>
+</div>
 </div>
 <div class="sect2">
 <h3 id="calendar-show"><a class="link" href="#calendar-show">G.6. Calendar Show</a></h3>
@@ -3277,26 +3352,32 @@ Expected: Calendar displays the current month. Calendar should be populated with
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Test case: <code>calendar show y/0 m/12</code><br>
-Expected: Calendar is unchanged. Error details shown in the status message.</p>
+<p>Test cases:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>calendar show y/0 m/12</code></p>
 </li>
 <li>
-<p>Test case: <code>calendar show y/10000 m/12</code><br>
-Expected: Calendar is unchanged. Error details shown in the status message.</p>
+<p><code>calendar show y/10000 m/12</code></p>
 </li>
 <li>
-<p>Test case: <code>calendar show y/2018 m/0</code><br>
-Expected: Calendar is unchanged. Error details shown in the status message.</p>
+<p><code>calendar show y/2018 m/0</code></p>
 </li>
 <li>
-<p>Test case: <code>calendar show y/2018 m/13</code><br>
-Expected: Calendar is unchanged. Error details shown in the status message.</p>
+<p><code>calendar show y/2018 m/13</code></p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>Expected: Calendar is unchanged. Error details shown in the status message.</p>
+</div>
+</li>
+</ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:12:52 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:34:53 UTC</div></div></div></body></html>
