@@ -59,6 +59,7 @@ This enhancement required me to use an Event already wrote by my teammate, `Jump
 *** Managed release `v1.3.2` and `v1.4` (2 releases) on GitHub
 *** Managed milestone `v1.4` issue tracker on GitHub
 ** Enhancements to existing features:
+*** Enlarged headless framebuffer for GUI tests to 1920x1080 so that GUI unit tests will not fail in Travis CI: link:{prURL}/183[#183]
 *** Refactor all branding from AddressBook to Cow: link:{prURL}/183[#183]
 *** Made sure that when main window opened, it is big enough to show the calendar pane: link:{prURL}/183[#183]
 *** Added module name in usage messages: link:{prURL}/87[#87]
