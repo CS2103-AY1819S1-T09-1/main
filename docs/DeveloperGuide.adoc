@@ -1012,7 +1012,7 @@ Use case ends.
 +
 Use case ends.
 
-// tag::editselectdeleteusecases[]
+// tag::editusecases[]
 === Edit a task
 
 **MSS**
@@ -1039,6 +1039,7 @@ Use case resumes at step 2.
 ** 3a1. Cow shows an error message.
 +
 Use case resumes at step 2
+// end::editusecases[]
 
 === Select a task
 
@@ -1063,6 +1064,7 @@ Use case ends
 +
 Use case resumes at step 2.
 
+// tag::deleteusecases[]
 === Delete a task
 
 **MSS**
@@ -1085,7 +1087,7 @@ Use case ends
 ** 3a1. Cow shows an error message.
 +
 Use case resumes at step 2
-// end::editselectdeleteusecases[]
+// end::deleteusecases[]
 
 // tag::batchdeletetasks[]
 === Batch delete tasks
@@ -1275,6 +1277,7 @@ contacts
 * Email
 * Orgmode
 
+// tag::manualtestingindocomsoft[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -1299,6 +1302,26 @@ Move the window to a different location. Close the window.
 
 .. Test case: `exit`
    Expected: the application should exit and the window should disappear.
+
+// tag::ManualTestingAddTasks[]
+=== Adding Tasks
+. Adding a task while all tasks are listed
+
+.. Prerequisites: List all tasks using the `tasks list` command. There can be any number of tasks in the list.
+.. Test case: `tasks add n/Brush the cows sd/20180101 st/0000 ed/20181231 et/2359 t/Chill`
+   Expected: A new task with the fields entered is added to the bottom of the task list.
+.. Test case: `tasks add n/Slaughter the cows ed/20190101 et/1200`
+   Expected: A new task with the entered name and end date and time is added with the current date and time as the
+   start date and time.
+.. Test case: `tasks add n/Feed the cows sd/20180101 st/2359 ed/20180101 et/0000`
+   Expected: No task is added. An error message is shown.
+.. Test case: `tasks add n/Feed the cows ed/19700101 et/0000`
+   Expected: No task is added. An error message is shown.
+.. Test case: `tasks add n/Feed the cows sd/20180101 st/0000 ed/20180231 et/2500`
+   Expected: No task is added. An error message is shown.
+.. Other incorrect tasks add commands to try: Names containing non-alphanumeric characters, dates that don't exist on
+   the calendar, times outside the range 0000-2359 inclusive, wrongly formatted dates and times.
+// tag::ManualTestingAddTasks[]
 
 === Editing Tasks
 . Editing a task while all tasks are listed
@@ -1353,6 +1376,7 @@ Move the window to a different location. Close the window.
 .. Prerequisites: List all tasks using the `tasks list` command. There are at least 1 task.
 .. Test case: `tasks delete all` +
    Expected: All tasks shown in the task list are deleted. Details of the deleted tasks are shown in the status message. Timestamp in the status bar is updated.
+// end::manualtestingindocomsoft[]
 
 // tag::filterTasksManualTestInstructions[]
 
