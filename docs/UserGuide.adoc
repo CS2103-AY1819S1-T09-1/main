@@ -274,8 +274,12 @@ Adds a task to Cow. +
 Format:
 `tasks add n/TASK_NAME [sd/START_DATE] [st/START_TIME] ed/END_DATE et/END_TIME [t/TAG]…`
 
+****
+* The end date and time cannot be earlier than the start date and time.
+****
 [TIP]
 If start date or time is not entered, the missing field(s) will default to the current date/time.
+Therefore, it is invalid to enter an end date and time before the current date and time.
 
 Examples:
 

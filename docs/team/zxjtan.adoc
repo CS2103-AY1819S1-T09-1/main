@@ -1,4 +1,7 @@
 = Jolene Tan - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
 
 == PROJECT: Cow
 
@@ -8,7 +11,7 @@
 
 Cow is a task management program with a view towards team projects. It includes an integrated contacts management module and assignment of tasks to contacts. Its command-line interface (CLI) is geared towards power users, letting them carry out operations efficiently without their hands leaving the keyboard.
 
-This project portfolio documents my personal contributions to this project, including 1.5k lines of code (LoC) and contributions to user and developer documentation.
+Cow was developed by a team of five Computer Science students from the National University of Singapore, including myself. This project portfolio documents my personal contributions to this project, including 1.5k lines of code (LoC) and contributions to user and developer documentation.
 
 == Summary of contributions
 This section documents the features I contributed to the project.
@@ -18,7 +21,10 @@ This section documents the features I contributed to the project.
 ** Created the model for tasks. This included auxillary classes including a DateTime class containing input validation and formatted text output tailored to this project.
 
 * *Major enhancement*: added *ability to create tasks in Cow*
-** Created a command for creating a task. Made start date and time of the task optional, defaulting to the date and time of the current moment.
+** Created a command for creating a task.
+** Made entry of start date and time of the task optional, defaulting to the date and time of the current moment. This enables faster entry of tasks that are already in progress.
+
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=zxjtan
 
 == Contributions to the User Guide
 
@@ -46,3 +52,18 @@ include::../DeveloperGuide.adoc[tag=taskclass]
 
 include::../DeveloperGuide.adoc[tag=addtasks]
 
+== User Stories
+
+|===
+|_While the whole group contributed to the table of user stories, I was the one who collated it at the end, streamlining redundancies and standardising the format and grammar._
+|===
+
+include::../DeveloperGuide.adoc[tag=userstories]
+
+== Use cases
+
+include::../DeveloperGuide.adoc[tag=addtaskusecase]
+
+== Instructions for Manual Testing
+
+include::../DeveloperGuide.adoc[tag=ManualTestingAddTasks]

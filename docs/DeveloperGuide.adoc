@@ -835,6 +835,7 @@ app
 [appendix]
 == User Stories
 
+// tag::userstories[]
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`,
 Low (unlikely to have) - `*`
 
@@ -885,6 +886,7 @@ on all platforms
 
 |`*` |power user |emacs-mode CLI |enter commands more efficiently
 |=======================================================================
+// end::userstories[]
 
 [appendix]
 == Use cases
@@ -988,6 +990,7 @@ Use case ends
 +
 Use case resumes at step 2.
 
+// tag::addtaskusecase[]
 === Create a task
 
 **MSS**
@@ -1004,6 +1007,7 @@ Use case ends.
 ** 1a1. Cow shows an error message.
 +
 Use case ends.
+// end::addtaskusecase[]
 
 === List tasks
 
@@ -1321,7 +1325,7 @@ Move the window to a different location. Close the window.
    Expected: No task is added. An error message is shown.
 .. Other incorrect tasks add commands to try: Names containing non-alphanumeric characters, dates that don't exist on
    the calendar, times outside the range 0000-2359 inclusive, wrongly formatted dates and times.
-// tag::ManualTestingAddTasks[]
+// end::ManualTestingAddTasks[]
 
 === Editing Tasks
 . Editing a task while all tasks are listed
