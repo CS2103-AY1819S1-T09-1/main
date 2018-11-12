@@ -13,6 +13,7 @@ endif::[]
 :toc-title:
 :toc-placement: preamble
 :repoURL: https://github.com/CS2103-AY1819S1-T09-1/main
+:pullURL: https://github.com/CS2103-AY1819S1-T09-1/main/pull
 
 image::jaypeeteedee.png[width=200px]
 {empty}[https://github.com/JayPeeTeeDee[Github]] | [https://www.linkedin.com/in/john-phua-a15628147[LinkedIn]]
@@ -54,19 +55,17 @@ compound different search criteria together.
 *** Managed releases `v1.2` - `v1.3` (2 releases) on GitHub
 ** Enhancements to existing features:
 *** Implemented initial `Storage` and `UI` components for tasks
-(Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/12[#12])
+(Pull request {pullUrl}/12[#12])
 *** Updated and maintained the graphical user interface for the list of tasks
-(Pull requests https://github.com/CS2103-AY1819S1-T09-1/main/pull/57[#57],
-https://github.com/CS2103-AY1819S1-T09-1/main/pull/90[#90],
-https://github.com/CS2103-AY1819S1-T09-1/main/pull/103[#103])
-*** Wrote task UI handlers for testing (Pull requests https://github.com/CS2103-AY1819S1-T09-1/main/pull/91[#91])
+(Pull requests {pullUrl}/57[#57], {pullUrl}/90[#90], {pullUrl}/103[#103])
+*** Wrote task UI handlers for testing (Pull requests {pullUrl}/91[#91])
 *** Wrote tests for my features that increased code coverage from 71% to 75%
-(Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/162[#162])
+(Pull request {pullUrl}/162[#162])
 ** Documentation:
-*** Updated calendar commands in User Guide (Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/31[#31])
-*** Added guide for finding tasks in User Guide (Pull request (Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/100[#100])
+*** Updated calendar commands in User Guide (Pull request {pullUrl}/31[#31])
+*** Added guide for finding tasks in User Guide (Pull request (Pull request {pullUrl}/100[#100])
 *** Added the implementation of listing and finding tasks in the Developer Guide
-(Pull request https://github.com/CS2103-AY1819S1-T09-1/main/pull/66[#66])
+(Pull request {pullUrl}/66[#66])
 ** Tools:
 *** Configured Reposense to track contributions from the team.
 
