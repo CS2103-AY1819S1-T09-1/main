@@ -319,11 +319,40 @@ image::TaskFindLogicSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-The use of `ObservableList` and `FilteredList` from JavaFX saves us the trouble of handling task list updates.
-Under this design, addition, updates and deletion of tasks will only need to interface with `VersionedAddressBook`,
-and the lists for display will be updated through JavaFX.
+===== Aspect: Updating of UI when list is filtered
 
-If we were use Java Lists instead, events will need to be raised to update lists stored for display.
+* **Alternative 1 (current choice):** Using `ObservableList` and `ListView` from JavaFX in UI component.
+** Pros:
+*** Automatically updates `ListView` when changes are made to `ObservableList`, no manual events are needed.
+*** Addition, updates and deletion of tasks will only need to interface with `Logic` and `Model`.
+** Cons:
+*** `ObservableList` does not raise change events when tasks in the base list are mutated.
+Any edits to existing tasks will need to replace the old `Task` instance
+with a new one for changes to be reflected on the UI.
+
+* **Alternative 2:** Using Java `List` in UI component.
+** Pros:
+*** Does not enforce immutability on tasks.
+*** Full control over when and what UI should update.
+** Cons:
+*** Events will need to be raised manually when tasks are changed.
+
+===== Aspect: Filtering of lists
+
+* **Alternative 1 (current choice):** Using `FilteredList` from JavaFX.
+** Pros:
+*** Convenient as the filter is maintained even when the base list is changed.
+*** Abstracts away filtering logic, only need to be concerned with the predicate used.
+*** Any filter updates will automatically update UI as it implements `ObservableList`.
+** Cons:
+*** Only works as a simple filter.
+
+* **Alternative 2:** Using `Streams` from Java.
+** Pros:
+*** Powerful, can also be used to transform tasks as an intermediate operation.
+** Cons:
+*** For the same predicate, a new stream will need to be made when the task list is changed.
+*** Events will need to be raised to update UI on newly filtered list of tasks.
 
 ==== Future Enhancements
 
