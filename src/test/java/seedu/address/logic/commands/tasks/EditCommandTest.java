@@ -9,9 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SLAUGHTER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_SLAUGHTER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_SLAUGHTER;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static seedu.address.model.task.Task.MESSAGE_END_BEFORE_START;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
@@ -40,10 +43,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Task task = model.getFilteredTaskList().get(0);
+        Index index = INDEX_FIRST_TASK;
+        Task task = model.getFilteredTaskList().get(index.getZeroBased());
         Task editedTask = new TaskBuilder(task).build();
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_TASK, descriptor);
+        EditCommand editCommand = new EditCommand(index, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
@@ -91,6 +95,19 @@ public class EditCommandTest {
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_wrongStartEndDateTimeUnfilteredList_failure() {
+        Index indexLastTask = Index.fromOneBased(model.getFilteredTaskList().size());
+
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder()
+                .withStartDateTime(new DateTime(VALID_END_DATE_SLAUGHTER, VALID_END_TIME_SLAUGHTER))
+                .withEndDateTime(new DateTime(VALID_START_DATE_SLAUGHTER, VALID_START_TIME_SLAUGHTER))
+                .build();
+        EditCommand editCommand = new EditCommand(indexLastTask, descriptor);
+
+        assertCommandFailure(editCommand, model, commandHistory, MESSAGE_END_BEFORE_START);
     }
 
     @Test

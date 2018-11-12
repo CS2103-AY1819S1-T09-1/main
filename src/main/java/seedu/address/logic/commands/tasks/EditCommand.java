@@ -53,7 +53,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
 
     private final Index index;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -84,10 +83,6 @@ public class EditCommand extends Command {
 
         if (!editedTask.isValidDateTimeRange()) {
             throw new CommandException(MESSAGE_END_BEFORE_START);
-        }
-
-        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
         model.updateTask(taskToEdit, editedTask);
