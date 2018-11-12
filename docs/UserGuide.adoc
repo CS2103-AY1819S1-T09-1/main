@@ -304,13 +304,15 @@ Edits the name of the 2nd task to be `Brush the cows` and clears all existing ta
 
 ==== Search for tasks: `tasks find`
 
-Find tasks based on name, start date, end date and/or tags +
+Find tasks based on name, start date, end date and/or tags. +
+When the command is entered, you should see the list of tasks update to show only the
+tasks that match your search request. +
 Format:
 `tasks find [n/KEYWORD]... [sd/START_DATE] [ed/END_DATE] [t/TAG]…`
 
 ****
 * Searching by keyword is case insensitive. e.g `cows` will match `Cows`
-* Only full words will be matched e.g. `Cow` will not match `Cows`
+* Only full words will be matched. e.g. `Cow` will not match `Cows`
 * Providing multiple keywords or tags will return tasks that match any of the keywords or tags. +
 e.g. `tasks find n/cow n/farm` will search for tasks with either `cow` or `farm` in the name.
 * Providing multiple start dates or end dates will only use the last one for filtering. +
