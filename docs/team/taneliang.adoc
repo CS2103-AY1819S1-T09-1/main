@@ -62,6 +62,7 @@ include::../UserGuide.adoc[tag=assigncontacttotask]
 
 include::../DeveloperGuide.adoc[tag=assigning-tasks-and-contacts]
 include::../DeveloperGuide.adoc[tag=assignpeopletotask]
+include::../DeveloperGuide.adoc[tag=assignManualTestInstructions]
 
 == PROJECT: ShowFace
 

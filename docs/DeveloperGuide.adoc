@@ -1373,6 +1373,7 @@ Expected: Task list is not changed. Error details is shown in the status message
 Expected: Similar to previous.
 
 // end::filterTasksManualTestInstructions[]
+// tag::assignManualTestInstructions[]
 
 === Assigning a Task to a Contact
 . Assigning a task to a contact and vice versa while some or all tasks and contacts are listed.
@@ -1409,6 +1410,8 @@ Expected: Similar to previous.
 .. Test case: `tasks unassign c/2 k/1` +
    Expected: No unassignment is made. Error detail is shown in the status message. Status bar remains the same.
 .. Other incorrect unassign commands to try: `tasks unassign` or `contacts unassign`, `tasks unassign c/x` or `contacts unassign c/x` (where x is any integer), `tasks unassign k/x` or `contacts unassign k/x` (where x in any integer), `tasks unassign c/x k/y` or `contacts unassign c/x k/y` (where x is negative or larger than the contacts list size and/or y is negative or larger than the task list size).
+
+// end::assignManualTestInstructions[]
 
 // tag::calendarManualTestInstructions[]
 
