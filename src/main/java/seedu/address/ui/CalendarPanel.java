@@ -73,7 +73,9 @@ public class CalendarPanel extends UiPart<Region> {
                 if (row == HEADER_ROW) {
                     calendarGridPane.add(new CalendarHeaderCell(col).getRoot(), col, row);
                 } else {
-                    calendarGridPane.add(new CalendarContentCell(row, col, taskList, calendar).getRoot(), col, row);
+                    // Subtract 1 from row so that CalendarContentCell row is based on content area
+                    // of calendar.
+                    calendarGridPane.add(new CalendarContentCell(row - 1, col, taskList, calendar).getRoot(), col, row);
                 }
             }
         }
@@ -83,20 +85,20 @@ public class CalendarPanel extends UiPart<Region> {
      * Writes empty grid with row/col dimension constraints.
      */
     private void buildEmptyGrid() {
-        for (int i = 0; i < COLS; i++) {
+        for (int col = 0; col < COLS; col++) {
             ColumnConstraints column = new ColumnConstraints(COL_WIDTH);
             column.setHgrow(Priority.ALWAYS);
             calendarGridPane.getColumnConstraints().add(column);
         }
 
-        for (int i = 0; i < ROWS; i++) {
-            RowConstraints row;
-            if (i == 0) {
-                row = new RowConstraints();
+        for (int row = 0; row < ROWS; row++) {
+            RowConstraints rowConstraint;
+            if (row == HEADER_ROW) {
+                rowConstraint = new RowConstraints();
             } else {
-                row = new RowConstraints(ROW_HEIGHT);
+                rowConstraint = new RowConstraints(ROW_HEIGHT);
             }
-            calendarGridPane.getRowConstraints().add(row);
+            calendarGridPane.getRowConstraints().add(rowConstraint);
         }
     }
 }

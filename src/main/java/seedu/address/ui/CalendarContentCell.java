@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.CalendarPanel.COLS;
+
 import java.util.Calendar;
 import java.util.logging.Logger;
 
@@ -72,7 +74,10 @@ public class CalendarContentCell extends UiPart<Region> {
         curMonth.set(Calendar.DAY_OF_MONTH, 1);
 
         int firstDayOfMonth = curMonth.get(Calendar.DAY_OF_WEEK);
-        int dateInCurMonth = (row - 1) * 7 + col - firstDayOfMonth + 2;
+
+        // col is 0-indexed but DAY_OF_WEEK is 1-indexed
+        int dateInCurMonth = (row) * COLS + col - firstDayOfMonth + 2;
+
         if (dateInCurMonth < 1) {
             // This grid belongs to previous month
             Calendar prevMonth = (Calendar) curMonth.clone();
@@ -82,7 +87,7 @@ public class CalendarContentCell extends UiPart<Region> {
         } else if (dateInCurMonth > curMonth.getActualMaximum(Calendar.DAY_OF_MONTH)) {
             // This grid belongs to the next month
             Calendar nextMonth = (Calendar) curMonth.clone();
-            nextMonth.add(Calendar.MONTH, 11);
+            nextMonth.add(Calendar.MONTH, 1);
             filterCalendar = nextMonth;
             displayDate = dateInCurMonth - curMonth.getActualMaximum(Calendar.DAY_OF_MONTH);
         } else {
