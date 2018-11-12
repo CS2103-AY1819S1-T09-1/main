@@ -43,8 +43,9 @@
 <li><a href="#calendar">3.4. Calendar</a>
 <ul class="sectlevel3">
 <li><a href="#view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code">3.4.1. View calendar for tasks due within given year and month: <code>calendar show</code></a></li>
-<li><a href="#list-tasks-for-a-specific-day-code-calendars-list-code-code-coming-in-v2-0-code">3.4.2. List tasks for a specific day: <code>calendars list</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#share-calendar-code-calendars-share-code-code-coming-in-v2-0-code">3.4.3. Share calendar: <code>calendars share</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#list-all-calendars-available-code-calendars-list-code-code-coming-in-v2-0-code">3.4.2. List all calendars available: <code>calendars list</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#import-calendar-code-calendars-import-code-code-coming-in-v2-0-code">3.4.3. Import calendar: <code>calendars import</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#share-calendar-code-calendars-share-code-code-coming-in-v2-0-code">3.4.4. Share calendar: <code>calendars share</code> <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#global">3.5. Global</a>
@@ -1014,23 +1015,31 @@ Format for entering dates is <code>YYYYMMDD</code>.</p>
 <p>Each cell in the calendar is populated with tasks that end on that day.</p>
 </li>
 <li>
-<p>Clicking on any task would cause its details to be displayed in the task details pane.</p>
-</li>
-<li>
 <p>Task filters applied via the <code>tasks find</code> command would also apply to the tasks displayed in the calendar.</p>
 </li>
 <li>
-<p>If there are more than 5 tasks ending on that day, the cell will be scrollable,
-but a scroll bar is not displayed due to space constraints.</p>
+<p>If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Clicking on an entry in the calendar would display it in the task details panel.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code"><a class="link" href="#view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code">3.4.1. View calendar for tasks due within given year and month: <code>calendar show</code></a></h4>
 <div class="paragraph">
-<p>Populates the calendar panel with tasks from the specified month.<br>
+<p>Displays the specified month in the calendar panel.<br>
 Format: <code>calendar show y/YEAR m/MONTH</code></p>
 </div>
 <div class="admonitionblock note">
@@ -1045,17 +1054,37 @@ Entries from the end of the previous month and the start of the following month 
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>calendar show y/2018 m/12</code><br>
+Displays tasks due in December 2018 in the calendar.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
-<h4 id="list-tasks-for-a-specific-day-code-calendars-list-code-code-coming-in-v2-0-code"><a class="link" href="#list-tasks-for-a-specific-day-code-calendars-list-code-code-coming-in-v2-0-code">3.4.2. List tasks for a specific day: <code>calendars list</code> <code>[coming in v2.0]</code></a></h4>
+<h4 id="list-all-calendars-available-code-calendars-list-code-code-coming-in-v2-0-code"><a class="link" href="#list-all-calendars-available-code-calendars-list-code-code-coming-in-v2-0-code">3.4.2. List all calendars available: <code>calendars list</code> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>calendars list ed/END_DATE</code></p>
+<p>Format: <code>calendars list</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="share-calendar-code-calendars-share-code-code-coming-in-v2-0-code"><a class="link" href="#share-calendar-code-calendars-share-code-code-coming-in-v2-0-code">3.4.3. Share calendar: <code>calendars share</code> <code>[coming in v2.0]</code></a></h4>
+<h4 id="import-calendar-code-calendars-import-code-code-coming-in-v2-0-code"><a class="link" href="#import-calendar-code-calendars-import-code-code-coming-in-v2-0-code">3.4.3. Import calendar: <code>calendars import</code> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>calendars share CONTACT_INDEX</code></p>
+<p>Format: <code>calendars import f/PATH_TO_FILE n/CALENDAR_NAME</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="share-calendar-code-calendars-share-code-code-coming-in-v2-0-code"><a class="link" href="#share-calendar-code-calendars-share-code-code-coming-in-v2-0-code">3.4.4. Share calendar: <code>calendars share</code> <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>Writes all tasks into a XML file at the specified path.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>calendars share f/PATH_TO_FILE</code></p>
 </div>
 </div>
 </div>
@@ -1162,4 +1191,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:55:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:58:52 UTC</div></div></div></body></html>

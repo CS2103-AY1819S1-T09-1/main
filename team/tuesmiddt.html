@@ -10,7 +10,7 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cow is a task management app with an emphasis on Command Line Interface ("CLI") interaction. It is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 10k LoC.</p>
+<p>Cow is a project management app with an emphasis on Command Line Interface ("CLI") interaction. It is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 10k LoC.</p>
 </div>
 </div>
 </div>
@@ -27,16 +27,16 @@
 <p>What it does: allows the user to view all tasks due in a specified month through the <code>calendar show</code> command.</p>
 </li>
 <li>
-<p>Justification: This feature achieves a significant improvement in the task management workflow by allowing easier and more intuitive deadline management.</p>
+<p>Justification: This feature achieves a significant improvement in the task management workflow by allowing easier and more intuitive deadline management. The user would be able to visualise his tasks for the entire month via the calendar view instead of in a single list.</p>
 </li>
 <li>
-<p>Highlights: This enhancement involves significant changes to the GUI. It requires a good understanding of the tools available via JavaFX. In addition, the implementation was challenging as it involved changes at multiple levels in the app.</p>
+<p>Highlights: This enhancement involves significant changes to the GUI. It requires a good understanding of the tools available via JavaFX in order to both build the feature and test it. In addition, the implementation was challenging as it involved changes at multiple levels in the app.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Code contributed</strong>: TBC</p>
+<p><strong>Code contributed</strong>: <a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=tuesmiddt">Collated code at RepoSense</a></p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -47,7 +47,28 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Port User Guide and Developer Guide sections from Markdown meeting minutes: <a href="https://github.com">#2</a></p>
+<p>Port Readme, User Guide, and Developer Guide sections from Markdown meeting minutes: <a href="https://github.com">#2</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed (with non-trivial review comments):
+<a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/160">#160</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Introduced the use of PlantUML instead of PowerPoint for the generation of UML diagrams.</p>
 </li>
 </ul>
 </div>
@@ -87,23 +108,31 @@ Format for entering dates is <code>YYYYMMDD</code>.</p>
 <p>Each cell in the calendar is populated with tasks that end on that day.</p>
 </li>
 <li>
-<p>Clicking on any task would cause its details to be displayed in the task details pane.</p>
-</li>
-<li>
 <p>Task filters applied via the <code>tasks find</code> command would also apply to the tasks displayed in the calendar.</p>
 </li>
 <li>
-<p>If there are more than 5 tasks ending on that day, the cell will be scrollable,
-but a scroll bar is not displayed due to space constraints.</p>
+<p>If there are more than 5 tasks ending on that day, the cell will be scrollable, but a scroll bar is not displayed due to space constraints.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Clicking on an entry in the calendar would display it in the task details panel.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code"><a class="link" href="#view-calendar-for-tasks-due-within-given-year-and-month-code-calendar-show-code">View calendar for tasks due within given year and month: <code>calendar show</code></a></h4>
 <div class="paragraph">
-<p>Populates the calendar panel with tasks from the specified month.<br>
+<p>Displays the specified month in the calendar panel.<br>
 Format: <code>calendar show y/YEAR m/MONTH</code></p>
 </div>
 <div class="admonitionblock note">
@@ -117,6 +146,17 @@ Entries from the end of the previous month and the start of the following month 
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>calendar show y/2018 m/12</code><br>
+Displays tasks due in December 2018 in the calendar.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -140,38 +180,123 @@ Entries from the end of the previous month and the start of the following month 
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The calendar show feature is facilitated by the <code>ModelManager</code>. It extends <code>ModelManager</code> with a calendar panel that allows the user to more easily view the tasks.</p>
+<p>The calendar show feature is facilitated by the <code>ModelManager</code> and displayed through the <code>CalendarPanel</code>. The purpose of this feature is to allow the user to more easily view his tasks.</p>
 </div>
 <div class="paragraph">
-<p>It exposes the following operations via the <code>Model</code> interface:</p>
+<p>This feature can be broken down into two stages: updating the model based on user input and rendering the UI.</p>
+</div>
+<div class="sect4">
+<h5 id="stage-1-input-handling"><a class="link" href="#stage-1-input-handling">Stage 1: Input handling</a></h5>
+<div class="paragraph">
+<p>The following operation is exposed via the <code>Model</code> interface:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>Model#updateCalendarMonth()</code>&#8201;&#8212;&#8201;Saves the given calendar that encapsulates the month to be displayed in the calendar panel.</p>
 </li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The basic flow of the <code>calendar show</code> command is as such:</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user enters the command <code>calendar show y/2018 m/12</code></p>
+</div>
+<div class="paragraph">
+<p>Step 2. The command is parsed and a <code>ShowCommand</code> object is created with the appropate values for year and month.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The <code>ShowCommand#execute()</code> method is invoked, and <code>Model#updateCalendarMont()</code> is called with a <code>Calendar</code> object encapsulating the first day of the specified month <code>1 Dec 2018</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The date of the month is arbitrarily chosen. However this is not strictly necessary as the necessary processing will be done by the UI component when rendering the calendar.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This is summarised in the following image.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CalendarShowCommandSequence.png" alt="CalendarShowCommandSequence" width="1280">
+</div>
+<div class="title">Figure 1. Calendar Show Command Logic Sequence Diagram</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="stage-2-ui-rendering"><a class="link" href="#stage-2-ui-rendering">Stage 2: UI Rendering</a></h5>
+<div class="paragraph">
+<p>The following operation is exposed via the <code>Model</code> interface:</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p><code>Model#getCalendarMonth()</code>&#8201;&#8212;&#8201;Returns an <code>ObservableValue&lt;Calendar&gt;</code> for the calendar panel to identify which weekday the month begins with.</p>
+<p><code>Model#getCalendarMonth()</code>&#8201;&#8212;&#8201;Returns an <code>ObservableValue&lt;Calendar&gt;</code> for the calendar
+UI elements to determine the month to display and the weekday it starts on.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the calendar show mechanism behaves at each step.</p>
+<p>Given below is how the calendar UI is initialised.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application. The <code>MainWindow</code> class calls <code>Model#getCalendarMonth()</code> and <code>Model#getFilteredTaskList()</code> when creating the calendar panel. This initialises the calendar panel with an <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code> to allow it to perform UI updates when necessary.</p>
+<p>Step 1. The user launches the application. The <code>Model</code> is initialised with a <code>ObservableValue&lt;Calendar&gt;</code> representing the current date. The <code>MainWindow</code> class calls <code>Model#getCalendarMonth()</code> and <code>Model#getFilteredTaskList()</code> when creating the <code>CalendarPanel</code>. This initialises the <code>CalendarPanel</code> with an <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code> to allow it to perform UI updates when necessary.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. The calendar panel constructs a <code>GridPane</code> and initialises the cells with empty containers.</p>
+<p>Step 2. The <code>CalendarPanel</code> constructs a <code>GridPane</code> and sets the row and column constraints.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The calendar panel registers listeners to the <code>ObservableValue&lt;Calendar&gt;</code> with a task that would empty grid cells and repopulate them with <code>ListView</code> elements that display the tasks starting on the corresponding dates.</p>
+<p>Step 3. The <code>CalendarPanel</code> populates the <code>GridPane</code>. The cells in the header row are populated with <code>CalendarHeaderCell</code> elements containing the days of a week. All other cells are populated with <code>CalendarContentCell</code> elements based on its position in the grid. The <code>CalendarContentCell</code> elements are intialised with the <code>ObservableList&lt;Task&gt;</code> and <code>ObservableValue&lt;Calendar&gt;</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 4. The user creates any number of tasks with start date in January 2018. The tasks will be stored appropriately.</p>
+<p>Step 4. The <code>CalendarContentCell</code> computes the date that it represents based on the calendar it receives and its position in the grid. It then creates a <code>FilteredList&lt;Task&gt;</code> from the <code>ObservableList&lt;Task&gt;</code> that only contains tasks belonging to that state. Finally, the <code>ListView&lt;Task&gt;</code> element configured to display elements in the <code>FilteredList&lt;Task&gt;</code> with <code>CalendarTaskCard</code> elements.</p>
 </div>
 <div class="paragraph">
-<p>Step 5. The user executes <code>calendars show y/2018 m/1</code>. The <code>calendars show</code> command calls <code>Model#updateCalendarMonth()</code>, listeners in the calendar panel to be notified of the changes.</p>
+<p>Step 5. The <code>CalendarContentCell</code> listens to updates to the <code>ObservableValue&lt;Calendar&gt;</code> that would update the predicate for the <code>FilteredList&lt;Task&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. The <code>CalendarPanel</code> writes the header for the month and year it is displaying.</p>
+</div>
+<div class="paragraph">
+<p>Step 7. The <code>CalendarPanel</code> listens to updates to the <code>ObservableValue&lt;Calendar&gt;</code> that would update the calendar header with the month and year of the new value.</p>
+</div>
+<div class="paragraph">
+<p>Initialisation complete.<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>Given below is how <code>calendar show</code> command is handled by the UI components.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user enters <code>calendar show y/2018 m/1</code>. This causes <code>Model#updateCalendarMonth</code> to called, which sets the new value for the <code>ObservableValue&lt;Calendar&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The update to the <code>ObservableValue&lt;Calendar&gt;</code> triggers the listener registered by the <code>CalendarPanel</code>. This causes the calendar header to be updated via <code>CalendarPanel#handleUpdateCalendar</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The update to the <code>ObservableValue&lt;Calendar&gt;</code> triggers the listener registered by the <code>CalendarContentCell</code>. This causes it to recompute the date that it represents and update the predicate for its <code>FilteredList&lt;Task&gt;</code>. This causes cell to display the appropriate tasks based on the new designated month.</p>
+</div>
+<div class="paragraph">
+<p>Update complete.<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The image below summarises the abovementioned mechanism for a single cell in the calendar.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CalendarRenderSequence.png" alt="CalendarRenderSequence" width="1280">
+</div>
+<div class="title">Figure 2. Calendar UI Rendering Sequence Diagram</div>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -254,7 +379,37 @@ Entries from the end of the previous month and the start of the following month 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Delete and regenerate cell contents each time the month is changed</p>
+<p><strong>Alternative 1 (current choice):</strong> Cells are constructed once and contents are updated each time the month is changed</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Better performance: Deleting and recreating elements incurs some computational cost.</p>
+</li>
+<li>
+<p>Cleaner abstraction: Code better follows Single Responsibility Principle. Updating of predicate for a <code>FilteredList&lt;Task&gt;</code> more accurately represents the actual behaviour being modelled.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Increased compleity of implementation.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Delete and regenerate cell contents each time the month is changed</p>
 <div class="ulist">
 <ul>
 <li>
@@ -272,34 +427,10 @@ Entries from the end of the previous month and the start of the following month 
 <div class="ulist">
 <ul>
 <li>
-<p>Poorer performance, although this is insignificant since number of elements to be created/deleted is small and fixed.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<p>Poorer performance.</p>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Create and store <code>ListView</code> containers and reuse them.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Better performance, since deleting and recreating them incurs some computational cost.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Cons:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>There were some difficulties around creating a separate <code>UiPart</code> component that could be added as a child of a <code>VBox</code> element.</p>
+<p>Messy code. One huge class will be used for the entire calendar.</p>
 </li>
 </ul>
 </div>
@@ -313,4 +444,4 @@ Entries from the end of the previous month and the start of the following month 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:55:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:58:53 UTC</div></div></div></body></html>
