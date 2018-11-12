@@ -23,7 +23,7 @@ image::tuesmiddt.png[width=200px]
 
 Cow is a project management app with an emphasis on Command Line Interface ("CLI") interaction. It allows users to completely manage their contacts and tasks without taking their fingers off the keyboard. In addition, a calendar view is available the user to visualise his tasks.
 
-It is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 10k LoC.
+Cow is written in Java, and its Graphical User Interface ("GUI") is created with JavaFX. It has approximately 15k LoC. This portfolio documents my contributions to this project.
 
 == Summary of contributions
 
