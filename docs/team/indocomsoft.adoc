@@ -2,6 +2,7 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:repoURL: https://github.com/CS2103-AY1819S1-T09-1/main
 :prURL: https://github.com/CS2103-AY1819S1-T09-1/main/pull
 
 = PROJECT: Cow
