@@ -69,7 +69,7 @@ This project follows https://github.com/oss-generic/process/blob/master/docs/Cod
 * For `Class count to use import with '\*'` and `Names count to use static import with '*'`: Set to `999` to prevent IntelliJ from contracting the import statements
 * For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.*`, `import all other imports`. Add a `<blank line>` between each `import`
 
-Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document to configure Intellij to check style-compliance as you write code.
+Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document to configure IntelliJ to check style-compliance as you write code.
 
 ==== Setting up CI
 
@@ -440,7 +440,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::calendarshow[]
+// tag::calendarShow[]
 === Calendar show feature
 ==== Current Implementation
 
@@ -538,21 +538,14 @@ image::CalendarRenderSequence.png[width="1280"]
 *** Better performance: Deleting and recreating elements incurs some computational cost.
 *** Cleaner abstraction: Code better follows Single Responsibility Principle. Updating of predicate for a `FilteredList<Task>` more accurately represents the actual behaviour being modelled.
 ** Cons:
-*** Increased compleity of implementation.
+*** Increased complexity of implementation.
 * **Alternative 2:** Delete and regenerate cell contents each time the month is changed
 ** Pros:
 *** Ease of implementation.
 ** Cons:
 *** Poorer performance.
 *** Messy code. One huge class will be used for the entire calendar.
-// end::calendarshow[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
+// end::calendarShow[]
 
 === Logging
 
@@ -1189,6 +1182,8 @@ Use case ends.
 Use case ends.
 // end::assignpeopletotask[]
 
+// tag::calendarUseCases[]
+
 === View calendar
 
 **MSS**
@@ -1233,6 +1228,8 @@ Use case ends.
 +
 Use case ends
 
+// end::calendarUseCases[]
+
 [appendix]
 == Non-Functional Requirements
 
@@ -1240,7 +1237,7 @@ Use case ends
 ** colour scheme
 ** compatibility with screen readers
 ** on-screen keyboard
-* Infinitely scaleable (serverless backend on AWS Lambda-equivalent)
+* Infinitely scalable (serverless back end on AWS Lambda-equivalent)
 * Support alternative (better, faster) forms of storage
 * Should work on any mainstream OS as long as it has Java 9 or higher
 installed.
