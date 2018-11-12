@@ -281,6 +281,7 @@ Examples:
 * `tasks add n/Milk the cows ed/20181129 et/2359 t/farm`
 // end::addtasks[]
 
+// tag::edittasks[]
 ==== Edit task: `tasks edit`
 
 Edits an existing task in Cow. +
@@ -303,6 +304,7 @@ Examples:
 Edits the start date and time of the 1st task to be 8 January 2005, 12:35pm.
 * `task edit 2 n/Brush the cows t/` +
 Edits the name of the 2nd task to be `Brush the cows` and clears all existing tags.
+// end::edittasks[]
 // tag::listfindtasks[]
 
 ==== Search for tasks: `tasks find`
