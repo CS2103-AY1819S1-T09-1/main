@@ -541,7 +541,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="title">Figure 9. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/CS2103-AY1819S1-T09-1/main/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/CS2103-AY1819S1-T09-1/main/blob/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Storage</code> component,</p>
@@ -740,13 +740,144 @@ the <code>filteredTasks</code> list, propagating the change up to the <code>Task
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.3.2. Design Considerations</a></h4>
-<div class="paragraph">
-<p>The use of <code>ObservableList</code> and <code>FilteredList</code> from JavaFX saves us the trouble of handling task list updates.
-Under this design, addition, updates and deletion of tasks will only need to interface with <code>VersionedAddressBook</code>,
-and the lists for display will be updated through JavaFX.</p>
+<div class="sect4">
+<h5 id="aspect-updating-of-ui-when-list-is-filtered"><a class="link" href="#aspect-updating-of-ui-when-list-is-filtered">Aspect: Updating of UI when list is filtered</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Using <code>ObservableList</code> and <code>ListView</code> from JavaFX in UI component.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Automatically updates <code>ListView</code> when changes are made to <code>ObservableList</code>, no manual events are needed.</p>
+</li>
+<li>
+<p>Addition, updates and deletion of tasks will only need to interface with <code>Logic</code> and <code>Model</code>.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>If we were use Java Lists instead, events will need to be raised to update lists stored for display.</p>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ObservableList</code> does not raise change events when tasks in the base list are mutated.
+Any edits to existing tasks will need to replace the old <code>Task</code> instance
+with a new one for changes to be reflected on the UI.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Using Java <code>List</code> in UI component.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Does not enforce immutability on tasks.</p>
+</li>
+<li>
+<p>Full control over when and what UI should update.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Events will need to be raised manually when tasks are changed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-filtering-of-lists"><a class="link" href="#aspect-filtering-of-lists">Aspect: Filtering of lists</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Using <code>FilteredList</code> from JavaFX.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Convenient as the filter is maintained even when the base list is changed.</p>
+</li>
+<li>
+<p>Abstracts away filtering logic, only need to be concerned with the predicate used.</p>
+</li>
+<li>
+<p>Any filter updates will automatically update UI as it implements <code>ObservableList</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Only works as a simple filter.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Using <code>Streams</code> from Java.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Powerful, can also be used to transform tasks as an intermediate operation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For the same predicate, a new stream will need to be made when the task list is changed.</p>
+</li>
+<li>
+<p>Events will need to be raised to update UI on newly filtered list of tasks.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -2723,4 +2854,4 @@ contacts</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:21:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 05:12:38 UTC</div></div></div></body></html>

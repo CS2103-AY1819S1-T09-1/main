@@ -1,63 +1,105 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>John Phua - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Cow</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-T09-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>John Phua - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-cow"><a class="link" href="#project-cow">PROJECT: Cow</a></h2>
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Cow</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-T09-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>John Phua - Project Portfolio</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../images/jaypeeteedee.png" alt="jaypeeteedee" width="200px">
+</div>
+</div>
 <div class="paragraph">
-<p>This document serves to provide an introduction to the project and my contributions to it.</p>
+<p>[<a href="https://github.com/JayPeeTeeDee">Github</a>] | [<a href="https://www.linkedin.com/in/john-phua-a15628147">LinkedIn</a>]</p>
+</div>
+<div class="paragraph">
+<p>Hello! I am John Phua, a Year 2 Computer Science undergraduate student at the National University of Singapore.
+Over the semester, my team and I built <em>Cow</em>, a project management application.
+This portfolio will introduce you to <em>Cow</em> and my contributions towards its development.</p>
 </div>
 </div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel0">
+<li><a href="#project-cow">PROJECT: Cow</a>
+<ul class="sectlevel1">
+<li><a href="#overview">1. Overview</a></li>
+<li><a href="#summary-of-contributions">2. Summary of contributions</a></li>
+<li><a href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a>
+<ul class="sectlevel3">
+<li><a href="#search-for-tasks-code-tasks-find-code">3.1. Search for tasks: <code>tasks find</code></a></li>
+</ul>
+</li>
+<li><a href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a>
+<ul class="sectlevel2">
+<li><a href="#Design-Storage">4.1. Storage component</a></li>
+<li><a href="#listing-and-finding-of-tasks">4.2. Listing and finding of tasks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
+</div>
+<h1 id="project-cow" class="sect0"><a class="link" href="#project-cow">PROJECT: Cow</a></h1>
 <div class="sect1">
-<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<h2 id="overview"><a class="link" href="#overview">1. Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Cow is a desktop task manager with project management capabilities, powered by a command-line interface.
-It is written in Java by a team of 4 undergraduates from the NUS School of Computing.</p>
+It is written in Java by a team of 5 undergraduates from the NUS School of Computing.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ui.png" alt="Ui">
+</div>
 </div>
 <div class="paragraph">
-<p>The list of features include:</p>
+<p>By entering commands, Cow allows you to efficiently:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Management of tasks</p>
+<p>Manage a list of tasks</p>
 </li>
 <li>
-<p>Management of contacts</p>
+<p>Manage a list of group members across different project groups</p>
 </li>
 <li>
-<p>Assigning of tasks to contacts</p>
+<p>Assign tasks to people</p>
 </li>
 <li>
-<p>Calendar view of tasks</p>
+<p>View the monthly workload of people through a calendar view</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">2. Summary of contributions</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major feature</strong>: Finding of tasks by name, date and tags</p>
+<p><strong>Major feature</strong>: Searching of tasks by name, date and tags</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Purpose: Allowing users to efficiently search for tasks</p>
+<p>Purpose: Allowing you to efficiently search for tasks</p>
 </li>
 <li>
-<p>Value to project: Allowing users to sieve through their long list of tasks</p>
+<p>Value to project: Task lists can get long and cluttered,
+this feature allows you to easily filter through your long list of tasks and retrieve what you want.</p>
 </li>
 <li>
-<p>Highlights: This feature was built to be flexible according to the users needs. Users are able to combine different
-search criteria to make their search more specific. This required the design of a new class that can accept and
+<p>Highlights: This feature was built to be flexible according to your needs. You can combine different
+search criteria to make your search more specific. This required the design of a new class that can accept and
 compound different search criteria together.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p><strong>Code contributions</strong>: [<a href="https://github.com/CS2103-AY1819S1-T09-1/main/commits/master?author=jaypeeteedee">All code commits</a>]
+[<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=jaypeeteedee">Project Dashboard View</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -82,13 +124,15 @@ compound different search criteria together.</p>
 (Pull request <a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/12">#12</a>)</p>
 </li>
 <li>
-<p>Updated and maintained the task list GUI
-(Pull requests <a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/57">#57</a>,
-<a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/90">#90</a>,
-<a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/103">#103</a>)</p>
+<p>Updated and maintained the graphical user interface for the list of tasks
+(Pull requests <a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/57">#57</a>, <a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/90">#90</a>, <a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/103">#103</a>)</p>
 </li>
 <li>
 <p>Wrote task UI handlers for testing (Pull requests <a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/91">#91</a>)</p>
+</li>
+<li>
+<p>Wrote tests for my features that increased code coverage from 71% to 75%
+(Pull request <a href="https://github.com/CS2103-AY1819S1-T09-1/main/pull/162">#162</a>)</p>
 </li>
 </ul>
 </div>
@@ -115,7 +159,7 @@ compound different search criteria together.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Configured Reposense to track contributions from team.</p>
+<p>Configured Reposense to track contributions from the team.</p>
 </li>
 </ul>
 </div>
@@ -128,7 +172,7 @@ compound different search criteria together.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -136,15 +180,21 @@ compound different search criteria together.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>You can see my contributions to the User Guide for Cow below.
+ They showcase my ability to write documentation that is easy for end-users to follow and understand,
+ while accounting for possible errors in usage.</em></p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="search-for-tasks-code-tasks-find-code"><a class="link" href="#search-for-tasks-code-tasks-find-code">Search for tasks: <code>tasks find</code></a></h4>
+<h4 id="search-for-tasks-code-tasks-find-code"><a class="link" href="#search-for-tasks-code-tasks-find-code">3.1. Search for tasks: <code>tasks find</code></a></h4>
 <div class="paragraph">
-<p>Find tasks based on name, start date, end date and/or tags<br>
-Format:
+<p>Find tasks based on name, start date, end date and/or tags.<br>
+When the command is entered, you should see the list of tasks update to show only the
+tasks that match your search request.<br></p>
+</div>
+<div class="paragraph">
+<p>Format:
 <code>tasks find [n/KEYWORD]&#8230;&#8203; [sd/START_DATE] [ed/END_DATE] [t/TAG]…</code></p>
 </div>
 <div class="sidebarblock">
@@ -155,7 +205,7 @@ Format:
 <p>Searching by keyword is case insensitive. e.g <code>cows</code> will match <code>Cows</code></p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Cow</code> will not match <code>Cows</code></p>
+<p>Only full words will be matched. e.g. <code>Cow</code> will not match <code>Cows</code></p>
 </li>
 <li>
 <p>Providing multiple keywords or tags will return tasks that match any of the keywords or tags.<br>
@@ -200,7 +250,7 @@ Displays all tasks whose name contains <code>Cows</code> and has the <code>farm<
 </div>
 </div>
 <div class="sect1">
-<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -208,14 +258,54 @@ Displays all tasks whose name contains <code>Cows</code> and has the <code>farm<
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>You can see my contributions to the Developer Guide for Cow below.
+ They showcase my ability to communicate technical concepts to other developers
+ and the technical depth of my contributions to the project.</em></p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="listing-and-finding-of-tasks"><a class="link" href="#listing-and-finding-of-tasks">Listing and finding of tasks</a></h3>
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">4.1. Storage component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
+</div>
+<div class="title">Figure 1. Structure of the Storage Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="https://github.com/CS2103-AY1819S1-T09-1/main/blob/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Storage</code> component,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+</li>
+<li>
+<p>can save the Address Book data in xml format and read it back.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>XmlAdaptedPerson</code> depends on <code>XmlAdaptedTaskId</code> to keep track of tasks assigned to the person.<br>
+<code>XmlAdaptedTask</code> depends on <code>XmlAdaptedPersonId</code> to keep track of persons assigned to the task.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-and-finding-of-tasks"><a class="link" href="#listing-and-finding-of-tasks">4.2. Listing and finding of tasks</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Listing and finding of tasks is facilitated by <code>ModelManager</code> and displayed through <code>TaskListPanel</code>.</p>
 </div>
@@ -258,7 +348,7 @@ the <code>filteredTasks</code> list, propagating the change up to the <code>Task
 <div class="content">
 <img src="../images/TaskListFindModelSequenceDiagram.png" alt="TaskListFindModelSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 1. Filtering of Tasks in Model Component</div>
+<div class="title">Figure 2. Filtering of Tasks in Model Component</div>
 </div>
 <div class="paragraph">
 <p>Currently, there are 2 use cases where <code>ModelManager#updateFilteredTaskList()</code> is called, examples are given below.</p>
@@ -274,7 +364,7 @@ the <code>filteredTasks</code> list, propagating the change up to the <code>Task
 <div class="content">
 <img src="../images/TaskListLogicSequenceDiagram.png" alt="TaskListLogicSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 2. Sequence Diagram of Tasks List Command</div>
+<div class="title">Figure 3. Sequence Diagram of Tasks List Command</div>
 </div>
 <div class="paragraph">
 <p>Case 2: After running <code>tasks find [n/KEYWORD]&#8230;&#8203; [sd/START_DATE] [ed/END_DATE] [t/TAG]…</code> command</p>
@@ -317,22 +407,153 @@ the <code>filteredTasks</code> list, propagating the change up to the <code>Task
 <div class="content">
 <img src="../images/TaskFindLogicSequenceDiagram.png" alt="TaskFindLogicSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 3. Sequence Diagram of Tasks Find Command</div>
+<div class="title">Figure 4. Sequence Diagram of Tasks Find Command</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="paragraph">
-<p>The use of <code>ObservableList</code> and <code>FilteredList</code> from JavaFX saves us the trouble of handling task list updates.
-Under this design, addition, updates and deletion of tasks will only need to interface with <code>VersionedAddressBook</code>,
-and the lists for display will be updated through JavaFX.</p>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-updating-of-ui-when-list-is-filtered"><a class="link" href="#aspect-updating-of-ui-when-list-is-filtered">Aspect: Updating of UI when list is filtered</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Using <code>ObservableList</code> and <code>ListView</code> from JavaFX in UI component.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Automatically updates <code>ListView</code> when changes are made to <code>ObservableList</code>, no manual events are needed.</p>
+</li>
+<li>
+<p>Addition, updates and deletion of tasks will only need to interface with <code>Logic</code> and <code>Model</code>.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>If we were use Java Lists instead, events will need to be raised to update lists stored for display.</p>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ObservableList</code> does not raise change events when tasks in the base list are mutated.
+Any edits to existing tasks will need to replace the old <code>Task</code> instance
+with a new one for changes to be reflected on the UI.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Using Java <code>List</code> in UI component.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Does not enforce immutability on tasks.</p>
+</li>
+<li>
+<p>Full control over when and what UI should update.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Events will need to be raised manually when tasks are changed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-filtering-of-lists"><a class="link" href="#aspect-filtering-of-lists">Aspect: Filtering of lists</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Using <code>FilteredList</code> from JavaFX.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Convenient as the filter is maintained even when the base list is changed.</p>
+</li>
+<li>
+<p>Abstracts away filtering logic, only need to be concerned with the predicate used.</p>
+</li>
+<li>
+<p>Any filter updates will automatically update UI as it implements <code>ObservableList</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Only works as a simple filter.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Using <code>Streams</code> from Java.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Powerful, can also be used to transform tasks as an intermediate operation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For the same predicate, a new stream will need to be made when the task list is changed.</p>
+</li>
+<li>
+<p>Events will need to be raised to update UI on newly filtered list of tasks.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancements"><a class="link" href="#future-enhancements">Future Enhancements</a></h4>
+<h4 id="future-enhancements"><a class="link" href="#future-enhancements">4.2.3. Future Enhancements</a></h4>
 <div class="paragraph">
 <p>Currently, searching by task name only matches full keywords. In the future, part of words can be matched to
 allow users to search with incomplete keywords.</p>
@@ -340,4 +561,4 @@ allow users to search with incomplete keywords.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:21:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 05:12:38 UTC</div></div></div></body></html>
