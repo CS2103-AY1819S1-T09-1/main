@@ -39,7 +39,7 @@ https://github.com/CS2103-AY1819S1-T09-1/main/pull/160[#160]
 
 include::../UserGuide.adoc[tag=calendar]
 
-include::../UserGuide.adoc[tag=calendarshow]
+include::../UserGuide.adoc[tag=calendarShow]
 
 == Contributions to the Developer Guide
 
@@ -47,4 +47,10 @@ include::../UserGuide.adoc[tag=calendarshow]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=calendarshow]
+=== *Implementation details of the calendar show feature*
+
+include::../DeveloperGuide.adoc[tag=calendarShow]
+
+=== *Use cases of the calendar show feature*
+
+include::../DeveloperGuide.adoc[tag=calendarUseCases]

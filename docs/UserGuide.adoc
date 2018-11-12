@@ -487,7 +487,7 @@ Clicking on an entry in the calendar would display it in the task details panel.
 
 // end::calendar[]
 
-// tag::calendarshow[]
+// tag::calendarShow[]
 ==== View calendar for tasks due within given year and month: `calendar show`
 
 Displays the specified month in the calendar panel. +
@@ -501,7 +501,7 @@ Examples:
 * `calendar show y/2018 m/12` +
 Displays tasks due in December 2018 in the calendar.
 
-// end::calendarshow[]
+// end::calendarShow[]
 
 ==== List all calendars available: `calendars list` `[coming in v2.0]`
 
