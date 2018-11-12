@@ -38,7 +38,7 @@
 <li><a href="#logging">3.7. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
 <li><a href="#editing-and-batch-deleting-tasks">3.9. Editing and Batch Deleting Tasks</a></li>
-<li><a href="#assigning-tasks-and-contacts">3.10. Assigning tasks and contacts</a></li>
+<li><a href="#assigning-and-unassigning-tasks-and-contacts">3.10. Assigning and unassigning tasks and contacts</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -83,8 +83,8 @@
 <li><a href="#select-a-task">C.9. Select a task</a></li>
 <li><a href="#delete-a-task">C.10. Delete a task</a></li>
 <li><a href="#batch-delete-tasks">C.11. Batch delete tasks</a></li>
-<li><a href="#assign-people-to-tasks">C.12. Assign people to tasks</a></li>
-<li><a href="#remove-person-from-all-tasks">C.13. Remove person from all tasks</a></li>
+<li><a href="#assign-people-to-a-task">C.12. Assign people to a task</a></li>
+<li><a href="#unassign-person-from-a-task">C.13. Unassign person from a task</a></li>
 <li><a href="#view-calendar">C.14. View calendar</a></li>
 <li><a href="#list-calendars">C.15. List calendars</a></li>
 <li><a href="#import-calendar">C.16. Import calendar</a></li>
@@ -1419,7 +1419,7 @@ UI elements to determine the month to display and the weekday it starts on.</p>
 <p>As for validation, in <code>EditCommandParser</code>, user input will be checked whether they conform to the format, else <code>ParseException</code> is thrown and usage message will be shown to the user. Meanwhile, <code>EditCommand</code> does another kind of validation: that the start date and time are before the end date and time, else <code>CommandException</code> is thrown and the user will be informed to ensure the chronological order of start and end <code>DateTime</code>. All these validations are done using methods defined inside <code>DateTime</code>.</p>
 </div>
 <div class="paragraph">
-<p>To explain more clearly, you can see below a sequence diagram of what happens when the user asked the program to edit a task:</p>
+<p>To explain more clearly, you can see below a sequence diagram of what happens when the user asks the program to edit a task:</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/EditTaskSequenceDiagram.png" alt="EditTaskSequenceDiagram"></span></p>
@@ -1454,26 +1454,56 @@ These diagrams are generated using <a href="http://plantuml.com/">PlantUML</a>. 
 </div>
 </div>
 <div class="sect2">
-<h3 id="assigning-tasks-and-contacts"><a class="link" href="#assigning-tasks-and-contacts">3.10. Assigning tasks and contacts</a></h3>
+<h3 id="assigning-and-unassigning-tasks-and-contacts"><a class="link" href="#assigning-and-unassigning-tasks-and-contacts">3.10. Assigning and unassigning tasks and contacts</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>Tasks and contacts can be assigned to each other using the commands <code>tasks assign</code> and <code>contacts assign</code>. This many-to-many relationship is stored simply as a list of task IDs and person IDs in the Person and Task classes respectively.</p>
+<p>Tasks and contacts can be assigned to each other using the commands <code>tasks assign</code> and <code>contacts assign</code>, and unassigned by the <code>tasks unassign</code> and <code>contacts unassign</code> commands.</p>
 </div>
 <div class="paragraph">
-<p>The commands are parsed by <code>AssignCommand</code> in both <code>TasksParser</code> and <code>ContactsParser</code>. If both the specified task and contact are found, the task and person IDs will be added to <code>Person.taskIds</code> and <code>Task.personIds</code> respectively, and the edited objects will be saved to disk. As happens when the edit commands are run, <code>indicateAddressBookChanged()</code> is called to update the UI. The data flow is similar to the one for <code>EditCommand</code> in the previous section.</p>
+<p>This many-to-many relationship is stored as a list of task IDs and person IDs in the Person and Task classes respectively. The IDs are UUIDs, chosen because they are guaranteed to be globally unique and are not dependent on the IDs of other tasks and persons. The IDs are generated randomly by the Person and Task classes if they are not provided to their respective constructors.</p>
 </div>
+<div class="paragraph">
+<p>The commands are parsed by <code>AssignCommandParser</code> and <code>UnassignCommandParser</code>, which are used by both <code>TasksParser</code> and <code>ContactsParser</code>. Both parsers will execute their respective <code>AssignCommand</code> and <code>UnassignCommand</code>. If both the specified task and contact are found, the task and person IDs will be added to <code>Person.taskIds</code> and <code>Task.personIds</code> respectively, and the edited objects will be saved to disk. As happens when the edit commands are run, <code>indicateAddressBookChanged()</code> is called to update the UI. The data flow is similar to the one for <code>EditCommand</code> in the previous section.</p>
+</div>
+<div class="paragraph">
+<p>The figure below is a sequence diagram that illustrates what happens when the user assigns a contact to a task. The process for assigning tasks to contacts and the unassign process are both very similar to this.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AssignTaskSequenceDiagram.png" alt="AssignTaskSequenceDiagram">
+</div>
+<div class="title">Figure 17. Sequence Diagram of Task Assign Command</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+These diagrams are generated using <a href="http://plantuml.com/">PlantUML</a>. The files used to generate the image files can be found in <code>docs/diagrams/plantuml</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="error-handling"><a class="link" href="#error-handling">3.10.2. Error handling</a></h4>
+<div class="paragraph">
+<p><code>AssignCommand</code> will also throw errors if a user tries to assign a task to a contact when the contact has already been assigned. Although this is not strictly necessary as the IDs are stored in sets and it would have been impossible to assign someone twice, the error message assures the user that no double assignments will be made, and thus improves the user experience. Similarly, <code>UnassignCommand</code> throws errors if the user attempts to unassign a contact from a task when the contact is not assigned to it.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="alternative-implementations-considered"><a class="link" href="#alternative-implementations-considered">3.10.3. Alternative implementations considered</a></h4>
 <div class="paragraph">
 <p>An alternative implementation that was considered was to model the many-to-many relationship using an <code>Assignment</code> class, which will act like a join table in relational databases. This would have slightly decoupled the <code>Person</code> and <code>Task</code> classes. However, we chose not to implement it this way as a <code>Person</code> will always be assigned to a <code>Task</code>, and also because implementing such a relationship with manually managed IDs is extremely complex without a relational database to abstract away the complexity.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancements-3"><a class="link" href="#future-enhancements-3">3.10.2. Future Enhancements</a></h4>
+<h4 id="future-enhancements-3"><a class="link" href="#future-enhancements-3">3.10.4. Future Enhancements</a></h4>
 <div class="paragraph">
-<p>Both implementations of <code>AssignCommand</code> are almost identical, and should be refactored.</p>
-</div>
-<div class="paragraph">
-<p>Currently, assignments cannot be removed. The commands that will perform this task, <code>tasks unassign</code> and <code>contacts unassign</code>, are both slated to be implemented in v1.3.</p>
+<p>Both <code>AssignCommand</code> and <code>UnassignCommand</code> have nearly identical implementations for both tasks and contacts. This is intentional, as this leaves room for the implementation of task or contact specific features. An example of such a possibility is an unassign all feature, e.g. <code>contacts unassign c/3</code>, which will be able to unassign contact 3 from all his tasks.</p>
 </div>
 </div>
 </div>
@@ -1538,7 +1568,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 17. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 18. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2521,7 +2551,7 @@ Use case resumes at step 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="assign-people-to-tasks"><a class="link" href="#assign-people-to-tasks">C.12. Assign people to tasks</a></h3>
+<h3 id="assign-people-to-a-task"><a class="link" href="#assign-people-to-a-task">C.12. Assign people to a task</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2597,7 +2627,7 @@ Use case resumes at step 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="remove-person-from-all-tasks"><a class="link" href="#remove-person-from-all-tasks">C.13. Remove person from all tasks</a></h3>
+<h3 id="unassign-person-from-a-task"><a class="link" href="#unassign-person-from-a-task">C.13. Unassign person from a task</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2616,17 +2646,60 @@ Use case resumes at step 2</p>
 <p>Cow displays a list of tasks assigned to the contact.</p>
 </li>
 <li>
-<p>Unassign contact from all tasks by entering
-<code>unassign_contact &lt;contact_id&gt; &lt;task_id&gt;</code></p>
+<p>User requests to unassign a contact from a task.</p>
 </li>
 <li>
-<p>Assign new contact to all tasks by entering
-<code>unassign_contact &lt;contact_id&gt; &lt;task_id&gt;</code>.</p>
-</li>
-<li>
+<p>Cow unassigns the contact from the task.</p>
+<div class="paragraph">
 <p>Use case ends</p>
+</div>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>4a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>5a. User provides an invalid person or task index.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>5a1. Cow shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5b. User requests to unassign a person that is not assigned to the task.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>5b1. Cow shows a message telling the user the person is not assigned.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -2854,4 +2927,4 @@ contacts</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:37:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:51:53 UTC</div></div></div></body></html>
