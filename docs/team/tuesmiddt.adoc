@@ -11,9 +11,12 @@ ifdef::env-github[]
 endif::[]
 :toc:
 :toc-title:
-:toc-placement: auto
+:toc-placement: preamble
 :repoURL: https://github.com/CS2103-AY1819S1-T09-1/main
 :pullURL: https://github.com/CS2103-AY1819S1-T09-1/main/pull
+
+image::tuesmiddt.png[width=200px]
+{empty}[https://github.com/tuesmiddt[Github]]
 
 = PROJECT: Cow
 == Overview
