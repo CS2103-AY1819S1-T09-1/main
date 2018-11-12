@@ -216,7 +216,7 @@ The `Model`,
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
-*API* : link:https://github.com/CS2103-AY1819S1-T09-1/main/blob/master/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/blob/master/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -265,7 +265,6 @@ image::AddTaskSequenceDiagram.png[width="800"]
 // tag::listfindtasks[]
 === Listing and finding of tasks
 ==== Current Implementation
-
 Listing and finding of tasks is facilitated by `ModelManager` and displayed through `TaskListPanel`.
 
 `ModelManager` implements the following relevant methods:

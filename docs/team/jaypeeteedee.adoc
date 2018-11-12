@@ -12,6 +12,7 @@ endif::[]
 :toc:
 :toc-title:
 :toc-placement: preamble
+:repoURL: https://github.com/CS2103-AY1819S1-T09-1/main
 
 image::jaypeeteedee.png[width=200px]
 {empty}[https://github.com/JayPeeTeeDee[Github]] | [https://www.linkedin.com/in/john-phua-a15628147[LinkedIn]]
